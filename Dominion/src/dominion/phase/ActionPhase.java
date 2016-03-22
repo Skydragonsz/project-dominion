@@ -8,11 +8,11 @@ import dominion.*;
 /**
  *
  * @author Quinten
-*/
+
 public class ActionPhase {
     
     
-    public void placeCard(String card, Player p){
+    public void placeCard(MainCard card, Player p){
         
         if (card.getType() == "ACTION"){
             //RUN FUNCTION OF SAID CARD
@@ -23,4 +23,4 @@ public class ActionPhase {
         };
         
     }
-}
+}*/
