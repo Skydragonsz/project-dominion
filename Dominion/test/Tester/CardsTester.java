@@ -19,6 +19,8 @@ import Cards.*;
  */
 public class CardsTester {
     private Witch w = new Witch();
+    private Copper c = new Copper();
+    
     public CardsTester() {
     }
     
@@ -44,7 +46,12 @@ public class CardsTester {
     // @Test
     // public void hello() {}
     @Test
-    public void testGetType(){
-        System.out.println(w.getType());
+    public void testGetTypeWitch(){
+        System.out.println("testGetTypeWitch " + w.getCardType());
+    }
+    
+    @Test
+    public void testGetTypeCopper(){
+        System.out.println("testGetTypeCopper " + c.getCardType());
     }
 }

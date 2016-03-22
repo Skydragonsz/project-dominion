@@ -9,15 +9,16 @@ package Cards;
  *
  * @author Arthur
  */
-public class ActionCards extends MainCard{
+public class Copper extends TreasureCards{
+    private final int value = 1;
+    private final int buyValue = 0;
     
-    private String TYPE= "ACTION";
-    
-    @Override
-    public String getCardType(){
-        return TYPE;
+    public int getValue(){
+        return value;
     }
     
-
-
+    public int getBuyValue(){
+        return buyValue;
+    }
+            
 }
