@@ -12,8 +12,14 @@ package Cards;
 public class TreasureCards extends MainCard{
     private String TYPE= "TREASURE";
     
+    private int amountOfBuys = 1;
+    
     @Override
     public String getCardType(){
         return TYPE;
+    }
+    
+    public void lowerBuys(){
+        amountOfBuys--;
     }
 }

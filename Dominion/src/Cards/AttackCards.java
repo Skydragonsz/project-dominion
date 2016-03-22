@@ -9,15 +9,6 @@ package Cards;
  *
  * @author Arthur
  */
-public class Witch extends AttackCards{
-    private final int cost = 5;
-    
-    public Witch(){
-        //TODO - Curse++;
-    }
-    
-    public int getCost(){
-        return cost;
-    }
-    
+public class AttackCards extends ActionCards{
+    //TODO - attack other players
 }

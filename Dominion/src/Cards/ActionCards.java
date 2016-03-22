@@ -13,9 +13,17 @@ public class ActionCards extends MainCard{
     
     private String TYPE= "ACTION";
     
+    private int amountOfActions = 1;
+    
+    
+    
     @Override
     public String getCardType(){
         return TYPE;
+    }
+    
+    public void lowerActions(){
+        amountOfActions--;
     }
     
 
