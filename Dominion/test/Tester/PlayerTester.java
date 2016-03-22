@@ -14,6 +14,8 @@ import dominion.*;
  */
 public class PlayerTester {
     
+    public Player p = new Player();
+    
     public PlayerTester() {
     }
     
@@ -27,6 +29,8 @@ public class PlayerTester {
     
     @Before
     public void setUp() {
+        
+        p.getFirstFiveCards();
     }
     
     @After
@@ -36,9 +40,8 @@ public class PlayerTester {
     
     @Test
     public void testGetCards(){
-        Player p = new Player();
-        p.getFirstFiveCards();
-        System.out.println(p.getCards());
+        
+        System.out.println(p.getCards(1));
     }
 
 }
