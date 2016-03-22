@@ -16,7 +16,8 @@ import java.util.Arrays;
 public class PlayerTester {
     
     private Player p = new Player();
-    private int[] test = new int[]{1,1,1,1,1,4,4,4};
+
+    //private int[] test = new int[]{1,1,1,1,1,4,4,4};
    
     public PlayerTester() {
     }
@@ -41,18 +42,25 @@ public class PlayerTester {
     
     
     @Test
-    public void testLinkedDeck(){
-    p.RemoveNthCard(6);
-    assertEquals(p.getLinkedCards(),"7 5 5 5 1 1 ");
+    public void testPrintedCards(){
+    
+    assertEquals(p.getDeck(),"7 5 5 5 1 1 ");
 
         
     }
+    
+    @Test
+    public void testShuffle(){
+    assertEquals(p.shuffleDeck(),"7 5 5 5 1 1 ");
+
+    }
+    /*
     @Test
     public void testShuffleDeck(){
     p.shuffleDeck(p.getDeck());
     assertEquals(p.getLinkedCards(),"7 5 5 5 1 1 ");
 
         
-    }
+    }*/
 
 }

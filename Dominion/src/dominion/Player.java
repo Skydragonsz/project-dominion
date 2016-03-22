@@ -9,14 +9,11 @@
 
 package dominion;
 
-import Deck.LinkedCards;
+//import Deck.LinkedCards;
 import java.util.*;
 
-public class Player{
-    private int[] cards;
-    private LinkedCards cardsLinked = new LinkedCards();
-    private int[] deck;
-    private LinkedCards deckLinked = new LinkedCards();
+public class Player{ 
+    private ArrayList deckArray;
     private int victoryPoints;
     private int[] discardPile;
         
@@ -27,38 +24,38 @@ public class Player{
     
     public void init()
     {
-    //deck = new int[]{1,1,1,1,1,4,4,4};
-    //FILL - TEST
-    cardsLinked.addInFront(1);
-    cardsLinked.addInFront(1);
-    cardsLinked.addInFront(5);
-    cardsLinked.addInFront(5);
-    cardsLinked.addInFront(5);
-    cardsLinked.addInFront(6);
-    cardsLinked.addInFront(7);
+        //Starter deck -- TEST
+        deckArray = new ArrayList<Integer>();
+        deckArray.add(1);
+        deckArray.add(1);
+        deckArray.add(1);
+        deckArray.add(1);
+        deckArray.add(1);
+        deckArray.add(4);
+        deckArray.add(4);
+        deckArray.add(4);
     }
-    
-    public LinkedCards shuffleDeck(LinkedCards deck){
-        Random rng = new Random();
+    public ArrayList<Integer> shuffleDeck(){
+        
         //TODO: Count 
         //REMOVE: i = 10
-        for (int i = 10 -1; i>0; i--)
+        Random rng = new Random();
+        for (int i = deckArray.size() -1; i>0; i--)
         {
             int index = rng.nextInt(i +1);
             
-            int swap = deck.getNth(index);
-            int swapTemp = deck.getNth(i);
-            deck.setNth(index,swapTemp);
-            deck.setNth(i,swap);                   
+            Object swap = deckArray.get(index);
+            deckArray.set(index,deckArray.get(i));
+            deckArray.set(i, swap);                   
         }
         
-        return deck;
+        return deckArray;
     }
-    
-    public LinkedCards getDeck(){
-        return cardsLinked;
+     
+    public ArrayList getDeck(){
+        return deckArray;
     }
-    
+/*    
     public void getFirstFiveCards()
     {
         cards = new int[5];
@@ -71,15 +68,20 @@ public class Player{
         return cards;
     }
     
+*/  
+    public void AddCard(int CardID)
+    {
+        deckArray.add(CardID);
+    }
     
     public void RemoveNthCard(int CardID){
-    cardsLinked.deleteFirst(CardID);
+        deckArray.remove(CardID);
     }
     
-    public String getLinkedCards(){
-        return cardsLinked.toString();
+    public String getD(){
+        return deckArray.toString();
     }
-    
+
 }
     
 
