@@ -37,7 +37,7 @@ public class Player{
         deck = new int[]{1,1,1,1,1,4,4,4};
     }
     
-    public void shuffleDeck(int[] deck){
+    public int[] shuffleDeck(int[] deck){
         Random rng = new Random();
         
         for (int i = deck.length -1; i>0; i--)
@@ -48,6 +48,12 @@ public class Player{
             deck[index] = deck[i];
             deck[i] = swap;                   
         }
+        
+        return deck;
+    }
+    
+    public int[] getDeck(){
+        return deck;
     }
     
     public void getFirstFiveCards()

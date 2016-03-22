@@ -8,13 +8,15 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import dominion.*;
+import java.util.Arrays;
 /**
  *
  * @author Arthur
  */
 public class PlayerTester {
     
-    public Player p = new Player();
+    private Player p = new Player();
+    private int[] test = new int[]{1,1,1,1,1,4,4,4};
     
     public PlayerTester() {
     }
@@ -30,7 +32,7 @@ public class PlayerTester {
     @Before
     public void setUp() {
         
-        p.getFirstFiveCards();
+        
     }
     
     @After
@@ -40,8 +42,9 @@ public class PlayerTester {
     
     @Test
     public void testGetCards(){
+        assertArrayEquals(p.shuffleDeck(test),test);
+
         
-        System.out.println(p.getCards(1));
     }
 
 }
