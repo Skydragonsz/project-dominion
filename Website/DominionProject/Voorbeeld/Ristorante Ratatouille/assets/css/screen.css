@@ -1,0 +1,201 @@
+/*---------------------*/
+/*    HTML ELEMENTS    */
+/*---------------------*/
+
+body {
+    font-family: Garamond, Cambria, 'Times New Roman', Times, serif;
+    font-size: 1rem;
+    color: #5f5352;
+}
+
+h1 {
+    color: white;
+    font-size: 6rem;
+    text-transform: capitalize;
+    text-align: center;
+}
+
+h2 {
+    text-transform: lowercase;
+    color: white;
+    text-align: center;
+    font-size: 1.4rem;
+    display: inline-block;
+    background-image: url("../media/line.gif"), url("../media/line.gif");
+    background-repeat: no-repeat;
+    background-position: left center, right center;
+    padding-left: 108px;
+    padding-right: 108px;
+    margin-bottom: 42px;
+}
+
+article.beliefs h3, article.reservation h3 {
+    font-size: 2.2rem;
+    text-transform: uppercase;
+    display: inline-block;
+    border-top: 1px solid #595355;
+    padding-top: 8px;
+    margin-bottom: 12px;
+    letter-spacing: 0.2rem;
+}
+
+article.beliefs h3 span, article.reservation h3 span {
+    background-color: #e1eee5;
+}
+
+article.beliefs img {
+    float: left;
+    margin-right: 25px;
+    box-shadow: 6px 8px 20px rgba(51,53,55,0.17);
+}
+
+article.reservation img {
+    float: right;
+    margin-left: 25px;
+    margin-right: 128px;
+    box-shadow: 6px 8px 20px rgba(51,53,55,0.17);
+}
+
+article.beliefs, article.reservation {
+    padding: 32px;
+}
+
+i {
+    font-style: italic;
+}
+
+b {
+    font-weight: bold;
+}
+
+p {
+    font-size: 1.5rem;
+    line-height: 130%;
+    margin-bottom: 16px;
+    padding-right: 150px;
+}
+
+/*---------------------*/
+/*  REUSABLE CLASSES   */
+/*---------------------*/
+
+.clearfix:before, .clearfix:after {
+    content: '';
+}
+
+.clearfix:after {
+    clear: both;
+    display: table;
+}
+
+/*---------------------*/
+/* CONTAINING ELEMENTS */
+/*---------------------*/
+
+header {
+    background-image: url("../media/header.jpg");
+    padding-top: 56px;
+    padding-bottom: 14px;
+    text-align: center;
+    box-shadow: 6px 2px 40px rgba(51,53,55,0.4);
+    margin-bottom: 20px;
+}
+
+section {
+    position: relative;
+    background-color: #aea8a8;
+    color: white;
+    padding-top: 28px;
+    text-align: center;
+}
+
+section article {
+    float: left;
+    width: 33%;
+    background-image: url("../media/swirl.png");
+    background-repeat: no-repeat;
+    background-position: top center;
+    padding-top: 40px;
+}
+
+section h3 {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 2.2rem;
+    margin-bottom: 40px;
+}
+
+section article h4 {
+    font-size: 2rem;
+    margin-bottom: 75px;
+}
+
+section article h5 {
+    font-size: 1.8rem;
+}
+
+section article p {
+    font-size: 1rem;
+    padding-right: 0px;
+    margin-bottom: 44px;
+}
+
+footer {
+    margin-left: 25%;
+    margin-right: 25%;
+}
+
+footer div {
+    float: left;
+    width: 25%;
+}
+
+ul li {
+    display: inline;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    letter-spacing: 0.2rem;
+}
+
+ul li a:after {
+    content: ' |';
+}
+
+ul li:last-of-type a:after {
+    content: '';
+}
+
+ul li a {
+    text-decoration: none;
+    color: white;
+}
+
+/*------------------------*/
+/* PAGE SPECIFIC ELEMENTS */
+/*------------------------*/
+
+aside.award {
+    font-size: 0.7rem;
+    text-transform: lowercase;
+    color: #d0ce13;
+    background-image: url("../media/wreath.png");
+    background-position: top left;
+    background-repeat: no-repeat;
+    width: 94px;
+    height: 76px;
+    position: absolute;
+    right: 40px;
+    top: -45px;
+}
+
+aside.award strong {
+    display: block;
+    margin-top: 18px;
+}
+
+aside.award strong span {
+    display: block;
+}
+
+/* --- Home --- */
+
