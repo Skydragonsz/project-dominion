@@ -9,11 +9,15 @@ package Cards;
  *
  * @author Arthur
  */
-public class ActionCards {
-    private static final String TYPE= "ACTION";
+public class ActionCards extends MainCard{
     
+    private String TYPE= "ACTION";
     
-    public String getType(){
+    @Override
+    public String getCardType(){
         return TYPE;
     }
+    
+
+
 }
