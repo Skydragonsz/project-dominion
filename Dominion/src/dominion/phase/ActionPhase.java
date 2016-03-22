@@ -4,18 +4,19 @@
  * and open the template in the editor.
  */
 package dominion.phase;
-
+import dominion.*;
 /**
  *
  * @author Quinten
-
+*/
 public class ActionPhase {
     
     
-    public void placeCard(String card){
+    public void placeCard(String card, Player p){
         
         if (card.getType() == "ACTION"){
-            
+            //RUN FUNCTION OF SAID CARD
+            p.discardCard("CURRENT CARD");
         
         }else{
             placeCard(card);
@@ -23,4 +24,3 @@ public class ActionPhase {
         
     }
 }
- */

@@ -35,7 +35,8 @@ public class TurnTester {
     
     @Before
     public void setUp() {
-    
+    n.addAction(24);
+    n.addBuy(25);
     }
     
     @After
@@ -51,5 +52,19 @@ public class TurnTester {
     public void AddFiveCoins(){
         n.addCoin(5);
      assertEquals(n.getCoin(), 5);
+    }
+    
+    @Test
+    public void RemoveOneAction(){
+        n.removeAction(1);
+        System.out.println(n.getAction());
+     assertEquals(n.getAction(), 23);
+    }
+    
+    @Test
+    public void RemoveBuysBelowZero(){
+        n.removeBuy(500);
+        System.out.println(n.getBuy());
+     assertTrue(n.getBuy() > 0);
     }
 }

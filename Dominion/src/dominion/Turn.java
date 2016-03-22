@@ -16,27 +16,59 @@ public class Turn {
    private int amountOfBuys;
    public static final int ACTION = 0, BUY = 1, CLEANUP = 2;
    
+//ADD
    public void addCoin(int amount)
    {
-       this.amountOfCurrency += amount;
+       if (this.amountOfCurrency <=0){
+        this.amountOfCurrency += amount;
+       }
    }
    
    public void addAction(int amount)
    {
+       if (this.amountOfActions <=0){
        this.amountOfActions += amount;
+       }
    }
    
    public void addBuy(int amount)
    {
+       if (this.amountOfBuys <=0){
        this.amountOfBuys += amount;
+       }
    }
-
-    public int getPhase()
-    {
-        return currentPhase; 
-    }
-    
+   
+//REMOVE   
+   public void removeCoin(int amount)
+   {
+       if (this.amountOfCurrency - amount >=0){
+       this.amountOfCurrency -= amount;
+       }
+   }
+   
+   public void removeAction(int amount)
+   {
+       if (this.amountOfActions - amount >=0){
+            this.amountOfActions -= amount;
+       }
+   }
+   
+   public void removeBuy(int amount)
+   {
+       if (this.amountOfCurrency - amount >=0){
+       this.amountOfBuys -= amount;
+       }
+   }
+//GET   
     public int getCoin(){
         return amountOfCurrency;
+    }
+    
+    public int getAction(){
+        return amountOfActions;
+    }
+    
+    public int getBuy(){
+        return amountOfBuys;
     }
 }
