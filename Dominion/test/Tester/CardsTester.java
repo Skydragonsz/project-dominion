@@ -20,6 +20,8 @@ import Cards.*;
 public class CardsTester {
     private Witch w = new Witch();
     private Copper c = new Copper();
+    private Province pro = new Province();
+    private Duchy du = new Duchy();
     
     public CardsTester() {
     }
@@ -53,5 +55,28 @@ public class CardsTester {
     @Test
     public void testGetTypeCopper(){
         System.out.println("testGetTypeCopper " + c.getCardType());
+    }
+    
+    
+    @Test
+    public void testGetCostOfWitch(){
+        System.out.println("testGetCostOfWitch " + w.getCost());
+    }
+    
+    @Test
+    public void testGetCostOfProvince(){
+        System.out.println("testGetCostOfProvince " + pro.getCost());
+    }
+    
+    @Test
+    public void testVictoryPoints(){
+        int VictoryPoints = 0;
+        VictoryPoints += pro.getVictoryValue();
+        VictoryPoints += du.getVictoryValue();
+        VictoryPoints += pro.getVictoryValue();
+        
+        
+        assertEquals(VictoryPoints,15);
+        
     }
 }

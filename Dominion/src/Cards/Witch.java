@@ -10,6 +10,14 @@ package Cards;
  * @author Arthur
  */
 public class Witch extends ActionCards{
+    private final int cost = 5;
     
+    public Witch(){
+        
+    }
+    
+    public int getCost(){
+        return cost;
+    }
     
 }

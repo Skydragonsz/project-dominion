@@ -9,17 +9,16 @@ package Cards;
  *
  * @author Arthur
  */
-public class Gold extends TreasureCards{
-    private final int cardID = 3;
-    private final int value = 3;
-    private final int cost = 6;
-    
-    public int getValue(){
-        return value;
-    }
+public class Estate extends VictoryCards{
+    private final int cardID = 4;
+    private final int victoryValue = 1;
+    private final int cost = 2;
     
     public int getCost(){
         return cost;
     }
     
+    public int getVictoryValue(){
+        return victoryValue;
+    }
 }

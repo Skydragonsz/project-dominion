@@ -10,15 +10,16 @@ package Cards;
  * @author Arthur
  */
 public class Copper extends TreasureCards{
+    private final int cardID = 1;
     private final int value = 1;
-    private final int buyValue = 0;
+    private final int cost = 0;
     
     public int getValue(){
         return value;
     }
     
-    public int getBuyValue(){
-        return buyValue;
+    public int getCost(){
+        return cost;
     }
             
 }
