@@ -9,15 +9,10 @@ package Cards;
  *
  * @author Arthur
  */
-public class Witch extends ActionCards{
-    private final int cost = 5;
+public class MainCard{
+    private String TYPE;
     
-    public Witch(){
-        
+    public String getCardType(){
+        return TYPE;
     }
-    
-    public int getCost(){
-        return cost;
-    }
-    
 }

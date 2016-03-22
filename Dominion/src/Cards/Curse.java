@@ -9,15 +9,17 @@ package Cards;
  *
  * @author Arthur
  */
-public class Witch extends ActionCards{
-    private final int cost = 5;
-    
-    public Witch(){
-        
-    }
+public class Curse extends VictoryCards{
+    private final int cardID = 7;
+    private final int victoryValue = -1;
+    private final int cost = 0;
     
     public int getCost(){
         return cost;
+    }
+    
+    public int getVictoryValue(){
+        return victoryValue;
     }
     
 }

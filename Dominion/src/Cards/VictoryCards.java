@@ -9,6 +9,11 @@ package Cards;
  *
  * @author Arthur
  */
-public class VictoryCards {
+public class VictoryCards extends MainCard{
+    private String TYPE= "VICTORY";
     
+    @Override
+    public String getCardType(){
+        return TYPE;
+    }
 }

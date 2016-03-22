@@ -9,11 +9,13 @@ package Cards;
  *
  * @author Arthur
  */
-public class Witch extends ActionCards{
-    private final int cost = 5;
+public class Silver extends TreasureCards{
+    private final int cardID = 2;
+    private final int value = 2;
+    private final int cost = 3;
     
-    public Witch(){
-        
+    public int getValue(){
+        return value;
     }
     
     public int getCost(){
