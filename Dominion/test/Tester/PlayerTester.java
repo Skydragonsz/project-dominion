@@ -16,8 +16,9 @@ import java.util.Arrays;
 public class PlayerTester {
     
     private Player p = new Player();
-    private int[] test = new int[]{1,1,1,1,1,4,4,4};
-    
+
+    //private int[] test = new int[]{1,1,1,1,1,4,4,4};
+   
     public PlayerTester() {
     }
     
@@ -37,14 +38,57 @@ public class PlayerTester {
     
     @After
     public void tearDown() {
+   
     }
     
     
     @Test
-    public void testGetCards(){
-        assertArrayEquals(p.shuffleDeck(test),test);
+    public void testPrintedCards(){
+    
+    assertEquals(p.getDeck(),"7 5 5 5 1 1 ");
 
         
     }
+    
+    @Test
+    public void testShuffle(){
+        p.shuffleDeck();
+    assertEquals(p.getDeck(),"7 5 5 5 1 1 ");
 
+    }
+    /*
+    @Test
+    public void testShuffleDeck(){
+    p.shuffleDeck(p.getDeck());
+    assertEquals(p.getLinkedCards(),"7 5 5 5 1 1 ");
+
+        
+    }*/
+    
+    @Test
+    public void testGetHand(){
+    System.out.println(p.getDeck());
+    System.out.println(p.getCards());
+    System.out.println("^BEGIN STATE^");
+    
+    p.shuffleDeck();
+    System.out.println(p.getDeck());
+    System.out.println("^SHUFFLE^");  
+    
+    p.setNthAmountOfCards(2);
+    System.out.println(p.getDeck());
+    System.out.println(p.getCards());
+    assertEquals(p.getCards(),"7 5 5 5 1 1 ");
+    
+    }
+    
+    @Test
+    public void testPrintedCardsAfter(){
+    
+    assertEquals(p.getDeck(),"7 5 5 5 1 1 ");
+
+        
+    }    
+    
+    
 }
