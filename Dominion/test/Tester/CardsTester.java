@@ -86,20 +86,15 @@ public class CardsTester {
     
     @Test
     public void testWitchMetFunctie(){
-        System.out.println("player 1 deck:" + p.getDeck());
-        System.out.println("player 2 deck:" +p2.getDeck());
+
         p.shuffleDeck();
-        System.out.println("player 1 deck na shuffle:" +p.getDeck());
+
         p.setNthAmountOfCards(5);
         p2.setNthAmountOfCards(5);
-        System.out.println("player 1 deck:" +p.getDeck());
-        System.out.println("player 1 hand:" +p.getCards());
-        System.out.println("Turn" + t.getAction());
+
         w2.playCard(p,p2,t);
-        System.out.println("player 1 hand:" +p.getCards());
-        System.out.println("player 1 deck:" +p.getDeck());
-        System.out.println(p2.getDeck());
-        System.out.println("Turn" + t.getAction());
+        assertEquals(t.getAction(),0);
+
         
         
         

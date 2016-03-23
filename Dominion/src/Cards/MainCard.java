@@ -15,4 +15,8 @@ public class MainCard{
     public String getCardType(){
         return TYPE;
     }
+    
+    public static void playCard(){
+        
+    }
 }

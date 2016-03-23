@@ -4,11 +4,18 @@
  * and open the template in the editor.
  */
 package Cards;
-
+import dominion.Turn;
 /**
  *
  * @author Arthur
  */
-public class AttackCards extends ActionCards{
-    //TODO - attack other players
+public class Cellar extends ActionCards{
+    public Cellar(){
+        
+    }
+    
+    
+    public static void playCard(){
+        
+    }
 }
