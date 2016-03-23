@@ -14,6 +14,8 @@ import static org.junit.Assert.*;
 import dominion.phase.ActionPhase;
 import Cards.*;
 import dominion.Player;
+import java.util.HashMap;
+import java.util.Map;
 /**
  *
  * @author Quinten
@@ -24,7 +26,8 @@ public class PhaseTest {
     Village v1 = new Village();
     Player p1 = new Player();
     Player p2 = new Player();
-
+    Map<String, Village> map = new HashMap<>();
+    
     public PhaseTest() {
     }
     
