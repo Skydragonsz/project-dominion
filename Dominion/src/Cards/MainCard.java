@@ -20,6 +20,10 @@ public class MainCard{
     }
     
     
+    public void playCard(Player player){
+        System.out.println("DIT IS DE MAIN CARD.");
+    }
+    
     public void playCard(Player player,Player otherPlayer){
         System.out.println("DIT IS DE MAIN CARD.");
     }

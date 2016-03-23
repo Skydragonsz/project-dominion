@@ -65,6 +65,7 @@ public class PhaseTest {
     System.out.println(p2.getDeck());
     System.out.println(p2.getCards());
     System.out.println("^WITCH EFFECT STATE^");
+    System.out.println(v1.getCardType());
     
  
     }

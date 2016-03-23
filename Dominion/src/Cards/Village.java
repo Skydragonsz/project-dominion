@@ -19,7 +19,7 @@ public class Village extends ActionCards{
         
     }
     
-        public void playCard(Player player,Player otherPlayer){
+    public void playCard(Player player){
         
         System.out.println("VILLAGE EFFECT");
         player.setNthAmountOfCards(1); //HAND
