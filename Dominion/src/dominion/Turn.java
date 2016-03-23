@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package dominion;
+import dominion.*;
+import dominion.phase.ActionPhase;
 
 /**
  *
@@ -15,7 +17,7 @@ public class Turn {
    private int amountOfActions = 1;
    private int amountOfBuys = 1;
    public static final int ACTION = 0, BUY = 1, CLEANUP = 2;
-   
+
    public Turn(){
        
    }
@@ -23,44 +25,44 @@ public class Turn {
 //ADD
    public void addCoin(int amount)
    {
-       if (this.amountOfCurrency <=0){
-        this.amountOfCurrency += amount;
+       if (amountOfCurrency <=0){
+        amountOfCurrency += amount;
        }
    }
    
    public void addAction(int amount)
    {
-       if (this.amountOfActions <=0){
-       this.amountOfActions += amount;
+       if (amountOfActions >=0){
+       amountOfActions += amount;
        }
    }
    
    public void addBuy(int amount)
    {
-       if (this.amountOfBuys <=0){
-       this.amountOfBuys += amount;
+       if (amountOfBuys <=0){
+       amountOfBuys += amount;
        }
    }
    
 //REMOVE   
    public void removeCoin(int amount)
    {
-       if (this.amountOfCurrency - amount >=0){
-       this.amountOfCurrency -= amount;
+       if (amountOfCurrency - amount >=0){
+       amountOfCurrency -= amount;
        }
    }
    
    public void removeAction(int amount)
    {
-       if (this.amountOfActions - amount >=0){
-            this.amountOfActions -= amount;
+       if (amountOfActions - amount >=0){
+            amountOfActions -= amount;
        }
    }
    
    public void removeBuy(int amount)
    {
-       if (this.amountOfCurrency - amount >=0){
-       this.amountOfBuys -= amount;
+       if (amountOfCurrency - amount >=0){
+       amountOfBuys -= amount;
        }
    }
 //GET   

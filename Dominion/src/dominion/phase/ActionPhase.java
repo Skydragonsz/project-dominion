@@ -4,23 +4,26 @@
  * and open the template in the editor.
  */
 package dominion.phase;
+import Cards.MainCard;
 import dominion.*;
 /**
  *
  * @author Quinten
+*/
+public class ActionPhase{ 
 
-public class ActionPhase {
-    
-    
-    public void placeCard(MainCard card, Player p){
+    public void placeCard(MainCard card, Player p, Player otherPlayer){
         
-        if (card.getType() == "ACTION"){
-            //RUN FUNCTION OF SAID CARD
-            p.discardCard("CURRENT CARD");
-        
-        }else{
-            placeCard(card);
-        };
+        if (card.getCardType() == "ATTACK"){
+            card.playCard(p,otherPlayer);
+            //p.AddToPlayingField(card.GetID());
+            //p.RemoveNthCard(card.GetID());
+            p.removeAction(1);
+            
+            
+        }else if(card.getCardType() == "ACTION"){
+            card.playCard(p);
+        }
         
     }
-}*/
+}

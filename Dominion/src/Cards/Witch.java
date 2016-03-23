@@ -10,19 +10,22 @@ import dominion.Turn;
  *
  * @author Arthur
  */
-public class Witch extends ActionCards{
+public class Witch extends AttackCards{
+    private final int cardID = 31;
     private final int cost = 5;
-       
+
+    
     public Witch(){
 
     }
-
-    
-    public static void playCard(Player player,Player otherPlayer, Turn turn){
-        turn.removeAction(1);
-        player.setNthAmountOfCards(2);
-        otherPlayer.AddCard(7); //Add Curse card
+   
+    public void playCard(Player player,Player otherPlayer){
+        //turn.removeAction(1);
+        System.out.println("WITCH EFFECT");
+        player.setNthAmountOfCards(2); //HAND
+        otherPlayer.AddCard(7); //Add Curse card DECK
     }
+    
     
     public int getCost(){
         return cost;

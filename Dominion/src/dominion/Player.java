@@ -12,9 +12,10 @@ package dominion;
 //import Deck.LinkedCards;
 import java.util.*;
 
-public class Player{ 
+public class Player extends Turn{ 
     private ArrayList deckArray;
     private ArrayList cardArray;
+    private ArrayList playingFieldArray;
     private int victoryPoints;
     private int[] discardPile;
         
@@ -28,6 +29,7 @@ public class Player{
         //Starter deck -- TEST
         deckArray = new ArrayList<Integer>();
         cardArray = new ArrayList<Integer>();
+        playingFieldArray = new ArrayList<Integer>();
         deckArray.add(1);
         deckArray.add(1);
         deckArray.add(1);
@@ -75,14 +77,14 @@ public class Player{
         deckArray.add(CardID);
     }
     
+    public void AddToPlayingField(int CardID)
+    {
+        playingFieldArray.add(CardID);
+    }
+    
     public void RemoveNthCard(int CardID){
         deckArray.remove(CardID);
     }
-    
-    public String getD(){
-        return deckArray.toString();
-    }
-
 }
     
 
