@@ -21,6 +21,7 @@ import dominion.Player;
 public class PhaseTest {
     ActionPhase Pl = new ActionPhase();
     Witch w1 = new Witch();
+    Village v1 = new Village();
     Player p1 = new Player();
     Player p2 = new Player();
 
@@ -57,7 +58,7 @@ public class PhaseTest {
     System.out.println(p2.getCards());
     System.out.println("^BEGIN STATE^");
  
-       Pl.placeCard(w1, p1, p2);
+       Pl.placeCard(v1, p1, p2);
        
     System.out.println(p1.getDeck());
     System.out.println(p1.getCards());

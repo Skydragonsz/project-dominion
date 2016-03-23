@@ -11,13 +11,9 @@ import dominion.Turn;
  * @author Arthur
  */
 public class Witch extends ActionCards{
+    private final int cardID = 31;
     private final int cost = 5;
-    private String TYPE= "ACTION";
-    
-    
-    public String getCardType(){
-        return TYPE;
-    }
+
     
     public Witch(){
 

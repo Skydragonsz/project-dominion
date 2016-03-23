@@ -32,7 +32,7 @@ public class Turn {
    
    public void addAction(int amount)
    {
-       if (this.amountOfActions <=0){
+       if (this.amountOfActions >=0){
        this.amountOfActions += amount;
        }
    }

@@ -12,7 +12,7 @@ package dominion;
 //import Deck.LinkedCards;
 import java.util.*;
 
-public class Player{ 
+public class Player extends Turn{ 
     private ArrayList deckArray;
     private ArrayList cardArray;
     private ArrayList playingFieldArray;

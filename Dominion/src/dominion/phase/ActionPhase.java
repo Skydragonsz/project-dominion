@@ -5,7 +5,6 @@
  */
 package dominion.phase;
 import Cards.MainCard;
-import Cards.Witch;
 import dominion.*;
 /**
  *
@@ -19,6 +18,8 @@ public class ActionPhase{
             card.playCard(p,otherPlayer);
             //p.AddToPlayingField(card.GetID());
             //p.RemoveNthCard(card.GetID());
+            p.removeAction(1);
+            
             
         }else{
             placeCard(card, p, otherPlayer);
