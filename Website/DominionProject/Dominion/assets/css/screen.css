@@ -1,21 +1,73 @@
+@font-face {
+    font-family: MontserratRegular;
+    src: url('../fonts/MontserratRegular.eot');
+    src: local('MontserratRegular'),
+    url('../fonts/MontserratRegular.woff') format('woff'),
+    url('../fonts/MontserratRegular.ttf') format('truetype');
+}
+
 /*---------------------*/
 /*    HTML ELEMENTS    */
 /*---------------------*/
+
+#play a {
+    color: black;
+}
+
 #play {
-    background-color: gold;
-    background-image: url("../media/Playbutton.png");
+    background-image:url("../media/nav_play_background.jpg");
     background-position: right;
-    background-repeat: no-repeat;
+    background-position: left;
     padding-right: 50px;
+    padding-left: 50px;
 
 }
 
 body {
+    background-color: #3C1B00;
+    font-family: MontserratRegular;
+}
 
+section {
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+    color: #ffd700;
+}
+
+article h1 {
+    color: #FFE769;
+    border: solid 1px #ffd700;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: #BA3729;
+    border-radius: 8px;
+}
+
+article h2 {
+    color: #FFE769;
+    border-bottom: solid 1px #ffd700;
+    text-align: center;
+    width: 30%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+article p {
+    width: 70%;
+    line-height: 130%;
 }
 
 header {
     text-align: center;
+    position: fixed;
+    width: 100%;
+    font-family: MontserratRegular;
 }
 
 /*---------------------*/
@@ -28,32 +80,55 @@ header {
 /* CONTAINING ELEMENTS */
 /*---------------------*/
 nav {
-    background-color: #404453;
+    background-image: url("../media/nav_background_red.jpg");
+    background-repeat: repeat-x;
+    line-height: 350%;
+    border-top: 1px solid #39444b;
+    border-bottom: 1px solid #7E8285;
+    box-shadow: 10px 5px 10px black;
+    z-index: 1;
 
 }
 
 nav a {
     text-decoration: none;
-    color: dodgerblue;
+    color: gold;
     font-weight: bold;
+
 }
 
 nav ul li {
     display: inline-block;
     text-transform: uppercase;
-    font-size: 1.2rem;
+    font-size: 1rem;
     vertical-align: middle;
     text-align: center;
     height: 60px;
     width: auto;
+    padding-left: 10px;
+    padding-right: 15px;
 
 }
 
-ul li {
-    border-right: solid 1px lightgray;
+li+li {
+    border-left: 1px solid #7E8285;
 }
 
-ul li:nth-last-child{
+nav a:hover {
+    color: #f8e68d;
+}
+
+nav ul li:hover{
+    background-color: #BA3729;
+    color: #f8e68d;
+}
+
+nav ul li:first-child:hover {
+    background-color:transparent;
+}
+
+
+ul li:nth-last-child(1){
     border-right: none;
 }
 
@@ -72,11 +147,12 @@ ul li:last-of-type a:after {
     padding-bottom: 0px;
 }
 
+
 #banner {
-    background-image: url("../media/MedievalCastle.jpg");
+    background-image: url("../media/DominionBanner.jpg");
     width: auto;
-    height: 250px;
-    margin-top: 100px;
+    height: 500px;
+    z-index: 2;
 }
 
 /*------------------------*/
