@@ -4,22 +4,18 @@
  * and open the template in the editor.
  */
 package Cards;
-
+import dominion.Turn;
 /**
  *
  * @author Arthur
  */
-public class TreasureCards extends MainCard{
-    private String TYPE= "TREASURE";
-    
-    private int amountOfBuys = 1;
-    
-    @Override
-    public String getCardType(){
-        return TYPE;
+public class Cellar extends ActionCards{
+    public Cellar(){
+        
     }
     
-    public void lowerBuys(){
-        amountOfBuys--;
+    
+    public static void playCard(){
+        
     }
 }

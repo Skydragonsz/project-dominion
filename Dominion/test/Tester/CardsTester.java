@@ -12,16 +12,23 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import Cards.*;
+import Cards.Witch;
+import dominion.Player;
+import dominion.Turn;
 
 /**
  *
  * @author Arthur
  */
 public class CardsTester {
+    private Player p = new Player();
+    private Player p2 = new Player();
     private Witch w = new Witch();
+    private Witch w2;
     private Copper c = new Copper();
     private Province pro = new Province();
     private Duchy du = new Duchy();
+    private Turn t = new Turn();
     
     public CardsTester() {
     }
@@ -42,30 +49,24 @@ public class CardsTester {
     public void tearDown() {
     }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
     @Test
     public void testGetTypeWitch(){
-        System.out.println("testGetTypeWitch " + w.getCardType());
+        assertEquals(w.getCardType(), "ACTION");
+        
     }
     
     @Test
     public void testGetTypeCopper(){
-        System.out.println("testGetTypeCopper " + c.getCardType());
+        assertEquals(c.getCardType(),"TREASURE");
+        
     }
     
     
-    @Test
-    public void testGetCostOfWitch(){
-        System.out.println("testGetCostOfWitch " + w.getCost());
-    }
     
     @Test
     public void testGetCostOfProvince(){
-        System.out.println("testGetCostOfProvince " + pro.getCost());
+        assertEquals(pro.getCost(),8);
+        
     }
     
     @Test
@@ -77,6 +78,25 @@ public class CardsTester {
         
         
         assertEquals(VictoryPoints,15);
+        
+    }
+    
+    
+
+    
+    @Test
+    public void testWitchMetFunctie(){
+
+        p.shuffleDeck();
+
+        p.setNthAmountOfCards(5);
+        p2.setNthAmountOfCards(5);
+
+        w2.playCard(p,p2,t);
+        assertEquals(t.getAction(),0);
+
+        
+        
         
     }
 }

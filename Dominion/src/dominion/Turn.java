@@ -12,13 +12,16 @@ import dominion.phase.ActionPhase;
  * @author Quinten
  */
 public class Turn {
-   private int amountOfCurrency;
+   private int amountOfCurrency = 0;
    private int currentPhase;
-   private int amountOfActions;
-   private int amountOfBuys;
+   private int amountOfActions = 1;
+   private int amountOfBuys = 1;
    public static final int ACTION = 0, BUY = 1, CLEANUP = 2;
+
+   public Turn(){
+       
+   }
    
-  
 //ADD
    public void addCoin(int amount)
    {

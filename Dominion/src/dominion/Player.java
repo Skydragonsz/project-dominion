@@ -40,6 +40,7 @@ public class Player{
         deckArray.add(4);
         deckArray.add(4);
         deckArray.add(4);
+
     }
     public void shuffleDeck(){
         Random rng = new Random();
@@ -51,7 +52,7 @@ public class Player{
             deckArray.set(index,deckArray.get(i));
             deckArray.set(i, swap);                   
         }   
-        this.deckArray = deckArray;
+        
     }
      
     public ArrayList getDeck(){
