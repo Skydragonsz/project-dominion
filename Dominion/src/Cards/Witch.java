@@ -12,25 +12,19 @@ import dominion.Turn;
  */
 public class Witch extends ActionCards{
     private final int cost = 5;
-    
-    
-    
+       
     public Witch(){
-        
-        
+
     }
 
     
     public static void playCard(Player player,Player otherPlayer, Turn turn){
         turn.removeAction(1);
         player.setNthAmountOfCards(2);
-        otherPlayer.AddCard(7);
-
-
+        otherPlayer.AddCard(7); //Add Curse card
     }
     
     public int getCost(){
         return cost;
     }
-    
 }
