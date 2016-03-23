@@ -5,19 +5,20 @@
  */
 package dominion.phase;
 import Cards.MainCard;
+import Cards.Witch;
 import dominion.*;
 /**
  *
  * @author Quinten
 */
 public class ActionPhase{ 
-    
-    public void placeCard(MainCard card, Player p, Player otherPlayer){
+
+    public void placeCard(Witch card, Player p, Player otherPlayer){
         
         if (card.getCardType() == "ACTION"){
             card.playCard(p,otherPlayer);
-            p.AddToPlayingField(card.GetID());
-            p.RemoveNthCard(card.GetID());
+            //p.AddToPlayingField(card.GetID());
+            //p.RemoveNthCard(card.GetID());
             
         }else{
             placeCard(card, p, otherPlayer);

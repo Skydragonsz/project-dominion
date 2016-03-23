@@ -5,6 +5,9 @@
  */
 package Cards;
 
+import dominion.Player;
+import dominion.Turn;
+
 /**
  *
  * @author Arthur
@@ -16,7 +19,8 @@ public class MainCard{
         return TYPE;
     }
     
-    public static void playCard(){
+    
+    public void playCard(Player player,Player otherPlayer){
         
     }
 }

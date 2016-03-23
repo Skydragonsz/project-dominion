@@ -12,16 +12,23 @@ import dominion.Turn;
  */
 public class Witch extends ActionCards{
     private final int cost = 5;
-       
+    private String TYPE= "ACTION";
+    
+    
+    public String getCardType(){
+        return TYPE;
+    }
+    
     public Witch(){
 
     }
 
     
-    public static void playCard(Player player,Player otherPlayer, Turn turn){
-        turn.removeAction(1);
-        player.setNthAmountOfCards(2);
-        otherPlayer.AddCard(7); //Add Curse card
+    public void playCard(Player player,Player otherPlayer){
+        //turn.removeAction(1);
+        System.out.println("WITCH EFFECT");
+        player.setNthAmountOfCards(2); //HAND
+        otherPlayer.AddCard(7); //Add Curse card DECK
     }
     
     public int getCost(){
