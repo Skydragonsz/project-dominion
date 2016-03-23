@@ -4,7 +4,8 @@
  * and open the template in the editor.
  */
 package Cards;
-
+import dominion.Player;
+import dominion.Turn;
 /**
  *
  * @author Arthur
@@ -12,8 +13,20 @@ package Cards;
 public class Witch extends ActionCards{
     private final int cost = 5;
     
+    
+    
     public Witch(){
         
+        
+    }
+
+    
+    public static void playCard(Player player,Player otherPlayer, Turn turn){
+        turn.removeAction(1);
+        player.setNthAmountOfCards(2);
+        otherPlayer.AddCard(7);
+
+
     }
     
     public int getCost(){
