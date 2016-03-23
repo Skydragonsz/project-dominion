@@ -38,6 +38,7 @@ public class PlayerTester {
     
     @After
     public void tearDown() {
+   
     }
     
     
@@ -51,7 +52,8 @@ public class PlayerTester {
     
     @Test
     public void testShuffle(){
-    assertEquals(p.shuffleDeck(),"7 5 5 5 1 1 ");
+        p.shuffleDeck();
+    assertEquals(p.getDeck(),"7 5 5 5 1 1 ");
 
     }
     /*
@@ -62,5 +64,31 @@ public class PlayerTester {
 
         
     }*/
+    
+    @Test
+    public void testGetHand(){
+    System.out.println(p.getDeck());
+    System.out.println(p.getCards());
+    System.out.println("^BEGIN STATE^");
+    
+    p.shuffleDeck();
+    System.out.println(p.getDeck());
+    System.out.println("^SHUFFLE^");  
+    
+    p.setNthAmountOfCards(2);
+    System.out.println(p.getDeck());
+    System.out.println(p.getCards());
+    assertEquals(p.getCards(),"7 5 5 5 1 1 ");
+    
+    }
+    
+    @Test
+    public void testPrintedCardsAfter(){
+    
+    assertEquals(p.getDeck(),"7 5 5 5 1 1 ");
 
+        
+    }    
+    
+    
 }
