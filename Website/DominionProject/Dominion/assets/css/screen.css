@@ -74,7 +74,8 @@ footer {
     height: 100px;
     background-image: url("../media/footer_background.jpg");
     background-repeat: repeat-x;
-    padding-top: 50px;
+    padding-top: 25px;
+    padding-bottom: 25px;
 }
 
 /*---------------------*/
@@ -150,7 +151,8 @@ ul li:last-of-type a:after {
 #footercontent {
     display: inline-block;
     width: 50%;
-    margin-left: 400px;
+    margin-left: 265px;
+    padding-top: 35px;
 }
 
 #logo {
@@ -164,8 +166,12 @@ ul li:last-of-type a:after {
     display: inline-block;
     width: 10%;
     float: left;
-    margin-left: 225px;
+    margin-left: 355px;
     vertical-align: middle;
+
+}
+
+#footerlogo img {
 
 }
 
