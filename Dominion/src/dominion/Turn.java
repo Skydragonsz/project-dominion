@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package dominion;
+import dominion.*;
+import dominion.phase.ActionPhase;
 
 /**
  *
@@ -16,6 +18,7 @@ public class Turn {
    private int amountOfBuys;
    public static final int ACTION = 0, BUY = 1, CLEANUP = 2;
    
+  
 //ADD
    public void addCoin(int amount)
    {

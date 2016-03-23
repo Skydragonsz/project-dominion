@@ -15,6 +15,7 @@ import java.util.*;
 public class Player{ 
     private ArrayList deckArray;
     private ArrayList cardArray;
+    private ArrayList playingFieldArray;
     private int victoryPoints;
     private int[] discardPile;
         
@@ -28,6 +29,7 @@ public class Player{
         //Starter deck -- TEST
         deckArray = new ArrayList<Integer>();
         cardArray = new ArrayList<Integer>();
+        playingFieldArray = new ArrayList<Integer>();
         deckArray.add(1);
         deckArray.add(1);
         deckArray.add(1);
@@ -38,10 +40,6 @@ public class Player{
         deckArray.add(4);
         deckArray.add(4);
         deckArray.add(4);
-        
-        cardArray.add(5);
-        cardArray.add(5);
-        cardArray.add(6);
     }
     public void shuffleDeck(){
         Random rng = new Random();
@@ -78,14 +76,14 @@ public class Player{
         deckArray.add(CardID);
     }
     
+    public void AddToPlayingField(int CardID)
+    {
+        playingFieldArray.add(CardID);
+    }
+    
     public void RemoveNthCard(int CardID){
         deckArray.remove(CardID);
     }
-    
-    public String getD(){
-        return deckArray.toString();
-    }
-
 }
     
 
