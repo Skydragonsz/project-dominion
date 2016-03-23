@@ -13,7 +13,7 @@ import dominion.*;
 */
 public class ActionPhase{ 
 
-    public void placeCard(Witch card, Player p, Player otherPlayer){
+    public void placeCard(MainCard card, Player p, Player otherPlayer){
         
         if (card.getCardType() == "ACTION"){
             card.playCard(p,otherPlayer);
