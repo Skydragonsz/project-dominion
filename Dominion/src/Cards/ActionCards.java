@@ -25,7 +25,4 @@ public class ActionCards extends MainCard{
     public void lowerActions(){
         amountOfActions--;
     }
-    
-
-
 }
