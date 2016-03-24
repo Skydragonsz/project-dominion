@@ -10,7 +10,7 @@ package Cards;
  * @author Arthur
  */
 public class Province extends VictoryCards{
-    private final int cardID = 6;
+    private static final int cardID = 6;
     private final int victoryValue = 6;
     private final int cost = 8;
     
@@ -21,4 +21,10 @@ public class Province extends VictoryCards{
     public int getVictoryValue(){
         return victoryValue;
     }
+    
+    @Override
+    public int getCardID(){
+        return cardID;
+    }
+    
 }

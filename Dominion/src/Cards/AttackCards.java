@@ -10,7 +10,7 @@ package Cards;
  * @author Arthur
  */
 public class AttackCards extends ActionCards{
-    private String TYPE= "ATTACK";
+    private final String TYPE= "ATTACK";
 
     @Override
     public String getCardType(){

@@ -11,9 +11,9 @@ package Cards;
  */
 public class ActionCards extends MainCard{
     
-    private String TYPE= "ACTION";
+    private final String TYPE= "ACTION";
     
-    private int amountOfActions = 1;
+    
     
     
     
@@ -22,7 +22,5 @@ public class ActionCards extends MainCard{
         return TYPE;
     }
     
-    public void lowerActions(){
-        amountOfActions--;
-    }
+
 }

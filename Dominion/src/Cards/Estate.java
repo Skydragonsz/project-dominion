@@ -21,4 +21,9 @@ public class Estate extends VictoryCards{
     public int getVictoryValue(){
         return victoryValue;
     }
+    
+    @Override
+    public int getCardID(){
+        return cardID;
+    }
 }

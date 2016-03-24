@@ -20,16 +20,17 @@ public class Village extends ActionCards{
     }
     
     public void playCard(Player player){
-        
-        System.out.println("VILLAGE EFFECT");
         player.setNthAmountOfCards(1); //HAND
-        player.addAction(2);
-        System.out.println("Extra action:" + player.getAction());
-        
+        player.addAction(2);        
     }
     
     public int getCost(){
         return cost;
+    }
+    
+    @Override
+    public int getCardID(){
+        return cardID;
     }
     
 }

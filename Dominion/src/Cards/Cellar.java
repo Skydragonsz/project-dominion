@@ -12,7 +12,7 @@ import dominion.Player;
  */
 public class Cellar extends ActionCards{
     private final int cardID = 8;
-    private final int cost = 3;
+    private final int cost = 2;
     public Cellar(){
         
         
@@ -30,5 +30,10 @@ public class Cellar extends ActionCards{
     
     public int getCost(){
         return cost;
+    }
+    
+    @Override
+    public int getCardID(){
+        return cardID;
     }
 }

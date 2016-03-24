@@ -4,19 +4,26 @@
  * and open the template in the editor.
  */
 package Cards;
-
+import dominion.Player;
 /**
  *
  * @author Arthur
  */
-public class VictoryCards extends MainCard{
-    private final String TYPE= "VICTORY";
-
+public class ReactionCards extends ActionCards{
+    private final String TYPE= "REACTION";
+    
+    
+    public void reactionPlay(Player player){
+        
+    }   
+    
+    public void reactionPlay(Player player,Player otherPlayer){
+        
+    }   
     
     @Override
     public String getCardType(){
         return TYPE;
     }
     
-
 }

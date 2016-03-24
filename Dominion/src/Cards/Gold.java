@@ -22,4 +22,9 @@ public class Gold extends TreasureCards{
         return cost;
     }
     
+    @Override
+    public int getCardID(){
+        return cardID;
+    }
+    
 }

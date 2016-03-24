@@ -21,5 +21,10 @@ public class Copper extends TreasureCards{
     public int getCost(){
         return cost;
     }
+    
+    @Override
+    public int getCardID(){
+        return cardID;
+    }
             
 }
