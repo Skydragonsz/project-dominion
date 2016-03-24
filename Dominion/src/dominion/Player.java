@@ -8,14 +8,14 @@
     */
 
 package dominion;
-
+import Cards.*;
 //import Deck.LinkedCards;
 import java.util.*;
 
-public class Player extends Turn{ 
+public class Player extends Turn{
+    private Cards.Collection collection = new Cards.Collection();
     private ArrayList deckArray;
     private ArrayList cardArray;
-    private ArrayList discardArray;
     private ArrayList playingFieldArray;
     private int victoryPoints;
     private int[] discardPile;
@@ -28,10 +28,13 @@ public class Player extends Turn{
     public void init()
     {
         //Starter deck -- TEST
-        deckArray = new ArrayList<Integer>();
-        cardArray = new ArrayList<Integer>();
-        playingFieldArray = new ArrayList<Integer>();
-        discardArray = new ArrayList<Integer>();
+        deckArray = new ArrayList();
+        cardArray = new ArrayList();
+        playingFieldArray = new ArrayList();
+        /*
+        deckArray.add(collection.getCard("copper"));
+        deckArray.add(collection.getCard("witch"));
+        */
         deckArray.add(1);
         deckArray.add(1);
         deckArray.add(1);
@@ -42,6 +45,7 @@ public class Player extends Turn{
         deckArray.add(4);
         deckArray.add(4);
         deckArray.add(4);
+
 
     }
     public void shuffleDeck(){
@@ -59,10 +63,6 @@ public class Player extends Turn{
      
     public ArrayList getDeck(){
         return deckArray;
-    }
-    
-    public ArrayList getDiscardPile(){
-        return discardArray;
     }
     
     public void setNthAmountOfCards(int amount )
@@ -83,6 +83,14 @@ public class Player extends Turn{
         deckArray.add(CardID);
     }
     
+      
+    public Object getCard(String name)
+    {
+        return deckArray.get(deckArray.indexOf(name));
+        
+        
+    }
+    
     public void AddToPlayingField(int CardID)
     {
         playingFieldArray.add(CardID);
@@ -91,26 +99,6 @@ public class Player extends Turn{
     public void RemoveNthCard(int CardID){
         deckArray.remove(CardID);
     }
-    
-    public String checkForReactionCard(){
-        
-        return "REACTION";
-    }
-    
-    public void discardDeckToPile(){
-        discardArray.addAll(deckArray);
-        deckArray.clear();
-    }
-    
-    public void isDeckEmpty(boolean value){
-        if(value){
-            deckArray.addAll(discardArray);
-            discardArray.clear();
-            shuffleDeck();
-        }
-    }
-    
-    
 }
     
 
