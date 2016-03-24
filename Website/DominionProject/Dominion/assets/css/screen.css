@@ -41,6 +41,7 @@ section {
     border: 20px solid;
     border-image: url("../media/section_border2.png") 30 round;
     padding: 10px;
+    z-index: 8;
 }
 
 section h1 {
@@ -57,7 +58,7 @@ section h1 {
 
 
 article {
-
+    margin: 10px;
 }
 
 article h2 {
@@ -70,7 +71,7 @@ article h2 {
     padding-bottom: 21px;
     margin-top: 10px;
     margin-bottom: 10px;
-    background-image: url("../media/test.png");
+    background-image: url("../media/title_ribbon.png");
     background-position: center;
     background-repeat: no-repeat;
 }
@@ -94,6 +95,8 @@ article h3 {
 article p {
     line-height: 130%;
     margin-bottom: 10px;
+    z-index: 8;
+
 }
 
 header {
@@ -101,6 +104,7 @@ header {
     position: fixed;
     width: 100%;
     font-family: MontserratRegular;
+    z-index: 10;
 }
 
 footer {
@@ -110,6 +114,10 @@ footer {
     background-repeat: repeat-x;
     padding-top: 25px;
     padding-bottom: 25px;
+}
+
+footer p {
+    line-height: 130%;
 }
 
 /*---------------------*/
@@ -128,7 +136,6 @@ nav {
     border-top: 1px solid #A26B28;
     border-bottom: 1px solid #A26B28;
     box-shadow: 10px 5px 10px black;
-    z-index: 1;
 
 }
 
@@ -180,14 +187,12 @@ section ul {
     margin-bottom: 10px;
 }
 
-#preparation {
-    position: relative;
-}
 
 #phases {
     list-style-type: upper-alpha;
     margin-left: 40px;
     margin-bottom: 10px;
+    line-height: 130%;
 }
 
 /*ul li a:after {
@@ -202,7 +207,7 @@ ul li:last-of-type a:after {
     display: inline-block;
     width: 50%;
     margin-left: 90px;
-    padding-top: 35px;
+    padding-top: 22px;
 }
 
 #logo {
@@ -238,16 +243,69 @@ ul li:last-of-type a:after {
     margin-bottom: 5px;
 }
 
+#victory {
+    position: relative;
+    margin-bottom: 65px;
+    z-index: 9;
+
+}
+
+#victory p {
+    padding-left: 70px;
+}
+
 /*------------------------*/
 /* PAGE SPECIFIC ELEMENTS */
 /*------------------------*/
 
 #treasurecard {
+    float: right;
+    position: relative;
+    top: -65px;
+    left: -45px;
+    -ms-transform: rotate(23deg);
+    -webkit-transform: rotate(23deg);
+    transform: rotate(23deg);
+    z-index: 9;
+}
+
+#victorycard {
     float: left;
-    padding-right: 30px;
-    position: absolute;
-    top: 0px;
-    left: 50px;
+    position: relative;
+    top: 4px;
+    left: 19px;
+    -ms-transform: rotate(-23deg);
+    -webkit-transform: rotate(-23deg);
+    transform: rotate(-23deg);
+    margin-right: 35px;
+    margin-bottom: 24px;
+    margin-top: 5px;
+    z-index: 9;
+}
+
+#cursecard {
+    float: right;
+    position: relative;
+    top: -65px;
+    left: -20px;
+    -ms-transform: rotate(23deg);
+    -webkit-transform: rotate(23deg);
+    transform: rotate(23deg);
+    z-index: 9;
+}
+
+#trashcard {
+    float: left;
+    position: relative;
+    top: 4px;
+    left: 19px;
+    -ms-transform: rotate(-23deg);
+    -webkit-transform: rotate(-23deg);
+    transform: rotate(-23deg);
+    margin-right: 35px;
+    margin-bottom: 24px;
+    margin-top: 5px;
+    z-index: 9;
 }
 
 
