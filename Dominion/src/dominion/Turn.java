@@ -23,7 +23,7 @@ public class Turn {
 //ADD
    public void addCoin(int amount)
    {
-       if (amountOfCurrency <=0){
+       if (amountOfCurrency >=0){
         amountOfCurrency += amount;
        }
    }
@@ -37,7 +37,7 @@ public class Turn {
    
    public void addBuy(int amount)
    {
-       if (amountOfBuys <=0){
+       if (amountOfBuys >=0){
        amountOfBuys += amount;
        }
    }

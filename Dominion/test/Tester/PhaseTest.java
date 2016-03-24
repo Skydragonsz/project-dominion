@@ -23,7 +23,6 @@ import java.util.Map;
 public class PhaseTest {
     Cards.Collection col = new Cards.Collection();
     ActionPhase Pl = new ActionPhase();
-    Witch w1 = new Witch();
     Player p1 = new Player();
     Player p2 = new Player();
   
@@ -61,14 +60,14 @@ public class PhaseTest {
     System.out.println(p2.getCards());
     System.out.println("^BEGIN STATE^");
 
-    Pl.placeCard(w1, p1, p2);
+    Pl.placeCard(col.getCard(31), p1, p2);
        
     System.out.println(p1.getDeck());
     System.out.println(p1.getCards());
     System.out.println(p2.getDeck());
     System.out.println(p2.getCards());
     System.out.println("^WITCH EFFECT STATE^");
-    System.out.println(col.getCard(5).getCardType());
+    System.out.println(col.getCard(31).getCardType());
     
  
     }

@@ -20,9 +20,11 @@ public class ActionPhase{
             //p.RemoveNthCard(card.GetID());
             p.removeAction(1);
             if(otherPlayer.checkForReactionCard() != "REACTION"){
+                System.out.println("NO REACTION IN HAND");
                 card.playCard(p,otherPlayer);
-            }
-        
+            } else {
+                System.out.println("REACTION IN HAND");
+                }
             
             
         }else if(card.getCardType() == "ACTION"){

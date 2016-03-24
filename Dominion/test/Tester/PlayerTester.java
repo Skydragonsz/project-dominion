@@ -10,6 +10,8 @@ import static org.junit.Assert.*;
 import dominion.*;
 import java.util.Arrays;
 import Cards.*;
+import java.util.ArrayList;
+import java.util.List;
 /**
  *
  * @author Arthur
@@ -18,7 +20,10 @@ public class PlayerTester {
     
     private Player p = new Player();
 
-    //private int[] test = new int[]{1,1,1,1,1,4,4,4};
+    //testArrayDeck is de kaarten dat het begindeck bevat.
+    //1 = copper & 4 = estate.    
+    List<Integer> testArrayDeck = new ArrayList<>(Arrays.asList(1, 1, 1, 1, 1, 1, 1, 4, 4, 4));
+    List<Integer> testArrayHand = new ArrayList<>(Arrays.asList(1, 1, 1));
    
     public PlayerTester() {
     }
@@ -45,58 +50,45 @@ public class PlayerTester {
     
     @Test
     public void testPrintedCards(){
-    //System.out.println(collection.getCard("copper"));
-    assertEquals(p.getDeck(),"7 5 5 5 1 1 ");
-
-        
+        assertEquals(p.getDeck(),testArrayDeck);
     }
     
     @Test
     public void testShuffle(){
+    //Het deck van de player p word geschud.
         p.shuffleDeck();
-    assertEquals(p.getDeck(),"7 5 5 5 1 1 ");
-
-    }
-    /*
-    @Test
-    public void testShuffleDeck(){
-    p.shuffleDeck(p.getDeck());
-    assertEquals(p.getLinkedCards(),"7 5 5 5 1 1 ");
-
+    //Kijk als deze deck niet gelijk is aan de begin deck.
+        assertTrue(p.getDeck() != testArrayDeck);
+    } 
         
-    }*/
-    
-
-    
     @Test
-    public void testPrintedCardsAfter(){
-    
-    assertEquals(p.getDeck(),"7 5 5 5 1 1 ");
-
+    public void testDiscardDeckToPile(){
+    //+Visuele feedback.    
+        System.out.println(p.getDeck());
+        System.out.println(p.getCards());
+        System.out.println("^BEGIN STATE^");
         
-    }   
-    
-    @Test
-    public void testdiscardDeckToPile(){
-    System.out.println(p.getDeck());
-    System.out.println(p.getCards());
-    System.out.println("^BEGIN STATE^");
-    
-    p.shuffleDeck();
-    System.out.println(p.getDeck());
-    System.out.println("^SHUFFLE^");  
-    
-    p.setNthAmountOfCards(3);
-    p.discardDeckToPile();
-    System.out.println(p.getDiscardPile());
-    System.out.println(p.getDeck());
-    System.out.println(p.getCards());
-    p.isDeckEmpty(true);
-    System.out.println(p.getDiscardPile());
-    System.out.println(p.getDeck());
-    System.out.println(p.getCards());
-    assertEquals(p.getCards(),"7 5 5 5 1 1 ");
-    
+        //Het deck shudden.
+        ////p.shuffleDeck();
+        ////System.out.println(p.getDeck());
+        ////System.out.println("^SHUFFLE^");  
+        
+        //Pakt drie kaarten van het deck.    
+        p.setNthAmountOfCards(3);
+        
+        //Discard deze kaarten.
+        p.discardDeckToPile();
+        System.out.println(p.getDiscardPile());
+        System.out.println(p.getDeck());
+        System.out.println(p.getCards());
+        
+        //?
+        p.isDeckEmpty(true);
+        System.out.println(p.getDiscardPile());
+        System.out.println(p.getDeck());
+        System.out.println(p.getCards());
+        assertEquals(p.getCards(), testArrayHand);
+
     
     }
     

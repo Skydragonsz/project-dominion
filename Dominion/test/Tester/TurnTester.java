@@ -56,7 +56,7 @@ public class TurnTester {
     
     @Test
     public void RemoveOneAction(){
-        n.removeAction(1);
+        n.removeAction(2);
         System.out.println(n.getAction());
      assertEquals(n.getAction(), 23);
     }

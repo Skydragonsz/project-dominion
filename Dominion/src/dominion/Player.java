@@ -104,7 +104,7 @@ public class Player extends Turn{
     
     public String checkForReactionCard(){
         
-        return "REACTION";
+        return "NOREACTION";
     }
     
     public void discardDeckToPile(){
