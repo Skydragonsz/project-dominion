@@ -16,6 +16,7 @@ public class Player extends Turn{
     private Cards.Collection collection = new Cards.Collection();
     private ArrayList deckArray;
     private ArrayList cardArray;
+    private ArrayList discardArray;
     private ArrayList playingFieldArray;
     private int victoryPoints;
     private int[] discardPile;
@@ -31,6 +32,7 @@ public class Player extends Turn{
         deckArray = new ArrayList();
         cardArray = new ArrayList();
         playingFieldArray = new ArrayList();
+        discardArray = new ArrayList();
         /*
         deckArray.add(collection.getCard("copper"));
         deckArray.add(collection.getCard("witch"));
@@ -98,6 +100,28 @@ public class Player extends Turn{
     
     public void RemoveNthCard(int CardID){
         deckArray.remove(CardID);
+    }
+    
+    public String checkForReactionCard(){
+        
+        return "REACTION";
+    }
+    
+    public void discardDeckToPile(){
+        discardArray.addAll(deckArray);
+        deckArray.clear();
+    }
+    
+    public void isDeckEmpty(boolean value){
+        if(value){
+            deckArray.addAll(discardArray);
+            discardArray.clear();
+            shuffleDeck();
+        }
+    }
+    
+    public ArrayList getDiscardPile(){
+        return discardArray;
     }
 }
     
