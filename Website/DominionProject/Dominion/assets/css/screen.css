@@ -6,6 +6,11 @@
     url('../fonts/MontserratRegular.ttf') format('truetype');
 }
 
+@font-face {
+    font-family: MedievalFont;
+    src: url('../fonts/OldeEnglish.ttf');
+}
+
 /*---------------------*/
 /*    HTML ELEMENTS    */
 /*---------------------*/
@@ -31,11 +36,14 @@ body {
 section {
     margin-left: auto;
     margin-right: auto;
-    width: 60%;
+    width: 45%;
     color: #ffd700;
+    border: 20px solid;
+    border-image: url("../media/section_border2.png") 30 round;
+    padding: 10px;
 }
 
-article h1 {
+section h1 {
     color: #FFE769;
     border: solid 1px #ffd700;
     text-align: center;
@@ -47,19 +55,45 @@ article h1 {
     border-radius: 8px;
 }
 
+
+article {
+
+}
+
 article h2 {
-    color: #FFE769;
-    border-bottom: solid 1px #ffd700;
+    font-family: MedievalFont;
+    font-size: 2em;
+    color: #D1AB52;
     text-align: center;
-    width: 15%;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    width: 35%;
+    padding-top: 26px;
+    padding-bottom: 21px;
     margin-top: 10px;
     margin-bottom: 10px;
+    background-image: url("../media/test.png");
+    background-position: center;
+    background-repeat: no-repeat;
 }
+
+span h3 {
+    border-bottom: none !important;
+    width: 40% !important;
+}
+
+article h3 {
+    color: #f8e68d;
+    border-bottom: solid 1px #f8e68d;
+    width: 20%;
+    border-bottom-right-radius: 5px;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+}
+
+
 
 article p {
     line-height: 130%;
+    margin-bottom: 10px;
 }
 
 header {
@@ -91,8 +125,8 @@ nav {
     background-image: url("../media/nav_background_red.jpg");
     background-repeat: repeat-x;
     line-height: 350%;
-    border-top: 1px solid #39444b;
-    border-bottom: 1px solid #7E8285;
+    border-top: 1px solid #A26B28;
+    border-bottom: 1px solid #A26B28;
     box-shadow: 10px 5px 10px black;
     z-index: 1;
 
@@ -118,8 +152,8 @@ nav ul li {
 
 }
 
-li+li {
-    border-left: 1px solid #7E8285;
+header li+li {
+    border-left: 1px solid #A26B28;
 }
 
 nav a:hover {
@@ -140,6 +174,22 @@ ul li:nth-last-child(1){
     border-right: none;
 }
 
+section ul {
+    list-style-type: circle;
+    margin-left: 40px;
+    margin-bottom: 10px;
+}
+
+#preparation {
+    position: relative;
+}
+
+#phases {
+    list-style-type: upper-alpha;
+    margin-left: 40px;
+    margin-bottom: 10px;
+}
+
 /*ul li a:after {
     content: ' |';
 }
@@ -151,7 +201,7 @@ ul li:last-of-type a:after {
 #footercontent {
     display: inline-block;
     width: 50%;
-    margin-left: 265px;
+    margin-left: 90px;
     padding-top: 35px;
 }
 
@@ -166,14 +216,18 @@ ul li:last-of-type a:after {
     display: inline-block;
     width: 10%;
     float: left;
-    margin-left: 355px;
+    margin-left: 385px;
     vertical-align: middle;
+    padding-top: 20px;
 
 }
 
 #footerlogo img {
-
+    width: 130%;
+    border-right: 1px solid #A26B28;
+    padding-right: 25px;
 }
+
 
 
 #banner {
@@ -181,12 +235,19 @@ ul li:last-of-type a:after {
     width: auto;
     height: 500px;
     z-index: 2;
+    margin-bottom: 5px;
 }
 
 /*------------------------*/
 /* PAGE SPECIFIC ELEMENTS */
 /*------------------------*/
 
-
+#treasurecard {
+    float: left;
+    padding-right: 30px;
+    position: absolute;
+    top: 0px;
+    left: 50px;
+}
 
 
