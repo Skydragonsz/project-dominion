@@ -9,6 +9,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import dominion.*;
 import java.util.Arrays;
+import Cards.*;
 /**
  *
  * @author Arthur
@@ -44,7 +45,7 @@ public class PlayerTester {
     
     @Test
     public void testPrintedCards(){
-    
+    //System.out.println(collection.getCard("copper"));
     assertEquals(p.getDeck(),"7 5 5 5 1 1 ");
 
         
