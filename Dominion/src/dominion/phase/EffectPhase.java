@@ -3,20 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Cards;
+package dominion.phase;
 
 /**
  *
  * @author Arthur
  */
-public class VictoryCards extends MainCard{
-    private final String TYPE= "VICTORY";
-
+public class EffectPhase {
     
-    @Override
-    public String getCardType(){
-        return TYPE;
-    }
-    
-
 }

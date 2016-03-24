@@ -28,6 +28,7 @@ public class CardsTester {
     private Copper c = new Copper();
     private Province pro = new Province();
     private Duchy du = new Duchy();
+    private Province province = new Province();
 
     
     public CardsTester() {
@@ -51,7 +52,7 @@ public class CardsTester {
 
     @Test
     public void testGetTypeWitch(){
-        assertEquals(w.getCardType(), "ACTION");
+        assertEquals(w.getCardType(), "ATTACK");
         
     }
     
@@ -80,6 +81,8 @@ public class CardsTester {
         assertEquals(VictoryPoints,15);
         
     }
+    
+
     
 
 }

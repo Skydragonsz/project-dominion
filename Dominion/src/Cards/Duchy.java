@@ -22,5 +22,10 @@ public class Duchy extends VictoryCards{
         return victoryValue;
     }
     
+    @Override
+    public int getCardID(){
+        return cardID;
+    }
+    
 }
 

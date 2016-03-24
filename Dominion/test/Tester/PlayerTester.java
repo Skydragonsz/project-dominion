@@ -65,8 +65,18 @@ public class PlayerTester {
         
     }*/
     
+
+    
     @Test
-    public void testGetHand(){
+    public void testPrintedCardsAfter(){
+    
+    assertEquals(p.getDeck(),"7 5 5 5 1 1 ");
+
+        
+    }   
+    
+    @Test
+    public void testdiscardDeckToPile(){
     System.out.println(p.getDeck());
     System.out.println(p.getCards());
     System.out.println("^BEGIN STATE^");
@@ -75,20 +85,19 @@ public class PlayerTester {
     System.out.println(p.getDeck());
     System.out.println("^SHUFFLE^");  
     
-    p.setNthAmountOfCards(2);
+    p.setNthAmountOfCards(3);
+    p.discardDeckToPile();
+    System.out.println(p.getDiscardPile());
+    System.out.println(p.getDeck());
+    System.out.println(p.getCards());
+    p.isDeckEmpty(true);
+    System.out.println(p.getDiscardPile());
     System.out.println(p.getDeck());
     System.out.println(p.getCards());
     assertEquals(p.getCards(),"7 5 5 5 1 1 ");
     
+    
     }
-    
-    @Test
-    public void testPrintedCardsAfter(){
-    
-    assertEquals(p.getDeck(),"7 5 5 5 1 1 ");
-
-        
-    }    
     
     
 }

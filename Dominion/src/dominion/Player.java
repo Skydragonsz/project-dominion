@@ -15,6 +15,7 @@ import java.util.*;
 public class Player extends Turn{ 
     private ArrayList deckArray;
     private ArrayList cardArray;
+    private ArrayList discardArray;
     private ArrayList playingFieldArray;
     private int victoryPoints;
     private int[] discardPile;
@@ -30,6 +31,7 @@ public class Player extends Turn{
         deckArray = new ArrayList<Integer>();
         cardArray = new ArrayList<Integer>();
         playingFieldArray = new ArrayList<Integer>();
+        discardArray = new ArrayList<Integer>();
         deckArray.add(1);
         deckArray.add(1);
         deckArray.add(1);
@@ -59,6 +61,10 @@ public class Player extends Turn{
         return deckArray;
     }
     
+    public ArrayList getDiscardPile(){
+        return discardArray;
+    }
+    
     public void setNthAmountOfCards(int amount )
     {
         for(int i = 0;i <amount ;i++){
@@ -85,6 +91,26 @@ public class Player extends Turn{
     public void RemoveNthCard(int CardID){
         deckArray.remove(CardID);
     }
+    
+    public String checkForReactionCard(){
+        
+        return "REACTION";
+    }
+    
+    public void discardDeckToPile(){
+        discardArray.addAll(deckArray);
+        deckArray.clear();
+    }
+    
+    public void isDeckEmpty(boolean value){
+        if(value){
+            deckArray.addAll(discardArray);
+            discardArray.clear();
+            shuffleDeck();
+        }
+    }
+    
+    
 }
     
 

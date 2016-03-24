@@ -4,28 +4,27 @@
  * and open the template in the editor.
  */
 package Cards;
+
 import dominion.Player;
 
 /**
  *
  * @author Arthur
  */
-public class Cellar extends ActionCards{
-    private final int cardID = 8;
-    private final int cost = 2;
-    public Cellar(){
-        
+public class Market extends ActionCards{
+    private final int cardID = 29;
+    private final int cost = 5;
+    
+    public Market(){
         
     }
     
     @Override
     public void playCard(Player player){
-        
-        System.out.println("VILLAGE EFFECT");
-       // player.setNthAmountOfCards(1); //HAND TODO -- 
+        player.addCoin(1);
+        player.addBuy(1);
         player.addAction(1);
-        System.out.println("Extra action:" + player.getAction());
-        
+        player.setNthAmountOfCards(1);
     }
     
     public int getCost(){
@@ -36,4 +35,5 @@ public class Cellar extends ActionCards{
     public int getCardID(){
         return cardID;
     }
+    
 }

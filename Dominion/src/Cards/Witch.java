@@ -5,7 +5,7 @@
  */
 package Cards;
 import dominion.Player;
-import dominion.Turn;
+
 /**
  *
  * @author Arthur
@@ -19,9 +19,8 @@ public class Witch extends AttackCards{
 
     }
    
+    @Override
     public void playCard(Player player,Player otherPlayer){
-        //turn.removeAction(1);
-        System.out.println("WITCH EFFECT");
         player.setNthAmountOfCards(2); //HAND
         otherPlayer.AddCard(7); //Add Curse card DECK
     }
@@ -29,5 +28,10 @@ public class Witch extends AttackCards{
     
     public int getCost(){
         return cost;
+    }
+    
+    @Override
+    public int getCardID(){
+        return cardID;
     }
 }

@@ -6,7 +6,7 @@
 package Cards;
 
 import dominion.Player;
-import dominion.Turn;
+
 
 /**
  *
@@ -14,6 +14,7 @@ import dominion.Turn;
  */
 public class MainCard{
     private String TYPE;
+    private static int cardID;
     
     public String getCardType(){
         return TYPE;
@@ -26,5 +27,9 @@ public class MainCard{
     
     public void playCard(Player player,Player otherPlayer){
         System.out.println("DIT IS DE MAIN CARD.");
+    }
+    
+    public int getCardID(){
+        return cardID;
     }
 }

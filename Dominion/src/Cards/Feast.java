@@ -5,27 +5,21 @@
  */
 package Cards;
 import dominion.Player;
-
 /**
  *
  * @author Arthur
  */
-public class Cellar extends ActionCards{
-    private final int cardID = 8;
-    private final int cost = 2;
-    public Cellar(){
-        
+public class Feast extends ActionCards{
+    private final int cardID = 15;
+    private final int cost = 4;
+    
+    public Feast(){
         
     }
     
     @Override
     public void playCard(Player player){
-        
-        System.out.println("VILLAGE EFFECT");
-       // player.setNthAmountOfCards(1); //HAND TODO -- 
-        player.addAction(1);
-        System.out.println("Extra action:" + player.getAction());
-        
+        //TODO -- EffectPhase
     }
     
     public int getCost(){
@@ -36,4 +30,5 @@ public class Cellar extends ActionCards{
     public int getCardID(){
         return cardID;
     }
+    
 }

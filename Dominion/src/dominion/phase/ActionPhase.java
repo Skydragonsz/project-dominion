@@ -15,10 +15,14 @@ public class ActionPhase{
     public void placeCard(MainCard card, Player p, Player otherPlayer){
         
         if (card.getCardType() == "ATTACK"){
-            card.playCard(p,otherPlayer);
+            
             //p.AddToPlayingField(card.GetID());
             //p.RemoveNthCard(card.GetID());
             p.removeAction(1);
+            if(otherPlayer.checkForReactionCard() != "REACTION"){
+                card.playCard(p,otherPlayer);
+            }
+        
             
             
         }else if(card.getCardType() == "ACTION"){
