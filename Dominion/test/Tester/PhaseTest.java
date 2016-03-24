@@ -21,12 +21,12 @@ import java.util.Map;
  * @author Quinten
  */
 public class PhaseTest {
+    Cards.Collection col = new Cards.Collection();
     ActionPhase Pl = new ActionPhase();
     Witch w1 = new Witch();
-    Village v1 = new Village();
     Player p1 = new Player();
     Player p2 = new Player();
-    Map<String, Village> map = new HashMap<>();
+  
     
     public PhaseTest() {
     }
@@ -60,15 +60,15 @@ public class PhaseTest {
     System.out.println(p2.getDeck());
     System.out.println(p2.getCards());
     System.out.println("^BEGIN STATE^");
- 
-       Pl.placeCard(v1, p1, p2);
+
+    Pl.placeCard(w1, p1, p2);
        
     System.out.println(p1.getDeck());
     System.out.println(p1.getCards());
     System.out.println(p2.getDeck());
     System.out.println(p2.getCards());
     System.out.println("^WITCH EFFECT STATE^");
-    System.out.println(v1.getCardType());
+    System.out.println(col.getCard(5).getCardType());
     
  
     }
