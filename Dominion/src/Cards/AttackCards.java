@@ -9,14 +9,12 @@ package Cards;
  *
  * @author Arthur
  */
-public class VictoryCards extends MainCard{
-    private final String TYPE= "VICTORY";
+public class AttackCards extends ActionCards{
+    private final String TYPE= "ATTACK";
 
-    
     @Override
     public String getCardType(){
         return TYPE;
     }
     
-
 }

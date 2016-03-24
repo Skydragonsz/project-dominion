@@ -4,22 +4,26 @@
  * and open the template in the editor.
  */
 package Cards;
-
+import dominion.Player;
 /**
  *
  * @author Arthur
  */
-public class Curse extends VictoryCards{
-    private final int cardID = 7;
-    private final int victoryValue = -1;
-    private final int cost = 0;
+public class Feast extends ActionCards{
+    private final int cardID = 15;
+    private final int cost = 4;
+    
+    public Feast(){
+        
+    }
+    
+    @Override
+    public void playCard(Player player){
+        //TODO -- EffectPhase
+    }
     
     public int getCost(){
         return cost;
-    }
-    
-    public int getVictoryValue(){
-        return victoryValue;
     }
     
     @Override

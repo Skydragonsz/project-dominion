@@ -1,10 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
     /*
     1 Copper
     2 Silver
@@ -16,56 +9,105 @@
 
 package dominion;
 
+//import Deck.LinkedCards;
 import java.util.*;
 
-public class Player{
-    private int[] cards;
-    private int[] deck;
+public class Player extends Turn{ 
+    private ArrayList deckArray;
+    private ArrayList cardArray;
+    private ArrayList discardArray;
+    private ArrayList playingFieldArray;
     private int victoryPoints;
     private int[] discardPile;
-    
-        
         
     public Player()
-    {
-        
+    {        
         init();
     }
     
     public void init()
     {
-        deck = new int[]{1,1,1,1,1,4,4,4};
+        //Starter deck -- TEST
+        deckArray = new ArrayList<Integer>();
+        cardArray = new ArrayList<Integer>();
+        playingFieldArray = new ArrayList<Integer>();
+        discardArray = new ArrayList<Integer>();
+        deckArray.add(1);
+        deckArray.add(1);
+        deckArray.add(1);
+        deckArray.add(1);
+        deckArray.add(1);
+        deckArray.add(1);
+        deckArray.add(1);
+        deckArray.add(4);
+        deckArray.add(4);
+        deckArray.add(4);
+
     }
-    
-    public int[] shuffleDeck(int[] deck){
+    public void shuffleDeck(){
         Random rng = new Random();
-        
-        for (int i = deck.length -1; i>0; i--)
+        for (int i = deckArray.size() -1; i>0; i--)
         {
             int index = rng.nextInt(i +1);
             
-            int swap = deck[index];
-            deck[index] = deck[i];
-            deck[i] = swap;                   
-        }
+            Object swap = deckArray.get(index);
+            deckArray.set(index,deckArray.get(i));
+            deckArray.set(i, swap);                   
+        }   
         
-        return deck;
+    }
+     
+    public ArrayList getDeck(){
+        return deckArray;
     }
     
-    public int[] getDeck(){
-        return deck;
+    public ArrayList getDiscardPile(){
+        return discardArray;
     }
     
-    public void getFirstFiveCards()
+    public void setNthAmountOfCards(int amount )
     {
-        cards = new int[5];
-        for(int i = 0;i>=5;i++){
-            cards[i] = deck[i];
+        for(int i = 0;i <amount ;i++){
+            cardArray.add(deckArray.get(i));
+            deckArray.remove(i);
         }
     }
     
-    public int[] getCards(){
-        return cards;
+    public ArrayList getCards(){
+        return cardArray;
+    }
+    
+  
+    public void AddCard(int CardID)
+    {
+        deckArray.add(CardID);
+    }
+    
+    public void AddToPlayingField(int CardID)
+    {
+        playingFieldArray.add(CardID);
+    }
+    
+    public void RemoveNthCard(int CardID){
+        deckArray.remove(CardID);
+    }
+    
+    public String checkForReactionCard(){
+        
+        return "REACTION";
+    }
+    
+    public void discardDeckToPile(){
+        discardArray.addAll(deckArray);
+        deckArray.clear();
+    }
+    
+    public void isDeckEmpty(boolean value){
+        if(value){
+            deckArray.addAll(discardArray);
+            discardArray.clear();
+            shuffleDeck();
+        }
     }
     
     

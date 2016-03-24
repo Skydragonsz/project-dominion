@@ -10,21 +10,23 @@ import dominion.Player;
  *
  * @author Arthur
  */
-public class Witch extends AttackCards{
-    private final int cardID = 31;
-    private final int cost = 5;
-
-    
-    public Witch(){
-
+public class Cellar extends ActionCards{
+    private final int cardID = 8;
+    private final int cost = 2;
+    public Cellar(){
+        
+        
     }
-   
+    
     @Override
-    public void playCard(Player player,Player otherPlayer){
-        player.setNthAmountOfCards(2); //HAND
-        otherPlayer.AddCard(7); //Add Curse card DECK
+    public void playCard(Player player){
+        
+        System.out.println("VILLAGE EFFECT");
+       // player.setNthAmountOfCards(1); //HAND TODO -- 
+        player.addAction(1);
+        System.out.println("Extra action:" + player.getAction());
+        
     }
-    
     
     public int getCost(){
         return cost;

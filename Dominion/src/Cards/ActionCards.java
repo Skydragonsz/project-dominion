@@ -11,13 +11,16 @@ package Cards;
  */
 public class ActionCards extends MainCard{
     
-    private String TYPE= "ACTION";
+    private final String TYPE= "ACTION";
+    
+    
+    
+    
     
     @Override
     public String getCardType(){
         return TYPE;
     }
     
-
 
 }

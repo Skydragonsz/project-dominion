@@ -12,16 +12,24 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import Cards.*;
+import Cards.Witch;
+import dominion.Player;
+
 
 /**
  *
  * @author Arthur
  */
 public class CardsTester {
+    private Player p = new Player();
+    private Player p2 = new Player();
     private Witch w = new Witch();
+    private Witch w2;
     private Copper c = new Copper();
     private Province pro = new Province();
     private Duchy du = new Duchy();
+    private Province province = new Province();
+
     
     public CardsTester() {
     }
@@ -42,30 +50,24 @@ public class CardsTester {
     public void tearDown() {
     }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
     @Test
     public void testGetTypeWitch(){
-        System.out.println("testGetTypeWitch " + w.getCardType());
+        assertEquals(w.getCardType(), "ATTACK");
+        
     }
     
     @Test
     public void testGetTypeCopper(){
-        System.out.println("testGetTypeCopper " + c.getCardType());
+        assertEquals(c.getCardType(),"TREASURE");
+        
     }
     
     
-    @Test
-    public void testGetCostOfWitch(){
-        System.out.println("testGetCostOfWitch " + w.getCost());
-    }
     
     @Test
     public void testGetCostOfProvince(){
-        System.out.println("testGetCostOfProvince " + pro.getCost());
+        assertEquals(pro.getCost(),8);
+        
     }
     
     @Test
@@ -79,4 +81,8 @@ public class CardsTester {
         assertEquals(VictoryPoints,15);
         
     }
+    
+
+    
+
 }

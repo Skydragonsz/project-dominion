@@ -5,21 +5,27 @@
  */
 package Cards;
 
+import dominion.Player;
+
 /**
  *
  * @author Arthur
  */
-public class Curse extends VictoryCards{
-    private final int cardID = 7;
-    private final int victoryValue = -1;
-    private final int cost = 0;
+public class Workshop extends ActionCards{
+    private final int cardID = 14;
+    private final int cost = 3;
+    
+    public Workshop(){
+        
+    }
+    
+    @Override
+    public void playCard(Player player){
+        //TODO -- EffectPhase
+    }
     
     public int getCost(){
         return cost;
-    }
-    
-    public int getVictoryValue(){
-        return victoryValue;
     }
     
     @Override

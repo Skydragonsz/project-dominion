@@ -5,21 +5,29 @@
  */
 package Cards;
 
+import dominion.Player;
+
 /**
  *
  * @author Arthur
  */
-public class Duchy extends VictoryCards{
-    private final int cardID = 5;
-    private final int victoryValue = 3;
+public class Festival extends ActionCards{
+    private final int cardID = 26;
     private final int cost = 5;
+    
+    public Festival(){
+        
+    }
+    
+    @Override
+    public void playCard(Player player){
+        player.addCoin(2);
+        player.addBuy(1);
+        player.addAction(2);
+    }
     
     public int getCost(){
         return cost;
-    }
-    
-    public int getVictoryValue(){
-        return victoryValue;
     }
     
     @Override
@@ -28,4 +36,3 @@ public class Duchy extends VictoryCards{
     }
     
 }
-

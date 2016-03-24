@@ -4,27 +4,26 @@
  * and open the template in the editor.
  */
 package Cards;
+
 import dominion.Player;
+
 
 /**
  *
  * @author Arthur
  */
-public class Witch extends AttackCards{
-    private final int cardID = 31;
-    private final int cost = 5;
-
-    
-    public Witch(){
-
+public class Village extends ActionCards{
+    private final int cardID = 12;
+    private final int cost = 3;
+    public Village(){
+        
     }
-   
+    
     @Override
-    public void playCard(Player player,Player otherPlayer){
-        player.setNthAmountOfCards(2); //HAND
-        otherPlayer.AddCard(7); //Add Curse card DECK
+    public void playCard(Player player){
+        player.setNthAmountOfCards(1); //HAND
+        player.addAction(2);        
     }
-    
     
     public int getCost(){
         return cost;
@@ -34,4 +33,5 @@ public class Witch extends AttackCards{
     public int getCardID(){
         return cardID;
     }
+    
 }

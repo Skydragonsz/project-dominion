@@ -9,18 +9,20 @@ package Cards;
  *
  * @author Arthur
  */
-public class Curse extends VictoryCards{
-    private final int cardID = 7;
-    private final int victoryValue = -1;
-    private final int cost = 0;
+public class Gardens extends VictoryCards{
+    private final int cardID = 17;
+    private final int cost = 4;
+    
+    public Gardens(){
+        
+    }
+    
+
     
     public int getCost(){
         return cost;
     }
     
-    public int getVictoryValue(){
-        return victoryValue;
-    }
     
     @Override
     public int getCardID(){
