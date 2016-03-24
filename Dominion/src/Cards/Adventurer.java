@@ -22,6 +22,7 @@ public class Adventurer extends ActionCards{
     @Override
     public void playCard(Player player){
         //TODO -- EffectPhase
+        
     }
     
     public int getCost(){

@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 package dominion;
-import dominion.*;
-import dominion.phase.ActionPhase;
 
 /**
  *
