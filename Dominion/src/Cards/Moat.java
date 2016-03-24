@@ -19,10 +19,12 @@ public class Moat extends ReactionCards{
         
     }
     
+    @Override
     public void playCard(Player player){
         player.setNthAmountOfCards(2);
     }
     
+    @Override
     public void reactionPlay(Player player){
         //TODO -- Add reaction phase
     }   
@@ -33,7 +35,7 @@ public class Moat extends ReactionCards{
         return cost;
     }
     
-@Override
+    @Override
     public int getCardID(){
         return cardID;
     }

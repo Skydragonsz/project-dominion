@@ -19,6 +19,7 @@ public class Woodcutter extends ActionCards{
         
     }
     
+    @Override
     public void playCard(Player player){
         player.addCoin(2);
         player.addBuy(1);

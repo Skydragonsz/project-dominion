@@ -11,17 +11,18 @@ import dominion.Player;
  *
  * @author Arthur
  */
-public class Smithy extends ActionCards{
-    private final int cardID = 21;
-    private final int cost = 4;
+public class Laboratory extends ActionCards{
+    private final int cardID = 26;
+    private final int cost = 5;
     
-    public Smithy(){
+    public Laboratory(){
         
     }
     
     @Override
     public void playCard(Player player){
-        player.setNthAmountOfCards(3);
+        player.setNthAmountOfCards(2);
+        player.addAction(1);
     }
     
     public int getCost(){
@@ -32,4 +33,5 @@ public class Smithy extends ActionCards{
     public int getCardID(){
         return cardID;
     }
+    
 }

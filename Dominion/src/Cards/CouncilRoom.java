@@ -19,6 +19,7 @@ public class CouncilRoom extends ActionCards{
         
     }
     
+    @Override
     public void playCard(Player player,Player otherPlayer){
         player.addBuy(1);
         player.setNthAmountOfCards(4);

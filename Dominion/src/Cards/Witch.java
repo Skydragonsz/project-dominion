@@ -19,6 +19,7 @@ public class Witch extends AttackCards{
 
     }
    
+    @Override
     public void playCard(Player player,Player otherPlayer){
         player.setNthAmountOfCards(2); //HAND
         otherPlayer.AddCard(7); //Add Curse card DECK
