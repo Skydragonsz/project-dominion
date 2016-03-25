@@ -29,6 +29,7 @@ public class CardsTester {
     private Province pro = new Province();
     private Duchy du = new Duchy();
     private Province province = new Province();
+    private KingdomCards set = new KingdomCards();
 
     
     public CardsTester() {
@@ -81,8 +82,11 @@ public class CardsTester {
         assertEquals(VictoryPoints,15);
         
     }
-    
-
-    
-
+    @Test
+    public void testRandomSet(){
+          set.generateRandomSet();
+        
+        //assertTrue(set.getDeck() != testArrayDeck);
+        
+    }
 }
