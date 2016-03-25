@@ -14,22 +14,21 @@ public class ActionPhase{
 
     public void placeCard(MainCard card, Player p, Player otherPlayer){
         
-        if (card.getCardType() == "ATTACK"){
+        
+        p.removeAction(1);
+        if ("ATTACK".equals(card.getCardType())){
             
             //p.AddToPlayingField(card.GetID());
             //p.RemoveNthCard(card.GetID());
-            p.removeAction(1);
-            if(otherPlayer.checkForReactionCard()){
-                System.out.println("REACTION IN HAND");
-                
-            } else {
-                System.out.println("NO REACTION IN HAND");
-                card.playCard(p,otherPlayer);
-                }
+            
+            card.playCard(p,otherPlayer);
+            p.addToPlayingField(card.getCardID());
+
             
             
-        }else if(card.getCardType() == "ACTION"){
+        }else if("ACTION".equals(card.getCardType()) || "REACTION".equals(card.getCardType())){
             card.playCard(p);
+            p.addToPlayingField(card.getCardID());
         }
         
     }

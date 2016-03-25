@@ -75,4 +75,11 @@ public class Turn {
     public int getBuy(){
         return amountOfBuys;
     }
+    
+//RESET
+    public void cleanUp(){
+        amountOfCurrency = 0;
+        amountOfActions = 1;
+        amountOfBuys = 1;
+    }
 }

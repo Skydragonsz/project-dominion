@@ -54,27 +54,23 @@ public class PhaseTest {
     public void tearDown() {
     }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
 
     @Test
     public void AddOneWitch(){
     //+Visual feedback
+    p1.addCardToHand(31);
     System.out.println("Begin deck Player 1: " + p1.getDeck());
-    System.out.println("Begin hand Player 1: " + p1.getCards());
+    System.out.println("Begin hand Player 1: " + p1.getCardsInHand());
     System.out.println("Begin deck Player 2: " + p2.getDeck());
-    System.out.println("Begin hand Player 2: " + p2.getCards());
+    System.out.println("Begin hand Player 2: " + p2.getCardsInHand());
     System.out.println("^BEGIN STATE^");
-
+    
     Pl.placeCard(col.getCard(31), p1, p2);
        
     System.out.println("Effected (Witch) deck Player 1 (-2 cards): " + p1.getDeck());
-    System.out.println("Effected hand Player 1 (+2 cards): " + p1.getCards());
+    System.out.println("Effected hand Player 1 (+2 cards): " + p1.getCardsInHand());
     System.out.println("Effected deck Player 2 (+1 curse): " + p2.getDeck());
-    System.out.println("Effected hand Player 2: " + p2.getCards());
+    System.out.println("Effected hand Player 2: " + p2.getCardsInHand());
     System.out.println("^WITCH EFFECT STATE^");
     System.out.println("Card Type: " + col.getCard(31).getCardType());
     //TODO: Kijk voor een manier om alle assertEquals weer te geven op de test results.
@@ -85,13 +81,27 @@ public class PhaseTest {
     
     @Test
     public void AddOneWitchWhenOtherPlayerHasAReactionCard(){
-    p2.AddCardToHand(10);
+    p2.addCardToHand(10);
+    p1.addCardToHand(31);
     Pl.placeCard(col.getCard(31), p1, p2);
     System.out.println("Effected (Witch) deck Player 1 (-2 cards): " + p1.getDeck());
-    System.out.println("Effected hand Player 1 (+2 cards): " + p1.getCards());
+    System.out.println("Effected hand Player 1 (+2 cards): " + p1.getCardsInHand());
     System.out.println("Effected deck Player 2 (geen curse): " + p2.getDeck());
-    System.out.println("Effected hand Player 2(1 moat): " + p2.getCards());
+    System.out.println("Effected hand Player 2(1 moat): " + p2.getCardsInHand());
     System.out.println("^WITCH EFFECT STATE^");
     assertEquals(p2.getDeck(),testArrayDeck);
+    }
+    
+    
+    @Test
+    public void testAddToPlayingField(){
+        p1.addCardToHand(4);
+        p1.addCardToHand(3);
+        p1.addCardToHand(4);
+        p1.addCardToHand(3);
+        System.out.println("Hand unaffected"+p1.getCardsInHand());
+        p1.addToPlayingField(3);
+        System.out.println("Card in hand" + p1.getCardsInHand());
+        System.out.println("Playingfield"+p1.getPlayingField());
     }
 }

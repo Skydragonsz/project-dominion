@@ -1,6 +1,4 @@
 package dominion;
-import Cards.*;
-//import Deck.LinkedCards;
 import java.util.*;
 
 public class Player extends Turn{
@@ -8,11 +6,11 @@ public class Player extends Turn{
     //Bekijk voor niet active variablen
     private Cards.Collection collection = new Cards.Collection();
     private ArrayList deckArray;
-    private ArrayList cardArray;
+    private ArrayList handArray;
     private ArrayList discardArray;
     private ArrayList playingFieldArray;
+    private String name;
     private int victoryPoints;
-    private int[] discardPile;
     private boolean HasReaction;
         
     public Player()
@@ -20,11 +18,16 @@ public class Player extends Turn{
         init();
     }
     
+    public Player(String name)
+    {        
+        this.name = name;
+    }
+    
     public void init()
     {
         //Starter deck -- TEST
         deckArray = new ArrayList<Integer>();
-        cardArray = new ArrayList();
+        handArray = new ArrayList();
         playingFieldArray = new ArrayList();
         discardArray = new ArrayList();
         
@@ -62,28 +65,30 @@ public class Player extends Turn{
     }
     
     //Geeft de bovenste hoeveelheid gekozen kaarten van het deck naar de speler zijn hand.
-    public void setNthAmountOfCards(int amount )
+    public void setNthAmountOfCards(int amount)
     {
         for(int i = 0;i <amount ;i++){
-            cardArray.add(deckArray.get(i));
+            handArray.add(deckArray.get(i));
             deckArray.remove(i);
         }
     }
     
     //Geeft het hele hand terug als een ArrayList.
-    public ArrayList getCards(){
-        return cardArray;
+    public ArrayList getCardsInHand(){
+        return handArray;
     }
     
+
+    
     //Voegt hoeveelheid aantal kaart(en) toe aan het deck.
-    public void AddCard(int CardID)
+    public void addCardToDeck(int CardID)
     {
         deckArray.add(CardID);
     }
     
-    public void AddCardToHand(int CardID)
+    public void addCardToHand(int CardID)
     {
-       cardArray.add(CardID);
+       handArray.add(CardID);
     }
     
     //Vraag een kaart van je deck via naam !Niet meer nodig!
@@ -93,16 +98,31 @@ public class Player extends Turn{
         return deckArray.get(deckArray.indexOf(name));
     }
     
+    public ArrayList getPlayingField(){
+        return playingFieldArray;
+    }
+    
     //Voegt kaart toe aan playingField
-    public void AddToPlayingField(int CardID)
+    public void addToPlayingField(int CardID)
     {
         playingFieldArray.add(CardID);
+        handArray.remove(handArray.indexOf(CardID));
+        
+    }
+    
+    public void addToPlayingField(int CardID, int index)
+    {
+        playingFieldArray.add(CardID);
+        handArray.remove(index);
+        
     }
     
     //Verwijderd kaart van de speler zijn deck.
-    public void RemoveNthCard(int CardID){
+    //TODO -- Fix
+    public void removeNthCardFromDeck(int CardID){
         deckArray.remove(CardID);
     }
+    
     
     //Bekijkt heel de speler zijn hand voor een rection card.
     public Boolean checkForReactionCard(){
@@ -111,12 +131,12 @@ public class Player extends Turn{
         int CardID;
         HasReaction = false;
         System.out.println("-- VOOR DE LOOP -- ");
-        System.out.println(cardArray.size());
-        System.out.println(cardArray.size() - 1);
-        for (int i = 0; i < cardArray.size(); i++ ){
+        System.out.println(handArray.size());
+        System.out.println(handArray.size() - 1);
+        for (int i = 0; i < handArray.size(); i++ ){
             System.out.println("-- IN DE LOOP -- ");
             //TODO: check voor betere manier
-            CardID = Integer.parseInt(cardArray.get(i).toString());
+            CardID = Integer.parseInt(handArray.get(i).toString());
             System.out.println(CardID);
             if ("REACTION".equals(collection.getCard(CardID).getCardType())){
                 System.out.println("-- IN DE IF -- ");
@@ -129,6 +149,8 @@ public class Player extends Turn{
         return HasReaction;
     }
     
+
+    //TODO -- Rewrite function discard to deck
     public void discardDeckToPile(){
         discardArray.addAll(deckArray);
         deckArray.clear();

@@ -65,7 +65,7 @@ public class PlayerTester {
     public void testDiscardDeckToPile(){
     //+Visuele feedback.    
         System.out.println(p.getDeck());
-        System.out.println(p.getCards());
+        System.out.println(p.getCardsInHand());
         System.out.println("^BEGIN STATE^");
         
         //Het deck shudden.
@@ -80,14 +80,14 @@ public class PlayerTester {
         p.discardDeckToPile();
         System.out.println(p.getDiscardPile());
         System.out.println(p.getDeck());
-        System.out.println(p.getCards());
+        System.out.println(p.getCardsInHand());
         
         //?
         p.isDeckEmpty(true);
         System.out.println(p.getDiscardPile());
         System.out.println(p.getDeck());
-        System.out.println(p.getCards());
-        assertEquals(p.getCards(), testArrayHand);
+        System.out.println(p.getCardsInHand());
+        assertEquals(p.getCardsInHand(), testArrayHand);
 
     
     }
