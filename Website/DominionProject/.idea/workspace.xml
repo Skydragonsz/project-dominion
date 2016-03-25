@@ -2,28 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ea023dd1-5caf-4e17-80cc-779bca15a19f" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\Users\Gianni\Documents\School\Programmeerproject\Github\project-dominion\Website\DominionProject\Dominion\assets\media\duchy.jpg" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Gianni\Documents\School\Programmeerproject\Github\project-dominion\Website\DominionProject\Dominion\assets\media\gold.jpg" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Gianni\Documents\School\Programmeerproject\Github\project-dominion\Website\DominionProject\Dominion\assets\media\ribbon.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Gianni\Documents\School\Programmeerproject\Github\project-dominion\Website\DominionProject\Dominion\assets\media\section_border.gif" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Gianni\Documents\School\Programmeerproject\Github\project-dominion\Website\DominionProject\Dominion\assets\media\section_border3.jpg" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Gianni\Documents\School\Programmeerproject\Github\project-dominion\Website\DominionProject\Dominion\assets\media\section_border4.jpg" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Gianni\Documents\School\Programmeerproject\Github\project-dominion\Website\DominionProject\Dominion\assets\media\test.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Gianni\Documents\School\Programmeerproject\Github\project-dominion\Website\DominionProject\Dominion\assets\media\trashcard.jpg" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Gianni\Documents\School\Programmeerproject\Github\project-dominion\Website\DominionProject\Voorbeeld\FontExample\assets\css\reset.css" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Gianni\Documents\School\Programmeerproject\Github\project-dominion\Website\DominionProject\Voorbeeld\FontExample\assets\css\screen.css" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Gianni\Documents\School\Programmeerproject\Github\project-dominion\Website\DominionProject\Voorbeeld\FontExample\assets\fonts\ars-maquette-medium.ttf" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Gianni\Documents\School\Programmeerproject\Github\project-dominion\Website\DominionProject\Voorbeeld\FontExample\assets\fonts\ars-maquette-medium.woff" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Gianni\Documents\School\Programmeerproject\Github\project-dominion\Website\DominionProject\Voorbeeld\FontExample\assets\fonts\ars-maquette-regular.ttf" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Gianni\Documents\School\Programmeerproject\Github\project-dominion\Website\DominionProject\Voorbeeld\FontExample\assets\fonts\ars-maquette-regular.woff" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Gianni\Documents\School\Programmeerproject\Github\project-dominion\Website\DominionProject\Voorbeeld\FontExample\assets\media\examples.jpg" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Gianni\Documents\School\Programmeerproject\Github\project-dominion\Website\DominionProject\Voorbeeld\FontExample\assets\media\statistics.svg" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Gianni\Documents\School\Programmeerproject\Github\project-dominion\Website\DominionProject\Voorbeeld\FontExample\assets\media\wearables.jpg" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Gianni\Documents\School\Programmeerproject\Github\project-dominion\Website\DominionProject\Voorbeeld\FontExample\assets\media\wearables.svg" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Gianni\Documents\School\Programmeerproject\Github\project-dominion\Website\DominionProject\Voorbeeld\FontExample\examples.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Gianni\Documents\School\Programmeerproject\Github\project-dominion\Website\DominionProject\Voorbeeld\FontExample\index.html" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Dominion/images/Thumbs.db" afterPath="$PROJECT_DIR$/Dominion/images/Thumbs.db" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Dominion/images/gold.jpg" afterPath="$PROJECT_DIR$/Dominion/images/gold.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Dominion/Index.html" afterPath="$PROJECT_DIR$/Dominion/Index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Dominion/assets/css/screen.css" afterPath="$PROJECT_DIR$/Dominion/assets/css/screen.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Dominion/assets/js/script.js" afterPath="$PROJECT_DIR$/Dominion/assets/js/script.js" />
@@ -49,21 +27,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Index.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Dominion/Index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.762533">
-              <caret line="84" column="82" selection-start-line="84" selection-start-column="82" selection-end-line="84" selection-end-column="82" />
+            <state vertical-scroll-proportion="-15.038462">
+              <caret line="32" column="19" selection-start-line="32" selection-start-column="19" selection-end-line="32" selection-end-column="19" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="screen.css" pinned="false" current-in-tab="false">
+      <file leaf-file-name="screen.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Dominion/assets/css/screen.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="91" column="0" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.6947637">
+              <caret line="164" column="22" selection-start-line="164" selection-start-column="22" selection-end-line="164" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -73,29 +51,7 @@
         <entry file="file://$PROJECT_DIR$/Dominion/assets/js/script.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="8" column="37" selection-start-line="8" selection-start-column="37" selection-end-line="8" selection-end-column="37" />
-              <folding>
-                <element signature="e#0#42#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="screen.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Voorbeeld/Ristorante Ratatouille/assets/css/screen.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="13" column="31" selection-start-line="13" selection-start-column="31" selection-end-line="13" selection-end-column="31" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Voorbeeld/Ristorante Ratatouille/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="65" column="40" selection-start-line="65" selection-start-column="40" selection-end-line="65" selection-end-column="40" />
+              <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -121,8 +77,8 @@
       <list>
         <option value="$PROJECT_DIR$/Dominion/index.html" />
         <option value="$PROJECT_DIR$/Dominion/Index.html" />
-        <option value="$PROJECT_DIR$/Dominion/assets/css/screen.css" />
         <option value="$PROJECT_DIR$/Dominion/assets/js/script.js" />
+        <option value="$PROJECT_DIR$/Dominion/assets/css/screen.css" />
       </list>
     </option>
   </component>
@@ -138,10 +94,10 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="101" />
-    <option name="y" value="71" />
-    <option name="width" value="1755" />
-    <option name="height" value="921" />
+    <option name="x" value="49" />
+    <option name="y" value="38" />
+    <option name="width" value="1858" />
+    <option name="height" value="949" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -166,7 +122,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -186,64 +141,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Voorbeeld" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Dominion" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DominionProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Voorbeeld" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Ristorante Ratatouille" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Dominion" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DominionProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Voorbeeld" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FictiveCompany" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Dominion" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DominionProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Voorbeeld" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FictiveCompany" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -315,12 +212,35 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Dominion" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DominionProject" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Dominion" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="css" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -330,7 +250,7 @@
     <property name="DefaultHtmlFileTemplate" value="Html5" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="FullScreen" value="false" />
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
   <component name="RunManager">
@@ -375,10 +295,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="101" y="71" width="1755" height="921" extended-state="0" />
-    <editor active="false" />
+    <frame x="49" y="38" width="1858" height="949" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21966648" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20738328" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -417,6 +337,46 @@
     <entry file="file://$PROJECT_DIR$/Dominion/Index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Dominion/assets/css/screen.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="91" column="0" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Dominion/assets/js/script.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="37" selection-start-line="8" selection-start-column="37" selection-end-line="8" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Voorbeeld/Ristorante Ratatouille/assets/css/screen.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="13" column="31" selection-start-line="13" selection-start-column="31" selection-end-line="13" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Voorbeeld/Ristorante Ratatouille/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="65" column="40" selection-start-line="65" selection-start-column="40" selection-end-line="65" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Dominion/Index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
           <caret line="74" column="163" selection-start-line="74" selection-start-column="163" selection-end-line="74" selection-end-column="163" />
           <folding />
         </state>
@@ -442,7 +402,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="122" column="0" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -490,7 +449,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="122" column="0" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -538,7 +496,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="122" column="0" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -612,13 +569,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Voorbeeld/GameOfThronesOef/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.560686">
-          <caret line="25" column="34" selection-start-line="25" selection-start-column="34" selection-end-line="25" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Voorbeeld/GameOfThronesOef/assets/css/screen.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.0191326">
@@ -631,35 +581,10 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Voorbeeld/Ristorante Ratatouille/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="65" column="40" selection-start-line="65" selection-start-column="40" selection-end-line="65" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Voorbeeld/Ristorante Ratatouille/assets/css/screen.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="13" column="31" selection-start-line="13" selection-start-column="31" selection-end-line="13" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Voorbeeld/FictiveCompany/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="22" column="29" selection-start-line="22" selection-start-column="29" selection-end-line="22" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Voorbeeld/FictiveCompany/assets/css/screen.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="122" column="0" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -667,14 +592,37 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.47704083">
           <caret line="82" column="13" selection-start-line="82" selection-start-column="13" selection-end-line="82" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Voorbeeld/FictiveCompany/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.021628499">
+          <caret line="22" column="29" selection-start-line="22" selection-start-column="29" selection-end-line="22" selection-end-column="29" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Dominion/assets/css/screen.css">
+    <entry file="file://$PROJECT_DIR$/Voorbeeld/Ristorante Ratatouille/assets/css/screen.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="91" column="0" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.27216747">
+          <caret line="13" column="31" selection-start-line="13" selection-start-column="31" selection-end-line="13" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Voorbeeld/Ristorante Ratatouille/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.259542">
+          <caret line="65" column="40" selection-start-line="65" selection-start-column="40" selection-end-line="65" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Voorbeeld/GameOfThronesOef/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5407125">
+          <caret line="25" column="34" selection-start-line="25" selection-start-column="34" selection-end-line="25" selection-end-column="34" />
           <folding />
         </state>
       </provider>
@@ -682,20 +630,41 @@
     <entry file="file://$PROJECT_DIR$/Dominion/assets/js/script.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="37" selection-start-line="8" selection-start-column="37" selection-end-line="8" selection-end-column="37" />
-          <folding>
-            <element signature="e#0#42#0" expanded="false" />
-          </folding>
+          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Dominion/Index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.762533">
-          <caret line="84" column="82" selection-start-line="84" selection-start-column="82" selection-end-line="84" selection-end-column="82" />
+        <state vertical-scroll-proportion="-15.038462">
+          <caret line="32" column="19" selection-start-line="32" selection-start-column="19" selection-end-line="32" selection-end-column="19" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Dominion/assets/css/screen.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6947637">
+          <caret line="164" column="22" selection-start-line="164" selection-start-column="22" selection-end-line="164" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>
