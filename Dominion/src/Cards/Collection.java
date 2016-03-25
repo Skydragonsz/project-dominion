@@ -11,40 +11,40 @@ package Cards;
  */
 public class Collection {
     //Treasure
-    private Copper copper = new Copper();
-    private Silver silver = new Silver();
-    private Gold gold = new Gold();
+    private final Copper copper = new Copper();
+    private final Silver silver = new Silver();
+    private final Gold gold = new Gold();
     //Victory
-    private Estate estate = new Estate();
-    private Duchy duchy = new Duchy();
-    private Province province = new Province();
-    private Curse curse = new Curse();
+    private final Estate estate = new Estate();
+    private final Duchy duchy = new Duchy();
+    private final Province province = new Province();
+    private final Curse curse = new Curse();
     //Kingdom Cards
-    private Cellar cellar = new Cellar();
-    private Chapel chapel = new Chapel();
-    private Moat moat = new Moat();
-    private Chancellor chancellor = new Chancellor();
-    private Village village = new Village();
-    private Woodcutter woodcutter = new Woodcutter();
-    private Workshop workshop = new Workshop();
-    private Bureaucrat bureaucrat = new Bureaucrat();
-    private Feast feast = new Feast();
-    private Gardens gardens = new Gardens();
-    private Militia militia = new Militia();
-    private Moneylender moneylender = new Moneylender();
-    private Remodel remodel = new Remodel();
-    private Smithy smithy = new Smithy();
-    private Spy spy = new Spy();
-    private Thief thief = new Thief();
-    private ThroneRoom throneroom = new ThroneRoom();
-    private CouncilRoom councilroom = new CouncilRoom();
-    private Festival festival = new Festival();
-    private Laboratory laboratory = new Laboratory();
-    private Library library = new Library();
-    private Market market = new Market();
-    private Mine mine = new Mine();
-    private Witch witch = new Witch();
-    private Adventurer adventurer = new Adventurer();
+    private final Cellar cellar = new Cellar();
+    private final Chapel chapel = new Chapel();
+    private final Moat moat = new Moat();
+    private final Chancellor chancellor = new Chancellor();
+    private final Village village = new Village();
+    private final Woodcutter woodcutter = new Woodcutter();
+    private final Workshop workshop = new Workshop();
+    private final Bureaucrat bureaucrat = new Bureaucrat();
+    private final Feast feast = new Feast();
+    private final Gardens gardens = new Gardens();
+    private final Militia militia = new Militia();
+    private final Moneylender moneylender = new Moneylender();
+    private final Remodel remodel = new Remodel();
+    private final Smithy smithy = new Smithy();
+    private final Spy spy = new Spy();
+    private final Thief thief = new Thief();
+    private final ThroneRoom throneroom = new ThroneRoom();
+    private final CouncilRoom councilroom = new CouncilRoom();
+    private final Festival festival = new Festival();
+    private final Laboratory laboratory = new Laboratory();
+    private final Library library = new Library();
+    private final Market market = new Market();
+    private final Mine mine = new Mine();
+    private final Witch witch = new Witch();
+    private final Adventurer adventurer = new Adventurer();
 
     
     
