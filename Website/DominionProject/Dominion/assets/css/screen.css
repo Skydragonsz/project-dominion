@@ -100,8 +100,7 @@ article p {
 }
 
 header {
-    text-align: center;
-    position: fixed;
+    text-align: center;;
     width: 100%;
     font-family: MontserratRegular;
     z-index: 10;
@@ -130,7 +129,27 @@ cite {
 /*  REUSABLE CLASSES   */
 /*---------------------*/
 
+.header-fixed {
+    top: 0;
+    z-index: 100;
+    position: fixed;
+    width: 100%;
+    margin-bottom: 20px;
+}
 
+.section-scroll {
+    margin-top: 95px;
+}
+
+.banner1 {
+    background-image: url("../media/banner1.jpg");
+    transition: all 5s ease 0s;
+}
+
+.banner2 {
+    background-image: url("../media/banner2.jpg");
+    transition: all 5s ease 0s;
+}
 
 /*---------------------*/
 /* CONTAINING ELEMENTS */
@@ -142,6 +161,7 @@ nav {
     border-top: 1px solid #A26B28;
     border-bottom: 1px solid #A26B28;
     box-shadow: 10px 5px 10px black;
+    margin-bottom: 15px;
 
 }
 
@@ -163,7 +183,7 @@ nav ul li {
     padding-left: 10px;
     padding-right: 15px;
     margin-right: -5px;
-
+    transition: all 0.3s ease 0s;
 }
 
 header li+li {
@@ -176,7 +196,6 @@ nav a:hover {
 
 nav ul li:hover{
     background-color: #BA3729;
-    color: #f8e68d;
 }
 
 nav ul li:first-child:hover {
@@ -244,10 +263,9 @@ ul li:last-of-type a:after {
 
 
 #banner {
-    background-image: url("../media/DominionBanner.jpg");
+
     width: auto;
-    height: 500px;
-    margin-bottom: 5px;
+    height: 888px;
 }
 
 #victory {

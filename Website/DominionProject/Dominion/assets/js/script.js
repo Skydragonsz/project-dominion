@@ -22,6 +22,18 @@ $(document).ready(function(){
 });
 */
 
+
+var timer;
+
+function changeBanner(){
+    $("#banner").toggleClass("banner1").toggleClass("banner2");;
+};
+
+function startSwitch(){
+    $("#banner").addClass("banner1");
+    timer = setInterval(changeBanner, 10000)
+};
+
 $(document).ready(function(){
     $('a[href^="#"]').on('click',function (e) {
         e.preventDefault();
@@ -35,4 +47,19 @@ $(document).ready(function(){
             window.location.hash = target;
         });
     });
+
+    $(window).scroll(function () {
+        console.log($(window).scrollTop())
+        if ($(window).scrollTop() > 892) {
+            $('header').addClass('header-fixed');
+            $('section').addClass('section-scroll');
+        }
+        if ($(window).scrollTop() < 893) {
+            $('header').removeClass('header-fixed');
+            $('section').removeClass('section-scroll');
+        }
+    });
+
+    startSwitch();
+
 });
