@@ -177,6 +177,8 @@ System.out.println( "              ____                  _       _           \n"
            
            //LAYOUT
            public  void DrawMenu(String title, String... lines) {
+               int counter = 1;
+               
                System.out.println(
                     "╔══════════════╗\n" +
                     "║       "+ title.toUpperCase() +"      ║\n" +
@@ -184,8 +186,9 @@ System.out.println( "              ____                  _       _           \n"
                for (String line : lines) {
                    int lineLength = (22 - (line.length()+ 3));
                      System.out.println(
-                    "║ 1."+ line + CalculateSpaces(lineLength) + "║");
-                                    }
+                    "║ "+counter+"."+ line + CalculateSpaces(lineLength) + "║");
+               counter++;
+               }
                 System.out.println(
                     "╚══════════════╝");
            }           
