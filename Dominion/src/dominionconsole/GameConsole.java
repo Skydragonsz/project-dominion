@@ -78,39 +78,16 @@ import dominion.*;
            }
 
 	   public void run(){
-System.out.println( "    *                             |>>>                    +\n" +
-                    "+          *                      |                   *       +\n" +
-                    "                    |>>>      _  _|_  _   *     |>>>\n" +
-                    "           *        |        |;| |;| |;|        |                 *\n" +
-                    "     +          _  _|_  _    \\\\.    .  /    _  _|_  _       +\n" +
-                    " *             |;|_|;|_|;|    \\\\: +   /    |;|_|;|_|;|\n" +
-                    "               \\\\..      /    ||:+++. |    \\\\.    .  /           *\n" +
-                    "      +         \\\\.  ,  /     ||:+++  |     \\\\:  .  /\n" +
-                    "                 ||:+  |_   _ ||_ . _ | _   _||:+  |       *\n" +
-                    "          *      ||+++.|||_|;|_|;|_|;|_|;|_|;||+++ |          +\n" +
-                    "                 ||+++ ||.    .     .      . ||+++.|   *\n" +
-                    "+   *            ||: . ||:.     . .   .  ,   ||:   |               *\n" +
-                    "         *       ||:   ||:  ,     +       .  ||: , |      +\n" +
-                    "  *              ||:   ||:.     +++++      . ||:   |         *\n" +
-                    "     +           ||:   ||.     +++++++  .    ||: . |    +\n" +
-                    "           +     ||: . ||: ,   +++++++ .  .  ||:   |             +\n" +
-                    "                 ||: . ||: ,   +++++++ .  .  ||:   |        *\n" +
-                    "                 ||: . ||: ,   +++++++ .  .  ||:   | \n");
-
-System.out.println( "              ____                  _       _           \n" +
-"             / __ \\____  ____ ___  (_)___  (_)___  ____ \n" +
-"            / / / / __ \\/ __ `__ \\/ / __ \\/ / __ \\/ __ \\\n" +
-"           / /_/ / /_/ / / / / / / / / / / / /_/ / / / /\n" +
-"          /_____/\\____/_/ /_/ /_/_/_/ /_/_/\\____/_/ /_/ \n");
-
+                DrawLogo();
                 DrawMenu("MAIN MENU","Start game","Help", "Exit game", "Retry", "Load deck", "DEV");
-                
 
                 System.out.print("Choice an option:\t");
-                String option = scanner.nextLine();
+                int option = Integer.parseInt(scanner.nextLine());
                 
-                System.out.print("PICKED" + option);
 		nrPlayers = askNrPlayers();
+                
+                handleMainMenuAction(option);
+                
 		//gameEngine.setNrPlayers(nrPlayers);
                 
                 
@@ -119,8 +96,7 @@ System.out.println( "              ____                  _       _           \n"
 		//gameEngine.setPlayer(1, "rudy");
                 
                 
-//              gameEngine.init();
-//		gameLoop();
+
            }
 
 	   public int askNrPlayers(){
@@ -128,40 +104,68 @@ System.out.println( "              ____                  _       _           \n"
  	   }
 	   
 	   public void gameLoop(){
-//
-//		while(gameEngine.gameNotFinished())
-//		{
-//
+              boolean bln = true;
+		while( bln = true) //gameEngine.gameNotFinished()
+		{
 //			 stap 1: toon de situatie : wie is er aan de beurt?
 //			 welke kaarten heb je in je hand ?
 //			 wat ligt er op tafel?
 //			 welke zetten zijn nu mogelijk?
 //			 hoeveel geld heb je?
-//			showCurrentSituation();
+			showCurrentSituation();
+                        
+                        System.out.print("[ ACTIONS ] What action would you like to perform:\t");
+			int action = Integer.parseInt(scanner.nextLine());                           //askPlayerAction();  // 1 = draw card ; 2 = ... ; ....
 //
-//			int action = askPlayerAction();				// 1 = draw card ; 2 = ... ; ....
+			handlePlayerAction(action);		// gaat werken met gameEngine
 //
-//			handlePlayerAction(action);		// gaat werken met gameEngine
-//
-//		}
+		}
 //
 	   }
 //
 	   public void handlePlayerAction(int action){
            
 //	   
-//		switch(action)
-//		{
-//			case 1:				// 1 was: draw a card
-//				handleDrawCard();
-//				break;
-//			
-//			case 2:
-//				break;
+		switch(action)
+		{
+			case 1:				// 1 was: draw a card
+				handlePlayCard();
+				break;
+			
+			case 2:
+                                //handleBuyCard();
+				break;
+
+			default:
+                                System.out.print("Incorrect or unknown letter, please try again!\n");
+				break;
+		}
 //
-//			default:
-//				break;
-//		}
+	   }
+           
+            public void handleMainMenuAction(int action){
+            
+		switch(action)
+		{
+			case 1:				// 1: Start game
+                                //gameEngine.init();
+                                gameLoop();
+				break;
+			
+			case 2:                        // 2: Help
+				//showHelp();
+                                break;
+                        case 3:                        // 2: Exit game
+				//ExitGame();
+                                break;            
+			default:
+                                System.out.print("Incorrect or unknown number, please try again!\n");
+                                //duplicatie
+                                System.out.print("Choice an option:\t");
+                                int option = Integer.parseInt(scanner.nextLine());
+                                handleMainMenuAction(option);
+				break;
+		}
 //
 	   }
 //
@@ -169,19 +173,37 @@ System.out.println( "              ____                  _       _           \n"
 //	   
 //		GameEngine.drawCard();
 	   }
+           
+           public void handlePlayCard(){
+                System.out.print("[ ACTIONS -- PLAY CARD ] What card would you like to play:\t");
+		int card = Integer.parseInt(scanner.nextLine());
+//		GameEngine.playCard();
+	   }
 //
 	   public void showCurrentSituation(){
-//               
+//               GameEngine.showCurrentSituation();
+                System.out.print("\n======================================== "
+                               + "PLAYER 1 -- TURN 1"
+                                + " ========================================\n");
+                DrawMenu("Actions", "Play Card", "Buy Card", "Show all cards", "Info about a card","End Turn" );
+                DrawMenu("Current turn", "Coin(s): 0", "Action(s): 1", "Buy(s): 1" );
+                DrawMenu("Hand", "Copper", "Estate", "Silver", "Curse", "Village" );
+                DrawMenu("Playing Field", "Copper");
+                //ACTIONS = A B C; CURRENT TURN = None; HAND = 1 2 3; PLAYING FIELD = none;    
            }
            
            
            //LAYOUT
            public  void DrawMenu(String title, String... lines) {
                int counter = 1;
-               
+               int titleLength = (22 - (title.length()))/2;
+               String extraSpace = "";
+               if (titleLength % 2 == 0){
+               extraSpace = " ";
+               }
                System.out.println(
                     "╔══════════════╗\n" +
-                    "║       "+ title.toUpperCase() +"      ║\n" +
+                    "║" + CalculateSpaces(titleLength) + extraSpace + title.toUpperCase() + CalculateSpaces(titleLength) + "║\n" +
                     "╠══════════════╣" );
                for (String line : lines) {
                    int lineLength = (22 - (line.length()+ 3));
@@ -199,7 +221,34 @@ System.out.println( "              ____                  _       _           \n"
            }
            return BlankSpace;
            }
+           public void DrawLogo(){
+           System.out.println( "    *                             |>>>                    +\n" +
+                    "+          *                      |                   *       +\n" +
+                    "                    |>>>      _  _|_  _   *     |>>>\n" +
+                    "           *        |        |;| |;| |;|        |                 *\n" +
+                    "     +          _  _|_  _    \\\\.    .  /    _  _|_  _       +\n" +
+                    " *             |;|_|;|_|;|    \\\\: +   /    |;|_|;|_|;|\n" +
+                    "               \\\\..      /    ||:+++. |    \\\\.    .  /           *\n" +
+                    "      +         \\\\.  ,  /     ||:+++  |     \\\\:  .  /\n" +
+                    "                 ||:+  |_   _ ||_ . _ | _   _||:+  |       *\n" +
+                    "          *      ||+++.|||_|;|_|;|_|;|_|;|_|;||+++ |          +\n" +
+                    "                 ||+++ ||.    .     .      . ||+++.|   *\n" +
+                    "+   *            ||: . ||:.     . .   .  ,   ||:   |               *\n" +
+                    "         *       ||:   ||:  ,     +       .  ||: , |      +\n" +
+                    "  *              ||:   ||:.     +++++      . ||:   |         *\n" +
+                    "     +           ||:   ||.     +++++++  .    ||: . |    +\n" +
+                    "           +     ||: . ||: ,   +++++++ .  .  ||:   |             +\n" +
+                    "                 ||: . ||: ,   +++++++ .  .  ||:   |        *\n" +
+                    "                 ||: . ||: ,   +++++++ .  .  ||:   | \n");
+           System.out.println( "              ____                  _       _           \n" +
+"             / __ \\____  ____ ___  (_)___  (_)___  ____ \n" +
+"            / / / / __ \\/ __ `__ \\/ / __ \\/ / __ \\/ __ \\\n" +
+"           / /_/ / /_/ / / / / / / / / / / / /_/ / / / /\n" +
+"          /_____/\\____/_/ /_/ /_/_/_/ /_/_/\\____/_/ /_/ \n");
+
        }
+           }
+
 
 
 //    2. Engine classes
