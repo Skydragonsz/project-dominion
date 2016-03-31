@@ -5,7 +5,9 @@
  */
 package Cards;
 
+import dominion.GameEngine;
 import dominion.Player;
+import java.util.ArrayList;
 
 
 /**
@@ -26,6 +28,14 @@ public class MainCard{
     }
     
     public void playCard(Player player,Player otherPlayer){
+        System.out.println("DIT IS DE MAIN CARD.");
+    }
+    
+    public void playCard(Player player,ArrayList<Player> otherPlayer){
+        System.out.println("DIT IS DE MAIN CARD. ArrayList");
+    }
+    
+    public void playCard(Player player,GameEngine otherPlayer){
         System.out.println("DIT IS DE MAIN CARD.");
     }
     

@@ -4,14 +4,18 @@
  * and open the template in the editor.
  */
 package dominion;
-import dominion.Player;
+
 import java.util.*;
 /**
  *
  * @author Arthur
  */
-public class GameEngine {
-    private final ArrayList<Player> playerArray = new ArrayList<>();
+
+//TODO -- transfer Player methods to GameEngine
+public class GameEngine extends Turn{
+    private final static ArrayList<Player> playerArray = new ArrayList<>();
+    private final static ArrayList<Player> otherPlayersArray = new ArrayList<>();
+    
     public GameEngine(){
         
     }
@@ -20,8 +24,44 @@ public class GameEngine {
         
     }
     
-    private void init(){
-        //TODO -- Check this out
-        playerArray.add(new Player());
+    public void setAmountPlayers(int amount){
+        for(int i = 0; i < amount;i++)
+        {
+            playerArray.add(new Player("player " + (i+1)));
+            
+        }
     }
+    
+    public void setName(int playernr, String name){
+        getPlayer(playernr).setName(name);
+    }
+    
+    public Player getPlayer(int playernr){
+        return playerArray.get(playernr-1);
+    }
+    
+    public ArrayList<Player> getPlayerList(){
+        return playerArray;
+    }
+    
+        
+    
+    public ArrayList<Player> getOtherPlayersList(Player player){
+            for(int i = 0; i < playerArray.size();i++){
+                if(player != playerArray.get(i)){
+                    otherPlayersArray.add(playerArray.get(i));
+                }
+            }
+        
+        return otherPlayersArray;
+    }
+    
+    public void reset(){
+        otherPlayersArray.clear();
+        playerArray.clear();
+    }
+    
+    
+    
+    
 }
