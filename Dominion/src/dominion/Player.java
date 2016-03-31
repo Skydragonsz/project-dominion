@@ -57,6 +57,7 @@ public class Player extends GameEngine {
         deckArray.add(4);
     }
     
+    //TODO: Kan via ingebouwde functie!
     //Gelijk welk deck (van grootte) schudden.
     public void shuffleDeck(){
         Random rng = new Random();

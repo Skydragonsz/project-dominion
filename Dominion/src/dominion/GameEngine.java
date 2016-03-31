@@ -15,6 +15,7 @@ import java.util.*;
 public class GameEngine extends Turn{
     private final static ArrayList<Player> playerArray = new ArrayList<>();
     private final static ArrayList<Player> otherPlayersArray = new ArrayList<>();
+    private int currentPlayer = 1;
     
     public GameEngine(){
         
@@ -28,7 +29,6 @@ public class GameEngine extends Turn{
         for(int i = 0; i < amount;i++)
         {
             playerArray.add(new Player("player " + (i+1)));
-            
         }
     }
     
@@ -38,6 +38,19 @@ public class GameEngine extends Turn{
     
     public Player getPlayer(int playernr){
         return playerArray.get(playernr-1);
+    }
+    
+    public int getCurrentPlayer(){
+        return currentPlayer;
+    }
+    
+    public void setNextPlayer(){
+        currentPlayer++;
+    }
+        
+    
+    public int getLastPlayer(){
+        return playerArray.size();
     }
     
     public ArrayList<Player> getPlayerList(){

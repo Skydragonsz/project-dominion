@@ -1,12 +1,17 @@
 package gameconsole;
 
+import dominion.GameEngine;
+import dominion.Player;
+import dominion.Turn;
 import java.util.Scanner;
 
 public class GameConsole {
 
-    //private Dominion gameEngine;
+    private GameEngine gameEngine;
     private int nrPlayers;
+    private boolean endPlayerTurn = false;
     Scanner scanner = new Scanner(System.in);
+//NORMAL -- START-UP
 
     public static void main(String[] args) {
         // TODO code application logic here
@@ -16,7 +21,7 @@ public class GameConsole {
     }
 
     public GameConsole() {
-        //gameEngine = new Dominion();
+        gameEngine = new GameEngine();
     }
 
     public void run() {
@@ -24,20 +29,9 @@ public class GameConsole {
         GameConsoleLayout.DrawMenu("Main menu", "New game", "Load Game", "Show (card) sets", "Help", "Exit game");
 
         System.out.print("Choice an option:\t");
-        int option = Integer.parseInt(scanner.nextLine());
-
-        nrPlayers = askNrPlayers();
+        String option = scanner.nextLine();
 
         handleMainMenuAction(option);
-
-        //gameEngine.setNrPlayers(nrPlayers);
-        //VV Functie met for loop met aantal spelers VV
-        //gameEngine.setPlayer(0, "jos");
-        //gameEngine.setPlayer(1, "rudy");
-    }
-
-    public int askNrPlayers() {
-        return 2;
     }
 
     public void gameLoop() {
@@ -55,31 +49,55 @@ public class GameConsole {
             showCurrentSituation();
 
             System.out.print("[ ACTIONS ] What action would you like to perform:\t");
-            int action = Integer.parseInt(scanner.nextLine());                           //askPlayerAction();  // 1 = draw card ; 2 = ... ; ....
+            String action = scanner.nextLine();                           //askPlayerAction();  // 1 = draw card ; 2 = ... ; ....
 
             handlePlayerAction(action);		// gaat werken met gameEngine
 
+            if (gameEngine.getCurrentPlayer() == gameEngine.getLastPlayer()) {
+                //gameEngine.addTurn();
+            } else if (CurrentPlayerWantsToEndTurn()) {
+                System.out.print(gameEngine.getCurrentPlayer() + " || " + gameEngine.getLastPlayer());
+                initNewPlayerTurn();
+                gameEngine.setNextPlayer();
+            }
         }
-
     }
 
-    public void handlePlayerAction(int action) {
-        switch (action) {
-            case 1:
+    public boolean CurrentPlayerWantsToEndTurn() {
+        return endPlayerTurn;
+    }
+
+    public void endPlayerTurn() {
+        this.endPlayerTurn = true;
+    }
+
+    public void initNewPlayerTurn() {
+        this.endPlayerTurn = false;
+    }
+//HANDLE
+    //HANDLE SWITCH
+
+    public void handlePlayerAction(String action) {
+        switch (action.toUpperCase()) {
+            case "A":                       // A: Play a card
+                //TODO: Geld kan altijd gespeeld worden!
                 if (GetActions() > 0) {
                     handlePlayCard();
                 }
                 break;
 
-            case 2:
+            case "B":                      // B: Buy a card
                 if (getBuys() > 0) {
                     handleBuyCard();
                 }
                 break;
-            case 3:
+            case "C":                     // C: Show all cards on board (Victory, Kingdom, Treasure)
                 ShowAllCards("NaN");
                 System.out.print("Press ENTER to continue...");
                 scanner.nextLine();
+                break;
+            case "E":                     // C: Show all cards on board (Victory, Kingdom, Treasure)
+                endPlayerTurn();
                 break;
             default:
                 System.out.print("Incorrect or unknown letter, please try again!\n");
@@ -87,69 +105,68 @@ public class GameConsole {
         }
     }
 
-    public void handleMainMenuAction(int action) {
+    public void handleMainMenuAction(String action) {
 
-        switch (action) {
-            case 1:				// 1: (Start) New game
-                //handleMatchSettings();
+        switch (action.toUpperCase()) {
+            case "A":				// A: (Start) New game
                 //gameEngine.init();
                 ShowMatchSettings();
                 gameLoop();
                 break;
-            case 2:                        // 2: Load game
-
+            case "B":                        // B: Load game
                 //gameEngine.load();
                 break;
-            case 3:                        // 3: Show sets
+            case "C":                        // C: Show sets
                 //ShowSetsMenu();
                 break;
-            case 4:                        // 4: Help / info
+            case "D":                        // D: Help / info
                 //ShowHelpMenu();
                 break;
-            case 5:                        // 5: Exit game
+            case "E":                        // E: Exit game
                 //ExitGame();
                 break;
             default:
-                System.out.print("Incorrect or unknown number, please try again!\n");
+                System.out.print("Incorrect or unknown letter, please try again!\n");
                 //duplicatie
-                System.out.print("Choice an option:\t");
-                int option = Integer.parseInt(scanner.nextLine());
+                System.out.print("Choose an option:\t");
+                String option = scanner.nextLine();
                 handleMainMenuAction(option);
                 break;
         }
     }
 
-    public void handleMatchSettings(int action) {
-        switch (action) {
-            case 1:				// 1: (Start) New game
+    public void handleMatchSettings(String action) {
+        //WARNING: Copied switch from above.
+        //TODO: change content of cases.
+        switch (action.toUpperCase()) {
+            case "A":				// 1: (Start) New game
                 //handleMatchSettings();
                 //gameEngine.init();
                 gameLoop();
-
                 break;
-            case 2:                        // 2: Load game
-
+            case "B":                        // 2: Load game
                 //gameEngine.load();
                 break;
-            case 3:                        // 3: Show sets
+            case "C":                        // 3: Show sets
                 //ShowSetsMenu();
                 break;
-            case 4:                        // 4: Help / info
+            case "D":                        // 4: Help / info
                 //ShowHelpMenu();
                 break;
-            case 5:                        // 5: Exit game
+            case "E":                        // 5: Exit game
                 //ExitGame();
                 break;
             default:
-                System.out.print("Incorrect or unknown number, please try again!\n");
+                System.out.print("Incorrect or unknown letter, please try again!\n");
                 //duplicatie
                 System.out.print("Choice an option:\t");
-                int option = Integer.parseInt(scanner.nextLine());
+                String option = scanner.nextLine();
                 handleMainMenuAction(option);
                 break;
         }
     }
 
+    //HANDLE ACTIONS
     public void handleDrawCard() {
 
 //		GameEngine.drawCard();
@@ -168,6 +185,7 @@ public class GameConsole {
 //		GameEngine.playCard();
     }
 
+//GETTERS 
     public Integer GetActions() {
         return 1;
     }
@@ -176,12 +194,24 @@ public class GameConsole {
         return 1;
     }
 
+//SETTERS    
+    public void setPlayerNames(int amount) {
+        for (int i = 1; i <= amount; i++) {
+            System.out.print("Player " + i + "'s name" + ":\t");
+            String name = scanner.nextLine();
+            gameEngine.setName(i, name);
+        }
+    }
+
+//SHOWERS ;)    
     public void showCurrentSituation() {
+        //TODO: cleaning, lots of it
+        //IFB = insert from backend
 //               GameEngine.showCurrentSituation();
-        GameConsoleLayout.DrawTitel("PLAYER 1 -- TURN 1");
-        GameConsoleLayout.DrawSubTitel("PLAYER 1 INFORMATION");
+        GameConsoleLayout.DrawTitel("PLAYER " + gameEngine.getCurrentPlayer() + ": " + gameEngine.getPlayer(gameEngine.getCurrentPlayer()).getName() + " -- TURN " + "IFB");
+        GameConsoleLayout.DrawSubTitel(gameEngine.getPlayer(gameEngine.getCurrentPlayer()).getName() + " INFORMATION");
         GameConsoleLayout.DrawMenu("Actions", "Play Card", "Buy Card", "Show current board", "Search card info", "End Turn");
-        GameConsoleLayout.DrawMenu("Current turn", "Coin(s): 0", "Action(s): 1", "Buy(s): 1");
+        GameConsoleLayout.DrawMenu("Current turn", "Coin(s): " + gameEngine.getCoin(), "Action(s): " + gameEngine.getAction(), "Buy(s): " + gameEngine.getBuy());
         GameConsoleLayout.DrawMenu("Your Cards", "Copper", "Estate", "Silver", "Curse", "Village");
         GameConsoleLayout.DrawMenu("Playing Field", "Copper");
         //ACTIONS = A B C; CURRENT TURN = None; HAND = 1 2 3; PLAYING FIELD = none;    
@@ -202,17 +232,24 @@ public class GameConsole {
 
     public void ShowMatchSettings() {
 
-        //gameEngine.setNrPlayers(nrPlayers);
-        //VV Functie met for loop met aantal spelers VV
-        //gameEngine.setPlayer(0, "jos");
-        //gameEngine.setPlayer(1, "rudy");
         GameConsoleLayout.DrawTitel("Match Settings");
         GameConsoleLayout.DrawSubTitel("Players");
+
         System.out.print("How many players:\t");
         int amount = Integer.parseInt(scanner.nextLine());
+        gameEngine.setAmountPlayers(amount);
+        setPlayerNames(amount);
+
+        /*
+        System.out.print(gameEngine.getPlayer(1).getName());
+        System.out.print(gameEngine.getPlayer(2).getName());
+        System.out.print(gameEngine.getPlayer(3).getName());
+        System.out.print(gameEngine.getPlayer(4).getName());
+        System.out.print(gameEngine.getPlayer(5).getName());
+         */
         GameConsoleLayout.DrawSubTitel("Kingdom Set");
         GameConsoleLayout.DrawMenu("Kingdom Sets", "Custom set", "Random", "First game", "Big Money", "Interaction", "Size Distortion", "Village Square");
         System.out.print("Pick a set:\t");
-        int set = Integer.parseInt(scanner.nextLine());
+        String set = scanner.nextLine();
     }
 }
