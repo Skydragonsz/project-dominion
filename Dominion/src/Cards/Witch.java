@@ -24,7 +24,8 @@ public class Witch extends AttackCards{
     @Override
     public void playCard(Player player,Player otherPlayer){
         player.setNthAmountOfCards(2); //HAND
-        //TODO -- 3+ players 
+        //DONE -- 3+ players 
+        
         if(!otherPlayer.checkForReactionCard()){
             otherPlayer.addCardToDeck(7); //Add Curse card DECK
         }
@@ -41,9 +42,11 @@ public class Witch extends AttackCards{
         }
     }
     
+    //TODO -- Kijken of we enkel dit nodig hebben voor elke kaart!
     @Override
     public void playCard(Player player){
         player.setNthAmountOfCards(2);
+        
         
         for(int i = 0; i < player.getPlayerList().size()-1;i++){
             if(!player.getOtherPlayersList(player).get(i).checkForReactionCard()){
