@@ -1,10 +1,12 @@
 package dominion;
 import java.util.*;
+import dominion.*;
 
-public class Player extends Turn{
+public class Player extends GameEngine {
     //TODO: clean code
     //Bekijk voor niet active variablen
-    private Cards.Collection collection = new Cards.Collection();
+    private final Cards.Collection collection = new Cards.Collection();
+    private GameEngine ge;
     private ArrayList deckArray;
     private ArrayList handArray;
     private ArrayList discardArray;
@@ -21,6 +23,15 @@ public class Player extends Turn{
     public Player(String name)
     {        
         this.name = name;
+        init();
+    }
+    
+    public void setName(String name){
+        this.name = name;
+    }
+    
+    public String getName(){
+        return name;
     }
     
     public void init()
@@ -167,6 +178,15 @@ public class Player extends Turn{
     public ArrayList getDiscardPile(){
         return discardArray;
     }
+    
+    
+    
+    
+    //TODO -- Fix this shit 
+    // Player can't acces otherplayerslist <-- need a fix
+    
+    
+    
 }
     
 

@@ -4,7 +4,9 @@
  * and open the template in the editor.
  */
 package Cards;
+import dominion.GameEngine;
 import dominion.Player;
+import java.util.ArrayList;
 
 /**
  *
@@ -25,6 +27,28 @@ public class Witch extends AttackCards{
         //TODO -- 3+ players 
         if(!otherPlayer.checkForReactionCard()){
             otherPlayer.addCardToDeck(7); //Add Curse card DECK
+        }
+    }
+    
+    @Override
+    public void playCard(Player player,GameEngine otherPlayers){
+        player.setNthAmountOfCards(2);
+        
+        for(int i = 0; i < otherPlayers.getPlayerList().size()-1;i++){
+            if(!otherPlayers.getOtherPlayersList(player).get(i).checkForReactionCard()){
+                otherPlayers.getOtherPlayersList(player).get(i).addCardToDeck(7); //Add Curse card DECK
+            }
+        }
+    }
+    
+    @Override
+    public void playCard(Player player){
+        player.setNthAmountOfCards(2);
+        
+        for(int i = 0; i < player.getPlayerList().size()-1;i++){
+            if(!player.getOtherPlayersList(player).get(i).checkForReactionCard()){
+                player.getOtherPlayersList(player).get(i).addCardToDeck(7); //Add Curse card DECK
+            }
         }
     }
     

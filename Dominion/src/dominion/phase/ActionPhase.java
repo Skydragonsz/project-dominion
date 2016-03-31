@@ -6,30 +6,25 @@
 package dominion.phase;
 import Cards.MainCard;
 import dominion.*;
+
 /**
  *
  * @author Quinten
 */
 public class ActionPhase{ 
 
-    public void placeCard(MainCard card, Player p, Player otherPlayer){
-        
-        
-        p.removeAction(1);
-        if ("ATTACK".equals(card.getCardType())){
-            
-            //p.AddToPlayingField(card.GetID());
-            //p.RemoveNthCard(card.GetID());
-            
-            card.playCard(p,otherPlayer);
-            p.addToPlayingField(card.getCardID());
+           
 
-            
-            
+    public void placeCard(MainCard card, Player player){
+        
+        
+        player.removeAction(1);
+        if ("ATTACK".equals(card.getCardType())){
+            card.playCard(player); //TODO -- Checken of we enkel player nodig hebben! 
         }else if("ACTION".equals(card.getCardType()) || "REACTION".equals(card.getCardType())){
-            card.playCard(p);
-            p.addToPlayingField(card.getCardID());
+            card.playCard(player);
         }
+        player.addToPlayingField(card.getCardID());
         
     }
 }
