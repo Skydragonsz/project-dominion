@@ -211,7 +211,7 @@ public class GameConsole {
         GameConsoleLayout.DrawMenu("Actions", "Play Card", "Buy Card", "Show current board", "Search card info", "End Turn");
         GameConsoleLayout.DrawMenu("Current turn", "Coin(s): " + gameEngine.getCoin(), "Action(s): " + gameEngine.getAction(), "Buy(s): " + gameEngine.getBuy());
         GameConsoleLayout.DrawMenu("Your Cards", "Copper", "Estate", "Silver", "Curse", "Village");
-        gameEngine.getPlayer(gameEngine.getCurrentPlayer()).shuffleDeck();
+        //gameEngine.getPlayer(gameEngine.getCurrentPlayer()).shuffleDeck(); //Dit mag weg Player handled zelf de shuffle bij het maken van de player
         gameEngine.getPlayer(gameEngine.getCurrentPlayer()).setNthAmountOfCards(5);
         GameConsoleLayout.DrawMenu("Your Cards", gameEngine.getPlayer(gameEngine.getCurrentPlayer()).getCardsInHand());
         System.out.println(gameEngine.getPlayer(gameEngine.getCurrentPlayer()).getCardsInHand());

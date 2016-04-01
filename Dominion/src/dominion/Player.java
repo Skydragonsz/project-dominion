@@ -55,6 +55,7 @@ public class Player extends GameEngine {
         deckArray.add(4);
         deckArray.add(4);
         deckArray.add(4);
+        shuffleDeck();
     }
     
     //TODO: Kan via ingebouwde functie!
@@ -79,9 +80,11 @@ public class Player extends GameEngine {
     //Geeft de bovenste hoeveelheid gekozen kaarten van het deck naar de speler zijn hand.
     public void setNthAmountOfCards(int amount)
     {
+        
         for(int i = 0;i <amount ;i++){
-            handArray.add(deckArray.get(i));
-            deckArray.remove(i);
+            isDeckEmpty();
+            handArray.add(deckArray.get(0));
+            deckArray.remove(0);
         }
     }
     
@@ -131,8 +134,8 @@ public class Player extends GameEngine {
     
     //Verwijderd kaart van de speler zijn deck.
     //TODO -- Fix
-    public void removeNthCardFromDeck(int CardID){
-        deckArray.remove(CardID);
+    public void removeNthCardFromDeck(int index){
+        deckArray.remove(index);
     }
     
     
@@ -168,7 +171,8 @@ public class Player extends GameEngine {
         deckArray.clear();
     }
     
-    public void isDeckEmpty(boolean value){
+    public void isDeckEmpty(){
+        boolean value = deckArray.isEmpty();
         if(value){
             deckArray.addAll(discardArray);
             discardArray.clear();

@@ -64,8 +64,8 @@ public class PlayerTester {
     @Test
     public void testDiscardDeckToPile(){
     //+Visuele feedback.    
-        System.out.println(p.getDeck());
-        System.out.println(p.getCardsInHand());
+        System.out.println("Deck"+p.getDeck());
+        System.out.println("Hand"+p.getCardsInHand());
         System.out.println("^BEGIN STATE^");
         
         //Het deck shudden.
@@ -78,19 +78,22 @@ public class PlayerTester {
         
         //Discard deze kaarten.
         p.discardDeckToPile();
-        System.out.println(p.getDiscardPile());
-        System.out.println(p.getDeck());
-        System.out.println(p.getCardsInHand());
+        System.out.println("Discard pile "+p.getDiscardPile());
+        System.out.println("Deck "+p.getDeck());
+        System.out.println("Cards in hand"+p.getCardsInHand());
+        System.out.println("^Discard pile vol^");
         
-        //?
-        p.isDeckEmpty(true);
-        System.out.println(p.getDiscardPile());
-        System.out.println(p.getDeck());
-        System.out.println(p.getCardsInHand());
+        //
+        p.setNthAmountOfCards(5);
+        System.out.println("Discard pile "+p.getDiscardPile());
+        
+        System.out.println("Deck "+p.getDeck());
+        System.out.println("Cards in hand"+p.getCardsInHand());
         assertEquals(p.getCardsInHand(), testArrayHand);
 
     
     }
+    
     
     
 }
