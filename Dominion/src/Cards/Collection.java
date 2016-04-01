@@ -116,7 +116,7 @@ public class Collection {
                     return adventurer;
                     
             default:
-                     return null;
-    }
+                     return new MainCard();
+        }
     }
 }

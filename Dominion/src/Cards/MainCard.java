@@ -17,10 +17,16 @@ import java.util.ArrayList;
 public class MainCard{
     private String TYPE;
     private static int cardID;
+    private static String name = "MainCard";
     
     public String getCardType(){
         return TYPE;
     }
+    
+    public String getName(){
+        return name;
+    }
+    
     
     
     public void playCard(Player player){

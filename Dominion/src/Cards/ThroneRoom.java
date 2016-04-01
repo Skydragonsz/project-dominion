@@ -14,6 +14,7 @@ import dominion.Player;
 public class ThroneRoom extends ActionCards{
     private final int cardID = 24;
     private final int cost = 4;
+    private final String name = "Throne room";
     
     public ThroneRoom(){
         
@@ -31,6 +32,11 @@ public class ThroneRoom extends ActionCards{
     @Override
     public int getCardID(){
         return cardID;
+    }
+    
+    @Override
+    public String getName(){
+        return name;
     }
     
 }

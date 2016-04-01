@@ -14,7 +14,7 @@ import dominion.Player;
 public class Militia extends AttackCards{
     private final int cardID = 18;
     private final int cost = 4;
-    
+    private final String name = "Militia";
     public Militia(){
         
     }
@@ -31,6 +31,11 @@ public class Militia extends AttackCards{
     @Override
     public int getCardID(){
         return cardID;
+    }
+    
+    @Override
+    public String getName(){
+        return name;
     }
     
 }

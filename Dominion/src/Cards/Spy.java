@@ -14,6 +14,7 @@ import dominion.Player;
 public class Spy extends AttackCards{
     private final int cardID = 22;
     private final int cost = 4;
+    private final String name = "Spy";
     
     public Spy(){
         
@@ -31,6 +32,11 @@ public class Spy extends AttackCards{
     @Override
     public int getCardID(){
         return cardID;
+    }
+    
+    @Override
+    public String getName(){
+        return name;
     }
     
 }

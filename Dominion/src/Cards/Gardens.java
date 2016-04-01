@@ -12,6 +12,7 @@ package Cards;
 public class Gardens extends VictoryCards{
     private final int cardID = 17;
     private final int cost = 4;
+    private final String name = "Garden";
     
     public Gardens(){
         
@@ -27,6 +28,11 @@ public class Gardens extends VictoryCards{
     @Override
     public int getCardID(){
         return cardID;
+    }
+    
+    @Override
+    public String getName(){
+        return name;
     }
     
 }

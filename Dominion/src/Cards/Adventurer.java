@@ -14,6 +14,7 @@ import dominion.Player;
 public class Adventurer extends ActionCards{
     private final int cardID = 32;
     private final int cost = 6;
+    private final String name = "Adventurer";
     
     public Adventurer(){
         

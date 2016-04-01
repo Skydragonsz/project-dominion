@@ -14,7 +14,7 @@ import dominion.Player;
 public class Moat extends ReactionCards{
     private final int cardID = 10;
     private final int cost = 2;
-    
+    private final String name = "Moat";
     public Moat(){
         
     }
@@ -38,6 +38,11 @@ public class Moat extends ReactionCards{
     @Override
     public int getCardID(){
         return cardID;
+    }
+    
+    @Override
+    public String getName(){
+        return name;
     }
     
 }

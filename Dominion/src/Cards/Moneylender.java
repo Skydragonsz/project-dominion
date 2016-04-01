@@ -14,6 +14,7 @@ import dominion.Player;
 public class Moneylender extends ActionCards{
     private final int cardID = 19;
     private final int cost = 4;
+    private final String name = "Moneylender";
     
     public Moneylender(){
         
@@ -31,6 +32,11 @@ public class Moneylender extends ActionCards{
     @Override
     public int getCardID(){
         return cardID;
+    }
+    
+    @Override
+    public String getName(){
+        return name;
     }
     
     

@@ -13,6 +13,7 @@ public class Silver extends TreasureCards{
     private final int cardID = 2;
     private final int value = 2;
     private final int cost = 3;
+    private final String name = "Silver";
     
     public int getValue(){
         return value;
@@ -27,4 +28,8 @@ public class Silver extends TreasureCards{
         return cardID;
     }
     
+    @Override
+    public String getName(){
+        return name;
+    }
 }

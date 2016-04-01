@@ -13,6 +13,7 @@ public class Curse extends VictoryCards{
     private final int cardID = 7;
     private final int victoryValue = -1;
     private final int cost = 0;
+    private final String name = "Curse";
     
     public int getCost(){
         return cost;
@@ -25,6 +26,11 @@ public class Curse extends VictoryCards{
     @Override
     public int getCardID(){
         return cardID;
+    }
+    
+    @Override
+    public String getName(){
+        return name;
     }
     
 }

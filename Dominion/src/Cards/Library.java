@@ -14,6 +14,7 @@ import dominion.Player;
 public class Library extends ActionCards{
     private final int cardID = 28;
     private final int cost = 5;
+    private final String name = "Library";
     
     public Library(){
         
@@ -31,6 +32,11 @@ public class Library extends ActionCards{
     @Override
     public int getCardID(){
         return cardID;
+    }
+    
+    @Override
+    public String getName(){
+        return name;
     }
     
 }

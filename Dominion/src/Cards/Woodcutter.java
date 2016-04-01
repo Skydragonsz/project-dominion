@@ -14,7 +14,7 @@ import dominion.Player;
 public class Woodcutter extends ActionCards{
     private final int cardID = 13;
     private final int cost = 3;
-    
+    private final String name = "Woodcutter";
     public Woodcutter(){
         
     }
@@ -32,5 +32,10 @@ public class Woodcutter extends ActionCards{
     @Override
     public int getCardID(){
         return cardID;
+    }
+    
+    @Override
+    public String getName(){
+        return name;
     }
 }

@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public class Witch extends AttackCards{
     private final int cardID = 31;
     private final int cost = 5;
+    private final String name= "Witch";
 
     
     public Witch(){
@@ -63,5 +64,10 @@ public class Witch extends AttackCards{
     @Override
     public int getCardID(){
         return cardID;
+    }
+    
+    @Override
+    public String getName(){
+        return name;
     }
 }

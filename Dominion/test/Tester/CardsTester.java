@@ -30,6 +30,7 @@ public class CardsTester {
     private Duchy du = new Duchy();
     private Province province = new Province();
     private KingdomCards set = new KingdomCards();
+    private Collection col = new Collection();
 
     
     public CardsTester() {
@@ -88,5 +89,10 @@ public class CardsTester {
         
         //assertTrue(set.getDeck() != testArrayDeck);
         
+    }
+    
+    @Test
+    public void testGetName(){
+        System.out.println(col.getCard(123).getName());
     }
 }

@@ -14,6 +14,7 @@ import dominion.Player;
 public class Bureaucrat extends AttackCards{
     private final int cardID = 15;
     private final int cost = 4;
+    private final String name = "Bureaucrat";
     
     public Bureaucrat(){
         

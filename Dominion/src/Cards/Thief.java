@@ -14,6 +14,7 @@ import dominion.Player;
 public class Thief extends AttackCards{
     private final int cardID = 23;
     private final int cost = 4;
+    private final String name = "Thief";
     
     public Thief(){
         
@@ -33,4 +34,8 @@ public class Thief extends AttackCards{
         return cardID;
     }
     
+    @Override
+    public String getName(){
+        return name;
+    }
 }

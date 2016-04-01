@@ -13,6 +13,8 @@ import dominion.Player;
 public class Cellar extends ActionCards{
     private final int cardID = 8;
     private final int cost = 2;
+    private final String name = "Cellar";
+    
     public Cellar(){
         
         

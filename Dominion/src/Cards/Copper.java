@@ -13,6 +13,7 @@ public class Copper extends TreasureCards{
     private final int cardID = 1;
     private final int value = 1;
     private final int cost = 0;
+    private final String name = "Copper";
     
     public int getValue(){
         return value;
@@ -25,6 +26,11 @@ public class Copper extends TreasureCards{
     @Override
     public int getCardID(){
         return cardID;
+    }
+    
+    @Override
+    public String getName(){
+        return name;
     }
             
 }

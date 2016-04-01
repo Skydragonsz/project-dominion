@@ -13,6 +13,7 @@ public class Estate extends VictoryCards{
     private final int cardID = 4;
     private final int victoryValue = 1;
     private final int cost = 2;
+    private final String name = "Estate";
     
     public int getCost(){
         return cost;
@@ -25,5 +26,10 @@ public class Estate extends VictoryCards{
     @Override
     public int getCardID(){
         return cardID;
+    }
+    
+    @Override
+    public String getName(){
+        return name;
     }
 }

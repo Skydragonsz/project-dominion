@@ -14,6 +14,7 @@ import dominion.Player;
 public class Chancellor extends ActionCards{
     private final int cardID = 11;
     private final int cost = 3;
+    private final String name = "Chancellor";
     
     public Chancellor(){
         
@@ -35,6 +36,11 @@ public class Chancellor extends ActionCards{
     @Override
     public int getCardID(){
         return cardID;
+    }
+    
+    @Override
+    public String getName(){
+        return name;
     }
     
 }
