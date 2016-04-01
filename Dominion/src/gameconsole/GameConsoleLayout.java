@@ -5,20 +5,23 @@
  */
 package gameconsole;
 
+import java.util.ArrayList;
+import Cards.Collection;
 /**
  *
  * @author Quint
  */
 public class GameConsoleLayout {
-
+        private static Collection collection = new Collection();
     public static void DrawMenu(String title, String... lines) {
         //ACTIONS = ABC
         //CARDS = 123
         int counter = 1;
         char[] alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
+        //TODO: check length
         int titleLength = (22 - (title.length())) / 2;
         String extraSpace = "";
-
+        
         if (titleLength % 2 == 0) {
             extraSpace = " ";
         }
@@ -28,6 +31,31 @@ public class GameConsoleLayout {
         for (String line : lines) {
             int lineLength = (22 - (line.length() + 3));
             System.out.println("| " + alphabet[counter - 1] + ". " + line + CalculateSpaces(lineLength) + "|");
+            counter++;
+        }
+        System.out.println("|-----------------------|\n");
+    }
+    
+    
+    
+        public static void DrawMenu(String title, ArrayList<Integer> lines) {
+        //ACTIONS = ABC
+        //CARDS = 123
+        int counter = 1;
+        char[] alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
+        //TODO: check length
+        int titleLength = (22 - (title.length())) / 2;
+        String extraSpace = "";
+
+        if (titleLength % 2 == 0) {
+            extraSpace = " ";
+        }
+
+        System.out.println("|-----------------------|\n" + "|" + CalculateSpaces(titleLength) + extraSpace + title.toUpperCase() + CalculateSpaces(titleLength) + "|\n" + "|-----------------------|");
+
+        for (Integer line : lines) {
+            int lineLength = 3;
+            System.out.println("| " + alphabet[counter - 1] + ". " + collection.getCard(line).getName() + CalculateSpaces(lineLength) + "|");
             counter++;
         }
         System.out.println("|-----------------------|\n");

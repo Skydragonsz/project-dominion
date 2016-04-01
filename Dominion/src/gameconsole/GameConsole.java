@@ -1,14 +1,12 @@
 package gameconsole;
 
 import dominion.GameEngine;
-import dominion.Player;
-import dominion.Turn;
 import java.util.Scanner;
+
 
 public class GameConsole {
 
     private GameEngine gameEngine;
-    private int nrPlayers;
     private boolean endPlayerTurn = false;
     Scanner scanner = new Scanner(System.in);
 //NORMAL -- START-UP
@@ -213,11 +211,16 @@ public class GameConsole {
         GameConsoleLayout.DrawMenu("Actions", "Play Card", "Buy Card", "Show current board", "Search card info", "End Turn");
         GameConsoleLayout.DrawMenu("Current turn", "Coin(s): " + gameEngine.getCoin(), "Action(s): " + gameEngine.getAction(), "Buy(s): " + gameEngine.getBuy());
         GameConsoleLayout.DrawMenu("Your Cards", "Copper", "Estate", "Silver", "Curse", "Village");
+        gameEngine.getPlayer(gameEngine.getCurrentPlayer()).shuffleDeck();
+        gameEngine.getPlayer(gameEngine.getCurrentPlayer()).setNthAmountOfCards(5);
+        GameConsoleLayout.DrawMenu("Your Cards", gameEngine.getPlayer(gameEngine.getCurrentPlayer()).getCardsInHand());
+        System.out.println(gameEngine.getPlayer(gameEngine.getCurrentPlayer()).getCardsInHand());
         GameConsoleLayout.DrawMenu("Playing Field", "Copper");
         //ACTIONS = A B C; CURRENT TURN = None; HAND = 1 2 3; PLAYING FIELD = none;    
     }
 
     public void ShowAllCards(String board) {
+        //TODO: find better way to give a parameter value
         if (board == "first") {
             board = "THESE WILL BE THE CARDS FOR THE ONGOING GAME";
         } else {

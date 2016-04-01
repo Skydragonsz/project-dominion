@@ -47,7 +47,7 @@ public class Collection {
     private final Adventurer adventurer = new Adventurer();
 
     
-    
+    //change parameter to number
     public MainCard getCard(int name){
         switch(name){
             case 1: 

@@ -40,6 +40,7 @@ public class GameEngine extends Turn{
         return playerArray.get(playernr-1);
     }
     
+    //The 3 next functions use integer; not the names.
     public int getCurrentPlayer(){
         return currentPlayer;
     }

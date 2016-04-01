@@ -93,6 +93,6 @@ public class CardsTester {
     
     @Test
     public void testGetName(){
-        System.out.println(col.getCard(123).getName());
+        System.out.println(col.getCard(12).getName());
     }
 }
