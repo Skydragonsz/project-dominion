@@ -11,10 +11,13 @@ import dominion.Player;
  *
  * @author Arthur
  */
+
+//
 public class Chancellor extends ActionCards{
     private final int cardID = 11;
     private final int cost = 3;
     private final String name = "Chancellor";
+    private final String info = "You may immediately put your deck into your discard pile.";
     
     public Chancellor(){
         
@@ -24,11 +27,21 @@ public class Chancellor extends ActionCards{
     public void playCard(Player player){
         
         player.addCoin(2);
+        
+        
+        //You !!MAY!! immediately put your deck into your sicard pile.
+        //TODO -- keuze -- mss in EffectPhase
         player.discardDeckToPile();
-        player.isDeckEmpty(true);
+        
         
     }
     
+    @Override
+    public String getInfo(){
+        return info;
+    }
+    
+    @Override
     public int getCost(){
         return cost;
     }

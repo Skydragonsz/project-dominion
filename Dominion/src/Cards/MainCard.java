@@ -18,6 +18,8 @@ public class MainCard{
     private String TYPE;
     private static int cardID;
     private static String name = "MainCard";
+    private static String info = "Dit is de info van de MAINCARD";
+    private int cost = 0;
     
     public String getCardType(){
         return TYPE;
@@ -27,8 +29,18 @@ public class MainCard{
         return name;
     }
     
+    public int getCardID(){
+        return cardID;
+    } 
     
+    public int getCost(){
+        return cost;
+    }
     
+    public String getInfo(){
+        return info;
+    }
+       
     public void playCard(Player player){
         System.out.println("DIT IS DE MAIN CARD.");
     }
@@ -43,9 +55,5 @@ public class MainCard{
     
     public void playCard(Player player,GameEngine otherPlayer){
         System.out.println("DIT IS DE MAIN CARD.");
-    }
-    
-    public int getCardID(){
-        return cardID;
     }
 }

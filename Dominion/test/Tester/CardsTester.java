@@ -14,6 +14,8 @@ import static org.junit.Assert.*;
 import Cards.*;
 import Cards.Witch;
 import dominion.Player;
+import dominion.GameEngine;
+import dominion.phase.ActionPhase;
 
 
 /**
@@ -31,6 +33,8 @@ public class CardsTester {
     private Province province = new Province();
     private KingdomCards set = new KingdomCards();
     private Collection col = new Collection();
+    private GameEngine ge = new GameEngine();
+    private ActionPhase ap = new ActionPhase();
 
     
     public CardsTester() {
@@ -94,5 +98,53 @@ public class CardsTester {
     @Test
     public void testGetName(){
         System.out.println(col.getCard(12).getName());
+    }
+    
+    @Test
+    public void testAdventurer(){
+        System.out.println(p.getDeck());
+        col.getCard(32).playCard(p);
+        System.out.println(p.getDeck());
+        System.out.println(p.getCardsInHand());
+    }
+    
+    @Test
+    public void testBureaucrat(){
+        ge.reset();
+        ge.setAmountPlayers(3);
+        ge.setName(1, "Bob");
+        ge.setName(2, "Ross");
+        ge.setName(3, "Arthur");
+        
+        
+        
+        
+        ge.getPlayer(1).addCardToHand(1);
+        ge.getPlayer(1).addCardToHand(6);
+        ge.getPlayer(1).addCardToHand(3);
+        
+        ge.getPlayer(2).addCardToHand(1);
+        ge.getPlayer(2).addCardToHand(3);
+        ge.getPlayer(2).addCardToHand(3);
+        
+        ge.getPlayer(3).addCardToHand(15);
+        ge.getPlayer(3).addCardToHand(5);
+        ge.getPlayer(3).addCardToHand(1);
+        ge.getPlayer(3).addCardToHand(13);
+        
+        
+        
+        
+        for(int i = 1; i <= ge.getPlayerList().size() ; i++){
+            System.out.println(ge.getPlayer(i).getName() + " "+ ge.getPlayer(i).getCardsInHand());
+        }
+        
+        ap.placeCard(col.getCard(15), ge.getPlayer(3));
+        
+        
+        for(int i = 1; i <= ge.getPlayerList().size() ; i++){
+            System.out.println("AFTER: "+ge.getPlayer(i).getName() + " "+ ge.getPlayer(i).getCardsInHand());
+        }
+        
     }
 }

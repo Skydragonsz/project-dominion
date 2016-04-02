@@ -37,7 +37,7 @@ public class Player extends GameEngine {
     public void init()
     {
         //Starter deck -- TEST
-        deckArray = new ArrayList<Integer>();
+        deckArray = new ArrayList();
         handArray = new ArrayList();
         playingFieldArray = new ArrayList();
         discardArray = new ArrayList();
@@ -73,7 +73,7 @@ public class Player extends GameEngine {
         
     }
     //Geeft het hele deck terug als een ArrayList 
-    public ArrayList getDeck(){
+    public ArrayList<Integer> getDeck(){
         return deckArray;
     }
     
@@ -89,12 +89,10 @@ public class Player extends GameEngine {
     }
     
     //Geeft het hele hand terug als een ArrayList.
-    public ArrayList getCardsInHand(){
+    public ArrayList<Integer> getCardsInHand(){
         return handArray;
     }
-    
-
-    
+       
     //Voegt hoeveelheid aantal kaart(en) toe aan het deck.
     public void addCardToDeck(int CardID)
     {
@@ -113,7 +111,7 @@ public class Player extends GameEngine {
         return deckArray.get(deckArray.indexOf(name));
     }
     
-    public ArrayList getPlayingField(){
+    public ArrayList<Integer> getPlayingField(){
         return playingFieldArray;
     }
     
@@ -180,7 +178,7 @@ public class Player extends GameEngine {
         }
     }
     
-    public ArrayList getDiscardPile(){
+    public ArrayList<Integer> getDiscardPile(){
         return discardArray;
     }
     

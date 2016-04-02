@@ -6,12 +6,14 @@
 package Cards;
 import dominion.GameEngine;
 import dominion.Player;
-import java.util.ArrayList;
 
 /**
  *
  * @author Arthur
  */
+
+//Card is DONE
+//TODO Clean the code up!!!
 public class Witch extends AttackCards{
     private final int cardID = 31;
     private final int cost = 5;
@@ -56,7 +58,7 @@ public class Witch extends AttackCards{
         }
     }
     
-    
+    @Override
     public int getCost(){
         return cost;
     }

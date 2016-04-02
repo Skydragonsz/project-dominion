@@ -11,6 +11,7 @@ package dominion;
  */
 public class Turn {
    private int amountOfCurrency = 0;
+   private int amountOfFakeCurrency = 0; //Bijvoorbeeld; "WORKSHOP: Gain a card costing up to 4coins"
    private int currentPhase;
    private int amountOfActions = 1;
    private int amountOfBuys = 1;
@@ -25,6 +26,13 @@ public class Turn {
    {
        if (amountOfCurrency >=0){
         amountOfCurrency += amount;
+       }
+   }
+   
+   public void addFakeCoin(int amount)
+   {
+       if (amountOfFakeCurrency >=0){
+        amountOfFakeCurrency += amount;
        }
    }
    
@@ -50,6 +58,13 @@ public class Turn {
        }
    }
    
+   public void removeFakeCoin(int amount)
+   {
+       if (amountOfFakeCurrency - amount >=0){
+       amountOfFakeCurrency -= amount;
+       }
+   }
+   
    public void removeAction(int amount)
    {
        if (amountOfActions - amount >=0){
@@ -68,6 +83,10 @@ public class Turn {
         return amountOfCurrency;
     }
     
+    public int getFakeCoin(){
+        return amountOfFakeCurrency;
+    }
+    
     public int getAction(){
         return amountOfActions;
     }
@@ -79,6 +98,7 @@ public class Turn {
 //RESET
     public void cleanUp(){
         amountOfCurrency = 0;
+        amountOfFakeCurrency = 0;
         amountOfActions = 1;
         amountOfBuys = 1;
     }
