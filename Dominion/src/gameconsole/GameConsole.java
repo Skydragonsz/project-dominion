@@ -1,6 +1,7 @@
 package gameconsole;
 
 import dominion.GameEngine;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GameConsole {
@@ -23,7 +24,7 @@ public class GameConsole {
 
     public void run() {
         GameConsoleLayout.DrawLogo();
-        GameConsoleLayout.DrawMenu("Main menu", "New game", "Load Game", "Show (card) sets", "Help", "Exit game");
+        GameConsoleLayout.drawMenuAlphabeticList("Main menu", "New game", "Load Game", "Show (card) sets", "Help", "Exit game");
 
         System.out.print("Choice an option:\t");
         String option = scanner.nextLine();
@@ -33,20 +34,14 @@ public class GameConsole {
 
     public void gameLoop() {
         boolean bln = true;
-        //gameEngine.getPlayer(gameEngine.getCurrentPlayer()).setNthAmountOfCards(5);
         while (bln = true) //gameEngine.gameNotFinished()
         {
-//			 stap 1: toon de situatie : wie is er aan de beurt?
-//			 welke kaarten heb je in je hand ?
-//			 wat ligt er op tafel?
-//			 welke zetten zijn nu mogelijk?
-//			 hoeveel geld heb je?
             showCurrentSituation();
 
             System.out.print("[ ACTIONS ] What action would you like to perform:\t");
-            String action = scanner.nextLine();                           //askPlayerAction();  // 1 = draw card ; 2 = ... ; ....
+            String action = scanner.nextLine();
 
-            handlePlayerAction(action);		// gaat werken met gameEngine
+            handlePlayerAction(action);
 
             if (gameEngine.getCurrentPlayer() == gameEngine.getLastPlayer()) {
                 //gameEngine.addTurn();
@@ -69,22 +64,18 @@ public class GameConsole {
     public void initNewPlayerTurn() {
         this.endPlayerTurn = false;
     }
+    
 //HANDLE
     //HANDLE SWITCH
-
     public void handlePlayerAction(String action) {
         switch (action.toUpperCase()) {
             case "A":                       // A: Play a card
                 //TODO: Geld kan altijd gespeeld worden!
-                if (GetActions() > 0) {
-                    handlePlayCard();
-                }
+                if (GetActions() > 0) handlePlayCard();
                 break;
 
             case "B":                      // B: Buy a card
-                if (getBuys() > 0) {
-                    handleBuyCard();
-                }
+                if (getBuys() > 0) handleBuyCard();
                 break;
             case "C":                     // C: Show all cards on board (Victory, Kingdom, Treasure)
                 ShowAllCards("NaN");
@@ -170,14 +161,16 @@ public class GameConsole {
     public void handlePlayCard() {
         System.out.print("[ ACTIONS -- PLAY CARD ] What card would you like to play:\t");
         int card = Integer.parseInt(scanner.nextLine());
-        gameEngine.getPlayer(gameEngine.getCurrentPlayer()).addToPlayingFieldIndex(card);
+        gameEngine.getPlayer(gameEngine.getCurrentPlayer()).addToPlayingFieldIndex(card-1);
     }
 
     public void handleBuyCard() {
+        //TODO: change this with a better parameter.
         ShowAllCards("NaN");
+        
         System.out.print("[ ACTIONS -- BUY CARD ] What card would you like to buy:\t");
         int card = Integer.parseInt(scanner.nextLine());
-//		GameEngine.playCard();
+//	GameEngine.AddCardToHandCard();
     }
 
 //GETTERS 
@@ -198,22 +191,19 @@ public class GameConsole {
         }
     }
 
-//SHOWERS ;)    
+//SHOWERS ;)  
     public void showCurrentSituation() {
         //TODO: cleaning, lots of it
         //IFB = insert from backend
-//               GameEngine.showCurrentSituation();
+        //ACTIONS = A B C; CURRENT TURN = None; HAND = 1 2 3; PLAYING FIELD = none;    
         GameConsoleLayout.DrawTitel("PLAYER " + gameEngine.getCurrentPlayer() + ": " + gameEngine.getPlayer(gameEngine.getCurrentPlayer()).getName() + " -- TURN " + "IFB");
         GameConsoleLayout.DrawSubTitel(gameEngine.getPlayer(gameEngine.getCurrentPlayer()).getName() + " INFORMATION");
-        GameConsoleLayout.DrawMenu("Actions", "Play Card", "Buy Card", "Show current board", "Search card info", "End Turn");
-        GameConsoleLayout.DrawMenuNonInt("Current turn", "Coin(s): " + gameEngine.getCoin(), "Action(s): " + gameEngine.getAction(), "Buy(s): " + gameEngine.getBuy());
-        //GameConsoleLayout.DrawMenu("Your Cards", "Copper", "Estate", "Silver", "Curse", "Village");
-        //gameEngine.getPlayer(gameEngine.getCurrentPlayer()).shuffleDeck(); //Dit mag weg Player handled zelf de shuffle bij het maken van de player
+        
+        GameConsoleLayout.drawMenuAlphabeticList("Actions", "Play Card", "Buy Card", "Show current board", "Search card info", "End Turn");
+        GameConsoleLayout.drawMenuNoList("Current turn", "Coin(s): " + gameEngine.getCoin(), "Action(s): " + gameEngine.getAction(), "Buy(s): " + gameEngine.getBuy());
 
-        GameConsoleLayout.DrawMenu("Your Cards", gameEngine.getPlayer(gameEngine.getCurrentPlayer()).getCardsInHand());
-        System.out.println(gameEngine.getPlayer(gameEngine.getCurrentPlayer()).getCardsInHand());
-        GameConsoleLayout.DrawMenu("Playing Field", gameEngine.getPlayer(gameEngine.getCurrentPlayer()).getPlayingField());
-        //ACTIONS = A B C; CURRENT TURN = None; HAND = 1 2 3; PLAYING FIELD = none;    
+        GameConsoleLayout.drawMenuNumericList("Your Cards", gameEngine.getPlayer(gameEngine.getCurrentPlayer()).getCardsInHand());
+        GameConsoleLayout.drawMenuNoList("Playing Field", gameEngine.getPlayer(gameEngine.getCurrentPlayer()).getPlayingField());
     }
 
     public void ShowAllCards(String board) {
@@ -225,9 +215,9 @@ public class GameConsole {
         }
 
         GameConsoleLayout.DrawSubTitel(board);
-        GameConsoleLayout.DrawMenuBoard("Victory cards", "Province $8 (8)", "Duchy $8 (3)", "Estate $8 (9)");
-        GameConsoleLayout.DrawMenuBoard("Kingdom cards", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)");
-        GameConsoleLayout.DrawMenuBoard("Treasure cards", "Gold $8 (40)", "Silver $8(37)", "Bronze $8 (40)", "Curse $8 (9)");
+//        GameConsoleLayout.DrawMenuBoard("Victory cards", "Province $8 (8)", "Duchy $8 (3)", "Estate $8 (9)");
+//        GameConsoleLayout.DrawMenuBoard("Kingdom cards", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)");
+//        GameConsoleLayout.DrawMenuBoard("Treasure cards", "Gold $8 (40)", "Silver $8(37)", "Bronze $8 (40)", "Curse $8 (9)");
     }
 
     public void ShowMatchSettings() {
@@ -239,20 +229,14 @@ public class GameConsole {
         int amount = Integer.parseInt(scanner.nextLine());
         gameEngine.setAmountPlayers(amount);
         setPlayerNames(amount);
-
-        /*
-        System.out.print(gameEngine.getPlayer(1).getName());
-        System.out.print(gameEngine.getPlayer(2).getName());
-        System.out.print(gameEngine.getPlayer(3).getName());
-        System.out.print(gameEngine.getPlayer(4).getName());
-        System.out.print(gameEngine.getPlayer(5).getName());
-         */
+        
         GameConsoleLayout.DrawSubTitel("Kingdom Set");
-        GameConsoleLayout.DrawMenu("Kingdom Sets", "Custom set", "Random", "First game", "Big Money", "Interaction", "Size Distortion", "Village Square");
+        GameConsoleLayout.drawMenuAlphabeticList("Kingdom Sets", "Custom set", "Random", "First game", "Big Money", "Interaction", "Size Distortion", "Village Square");
         System.out.print("Pick a set:\t");
         String set = scanner.nextLine();
 
         //Shows players the chosen kingdom cards
+        //TODO: change this with a better parameter.
         ShowAllCards("first");
         System.out.print("Press ENTER to continue...");
         scanner.nextLine();

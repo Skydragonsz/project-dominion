@@ -16,97 +16,67 @@ public class GameConsoleLayout {
 
     private static Collection collection = new Collection();
     
-    //TODO: check four following functions; mostly duplicate.
-    //Used for hardcoded non-interactable(?) menus.
-    public static void DrawMenuNonInt(String title, String... lines) {
+    //Lots of duplicate code :(
+  
+    public static void drawMenuLine(String numerationChar, String line){
+        System.out.println("| " + numerationChar + line + "|");
+    }
+    
+    
+    public static void drawMenuNoList(String title, String... lines) {
         //TODO: check length
-        int titleLength = (22 - (title.length())) / 2;
-        String extraSpace = "";
-
-        if (titleLength % 2 == 0) {
-            extraSpace = " ";
-        }
-
-        System.out.println("|-----------------------|\n" + "|" + CalculateSpaces(titleLength) + extraSpace + title.toUpperCase() + CalculateSpaces(titleLength) + "|\n" + "|-----------------------|");
+        System.out.println("|-----------------------|\n" + "|" + title.toUpperCase() + "|\n" + "|-----------------------|");
 
         for (String line : lines) {
-            int lineLength = (22 - (line.length() + 3));
-            System.out.println("| " + line + CalculateSpaces(lineLength) + "|");
+                drawMenuLine(" ",line);
         }
         System.out.println("|-----------------------|\n");
     }
     
-     public static void DrawMenuBoard(ArrayList<Integer> Treasure, ArrayList<Integer> Victory, ArrayList<Integer> Kingdom) {
+    public static void drawMenuNoList(String title, ArrayList<Integer> lines) {
         //TODO: check length
-        int titleLength = (22 - (title.length())) / 2;
-        String extraSpace = "";
+        System.out.println("|-----------------------|\n" + "|" + title.toUpperCase() + "|\n" + "|-----------------------|");
 
-        if (titleLength % 2 == 0) {
-            extraSpace = " ";
-        }
-        
-        for (int i = 0; i < 3; i++){
-        
-        
-
-        System.out.println("|-----------------------|\n" + "|" + CalculateSpaces(titleLength) + extraSpace + title.toUpperCase() + CalculateSpaces(titleLength) + "|\n" + "|-----------------------|");
-
-        for (String line : lines) {
-            int lineLength = (22 - (line.length() + 3));
-            System.out.println("| " + line + CalculateSpaces(lineLength) + "|");
+        for (int line : lines) {
+                drawMenuLine(" ",collection.getCard(line).getName());
         }
         System.out.println("|-----------------------|\n");
     }
     
+    public static void drawMenuAlphabeticList(String title, String... lines) {
+        //TODO: check length
+        System.out.println("|-----------------------|\n" + "|" + title.toUpperCase() + "|\n" + "|-----------------------|");
+        char[] alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();   
+        int counter = 0;
+        for (String line : lines) {
+                drawMenuLine(String.valueOf(alphabet[counter]) + ". ", line);
+                counter++;
+        }
+        System.out.println("|-----------------------|\n");
+    }
     
-    //Used for making hardcoded option/action menus.
-    public static void DrawMenu(String title, String... lines) {
-        //ACTIONS = ABC
-        //CARDS = 123
+        public static void drawMenuNumericList(String title, String... lines) {
+        //TODO: check length
+        System.out.println("|-----------------------|\n" + "|" + title.toUpperCase() + "|\n" + "|-----------------------|");
         int counter = 1;
-        char[] alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
-        //TODO: check length
-        int titleLength = (22 - (title.length())) / 2;
-        String extraSpace = "";
-
-        if (titleLength % 2 == 0) {
-            extraSpace = " ";
-        }
-
-        System.out.println("|-----------------------|\n" + "|" + CalculateSpaces(titleLength) + extraSpace + title.toUpperCase() + CalculateSpaces(titleLength) + "|\n" + "|-----------------------|");
-
         for (String line : lines) {
-            int lineLength = (22 - (line.length() + 3));
-            System.out.println("| " + alphabet[counter - 1] + ". " + line + CalculateSpaces(lineLength) + "|");
-            counter++;
+                drawMenuLine(String.valueOf(counter) + ". ", line);
+                counter++;
+        }
+        System.out.println("|-----------------------|\n");
+    }
+        
+        public static void drawMenuNumericList(String title, ArrayList<Integer> lines) {
+        //TODO: check length
+        System.out.println("|-----------------------|\n" + "|" + title.toUpperCase() + "|\n" + "|-----------------------|");
+        int counter = 1;
+        for (int line : lines) {
+                drawMenuLine(String.valueOf(counter) + ". ", collection.getCard(line).getName() );
+                counter++;
         }
         System.out.println("|-----------------------|\n");
     }
     
-    // Used for making card (from ArrayList) menus.
-    public static void DrawMenu(String title, ArrayList<Integer> cards) {
-        //ACTIONS = ABC
-        //CARDS = 123
-        int counter = 1;
-        //char[] alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
-        //TODO: check length
-        int titleLength = (22 - (title.length())) / 2;
-        String extraSpace = "";
-
-        if (titleLength % 2 == 0) {
-            extraSpace = " ";
-        }
-
-        System.out.println("|-----------------------|\n" + "|" + CalculateSpaces(titleLength) + extraSpace + title.toUpperCase() + CalculateSpaces(titleLength) + "|\n" + "|-----------------------|");
-
-        for (Integer card : cards) {
-            int lineLength = 3;
-            System.out.println("| " + counter + ". " + collection.getCard(card).getName() + CalculateSpaces(lineLength) + "|");
-            counter++;
-        }
-        System.out.println("|-----------------------|\n");
-    }
-
     public static String CalculateSpaces(int amount) {
         String BlankSpace = "";
         for (int i = 0; i < amount; i++) {
