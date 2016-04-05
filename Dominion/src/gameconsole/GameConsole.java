@@ -3,7 +3,6 @@ package gameconsole;
 import dominion.GameEngine;
 import java.util.Scanner;
 
-
 public class GameConsole {
 
     private GameEngine gameEngine;
@@ -34,9 +33,7 @@ public class GameConsole {
 
     public void gameLoop() {
         boolean bln = true;
-        ShowAllCards("first");
-        System.out.print("Press ENTER to continue...");
-        scanner.nextLine();
+        //gameEngine.getPlayer(gameEngine.getCurrentPlayer()).setNthAmountOfCards(5);
         while (bln = true) //gameEngine.gameNotFinished()
         {
 //			 stap 1: toon de situatie : wie is er aan de beurt?
@@ -173,7 +170,7 @@ public class GameConsole {
     public void handlePlayCard() {
         System.out.print("[ ACTIONS -- PLAY CARD ] What card would you like to play:\t");
         int card = Integer.parseInt(scanner.nextLine());
-//		GameEngine.playCard();
+        gameEngine.getPlayer(gameEngine.getCurrentPlayer()).addToPlayingFieldIndex(card);
     }
 
     public void handleBuyCard() {
@@ -209,13 +206,13 @@ public class GameConsole {
         GameConsoleLayout.DrawTitel("PLAYER " + gameEngine.getCurrentPlayer() + ": " + gameEngine.getPlayer(gameEngine.getCurrentPlayer()).getName() + " -- TURN " + "IFB");
         GameConsoleLayout.DrawSubTitel(gameEngine.getPlayer(gameEngine.getCurrentPlayer()).getName() + " INFORMATION");
         GameConsoleLayout.DrawMenu("Actions", "Play Card", "Buy Card", "Show current board", "Search card info", "End Turn");
-        GameConsoleLayout.DrawMenu("Current turn", "Coin(s): " + gameEngine.getCoin(), "Action(s): " + gameEngine.getAction(), "Buy(s): " + gameEngine.getBuy());
-        GameConsoleLayout.DrawMenu("Your Cards", "Copper", "Estate", "Silver", "Curse", "Village");
+        GameConsoleLayout.DrawMenuNonInt("Current turn", "Coin(s): " + gameEngine.getCoin(), "Action(s): " + gameEngine.getAction(), "Buy(s): " + gameEngine.getBuy());
+        //GameConsoleLayout.DrawMenu("Your Cards", "Copper", "Estate", "Silver", "Curse", "Village");
         //gameEngine.getPlayer(gameEngine.getCurrentPlayer()).shuffleDeck(); //Dit mag weg Player handled zelf de shuffle bij het maken van de player
-        gameEngine.getPlayer(gameEngine.getCurrentPlayer()).setNthAmountOfCards(5);
+
         GameConsoleLayout.DrawMenu("Your Cards", gameEngine.getPlayer(gameEngine.getCurrentPlayer()).getCardsInHand());
         System.out.println(gameEngine.getPlayer(gameEngine.getCurrentPlayer()).getCardsInHand());
-        GameConsoleLayout.DrawMenu("Playing Field", "Copper");
+        GameConsoleLayout.DrawMenu("Playing Field", gameEngine.getPlayer(gameEngine.getCurrentPlayer()).getPlayingField());
         //ACTIONS = A B C; CURRENT TURN = None; HAND = 1 2 3; PLAYING FIELD = none;    
     }
 
@@ -228,9 +225,9 @@ public class GameConsole {
         }
 
         GameConsoleLayout.DrawSubTitel(board);
-        GameConsoleLayout.DrawMenu("Victory cards", "Province $8 (8)", "Duchy $8 (3)", "Estate $8 (9)");
-        GameConsoleLayout.DrawMenu("Kingdom cards", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)");
-        GameConsoleLayout.DrawMenu("Treasure cards", "Gold $8 (40)", "Silver $8(37)", "Bronze $8 (40)", "Curse $8 (9)");
+        GameConsoleLayout.DrawMenuBoard("Victory cards", "Province $8 (8)", "Duchy $8 (3)", "Estate $8 (9)");
+        GameConsoleLayout.DrawMenuBoard("Kingdom cards", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)");
+        GameConsoleLayout.DrawMenuBoard("Treasure cards", "Gold $8 (40)", "Silver $8(37)", "Bronze $8 (40)", "Curse $8 (9)");
     }
 
     public void ShowMatchSettings() {
@@ -254,5 +251,10 @@ public class GameConsole {
         GameConsoleLayout.DrawMenu("Kingdom Sets", "Custom set", "Random", "First game", "Big Money", "Interaction", "Size Distortion", "Village Square");
         System.out.print("Pick a set:\t");
         String set = scanner.nextLine();
+
+        //Shows players the chosen kingdom cards
+        ShowAllCards("first");
+        System.out.print("Press ENTER to continue...");
+        scanner.nextLine();
     }
 }

@@ -56,6 +56,7 @@ public class Player extends GameEngine {
         deckArray.add(4);
         deckArray.add(4);
         shuffleDeck();
+        setNthAmountOfCards(5);
     }
     
     //TODO: Kan via ingebouwde functie!
@@ -116,6 +117,13 @@ public class Player extends GameEngine {
     }
     
     //Voegt kaart toe aan playingField
+    public void addToPlayingFieldIndex(int Index)
+    {
+        playingFieldArray.add(handArray.get(Index));
+        handArray.remove(Index);
+        
+    }
+    
     public void addToPlayingField(int CardID)
     {
         playingFieldArray.add(CardID);
