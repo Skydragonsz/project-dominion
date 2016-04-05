@@ -19,7 +19,7 @@ public class Gardens extends VictoryCards{
     }
     
 
-    
+    @Override
     public int getCost(){
         return cost;
     }

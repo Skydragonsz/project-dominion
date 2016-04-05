@@ -15,10 +15,12 @@ public class Province extends VictoryCards{
     private final int cost = 8;
     private final String name = "Procince";
     
+    @Override
     public int getCost(){
         return cost;
     }
     
+    @Override
     public int getVictoryValue(){
         return victoryValue;
     }

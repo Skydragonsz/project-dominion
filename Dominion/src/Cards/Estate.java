@@ -15,10 +15,12 @@ public class Estate extends VictoryCards{
     private final int cost = 2;
     private final String name = "Estate";
     
+    @Override
     public int getCost(){
         return cost;
     }
     
+    @Override
     public int getVictoryValue(){
         return victoryValue;
     }

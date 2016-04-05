@@ -15,10 +15,12 @@ public class Duchy extends VictoryCards{
     private final int cost = 5;
     private final String name = "Duchy";
     
+    @Override
     public int getCost(){
         return cost;
     }
     
+    @Override
     public int getVictoryValue(){
         return victoryValue;
     }

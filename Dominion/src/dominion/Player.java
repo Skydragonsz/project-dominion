@@ -177,9 +177,13 @@ public class Player extends GameEngine {
         deckArray.clear();
     }
     
+    public void discardHandToPile(){
+        discardArray.addAll(handArray);
+        handArray.clear();
+    }
+    
     public void isDeckEmpty(){
-        boolean value = deckArray.isEmpty();
-        if(value){
+        if(deckArray.isEmpty()){
             deckArray.addAll(discardArray);
             discardArray.clear();
             shuffleDeck();
@@ -190,14 +194,13 @@ public class Player extends GameEngine {
         return discardArray;
     }
     
+    public void addNthAmountOfPoints(int amount){
+        victoryPoints += amount; 
+    }
     
-    
-    
-    //TODO -- Fix this shit 
-    // Player can't acces otherplayerslist <-- need a fix
-    
-    
-    
+    public int getVictoryPoints(){
+        return victoryPoints;
+    }
 }
     
 

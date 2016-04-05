@@ -20,6 +20,7 @@ public class MainCard{
     private static String name = "MainCard";
     private static String info = "Dit is de info van de MAINCARD";
     private int cost = 0;
+    private int victoryValue = 0;
     
     public String getCardType(){
         return TYPE;
@@ -39,6 +40,10 @@ public class MainCard{
     
     public String getInfo(){
         return info;
+    }
+    
+    public int getVictoryValue(){
+        return victoryValue;
     }
        
     public void playCard(Player player){
