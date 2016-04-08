@@ -7,3 +7,6 @@ Dominion/test/Tester/PlayerTester.java
 /DominionServer/nbproject/private/
 /DominionServer/build/
 /Dominion/dist/
+*.txt
+*.log
+*.log
