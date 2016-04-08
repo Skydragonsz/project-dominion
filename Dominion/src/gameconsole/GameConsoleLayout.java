@@ -6,7 +6,7 @@
 package gameconsole;
 
 import java.util.ArrayList;
-import Cards.Collection;
+import cards.Functions.Collection;
 
 /**
  *

@@ -5,7 +5,7 @@ import dominion.*;
 public class Player extends GameEngine {
     //TODO: clean code
     //Bekijk voor niet active variablen
-    private final Cards.Collection collection = new Cards.Collection();
+    private final cards.Functions.Collection collection = new cards.Functions.Collection();
     private GameEngine ge;
     private ArrayList deckArray;
     private ArrayList handArray;

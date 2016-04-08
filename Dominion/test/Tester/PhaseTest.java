@@ -12,7 +12,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import dominion.phase.ActionPhase;
-import Cards.*;
 import dominion.GameEngine;
 import dominion.Player;
 import java.util.ArrayList;
@@ -25,7 +24,7 @@ import java.util.Map;
  * @author Quinten
  */
 public class PhaseTest {
-    final Cards.Collection col = new Cards.Collection();
+    final cards.Functions.Collection col = new cards.Functions.Collection();
     ActionPhase Pl = new ActionPhase();
     Player p1 = new Player();
     Player p2 = new Player();

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package dominion.phase;
-import Cards.*;
+import cards.Maincards.MainCard;
 /**
  *
  * @author Arthur

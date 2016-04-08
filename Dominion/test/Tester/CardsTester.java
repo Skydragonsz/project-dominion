@@ -5,14 +5,18 @@
  */
 package Tester;
 
+import cards.MainSet.Copper;
+import cards.MainSet.Province;
+import cards.MainSet.Duchy;
+import cards.Functions.KingdomCards;
+import cards.Functions.Collection;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import Cards.*;
-import Cards.Witch;
+import cards.MainSet.Witch;
 import dominion.Player;
 import dominion.GameEngine;
 import dominion.phase.ActionPhase;
