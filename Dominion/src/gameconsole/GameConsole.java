@@ -90,6 +90,69 @@ public class GameConsole {
                 break;
         }
     }
+    
+    public void handleBuyAction(Integer card) {
+//    switch (card) {
+//        //Victory
+//        case 1:                       
+//
+//            break;
+//        case 2:                      
+//
+//            break;
+//        case 3:                     
+//
+//            break;
+//        //Treasure    
+//        case 4:                     
+//
+//            break;
+//        case 5:                      
+//
+//            break;
+//        case 6:                      
+//
+//            break;
+//        //KingdomCards    
+//        case 7:                    
+//
+//            break;
+//        case 8:                     
+//
+//            break;
+//        case 9:                       
+//
+//            break;
+//        case 10:                      
+//
+//            break;
+//        case 11:                     
+//
+//            break;
+//        case 12:                     
+//
+//            break;
+//        case 13:                      
+//
+//            break;
+//        case 14:                      
+//
+//            break;
+//        case 15:                    
+//
+//            break;
+//        case 16:                     
+//
+//            break;
+//        case 17:                     
+//
+//            break;
+//        default:
+//            System.out.print("Incorrect or unknown number, please try again!\n");
+//            break;
+//    }
+
+    }
 
     public void handleMainMenuAction(String action) {
 
@@ -170,7 +233,7 @@ public class GameConsole {
         
         System.out.print("[ ACTIONS -- BUY CARD ] What card would you like to buy:\t");
         int card = Integer.parseInt(scanner.nextLine());
-//	GameEngine.AddCardToHandCard();
+        gameEngine.getPlayer(gameEngine.getCurrentPlayer()).addHandFromBuyTransaction(card-1);
     }
 
 //GETTERS 
@@ -215,7 +278,7 @@ public class GameConsole {
         }
 
         GameConsoleLayout.DrawSubTitel(board);
-//        GameConsoleLayout.DrawMenuBoard("Victory cards", "Province $8 (8)", "Duchy $8 (3)", "Estate $8 (9)");
+        GameConsoleLayout.drawMenuNumericList("Board", gameEngine.getPlayer(gameEngine.getCurrentPlayer()).getCurrentSetArray());
 //        GameConsoleLayout.DrawMenuBoard("Kingdom cards", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)");
 //        GameConsoleLayout.DrawMenuBoard("Treasure cards", "Gold $8 (40)", "Silver $8(37)", "Bronze $8 (40)", "Curse $8 (9)");
     }

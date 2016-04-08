@@ -9,11 +9,12 @@ public class Player extends GameEngine {
     private GameEngine ge;
     private ArrayList deckArray;
     private ArrayList handArray;
-    private ArrayList discardArray;
+    private ArrayList discardArray = new ArrayList(Arrays.asList(1,1,1,1,1,1,1,4,4,4));
     private ArrayList playingFieldArray;
     private String name;
     private int victoryPoints;
     private boolean HasReaction;
+    private ArrayList currentSetArray = new ArrayList(Arrays.asList(1,2,3,4,5,6,7,8,29,18,30,10,20,21,12,13,14));
         
     public Player()
     {        
@@ -41,6 +42,7 @@ public class Player extends GameEngine {
         handArray = new ArrayList();
         playingFieldArray = new ArrayList();
         discardArray = new ArrayList();
+        
         
         //Add begin deck.
         //Always the same.
@@ -117,8 +119,10 @@ public class Player extends GameEngine {
     }
     
     //Voegt kaart toe aan playingField
+    //Bekijk welke van addToPlayingFieldIndex effectief gebruikt wordt.
     public void addToPlayingFieldIndex(int Index)
     {
+        //VV Werkt VV
         playingFieldArray.add(handArray.get(Index));
         handArray.remove(Index);
         
@@ -135,6 +139,13 @@ public class Player extends GameEngine {
     {
         playingFieldArray.add(CardID);
         handArray.remove(index);
+        
+    }
+    
+    public void addHandFromBuyTransaction(int Index)
+    {
+        handArray.add(currentSetArray.get(Index));
+        // -1 bij amount van gekozen kaart.
         
     }
     
@@ -192,6 +203,10 @@ public class Player extends GameEngine {
     
     public ArrayList<Integer> getDiscardPile(){
         return discardArray;
+    }
+    
+    public ArrayList<Integer> getCurrentSetArray(){
+        return currentSetArray;
     }
     
     public void addNthAmountOfPoints(int amount){
