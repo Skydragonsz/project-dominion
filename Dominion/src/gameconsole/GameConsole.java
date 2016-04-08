@@ -1,47 +1,50 @@
 package gameconsole;
 
 import dominion.GameEngine;
-import java.util.ArrayList;
+import dominion.Player;
 import java.util.Scanner;
 
 public class GameConsole {
 
     private GameEngine gameEngine;
-    private boolean endPlayerTurn = false;
+    private Player currentPlayer;
+    private boolean endPlayerTurn = false; //TEMP
     Scanner scanner = new Scanner(System.in);
-//NORMAL -- START-UP
 
+//START-UP
     public static void main(String[] args) {
-        // TODO code application logic here
         GameConsole consoleGame = new GameConsole();
-
         consoleGame.run();
     }
 
     public GameConsole() {
         gameEngine = new GameEngine();
+        currentPlayer = new Player();
     }
 
     public void run() {
-        GameConsoleLayout.DrawLogo();
-        GameConsoleLayout.drawMenuAlphabeticList("Main menu", "New game", "Load Game", "Show (card) sets", "Help", "Exit game");
+        Layout.drawLogo();
+        Layout.drawMenuAlphabeticList("Main menu", "New game", "Load Game", "print (card) sets", "Help", "Exit game");
 
         System.out.print("Choice an option:\t");
         String option = scanner.nextLine();
 
         handleMainMenuAction(option);
     }
-
+    
+    //START-UP -- GAMELOOP
     public void gameLoop() {
-        boolean bln = true;
+        boolean bln = true; //TEMP
+        
         while (bln = true) //gameEngine.gameNotFinished()
-        {
-            showCurrentSituation();
+        {   
+            currentPlayer = gameEngine.getPlayer(gameEngine.getCurrentPlayer());
+            printCurrentSituation();
 
             System.out.print("[ ACTIONS ] What action would you like to perform:\t");
-            String action = scanner.nextLine();
+            String option = scanner.nextLine();
 
-            handlePlayerAction(action);
+            handlePlayerAction(option);
 
             if (gameEngine.getCurrentPlayer() == gameEngine.getLastPlayer()) {
                 //gameEngine.addTurn();
@@ -52,7 +55,8 @@ public class GameConsole {
             }
         }
     }
-
+    
+    //GAMELOOP -- PLAYER INFO
     public boolean CurrentPlayerWantsToEndTurn() {
         return endPlayerTurn;
     }
@@ -66,110 +70,23 @@ public class GameConsole {
     }
     
 //HANDLE
-    //HANDLE SWITCH
-    public void handlePlayerAction(String action) {
-        switch (action.toUpperCase()) {
-            case "A":                       // A: Play a card
-                //TODO: Geld kan altijd gespeeld worden!
-                if (GetActions() > 0) handlePlayCard();
-                break;
-
-            case "B":                      // B: Buy a card
-                if (getBuys() > 0) handleBuyCard();
-                break;
-            case "C":                     // C: Show all cards on board (Victory, Kingdom, Treasure)
-                ShowAllCards("NaN");
-                System.out.print("Press ENTER to continue...");
-                scanner.nextLine();
-                break;
-            case "E":                     // C: Show all cards on board (Victory, Kingdom, Treasure)
-                endPlayerTurn();
-                break;
-            default:
-                System.out.print("Incorrect or unknown letter, please try again!\n");
-                break;
-        }
-    }
-    
-    public void handleBuyAction(Integer card) {
-//    switch (card) {
-//        //Victory
-//        case 1:                       
-//
-//            break;
-//        case 2:                      
-//
-//            break;
-//        case 3:                     
-//
-//            break;
-//        //Treasure    
-//        case 4:                     
-//
-//            break;
-//        case 5:                      
-//
-//            break;
-//        case 6:                      
-//
-//            break;
-//        //KingdomCards    
-//        case 7:                    
-//
-//            break;
-//        case 8:                     
-//
-//            break;
-//        case 9:                       
-//
-//            break;
-//        case 10:                      
-//
-//            break;
-//        case 11:                     
-//
-//            break;
-//        case 12:                     
-//
-//            break;
-//        case 13:                      
-//
-//            break;
-//        case 14:                      
-//
-//            break;
-//        case 15:                    
-//
-//            break;
-//        case 16:                     
-//
-//            break;
-//        case 17:                     
-//
-//            break;
-//        default:
-//            System.out.print("Incorrect or unknown number, please try again!\n");
-//            break;
-//    }
-
-    }
-
+    //HANDLE -- SWITCH
     public void handleMainMenuAction(String action) {
 
         switch (action.toUpperCase()) {
             case "A":				// A: (Start) New game
                 //gameEngine.init();
-                ShowMatchSettings();
+                printMatchSettings();
                 gameLoop();
                 break;
             case "B":                        // B: Load game
                 //gameEngine.load();
                 break;
-            case "C":                        // C: Show sets
-                //ShowSetsMenu();
+            case "C":                        // C: print sets
+                //printSetsMenu();
                 break;
             case "D":                        // D: Help / info
-                //ShowHelpMenu();
+                //printHelpMenu();
                 break;
             case "E":                        // E: Exit game
                 //ExitGame();
@@ -183,7 +100,7 @@ public class GameConsole {
                 break;
         }
     }
-
+    
     public void handleMatchSettings(String action) {
         //WARNING: Copied switch from above.
         //TODO: change content of cases.
@@ -196,11 +113,11 @@ public class GameConsole {
             case "B":                        // 2: Load game
                 //gameEngine.load();
                 break;
-            case "C":                        // 3: Show sets
-                //ShowSetsMenu();
+            case "C":                        // 3: print sets
+                //printSetsMenu();
                 break;
             case "D":                        // 4: Help / info
-                //ShowHelpMenu();
+                //printHelpMenu();
                 break;
             case "E":                        // 5: Exit game
                 //ExitGame();
@@ -214,35 +131,54 @@ public class GameConsole {
                 break;
         }
     }
+    
+    public void handlePlayerAction(String action) {
+        switch (action.toUpperCase()) {
+            case "A":                       // A: Play a card
+                //TODO: Geld kan altijd gespeeld worden!
+                if (gameEngine.getAction() > 0) handlePlayCard();
+                break;
 
-    //HANDLE ACTIONS
-    public void handleDrawCard() {
-
-//		GameEngine.drawCard();
+            case "B":                      // B: Buy a card
+                if (gameEngine.getBuy() > 0) handleBuyCard();
+                break;
+            case "C":                     // C: print all cards on board (Victory, Kingdom, Treasure)
+                printAllCards("NaN");
+                System.out.print("Press ENTER to continue...");
+                scanner.nextLine();
+                break;
+            case "E":                     // C: print all cards on board (Victory, Kingdom, Treasure)
+                endPlayerTurn();
+                break;
+            default:
+                System.out.print("Incorrect or unknown letter, please try again!\n");
+                break;
+        }
     }
-
+    
+    //HANDLE -- ACTION
     public void handlePlayCard() {
         System.out.print("[ ACTIONS -- PLAY CARD ] What card would you like to play:\t");
         int card = Integer.parseInt(scanner.nextLine());
-        gameEngine.getPlayer(gameEngine.getCurrentPlayer()).addToPlayingFieldIndex(card-1);
+        currentPlayer.addToPlayingField(card-1);
     }
 
     public void handleBuyCard() {
         //TODO: change this with a better parameter.
-        ShowAllCards("NaN");
+        printAllCards("NaN");
         
         System.out.print("[ ACTIONS -- BUY CARD ] What card would you like to buy:\t");
         int card = Integer.parseInt(scanner.nextLine());
-        gameEngine.getPlayer(gameEngine.getCurrentPlayer()).addHandFromBuyTransaction(card-1);
+        currentPlayer.addHandFromBuyTransaction(card-1);
     }
+    
+    public void handleBuyAction(Integer card) {
 
-//GETTERS 
-    public Integer GetActions() {
-        return 1;
     }
+    
+    public void handledrawCard() {
 
-    public Integer getBuys() {
-        return 1;
+//		GameEngine.drawCard();
     }
 
 //SETTERS    
@@ -254,22 +190,22 @@ public class GameConsole {
         }
     }
 
-//SHOWERS ;)  
-    public void showCurrentSituation() {
+//PRINTERS
+    public void printCurrentSituation() {
         //TODO: cleaning, lots of it
         //IFB = insert from backend
         //ACTIONS = A B C; CURRENT TURN = None; HAND = 1 2 3; PLAYING FIELD = none;    
-        GameConsoleLayout.DrawTitel("PLAYER " + gameEngine.getCurrentPlayer() + ": " + gameEngine.getPlayer(gameEngine.getCurrentPlayer()).getName() + " -- TURN " + "IFB");
-        GameConsoleLayout.DrawSubTitel(gameEngine.getPlayer(gameEngine.getCurrentPlayer()).getName() + " INFORMATION");
+        Layout.drawTitel("PLAYER " + gameEngine.getCurrentPlayer() + ": " + currentPlayer.getName() + " -- TURN " + "IFB");
+        Layout.drawSubTitel(currentPlayer.getName() + " INFORMATION");
         
-        GameConsoleLayout.drawMenuAlphabeticList("Actions", "Play Card", "Buy Card", "Show current board", "Search card info", "End Turn");
-        GameConsoleLayout.drawMenuNoList("Current turn", "Coin(s): " + gameEngine.getCoin(), "Action(s): " + gameEngine.getAction(), "Buy(s): " + gameEngine.getBuy());
+        Layout.drawMenuAlphabeticList("Actions", "Play Card", "Buy Card", "print current board", "Search card info", "End Turn");
+        Layout.drawMenuNoList("Current turn", "Coin(s): " + gameEngine.getCoin(), "Action(s): " + gameEngine.getAction(), "Buy(s): " + gameEngine.getBuy());
 
-        GameConsoleLayout.drawMenuNumericList("Your Cards", gameEngine.getPlayer(gameEngine.getCurrentPlayer()).getCardsInHand());
-        GameConsoleLayout.drawMenuNoList("Playing Field", gameEngine.getPlayer(gameEngine.getCurrentPlayer()).getPlayingField());
+        Layout.drawMenuNumericList("Your Cards", currentPlayer.getCardsInHand());
+        Layout.drawMenuNoList("Playing Field", currentPlayer.getPlayingField());
     }
 
-    public void ShowAllCards(String board) {
+    public void printAllCards(String board) {
         //TODO: find better way to give a parameter value
         if (board == "first") {
             board = "THESE WILL BE THE CARDS FOR THE ONGOING GAME";
@@ -277,30 +213,30 @@ public class GameConsole {
             board = "YOUR CURRENT BOARD";
         }
 
-        GameConsoleLayout.DrawSubTitel(board);
-        GameConsoleLayout.drawMenuNumericList("Board", gameEngine.getPlayer(gameEngine.getCurrentPlayer()).getCurrentSetArray());
-//        GameConsoleLayout.DrawMenuBoard("Kingdom cards", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)");
-//        GameConsoleLayout.DrawMenuBoard("Treasure cards", "Gold $8 (40)", "Silver $8(37)", "Bronze $8 (40)", "Curse $8 (9)");
+        Layout.drawSubTitel(board);
+        Layout.drawMenuNumericList("Board", currentPlayer.getCurrentSetArray());
+//        GameConsoleLayout.drawMenuBoard("Kingdom cards", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)");
+//        GameConsoleLayout.drawMenuBoard("Treasure cards", "Gold $8 (40)", "Silver $8(37)", "Bronze $8 (40)", "Curse $8 (9)");
     }
 
-    public void ShowMatchSettings() {
+    public void printMatchSettings() {
 
-        GameConsoleLayout.DrawTitel("Match Settings");
-        GameConsoleLayout.DrawSubTitel("Players");
+        Layout.drawTitel("Match Settings");
+        Layout.drawSubTitel("Players");
 
         System.out.print("How many players:\t");
         int amount = Integer.parseInt(scanner.nextLine());
         gameEngine.setAmountPlayers(amount);
         setPlayerNames(amount);
         
-        GameConsoleLayout.DrawSubTitel("Kingdom Set");
-        GameConsoleLayout.drawMenuAlphabeticList("Kingdom Sets", "Custom set", "Random", "First game", "Big Money", "Interaction", "Size Distortion", "Village Square");
+        Layout.drawSubTitel("Kingdom Set");
+        Layout.drawMenuAlphabeticList("Kingdom Sets", "Custom set", "Random", "First game", "Big Money", "Interaction", "Size Distortion", "Village Square");
         System.out.print("Pick a set:\t");
         String set = scanner.nextLine();
 
-        //Shows players the chosen kingdom cards
+        //prints players the chosen kingdom cards
         //TODO: change this with a better parameter.
-        ShowAllCards("first");
+        printAllCards("first");
         System.out.print("Press ENTER to continue...");
         scanner.nextLine();
     }

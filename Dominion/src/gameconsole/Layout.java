@@ -12,72 +12,70 @@ import cards.Functions.Collection;
  *
  * @author Quint
  */
-public class GameConsoleLayout {
+public class Layout {
 
     private static Collection collection = new Collection();
-    
+
     //Lots of duplicate code :(
-  
-    public static void drawMenuLine(String numerationChar, String line){
+    public static void drawMenuLine(String numerationChar, String line) {
         System.out.println("| " + numerationChar + line + "|");
     }
-    
-    
+
     public static void drawMenuNoList(String title, String... lines) {
         //TODO: check length
         System.out.println("|-----------------------|\n" + "|" + title.toUpperCase() + "|\n" + "|-----------------------|");
 
         for (String line : lines) {
-                drawMenuLine(" ",line);
+            drawMenuLine(" ", line);
         }
         System.out.println("|-----------------------|\n");
     }
-    
+
     public static void drawMenuNoList(String title, ArrayList<Integer> lines) {
         //TODO: check length
         System.out.println("|-----------------------|\n" + "|" + title.toUpperCase() + "|\n" + "|-----------------------|");
 
         for (int line : lines) {
-                drawMenuLine(" ",collection.getCard(line).getName());
+            drawMenuLine(" ", collection.getCard(line).getName());
         }
         System.out.println("|-----------------------|\n");
     }
-    
+
     public static void drawMenuAlphabeticList(String title, String... lines) {
         //TODO: check length
         System.out.println("|-----------------------|\n" + "|" + title.toUpperCase() + "|\n" + "|-----------------------|");
-        char[] alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();   
+        char[] alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
         int counter = 0;
         for (String line : lines) {
-                drawMenuLine(String.valueOf(alphabet[counter]) + ". ", line);
-                counter++;
+            drawMenuLine(String.valueOf(alphabet[counter]) + ". ", line);
+            counter++;
         }
         System.out.println("|-----------------------|\n");
     }
-    
-        public static void drawMenuNumericList(String title, String... lines) {
+
+    public static void drawMenuNumericList(String title, String... lines) {
         //TODO: check length
         System.out.println("|-----------------------|\n" + "|" + title.toUpperCase() + "|\n" + "|-----------------------|");
         int counter = 1;
         for (String line : lines) {
-                drawMenuLine(String.valueOf(counter) + ". ", line);
-                counter++;
+            drawMenuLine(String.valueOf(counter) + ". ", line);
+            counter++;
         }
         System.out.println("|-----------------------|\n");
     }
-        
-        public static void drawMenuNumericList(String title, ArrayList<Integer> lines) {
+
+    public static void drawMenuNumericList(String title, ArrayList<Integer> lines) {
         //TODO: check length
         System.out.println("|-----------------------|\n" + "|" + title.toUpperCase() + "|\n" + "|-----------------------|");
         int counter = 1;
         for (int line : lines) {
-                drawMenuLine(String.valueOf(counter) + ". ", collection.getCard(line).getName() );
-                counter++;
+            drawMenuLine(String.valueOf(counter) + ". ", collection.getCard(line).getName());
+            counter++;
         }
         System.out.println("|-----------------------|\n");
     }
-    
-    public static String CalculateSpaces(int amount) {
+
+    public static String calculateSpaces(int amount) {
         String BlankSpace = "";
         for (int i = 0; i < amount; i++) {
             BlankSpace += " ";
@@ -85,7 +83,7 @@ public class GameConsoleLayout {
         return BlankSpace;
     }
 
-    public static void DrawLogo() {
+    public static void drawLogo() {
         System.out.println("    *                             |>>>                    +\n"
                 + "+          *                      |                   *       +\n"
                 + "                    |>>>      _  _|_  _   *     |>>>\n"
@@ -112,11 +110,11 @@ public class GameConsoleLayout {
 
     }
 
-    public static void DrawTitel(String titel) {
+    public static void drawTitel(String titel) {
         System.out.print("\n======================================== " + titel + " ========================================\n");
     }
 
-    public static void DrawSubTitel(String Subtitel) {
-        System.out.print("\n==================== " + Subtitel + " ====================\n");
+    public static void drawSubTitel(String subtitel) {
+        System.out.print("\n==================== " + subtitel + " ====================\n");
     }
 }

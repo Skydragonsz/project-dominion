@@ -9,6 +9,6 @@ package gameconsole;
  *
  * @author Quint
  */
-public class GameConsoleActions {
+public class Actions {
     
 }
