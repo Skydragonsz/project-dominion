@@ -30,6 +30,9 @@ public class Cellar extends ActionCards{
         
     }
     
+    
+    
+    @Override
     public int getCost(){
         return cost;
     }
@@ -37,5 +40,10 @@ public class Cellar extends ActionCards{
     @Override
     public int getCardID(){
         return cardID;
+    }
+    
+    @Override
+    public String getName(){
+        return name;
     }
 }

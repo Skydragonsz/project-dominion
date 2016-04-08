@@ -15,8 +15,8 @@ import java.util.ArrayList;
  * @author Arthur
  */
 public class MainCard{
-    private String TYPE;
-    private static int cardID;
+    private String TYPE = "MAIN";
+    private static int cardID = 0;
     private static String name = "MainCard";
     private static String info = "Dit is de info van de MAINCARD";
     private int cost = 0;
