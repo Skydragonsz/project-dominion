@@ -20,12 +20,50 @@
 }
 
 #play {
-    background-image:url("../media/nav_play_background.jpg");
-    background-position: right;
-    background-position: left;
+    background-color: #F2B90C;
     padding-right: 50px;
     padding-left: 50px;
+    z-index: 9;
+    height: 100px;
+    width: 300px;
+    position: absolute;
+    left: 800px;
+    top: 350px;
+    text-align: center;
+    font-family: MontserratRegular;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition-duration: 0.4s;
+}
 
+#play:hover {
+    background-color: #BA3729;
+    color: #F2B90C;
+
+}
+
+#play:after {
+    content: "";
+    background: #EDD385;
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 300%;
+    margin-left: -60px!important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 1.2s
+}
+
+#play:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+}
+
+#play p {
+    padding-top: 43px;
 }
 
 body {
@@ -266,6 +304,8 @@ ul li:last-of-type a:after {
 
     width: auto;
     height: 888px;
+    z-index: 8;
+    position: relative;
 }
 
 #victory {
