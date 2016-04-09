@@ -6,7 +6,6 @@ import java.util.*;
 public class Player extends GameEngine {
 //PLAYER
     //PLAYER INFO
-
     private String name;
     private int victoryPoints;
     private boolean HasReaction;

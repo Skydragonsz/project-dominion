@@ -24,7 +24,7 @@ public class Workshop extends ActionCards{
     @Override
     public void playCard(Player player){
         //TODO -- EffectPhase
-        player.addFakeCoin(4);
+        player.addInstancedCoin(4);
     }
     
     @Override

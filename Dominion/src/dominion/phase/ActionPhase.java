@@ -13,14 +13,11 @@ import dominion.*;
 */
 public class ActionPhase{ 
 
-           
-
     public void placeCard(MainCard card, Player player){
-        
-        
         player.removeAction(1);
         if ("ATTACK".equals(card.getCardType())){
-            card.playCard(player); //TODO -- Checken of we enkel player nodig hebben! 
+            card.playCard(player); //TODO -- Checken of we enkel player nodig hebben!
+        //TODO: change this to include a function that checks all other players their hand for a reaction card
         }else if("ACTION".equals(card.getCardType()) || "REACTION".equals(card.getCardType())){
             card.playCard(player);
         }
