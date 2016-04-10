@@ -15,6 +15,8 @@ import java.util.List;
  *
  * @author Arthur
  */
+//Since these tests were during earlier development they don't work anymore.
+//Need to correct what these tests check in the assertEquals.
 public class PlayerTester {
     
     private Player p = new Player();

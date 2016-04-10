@@ -29,7 +29,7 @@ public class VictoryPointsTester {
     @Test
     public void testVictoryPoints(){
         ge.setAmountPlayers(3);
-        ge.getPlayer(1).addCardToDeck(6);
+        ge.getPlayer(1).addCardToDeck(1);
         ge.getPlayer(1).addCardToDeck(6);
         ge.getPlayer(1).addCardToDeck(5);
         ge.getPlayer(1).addCardToDeck(1);
@@ -56,6 +56,7 @@ public class VictoryPointsTester {
         //
         vp.victoryPointsCalc(ge);
         System.out.println(ge.getPlayer(1).getVictoryPoints());
+        assertEquals(ge.getPlayer(1).getVictoryPoints(),15);
         
     }
 }
