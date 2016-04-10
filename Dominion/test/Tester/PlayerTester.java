@@ -55,7 +55,9 @@ public class PlayerTester {
     @Test
     public void testShuffle(){
     //Het deck van de player p word geschud.
+        System.out.println(p.getDeck());
         p.shuffleDeck();
+        System.out.println(p.getDeck());
     //Kijk als deze deck niet gelijk is aan de begin deck.
         assertTrue(p.getDeck() != testArrayDeck);
     } 
@@ -65,6 +67,7 @@ public class PlayerTester {
     //+Visuele feedback.    
         System.out.println("Deck"+p.getDeck());
         System.out.println("Hand"+p.getCardsInHand());
+        System.out.println("Discard pile "+p.getDiscardPile());
         System.out.println("^BEGIN STATE^");
         
         //Het deck shudden.
