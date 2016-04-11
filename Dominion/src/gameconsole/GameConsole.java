@@ -170,6 +170,9 @@ public class GameConsole {
         
         System.out.print("[ ACTIONS -- BUY CARD ] What card would you like to buy:\t");
         int card = Integer.parseInt(scanner.nextLine());
+        //TODO -- If enough money
+        //TODO -- Card goes to discardArray, not to handArray
+        //TODO -- -1 buy
         currentPlayer.addHandFromBuyTransaction(card-1);
     }
     
