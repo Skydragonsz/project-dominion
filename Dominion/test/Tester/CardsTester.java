@@ -129,10 +129,10 @@ public class CardsTester {
     //Does the function work?
     public void testBureaucrat() {
         ge.reset();
-        ge.setAmountPlayers(3);
-        ge.setName(1, "Bob");
-        ge.setName(2, "Ross");
-        ge.setName(3, "Arthur");
+        ge.initAmountPlayers(3);
+        ge.setPlayerName(1, "Bob");
+        ge.setPlayerName(2, "Ross");
+        ge.setPlayerName(3, "Arthur");
 
         ge.getPlayer(1).addCardToHand(1);
         ge.getPlayer(1).addCardToHand(6);

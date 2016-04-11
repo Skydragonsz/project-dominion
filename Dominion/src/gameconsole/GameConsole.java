@@ -24,7 +24,7 @@ public class GameConsole {
 
     public void run() {
         Layout.drawLogo();
-        Layout.drawMenuAlphabeticList("Main menu", "New game", "Load Game", "print (card) sets", "Help", "Exit game");
+        Layout.drawMenuAlphabeticList("Main menu", "New game", "Load Game", "show (card) sets", "Help", "Exit game");
 
         System.out.print("Choice an option:\t");
         String option = scanner.nextLine();
@@ -46,11 +46,11 @@ public class GameConsole {
 
             handlePlayerAction(option);
 
-            if (gameEngine.getCurrentPlayer() == gameEngine.getLastPlayer()) {
-                gameEngine.addTurn();
+            if (gameEngine.getCurrentPlayer() == gameEngine.getMaxPlayers()) {
+                //gameEngine.addTurn();
                 gameEngine.ResetPlayer();
             } else if (CurrentPlayerWantsToEndTurn()) {
-                System.out.print(gameEngine.getCurrentPlayer() + " || " + gameEngine.getLastPlayer());
+                System.out.print(gameEngine.getCurrentPlayer() + " || " + gameEngine.getMaxPlayers());
                 initNewPlayerTurn();
                 gameEngine.setNextPlayer();
             }
@@ -190,7 +190,7 @@ public class GameConsole {
         for (int i = 1; i <= amount; i++) {
             System.out.print("Player " + i + "'s name" + ":\t");
             String name = scanner.nextLine();
-            gameEngine.setName(i, name);
+            gameEngine.setPlayerName(i, name);
         }
     }
 
@@ -221,7 +221,7 @@ public class GameConsole {
 
         System.out.print("How many players:\t");
         int amount = Integer.parseInt(scanner.nextLine());
-        gameEngine.setAmountPlayers(amount);
+        gameEngine.initAmountPlayers(amount);
         setPlayerNames(amount);
         
         Layout.drawSubTitel("Kingdom Set");

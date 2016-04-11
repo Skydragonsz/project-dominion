@@ -28,7 +28,7 @@ public class VictoryPointsTester {
     
     @Test
     public void testVictoryPoints(){
-        ge.setAmountPlayers(3);
+        ge.initAmountPlayers(3);
         ge.getPlayer(1).addCardToDeck(1);
         ge.getPlayer(1).addCardToDeck(6);
         ge.getPlayer(1).addCardToDeck(5);

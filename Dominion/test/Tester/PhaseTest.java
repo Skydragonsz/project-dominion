@@ -60,10 +60,10 @@ public class PhaseTest {
     public void AddOneWitch(){
     ge.reset();
     //+Visual feedback
-    ge.setAmountPlayers(3);
-    ge.setName(1, "WitchPlayer");
-    ge.setName(2, "WitchTester");
-    ge.setName(3, "RandomPlayer");
+    ge.initAmountPlayers(3);
+    ge.setPlayerName(1, "WitchPlayer");
+    ge.setPlayerName(2, "WitchTester");
+    ge.setPlayerName(3, "RandomPlayer");
     
     for(int i = 0;i < ge.getPlayerList().size()-1 ;i++){
             System.out.println(ge.getOtherPlayersList(ge.getPlayer(1)).get(i).getName());
@@ -95,7 +95,7 @@ public class PhaseTest {
     @Test
     public void AddOneWitchWhenOtherPlayerHasAReactionCard(){
     ge.reset();
-    ge.setAmountPlayers(2);
+    ge.initAmountPlayers(2);
     ge.getPlayer(2).addCardToHand(10);
     ge.getPlayer(1).addCardToHand(31);
     Pl.placeCard(col.getCard(31), ge.getPlayer(1));
@@ -130,10 +130,10 @@ public class PhaseTest {
     public void testAddOneWitchWithAndWithoutMoat(){
     ge.reset();
     //+Visual feedback
-    ge.setAmountPlayers(3);
-    ge.setName(1, "WitchPlayer");
-    ge.setName(2, "WithoutMoat");
-    ge.setName(3, "WithMoat");
+    ge.initAmountPlayers(3);
+    ge.setPlayerName(1, "WitchPlayer");
+    ge.setPlayerName(2, "WithoutMoat");
+    ge.setPlayerName(3, "WithMoat");
     
     for(int i = 0;i < ge.getPlayerList().size()-1 ;i++){
             System.out.println(ge.getOtherPlayersList(ge.getPlayer(1)).get(i).getName());

@@ -4,7 +4,7 @@ import java.util.*;
 import cards.Functions.Collection;
 
 //TODO: clean up code
-public class Player extends GameEngine {
+public class Player {
 //PLAYER
     //PLAYER INFO
     private String name;

@@ -21,7 +21,8 @@ import dominion.*;
     
 public class TurnTester {
 
-    public Turn n = new Turn();
+    public Turn n = new Turn(1);
+    public TurnSegment ts = n.getCurrentTurnSegment();
     public TurnTester() {
     }
     
@@ -35,8 +36,8 @@ public class TurnTester {
     
     @Before
     public void setUp() {
-    n.addAction(24);
-    n.addBuy(25);
+    ts.addAction(24);
+    ts.addBuy(25);
     }
     
     @After
@@ -50,21 +51,21 @@ public class TurnTester {
     // public void hello() {}
     @Test
     public void testAddFiveCoins(){
-        n.addCoin(5);
-     assertEquals(n.getCoin(), 5);
+        ts.addCoin(5);
+     assertEquals(ts.getCoin(), 5);
     }
     
     @Test
     public void testRemoveOneAction(){
-        n.removeAction(2);
-        System.out.println(n.getAction());
-     assertEquals(n.getAction(), 23);
+        ts.removeAction(2);
+        System.out.println(ts.getAction());
+     assertEquals(ts.getAction(), 23);
     }
     
     @Test
     public void restRemoveBuysBelowZero(){
-        n.removeBuy(500);
-        System.out.println(n.getBuy());
-     assertTrue(n.getBuy() > 0);
+        ts.removeBuy(500);
+        System.out.println(ts.getBuy());
+     assertTrue(ts.getBuy() > 0);
     }
 }

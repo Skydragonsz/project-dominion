@@ -49,9 +49,9 @@ public class GameEngineTester {
         System.out.println("testsetAmountPlayers");
         ge.reset();
         
-        ge.setAmountPlayers(2);
-        ge.setName(1, "Bob");
-        ge.setName(2, "Rudy");
+        ge.initAmountPlayers(2);
+        ge.setPlayerName(1, "Bob");
+        ge.setPlayerName(2, "Rudy");
         System.out.println(ge.getPlayer(1).getName());
         System.out.println(ge.getPlayerList());
         assertEquals(ge.getPlayerList().size(),2);
@@ -63,11 +63,11 @@ public class GameEngineTester {
         System.out.println("testGetOtherPlayers");
         ge.reset();
         
-        ge.setAmountPlayers(4);
-        ge.setName(1, "Quinten");
-        ge.setName(2, "Coene");
-        ge.setName(3, "Tim");
-        ge.setName(4, "Arthur");
+        ge.initAmountPlayers(4);
+        ge.setPlayerName(1, "Quinten");
+        ge.setPlayerName(2, "Coene");
+        ge.setPlayerName(3, "Tim");
+        ge.setPlayerName(4, "Arthur");
         
         //Gives all other players then said player.
         //What the result should be.
@@ -102,11 +102,11 @@ public class GameEngineTester {
         ge.reset();
         System.out.println("testGetOtherPlayersByName");
         
-        ge.setAmountPlayers(4);
-        ge.setName(1, "Quinten");
-        ge.setName(2, "Coene");
-        ge.setName(3, "Tim");
-        ge.setName(4, "Arthur");
+        ge.initAmountPlayers(4);
+        ge.setPlayerName(1, "Quinten");
+        ge.setPlayerName(2, "Coene");
+        ge.setPlayerName(3, "Tim");
+        ge.setPlayerName(4, "Arthur");
         
         String tempString = new String();
         String resultString = "QuintenCoeneTim";
