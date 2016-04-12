@@ -91,7 +91,8 @@ public class Player extends GameEngine {
     }
 
     public void addHandFromBuyTransaction(int Index) {
-        handArray.add(currentSetArray.get(Index));
+        discardArray.add(currentSetArray.get(Index));
+        //Wanneer je iets koopt gaat het naar je discardpile, dus mss ook de naam refactore
         // -1 bij amount van gekozen kaart.
 
     }
@@ -160,7 +161,6 @@ public class Player extends GameEngine {
                 deckArray.remove(0);
             }
         }else{
-            isDeckEmpty();
             for (int i = 0; i <= deckArray.size(); i++) {
                 isDeckEmpty();
                 handArray.add(deckArray.get(0));
