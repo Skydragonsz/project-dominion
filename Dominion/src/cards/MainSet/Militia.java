@@ -12,6 +12,7 @@ import dominion.Player;
  *
  * @author Arthur
  */
+//Card is NOT DONE
 public class Militia extends AttackCards{
     private final int cardID = 18;
     private final int cost = 4;
@@ -22,7 +23,14 @@ public class Militia extends AttackCards{
     
     @Override
     public void playCard(Player player){
-        //TODO -- EffectPhase
+        //TODO -- player may chose which card to discard
+        player.addCoin(2);
+        for(int i = 0; i < player.getPlayerList().size()-1;i++){
+            if(!player.getOtherPlayersList(player).get(i).checkForReactionCard()){
+                //TODO -- fix this
+                //player.getOtherPlayersList(player).get(i).
+            }
+        }
     }
     
     @Override

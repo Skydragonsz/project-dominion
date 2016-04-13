@@ -12,6 +12,7 @@ import dominion.Player;
  *
  * @author Arthur
  */
+//Card is NOT DONE
 public class Library extends ActionCards{
     private final int cardID = 28;
     private final int cost = 5;
@@ -23,7 +24,10 @@ public class Library extends ActionCards{
     
     @Override
     public void playCard(Player player){
-        //TODO -- EffectPhase
+        int amount = player.getCardsInHand().size();
+        amount = 7 - amount;
+        player.setNthAmountOfCards(amount);
+        //TODO -- if action card, ask if you want to keep it!
     }
     
     @Override

@@ -12,6 +12,7 @@ import dominion.Player;
  *
  * @author Arthur
  */
+//Card is NOT DONE
 public class Remodel extends ActionCards{
     private final int cardID = 20;
     private final int cost = 4;
@@ -24,6 +25,7 @@ public class Remodel extends ActionCards{
     @Override
     public void playCard(Player player){
         //TODO -- EffectPhase
+        //Trashed card.getCost + 2 coins
     }
     
     @Override

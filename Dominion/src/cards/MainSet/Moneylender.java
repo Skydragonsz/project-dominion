@@ -12,6 +12,7 @@ import dominion.Player;
  *
  * @author Arthur
  */
+//Card is NOT DONE
 public class Moneylender extends ActionCards{
     private final int cardID = 19;
     private final int cost = 4;
@@ -24,6 +25,7 @@ public class Moneylender extends ActionCards{
     @Override
     public void playCard(Player player){
         //TODO -- EffectPhase
+        //if coper to TRASH; +3 coins
     }
     
     @Override

@@ -5,10 +5,13 @@
  */
 package cards.MainSet;
 
+import cards.Maincards.VictoryCards;
+
 /**
  *
  * @author Arthur
  */
+//Card is DONE
 public class Duchy extends VictoryCards{
     private final int cardID = 5;
     private final int victoryValue = 3;

@@ -102,8 +102,12 @@ public class Player extends GameEngine {
     }
 
     //DISCARD
-    public void discardNthCardFromDeck(int index) {
+    public void removeNthCardFromDeck(int index) {
         deckArray.remove(index);
+    }
+    
+    public void removeNthCardFromPlayingField(int index) {
+        playingFieldArray.remove(index);
     }
 
     public void discardDeckToPile() {

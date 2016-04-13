@@ -11,6 +11,7 @@ import cards.Maincards.TreasureCards;
  *
  * @author Arthur
  */
+//Card is DONE
 public class Silver extends TreasureCards{
     private final int cardID = 2;
     private final int value = 2;

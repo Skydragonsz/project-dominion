@@ -13,7 +13,7 @@ import dominion.Player;
  *
  * @author Arthur
  */
-
+//Card is NOT DONE
 //TODO -- FIX THIS
 public class Bureaucrat extends AttackCards{
     private final int cardID = 15;

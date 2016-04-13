@@ -12,6 +12,7 @@ import dominion.Player;
  *
  * @author Arthur
  */
+//Card is DONE
 public class Smithy extends ActionCards{
     private final int cardID = 21;
     private final int cost = 4;

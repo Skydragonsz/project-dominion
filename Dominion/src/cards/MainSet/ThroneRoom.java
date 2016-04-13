@@ -12,6 +12,7 @@ import dominion.Player;
  *
  * @author Arthur
  */
+//Card is NOT DONE
 public class ThroneRoom extends ActionCards{
     private final int cardID = 24;
     private final int cost = 4;

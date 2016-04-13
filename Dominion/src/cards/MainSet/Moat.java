@@ -12,6 +12,7 @@ import dominion.Player;
  *
  * @author Arthur
  */
+//Card is DONE
 public class Moat extends ReactionCards{
     private final int cardID = 10;
     private final int cost = 2;
