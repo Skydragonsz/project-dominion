@@ -30,9 +30,9 @@ public class Witch extends AttackCards{
         player.setNthAmountOfCards(2);
         
         
-        for(int i = 0; i < player.getPlayerList().size()-1;i++){
-            if(!player.getOtherPlayersList(player).get(i).checkForReactionCard()){
-                player.getOtherPlayersList(player).get(i).addCardToDeck(7); //Add Curse card DECK
+        for(int i = 0; i < gameEngine.getPlayerList().size()-1;i++){
+            if(!gameEngine.getOtherPlayersList(player).get(i).checkForReactionCard()){
+                gameEngine.getOtherPlayersList(player).get(i).addCardToDeck(7); //Add Curse card DECK
             }
         }
     }

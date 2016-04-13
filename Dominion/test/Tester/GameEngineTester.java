@@ -91,9 +91,12 @@ public class GameEngineTester {
         extra: assertArrayEquals isn't used since the values are ArrayLists and not Arrays.
         */
         
+        /* Q 13/04/2016 TEMP FIX, clear the array */
+        
         
         System.out.println(ge.getOtherPlayersList(ge.getPlayer(4)));
         System.out.println(resultOtherPlayerArray);
+        System.out.println(ge.getPlayerList());
         assertEquals(ge.getOtherPlayersList(ge.getPlayer(4)),resultOtherPlayerArray);
     }
     

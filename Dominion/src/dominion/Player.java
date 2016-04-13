@@ -4,9 +4,10 @@ import java.util.*;
 import cards.Functions.Collection;
 
 //TODO: clean up code
-public class Player {
+public class Player extends TurnSegment {
 //PLAYER
     //PLAYER INFO
+
     private String name;
     private int victoryPoints;
     private boolean HasReaction;
@@ -20,7 +21,7 @@ public class Player {
 
     //OBJECTS
     private final Collection collection = new Collection();
-    private GameEngine ge;
+    private GameEngine gameEngine;
 
 //CONSTRUCTOR    
     public Player() {
@@ -136,11 +137,15 @@ public class Player {
         return deckArray;
     }
 
-        //Geeft het hele hand terug als een ArrayList.
+    //Geeft het hele hand terug als een ArrayList.
     public ArrayList<Integer> getCardsInHand() {
         return handArray;
     }
 
+    public Integer getCardInHand(int index) {
+        return Integer.parseInt(handArray.get(index).toString());
+    }
+    
     public ArrayList<Integer> getPlayingField() {
         return playingFieldArray;
     }
@@ -149,18 +154,16 @@ public class Player {
     public void setName(String name) {
         this.name = name;
     }
-        //Geeft de bovenste hoeveelheid gekozen kaarten van het deck naar de speler zijn hand.
+    //Geeft de bovenste hoeveelheid gekozen kaarten van het deck naar de speler zijn hand.
 
     public void setNthAmountOfCards(int amount) {
         //Je kan niet meer kaarten trekken dan er in je deck zitten. Bijvoorbeeld: 3 kaarten in je deck en jij wilt 5 kaarten!
-        if(amount<=(deckArray.size() + discardArray.size())){
-            for (int i = 0; i < amount; i++) {
-                isDeckEmpty();
+        if (amount <= (deckArray.size() + discardArray.size())) {
+            for (int i = 0; i < amount; i++) { isDeckEmpty();
                 handArray.add(deckArray.get(0));
                 deckArray.remove(0);
             }
-        }else{
-            isDeckEmpty();
+        } else { isDeckEmpty();
             for (int i = 0; i <= deckArray.size(); i++) {
                 isDeckEmpty();
                 handArray.add(deckArray.get(0));

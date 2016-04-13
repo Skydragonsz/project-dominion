@@ -7,6 +7,7 @@ package cards.MainSet;
 
 import cards.Functions.Collection;
 import cards.Maincards.AttackCards;
+import dominion.GameEngine;
 import dominion.Player;
 
 /**
@@ -20,6 +21,7 @@ public class Bureaucrat extends AttackCards{
     private final int cost = 4;
     private final String name = "Bureaucrat";
     
+
     public Bureaucrat(){
         
     }
@@ -27,9 +29,9 @@ public class Bureaucrat extends AttackCards{
     @Override
     public void playCard(Player player){
         player.addCardToDeck(2);
-        System.out.println("VOOR LOOP" + (player.getPlayerList().size()-1) );
+        System.out.println("VOOR LOOP" + (gameEngine.getPlayerList().size()-1) );
         
-        for(int index = 0; index < player.getPlayerList().size()-1 ; index++){
+        for(int index = 0; index < gameEngine.getPlayerList().size()-1 ; index++){
             
             //int I is BROKEN! Zit steeds in de loop vast
             
@@ -39,15 +41,15 @@ public class Bureaucrat extends AttackCards{
             Collection col = new Collection();
             
             int cardIndex = 0;
-            for(int j = 0; j < player.getOtherPlayersList(player).get(index).getCardsInHand().size();j++){
+            for(int j = 0; j < gameEngine.getOtherPlayersList(player).get(index).getCardsInHand().size();j++){
                 
                 System.out.println("IN TWEEDE LOOP");
                 
                 if ("VICTORY".equals(col.getCard(player.getCardsInHand().get(cardIndex)).getCardType())){
-                    player.getOtherPlayersList(player).get(index).getDeck().add(0,player.getOtherPlayersList(player).get(index).getCardsInHand().get(cardIndex));
-                    player.getOtherPlayersList(player).get(index).getCardsInHand().remove(cardIndex);
+                    gameEngine.getOtherPlayersList(player).get(index).getDeck().add(0,gameEngine.getOtherPlayersList(player).get(index).getCardsInHand().get(cardIndex));
+                    gameEngine.getOtherPlayersList(player).get(index).getCardsInHand().remove(cardIndex);
                     
-                    j = player.getOtherPlayersList(player).get(index).getCardsInHand().size() +1;
+                    j = gameEngine.getOtherPlayersList(player).get(index).getCardsInHand().size() +1;
                     System.out.println("IN DE IF");
 
                 }

@@ -27,8 +27,8 @@ public class CouncilRoom extends ActionCards{
         player.setNthAmountOfCards(4);
         
                 
-        for(int i = 0; i < player.getPlayerList().size()-1;i++){
-            player.getOtherPlayersList(player).get(i).setNthAmountOfCards(1);
+        for(int i = 0; i < gameEngine.getPlayerList().size()-1;i++){
+            gameEngine.getOtherPlayersList(player).get(i).setNthAmountOfCards(1);
         }
     }
     

@@ -22,6 +22,7 @@ public class MainCard{
     private int cost = 0;
     private int victoryValue = 0;
     private int value = 0;
+    public GameEngine gameEngine;
     
     public String getCardType(){
         return TYPE;

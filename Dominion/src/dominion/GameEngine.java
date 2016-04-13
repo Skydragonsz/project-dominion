@@ -5,7 +5,9 @@
  */
 package dominion;
 
+import dominion.phase.ActionPhase;
 import java.util.*;
+import cards.Functions.Collection;
 /**
  *
  * @author Arthur
@@ -15,8 +17,9 @@ import java.util.*;
 public class GameEngine{
     private final static ArrayList<Player> playerArray = new ArrayList<>();
     private final static ArrayList<Player> otherPlayersArray = new ArrayList<>();
-    private int currentPlayer = 1;
-    
+    private Player currentPlayer;
+    private int PlayerCounter = 0;
+    private Collection collection;
     private ArrayList<Turn> turnArray = new ArrayList<>();
     
     
@@ -44,9 +47,8 @@ public class GameEngine{
         return playerArray.get(playernr-1);
     }
     
-    //The 3 next functions use integer; not the names.
-    public int getCurrentPlayer(){
-        return currentPlayer;
+    public Player getCurrentPlayer(){
+        return playerArray.get(PlayerCounter);
     }
         public int getMaxPlayers(){
         return playerArray.size();
@@ -57,6 +59,8 @@ public class GameEngine{
     }
 
     public ArrayList<Player> getOtherPlayersList(Player player){
+            //TEMP FIX
+            otherPlayersArray.clear();
             for(int i = 0; i < playerArray.size();i++){
                 if(player != playerArray.get(i)){
                     otherPlayersArray.add(playerArray.get(i));
@@ -67,14 +71,17 @@ public class GameEngine{
     
     //SETTERS
     public void setNextPlayer(){
-        currentPlayer++;
+        PlayerCounter++;
     }
     
     //RESET
     public void ResetPlayer(){
-        currentPlayer = 1;
+        PlayerCounter = 0;
     }
     
+    public void PlayCardEffect(int index){
+
+    }
     
 //TURN        
     public void addTurn(int NthTurn){

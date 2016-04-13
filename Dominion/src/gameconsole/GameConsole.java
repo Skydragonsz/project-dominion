@@ -2,12 +2,15 @@ package gameconsole;
 
 import dominion.GameEngine;
 import dominion.Player;
+import dominion.phase.ActionPhase;
+import cards.Functions.Collection;
 import java.util.Scanner;
 
 public class GameConsole {
 
     private GameEngine gameEngine;
     private Player currentPlayer;
+    private Collection collection;
     private boolean endPlayerTurn = false; //TEMP
     Scanner scanner = new Scanner(System.in);
 
@@ -137,11 +140,11 @@ public class GameConsole {
         switch (action.toUpperCase()) {
             case "A":                       // A: Play a card
                 //TODO: Geld kan altijd gespeeld worden!
-                if (gameEngine.getAction() > 0) handlePlayCard();
+                if (1 > 0) handlePlayCard(); //TEMP 1
                 break;
 
             case "B":                      // B: Buy a card
-                if (gameEngine.getBuy() > 0) handleBuyCard();
+                if (1 > 0) handleBuyCard();  //TEMP 1
                 break;
             case "C":                     // C: print all cards on board (Victory, Kingdom, Treasure)
                 printAllCards();
@@ -162,6 +165,7 @@ public class GameConsole {
         System.out.print("[ ACTIONS -- PLAY CARD ] What card would you like to play:\t");
         int card = Integer.parseInt(scanner.nextLine());
         currentPlayer.addToPlayingField(card-1);
+        
     }
 
     public void handleBuyCard() {
@@ -199,11 +203,11 @@ public class GameConsole {
         //TODO: cleaning, lots of it
         //IFB = insert from backend
         //ACTIONS = A B C; CURRENT TURN = None; HAND = 1 2 3; PLAYING FIELD = none;    
-        Layout.drawTitel("PLAYER " + gameEngine.getCurrentPlayer() + ": " + currentPlayer.getName() + " -- TURN " + gameEngine.getCurrentTurn());
+        Layout.drawTitel("PLAYER " + gameEngine.getCurrentPlayer() + ": " + currentPlayer.getName() + " -- TURN " +  "TEMP");
         Layout.drawSubTitel(currentPlayer.getName() + " INFORMATION");
         
         Layout.drawMenuAlphabeticList("Actions", "Play Card", "Buy Card", "print current board", "Search card info", "End Turn");
-        Layout.drawMenuNoList("Current turn", "Coin(s): " + gameEngine.getCoin(), "Action(s): " + gameEngine.getAction(), "Buy(s): " + gameEngine.getBuy());
+        Layout.drawMenuNoList("Current turn", "Coin(s): " + "TEMP", "Action(s): " + "TEMP" , "Buy(s): " +  "TEMP");
 
         Layout.drawMenuNumericList("Your Cards", currentPlayer.getCardsInHand());
         Layout.drawMenuNoList("Playing Field", currentPlayer.getPlayingField());
