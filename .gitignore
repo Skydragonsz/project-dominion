@@ -4,6 +4,9 @@
 Dominion/test/Tester/PlayerTester.java
 /ServerSocket/nbproject/private/
 /ServerSocket/build/
-Dominion/dist/Dominion.jar
-Dominion/dist/README.TXT
-apache-tomcat-8.0.33/*
+/DominionServer/nbproject/private/
+/DominionServer/build/
+/Dominion/dist/
+*.txt
+*.log
+*.log
