@@ -21,7 +21,7 @@ public class ActionPhase{
         }else if("ACTION".equals(card.getCardType()) || "REACTION".equals(card.getCardType())){
             card.playCard(player);
         }
-        player.addToPlayingField(card.getCardID());
+        player.addToPlayingField(player.getCardsInHand().indexOf(card.getCardID()));
         
     }
     

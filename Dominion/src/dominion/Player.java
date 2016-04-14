@@ -109,6 +109,10 @@ public class Player extends GameEngine {
     public void removeNthCardFromPlayingField(int index) {
         playingFieldArray.remove(index);
     }
+    
+    public void removeNthCardFromHand(int index) {
+        handArray.remove(index);
+    }
 
     public void discardDeckToPile() {
         discardArray.addAll(deckArray);
@@ -144,6 +148,10 @@ public class Player extends GameEngine {
         //Geeft het hele hand terug als een ArrayList.
     public ArrayList<Integer> getCardsInHand() {
         return handArray;
+    }
+    
+    public Integer getCardInHand(int index) {
+        return Integer.parseInt(handArray.get(index).toString());
     }
 
     public ArrayList<Integer> getPlayingField() {

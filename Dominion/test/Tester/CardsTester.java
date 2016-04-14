@@ -158,4 +158,26 @@ public class CardsTester {
         }
         fail(); 
     }
+    
+    @Test
+    public void testMoneylender() {
+        ge.setAmountPlayers(2);
+        ge.setName(1, "Brian");
+        ge.setName(2, "Steve");
+        
+        Player Brian = ge.getPlayer(1);
+        ArrayList resultHandArray =  new ArrayList(Brian.getCardsInHand());  
+        
+        ge.getPlayer(1).addCardToHand(19);
+        ge.getPlayer(1).addCardToHand(1);
+        
+        System.out.println(Brian.getCardsInHand());
+        System.out.println(resultHandArray);
+        ap.placeCard(col.getCard(19), ge.getPlayer(1));
+        
+        System.out.println(Brian.getCoin());
+        
+        assertEquals(Brian.getCardsInHand(),resultHandArray);
+    }
+    
 }
