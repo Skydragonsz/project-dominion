@@ -12,6 +12,7 @@ import dominion.Player;
  *
  * @author Arthur
  */
+//Card is NOT DONE
 public class Spy extends AttackCards{
     private final int cardID = 22;
     private final int cost = 4;
@@ -24,6 +25,9 @@ public class Spy extends AttackCards{
     @Override
     public void playCard(Player player){
         //TODO -- EffectPhase
+        player.setNthAmountOfCards(1);
+        player.addAction(1);
+        
     }
     
     @Override

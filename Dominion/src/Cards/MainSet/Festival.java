@@ -12,6 +12,7 @@ import dominion.Player;
  *
  * @author Arthur
  */
+//Card is DONE
 public class Festival extends ActionCards{
     private final int cardID = 26;
     private final int cost = 5;

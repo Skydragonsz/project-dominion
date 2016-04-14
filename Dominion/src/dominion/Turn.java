@@ -11,11 +11,10 @@ package dominion;
  */
 public class Turn {
    private int amountOfCurrency = 0;
-   private int amountOfFakeCurrency = 0; //Bijvoorbeeld; "WORKSHOP: Gain a card costing up to 4coins"
-   private int currentPhase;
+   private int amountOfInstancedCurrency = 0; //Bijvoorbeeld; "WORKSHOP: Gain a card costing up to 4coins"
    private int amountOfActions = 1;
    private int amountOfBuys = 1;
-   public static final int ACTION = 0, BUY = 1, CLEANUP = 2;
+   private int turnNumber = 1;
 
    public Turn(){
        
@@ -29,10 +28,10 @@ public class Turn {
        }
    }
    
-   public void addFakeCoin(int amount)
+   public void addInstancedCoin(int amount)
    {
-       if (amountOfFakeCurrency >=0){
-        amountOfFakeCurrency += amount;
+       if (amountOfInstancedCurrency >=0){
+        amountOfInstancedCurrency += amount;
        }
    }
    
@@ -50,6 +49,11 @@ public class Turn {
        }
    }
    
+   public void addTurn()
+   {
+      this.turnNumber += 1;
+       
+   }
 //REMOVE   
    public void removeCoin(int amount)
    {
@@ -58,10 +62,10 @@ public class Turn {
        }
    }
    
-   public void removeFakeCoin(int amount)
+   public void removeInstancedCoin(int amount)
    {
-       if (amountOfFakeCurrency - amount >=0){
-       amountOfFakeCurrency -= amount;
+       if (amountOfInstancedCurrency - amount >=0){
+       amountOfInstancedCurrency -= amount;
        }
    }
    
@@ -83,8 +87,8 @@ public class Turn {
         return amountOfCurrency;
     }
     
-    public int getFakeCoin(){
-        return amountOfFakeCurrency;
+    public int getInstancedCoin(){
+        return amountOfInstancedCurrency;
     }
     
     public int getAction(){
@@ -95,10 +99,14 @@ public class Turn {
         return amountOfBuys;
     }
     
+    public int getCurrentTurn(){
+        return turnNumber;
+    }
+    
 //RESET
     public void cleanUp(){
         amountOfCurrency = 0;
-        amountOfFakeCurrency = 0;
+        amountOfInstancedCurrency = 0;
         amountOfActions = 1;
         amountOfBuys = 1;
     }

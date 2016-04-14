@@ -12,6 +12,7 @@ import dominion.Player;
  *
  * @author Arthur
  */
+//Card is NOT DONE
 public class Thief extends AttackCards{
     private final int cardID = 23;
     private final int cost = 4;

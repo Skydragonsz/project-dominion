@@ -16,13 +16,13 @@ import dominion.GameEngine;
 import dominion.Player;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 /**
  *
  * @author Quinten
  */
+
+//PhaseTest needs rework, most tests don't/won't work.
 public class PhaseTest {
     final cards.Functions.Collection col = new cards.Functions.Collection();
     ActionPhase Pl = new ActionPhase();
@@ -116,9 +116,14 @@ public class PhaseTest {
         p1.addCardToHand(4);
         p1.addCardToHand(3);
         System.out.println("Hand unaffected"+p1.getCardsInHand());
+        ArrayList resultArray = new ArrayList();
+        resultArray.add(p1.getCardsInHand().get(3));
+        
         p1.addToPlayingField(3);
         System.out.println("Card in hand" + p1.getCardsInHand());
         System.out.println("Playingfield"+p1.getPlayingField());
+
+        assertEquals(p1.getPlayingField(),resultArray);
     }
     
     @Test

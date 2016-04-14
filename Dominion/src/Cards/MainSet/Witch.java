@@ -24,29 +24,7 @@ public class Witch extends AttackCards{
     public Witch(){
 
     }
-   
-    @Override
-    public void playCard(Player player,Player otherPlayer){
-        player.setNthAmountOfCards(2); //HAND
-        //DONE -- 3+ players 
-        
-        if(!otherPlayer.checkForReactionCard()){
-            otherPlayer.addCardToDeck(7); //Add Curse card DECK
-        }
-    }
-    
-    @Override
-    public void playCard(Player player,GameEngine otherPlayers){
-        player.setNthAmountOfCards(2);
-        
-        for(int i = 0; i < otherPlayers.getPlayerList().size()-1;i++){
-            if(!otherPlayers.getOtherPlayersList(player).get(i).checkForReactionCard()){
-                otherPlayers.getOtherPlayersList(player).get(i).addCardToDeck(7); //Add Curse card DECK
-            }
-        }
-    }
-    
-    //TODO -- Kijken of we enkel dit nodig hebben voor elke kaart!
+           
     @Override
     public void playCard(Player player){
         player.setNthAmountOfCards(2);

@@ -10,6 +10,7 @@ import dominion.Player;
  *
  * @author Arthur
  */
+//Card is NOT DONE
 public class Feast extends ActionCards{
     private final int cardID = 15;
     private final int cost = 4;
@@ -21,7 +22,9 @@ public class Feast extends ActionCards{
     
     @Override
     public void playCard(Player player){
-        //TODO -- EffectPhase
+        //TODO -- look if this works
+        player.removeNthCardFromPlayingField(player.getPlayingField().indexOf(15));
+        player.addInstancedCoin(5);
     }
     
     @Override

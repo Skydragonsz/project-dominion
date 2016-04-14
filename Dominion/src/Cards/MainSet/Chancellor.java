@@ -13,7 +13,7 @@ import dominion.Player;
  * @author Arthur
  */
 
-//
+//Card is NOT DONE
 public class Chancellor extends ActionCards{
     private final int cardID = 11;
     private final int cost = 3;

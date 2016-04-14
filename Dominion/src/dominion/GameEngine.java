@@ -49,6 +49,9 @@ public class GameEngine extends Turn{
         currentPlayer++;
     }
         
+    public void ResetPlayer(){
+        currentPlayer = 1;
+    }
     
     public int getLastPlayer(){
         return playerArray.size();

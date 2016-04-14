@@ -12,6 +12,7 @@ import dominion.Player;
  *
  * @author Arthur
  */
+//Card is DONE
 public class Laboratory extends ActionCards{
     private final int cardID = 26;
     private final int cost = 5;

@@ -24,10 +24,12 @@ public class Chapel extends ActionCards{
     @Override
     public void playCard(Player player){
         //TODO -- Trash up to 4 cards in your hand.
+        //EffectPhase?
 
         
     }
     
+    @Override
     public int getCost(){
         return cost;
     }

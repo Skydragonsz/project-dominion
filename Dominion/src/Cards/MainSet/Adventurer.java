@@ -24,7 +24,7 @@ public class Adventurer extends ActionCards{
     private final int cost = 6;
     private final String name = "Adventurer";
     //TODO -- hebben we een info nodig? of gaat dit in de database staan?
-    private final String info = "Reveal cards from yout deck until you reveal 2 treasure cards. oyt those Treasure cards into your hand and discard the other revealed cards.";
+    private final String info = "Reveal cards from yout deck until you reveal 2 treasure cards. Put those Treasure cards into your hand and discard the other revealed cards.";
     
     
     

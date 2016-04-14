@@ -1,25 +1,25 @@
 package dominion;
 
 import java.util.*;
+import cards.Functions.Collection;
 
 //TODO: clean up code
 public class Player extends GameEngine {
 //PLAYER
     //PLAYER INFO
-
     private String name;
     private int victoryPoints;
     private boolean HasReaction;
 
     //CARDS INFO
-    private ArrayList currentSetArray = new ArrayList(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 29, 18, 30, 10, 20, 21, 12, 13, 14));
-    private ArrayList deckArray = new ArrayList(Arrays.asList(1, 1, 1, 1, 1, 1, 1, 4, 4, 4));
+    private ArrayList currentSetArray = new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 29, 18, 30, 10, 20, 21, 12, 13, 14));
+    private ArrayList deckArray = new ArrayList<Integer>(Arrays.asList(1, 1, 1, 1, 1, 1, 1, 4, 4, 4));
     private ArrayList handArray;
     private ArrayList playingFieldArray;
     private ArrayList discardArray;
 
     //OBJECTS
-    private final cards.Functions.Collection collection = new cards.Functions.Collection();
+    private final Collection collection = new Collection();
     private GameEngine ge;
 
 //CONSTRUCTOR    
@@ -34,9 +34,9 @@ public class Player extends GameEngine {
 
 //START-UP     
     public void init() {
-        handArray = new ArrayList();
-        playingFieldArray = new ArrayList();
-        discardArray = new ArrayList();
+        handArray = new ArrayList<Integer>();
+        playingFieldArray = new ArrayList<Integer>();
+        discardArray = new ArrayList<Integer>();
 
         shuffleDeck();
         setNthAmountOfCards(5);
@@ -54,22 +54,13 @@ public class Player extends GameEngine {
         //TODO: clean code
         int CardID;
         HasReaction = false;
-        System.out.println("-- VOOR DE LOOP -- ");
-        System.out.println(handArray.size());
-        System.out.println(handArray.size() - 1);
         for (int i = 0; i < handArray.size(); i++) {
-            System.out.println("-- IN DE LOOP -- ");
             //TODO: check voor betere manier
             CardID = Integer.parseInt(handArray.get(i).toString());
-            System.out.println(CardID);
             if ("REACTION".equals(collection.getCard(CardID).getCardType())) {
-                System.out.println("-- IN DE IF -- ");
-                System.out.println(collection.getCard(CardID).getCardType());
-
                 HasReaction = true;
             }
         }
-        System.out.println("-- NA DE LOOP DE LOOP -- ");
         return HasReaction;
     }
 
@@ -100,7 +91,8 @@ public class Player extends GameEngine {
     }
 
     public void addHandFromBuyTransaction(int Index) {
-        handArray.add(currentSetArray.get(Index));
+        discardArray.add(currentSetArray.get(Index));
+        //Wanneer je iets koopt gaat het naar je discardpile, dus mss ook de naam refactore
         // -1 bij amount van gekozen kaart.
 
     }
@@ -110,8 +102,16 @@ public class Player extends GameEngine {
     }
 
     //DISCARD
-    public void discardNthCardFromDeck(int index) {
+    public void removeNthCardFromDeck(int index) {
         deckArray.remove(index);
+    }
+    
+    public void removeNthCardFromPlayingField(int index) {
+        playingFieldArray.remove(index);
+    }
+    
+    public void removeNthCardFromHand(int index) {
+        handArray.remove(index);
     }
 
     public void discardDeckToPile() {
@@ -149,6 +149,10 @@ public class Player extends GameEngine {
     public ArrayList<Integer> getCardsInHand() {
         return handArray;
     }
+    
+    public Integer getCardInHand(int index) {
+        return Integer.parseInt(handArray.get(index).toString());
+    }
 
     public ArrayList<Integer> getPlayingField() {
         return playingFieldArray;
@@ -161,11 +165,19 @@ public class Player extends GameEngine {
         //Geeft de bovenste hoeveelheid gekozen kaarten van het deck naar de speler zijn hand.
 
     public void setNthAmountOfCards(int amount) {
-
-        for (int i = 0; i < amount; i++) {
-            isDeckEmpty();
-            handArray.add(deckArray.get(0));
-            deckArray.remove(0);
+        //Je kan niet meer kaarten trekken dan er in je deck zitten. Bijvoorbeeld: 3 kaarten in je deck en jij wilt 5 kaarten!
+        if(amount<=(deckArray.size() + discardArray.size())){
+            for (int i = 0; i < amount; i++) {
+                isDeckEmpty();
+                handArray.add(deckArray.get(0));
+                deckArray.remove(0);
+            }
+        }else{
+            for (int i = 0; i <= deckArray.size(); i++) {
+                isDeckEmpty();
+                handArray.add(deckArray.get(0));
+                deckArray.remove(0);
+            }
         }
     }
 }

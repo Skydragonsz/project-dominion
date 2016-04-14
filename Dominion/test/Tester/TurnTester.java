@@ -49,20 +49,20 @@ public class TurnTester {
     // @Test
     // public void hello() {}
     @Test
-    public void AddFiveCoins(){
+    public void testAddFiveCoins(){
         n.addCoin(5);
      assertEquals(n.getCoin(), 5);
     }
     
     @Test
-    public void RemoveOneAction(){
+    public void testRemoveOneAction(){
         n.removeAction(2);
         System.out.println(n.getAction());
      assertEquals(n.getAction(), 23);
     }
     
     @Test
-    public void RemoveBuysBelowZero(){
+    public void restRemoveBuysBelowZero(){
         n.removeBuy(500);
         System.out.println(n.getBuy());
      assertTrue(n.getBuy() > 0);

@@ -5,10 +5,13 @@
  */
 package cards.MainSet;
 
+import cards.Maincards.VictoryCards;
+
 /**
  *
  * @author Arthur
  */
+//Card is DONE
 public class Gardens extends VictoryCards{
     private final int cardID = 17;
     private final int cost = 4;

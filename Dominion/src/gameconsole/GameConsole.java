@@ -47,7 +47,8 @@ public class GameConsole {
             handlePlayerAction(option);
 
             if (gameEngine.getCurrentPlayer() == gameEngine.getLastPlayer()) {
-                //gameEngine.addTurn();
+                gameEngine.addTurn();
+                gameEngine.ResetPlayer();
             } else if (CurrentPlayerWantsToEndTurn()) {
                 System.out.print(gameEngine.getCurrentPlayer() + " || " + gameEngine.getLastPlayer());
                 initNewPlayerTurn();
@@ -143,7 +144,7 @@ public class GameConsole {
                 if (gameEngine.getBuy() > 0) handleBuyCard();
                 break;
             case "C":                     // C: print all cards on board (Victory, Kingdom, Treasure)
-                printAllCards("NaN");
+                printAllCards();
                 System.out.print("Press ENTER to continue...");
                 scanner.nextLine();
                 break;
@@ -165,10 +166,13 @@ public class GameConsole {
 
     public void handleBuyCard() {
         //TODO: change this with a better parameter.
-        printAllCards("NaN");
+        printAllCards();
         
         System.out.print("[ ACTIONS -- BUY CARD ] What card would you like to buy:\t");
         int card = Integer.parseInt(scanner.nextLine());
+        //TODO -- If enough money
+        //TODO -- Card goes to discardArray, not to handArray
+        //TODO -- -1 buy
         currentPlayer.addHandFromBuyTransaction(card-1);
     }
     
@@ -195,7 +199,7 @@ public class GameConsole {
         //TODO: cleaning, lots of it
         //IFB = insert from backend
         //ACTIONS = A B C; CURRENT TURN = None; HAND = 1 2 3; PLAYING FIELD = none;    
-        Layout.drawTitel("PLAYER " + gameEngine.getCurrentPlayer() + ": " + currentPlayer.getName() + " -- TURN " + "IFB");
+        Layout.drawTitel("PLAYER " + gameEngine.getCurrentPlayer() + ": " + currentPlayer.getName() + " -- TURN " + gameEngine.getCurrentTurn());
         Layout.drawSubTitel(currentPlayer.getName() + " INFORMATION");
         
         Layout.drawMenuAlphabeticList("Actions", "Play Card", "Buy Card", "print current board", "Search card info", "End Turn");
@@ -205,18 +209,9 @@ public class GameConsole {
         Layout.drawMenuNoList("Playing Field", currentPlayer.getPlayingField());
     }
 
-    public void printAllCards(String board) {
-        //TODO: find better way to give a parameter value
-        if (board == "first") {
-            board = "THESE WILL BE THE CARDS FOR THE ONGOING GAME";
-        } else {
-            board = "YOUR CURRENT BOARD";
-        }
-
-        Layout.drawSubTitel(board);
+    public void printAllCards() {
+        Layout.drawSubTitel("Card available on board");
         Layout.drawMenuNumericList("Board", currentPlayer.getCurrentSetArray());
-//        GameConsoleLayout.drawMenuBoard("Kingdom cards", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)", "Village $8 (10)");
-//        GameConsoleLayout.drawMenuBoard("Treasure cards", "Gold $8 (40)", "Silver $8(37)", "Bronze $8 (40)", "Curse $8 (9)");
     }
 
     public void printMatchSettings() {
@@ -236,7 +231,7 @@ public class GameConsole {
 
         //prints players the chosen kingdom cards
         //TODO: change this with a better parameter.
-        printAllCards("first");
+        printAllCards();
         System.out.print("Press ENTER to continue...");
         scanner.nextLine();
     }

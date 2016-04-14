@@ -5,6 +5,7 @@
  */
 package dominion.phase;
 import cards.Maincards.MainCard;
+import dominion.phase.ActionPhase;
 /**
  *
  * @author Arthur
@@ -12,27 +13,30 @@ import cards.Maincards.MainCard;
 
 
 public class EffectPhase {
-    private String choise1;
-    private String choise2;
+    private String firstChoice;
+    private String secondChoice;
+    private ActionPhase ap = new ActionPhase();
+    private boolean dicisions;
     
     public EffectPhase(){
         
     }
     
-    public void decisions(String choise1, String choise2, MainCard playcard){
-        this.choise1 = choise1;
-        this.choise2 = choise2;
+    public void decisions(String firstChoice, String secondChoice, MainCard playcard){
+        this.firstChoice = firstChoice;
+        this.secondChoice = secondChoice;
         
-        
-        
+        while(dicisions){
+            
+        }
     }
     
     public String getChoise1(){
-        return choise1;
+        return firstChoice;
     }
     
     public String getChoise2(){
-        return choise2;
+        return secondChoice;
     }
     
     

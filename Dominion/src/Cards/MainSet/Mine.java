@@ -12,6 +12,7 @@ import dominion.Player;
  *
  * @author Arthur
  */
+//Card is NOT DONE
 public class Mine extends ActionCards{
     private final int cardID = 30;
     private final int cost = 5;
@@ -23,6 +24,8 @@ public class Mine extends ActionCards{
     @Override
     public void playCard(Player player){
         //TODO -- EffectPhase
+        //Trash Treasurecard; getValue + 3
+        player.addInstancedCoin(3);
     }
     
     @Override
