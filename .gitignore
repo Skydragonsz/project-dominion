@@ -6,3 +6,4 @@ Dominion/test/Tester/PlayerTester.java
 /ServerSocket/build/
 Dominion/dist/Dominion.jar
 Dominion/dist/README.TXT
+apache-tomcat-8.0.33/*
