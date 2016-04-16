@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package dominion;
-import cards1.Functions.Collection;
+import cards.Functions.Collection;
 
 /**
  *
