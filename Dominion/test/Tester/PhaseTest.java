@@ -24,7 +24,7 @@ import java.util.List;
 
 //PhaseTest needs rework, most tests don't/won't work.
 public class PhaseTest {
-    final cards.Functions.Collection col = new cards.Functions.Collection();
+    final cards1.Functions.Collection col = new cards1.Functions.Collection();
     ActionPhase Pl = new ActionPhase();
     Player p1 = new Player();
     Player p2 = new Player();

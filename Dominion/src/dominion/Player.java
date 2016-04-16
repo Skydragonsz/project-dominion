@@ -1,7 +1,7 @@
 package dominion;
 
 import java.util.*;
-import cards.Functions.Collection;
+import cards1.Functions.Collection;
 
 //TODO: clean up code
 public class Player extends GameEngine {
