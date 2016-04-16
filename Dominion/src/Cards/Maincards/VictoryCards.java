@@ -5,8 +5,6 @@
  */
 package cards.Maincards;
 
-import cards.Maincards.MainCard;
-
 /**
  *
  * @author Arthur
