@@ -10,7 +10,16 @@ public class Player extends TurnSegment {
 
     private String name;
     private int victoryPoints;
+    
+    private Pile deck;
+    private Pile hand;
+    private Pile discardPile;
+    private Pile playingField;
+    
+    private Pile KingdomSet;
     private boolean HasReaction;
+    
+    
 
     //CARDS INFO
     private ArrayList currentSetArray = new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 29, 18, 30, 10, 20, 21, 12, 13, 14));
@@ -27,15 +36,7 @@ public class Player extends TurnSegment {
     public Player() {
         init();
     }
-//    
-//    public Player(DominionData data) {
-//        this.deckArray = data.getDeck();
-//        this.handArray = data.getHand();
-//        this.discardArray = data.getDiscardPile();
-//        
-//        this.name = data.getName();
-//    }
-
+    
     public Player(String name) {
         this.name = name;
         init();
@@ -46,13 +47,14 @@ public class Player extends TurnSegment {
         handArray = new ArrayList<Integer>();
         playingFieldArray = new ArrayList<Integer>();
         discardArray = new ArrayList<Integer>();
-
+        
         shuffleDeck();
         drawCards(5);
     }
 
 //FUNCTIONS
     //OTHER
+    //**CHECK ALL METHODES, THESE NEED TO BE IN ANOTHER CLASS -- REMOVE**//
     public void shuffleDeck() {
         Collections.shuffle(deckArray);
     }
