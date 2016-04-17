@@ -27,7 +27,7 @@ public class Witch extends AttackCards{
            
     @Override
     public void playCard(Player player){
-        player.setNthAmountOfCards(2);
+        player.drawCards(2);
         
         
         for(int i = 0; i < gameEngine.getPlayerList().size()-1;i++){

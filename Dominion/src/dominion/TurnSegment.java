@@ -5,6 +5,9 @@
  */
 package dominion;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  *
  * @author Quint
@@ -16,7 +19,9 @@ public class TurnSegment {
    private int instancedCurrency; //Bijvoorbeeld; "WORKSHOP: Gain a card costing up to 4coins"
    private int action;
    private int buy;
-    
+   
+   
+
    public TurnSegment(){
        this.currency = 0;
        this.instancedCurrency = 0;

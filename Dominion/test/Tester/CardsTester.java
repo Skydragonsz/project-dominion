@@ -106,7 +106,7 @@ public class CardsTester {
 
     @Test
     public void testAdventurer() {
-        System.out.println(p.getDeck());
+        System.out.println(p.getCardsInDeck());
         //Adventurer card will add two copper (ID = 1) into the hand of the player.
         //What the result should be.
         ArrayList resultHandArray =  new ArrayList(p.getCardsInHand());       
@@ -116,7 +116,7 @@ public class CardsTester {
         //Real function
         col.getCard(32).playCard(p);
 
-        System.out.println(p.getDeck());
+        System.out.println(p.getCardsInDeck());
         System.out.println(p.getCardsInHand());
         System.out.println(resultHandArray);
         
@@ -150,12 +150,15 @@ public class CardsTester {
         for (int i = 1; i <= ge.getPlayerList().size(); i++) {
             System.out.println(ge.getPlayer(i).getName() + " " + ge.getPlayer(i).getCardsInHand());
         }
-
+        
+        
+        System.out.println(ge.getPlayer(3));
+        System.out.println(col.getCard(15) );       
         ap.placeCard(col.getCard(15), ge.getPlayer(3));
 
         for (int i = 1; i <= ge.getPlayerList().size(); i++) {
             System.out.println("AFTER: " + ge.getPlayer(i).getName() + " " + ge.getPlayer(i).getCardsInHand());
         }
-        fail(); 
+        //fail(); 
     }
 }

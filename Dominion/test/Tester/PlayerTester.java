@@ -51,23 +51,23 @@ public class PlayerTester {
     
     @Test
     public void testPrintedCards(){
-        assertEquals(p.getDeck(),testArrayDeck);
+        assertEquals(p.getCardsInDeck(),testArrayDeck);
     }
     
     @Test
     public void testShuffle(){
     //Het deck van de player p word geschud.
-        System.out.println(p.getDeck());
+        System.out.println(p.getCardsInDeck());
         p.shuffleDeck();
-        System.out.println(p.getDeck());
+        System.out.println(p.getCardsInDeck());
     //Kijk als deze deck niet gelijk is aan de begin deck.
-        assertTrue(p.getDeck() != testArrayDeck);
+        assertTrue(p.getCardsInDeck() != testArrayDeck);
     } 
         
     @Test
     public void testDiscardDeckToPile(){
     //+Visuele feedback.    
-        System.out.println("Deck"+p.getDeck());
+        System.out.println("Deck"+p.getCardsInDeck());
         System.out.println("Hand"+p.getCardsInHand());
         System.out.println("Discard pile "+p.getDiscardPile());
         System.out.println("^BEGIN STATE^");
@@ -78,20 +78,20 @@ public class PlayerTester {
         ////System.out.println("^SHUFFLE^");  
         
         //Pakt drie kaarten van het deck.    
-        p.setNthAmountOfCards(3);
+        p.drawCards(3);
         
         //Discard deze kaarten.
         p.discardDeckToPile();
         System.out.println("Discard pile "+p.getDiscardPile());
-        System.out.println("Deck "+p.getDeck());
+        System.out.println("Deck "+p.getCardsInDeck());
         System.out.println("Cards in hand"+p.getCardsInHand());
         System.out.println("^Discard pile vol^");
         
         //
-        p.setNthAmountOfCards(5);
+        p.drawCards(5);
         System.out.println("Discard pile "+p.getDiscardPile());
         
-        System.out.println("Deck "+p.getDeck());
+        System.out.println("Deck "+p.getCardsInDeck());
         System.out.println("Cards in hand"+p.getCardsInHand());
         assertEquals(p.getCardsInHand(), testArrayHand);
 

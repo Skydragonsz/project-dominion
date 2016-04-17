@@ -68,26 +68,26 @@ public class PhaseTest {
     for(int i = 0;i < ge.getPlayerList().size()-1 ;i++){
             System.out.println(ge.getOtherPlayersList(ge.getPlayer(1)).get(i).getName());
     }
-    System.out.println("Begin deck Player 1: " + ge.getPlayer(1).getDeck());
+    System.out.println("Begin deck Player 1: " + ge.getPlayer(1).getCardsInDeck());
     
     ge.getPlayer(1).addCardToHand(31);
     
-    System.out.println("Begin deck Player 1: " + ge.getPlayer(1).getDeck());
+    System.out.println("Begin deck Player 1: " + ge.getPlayer(1).getCardsInDeck());
     System.out.println("Begin hand Player 1: " + ge.getPlayer(1).getCardsInHand());
-    System.out.println("Begin deck Player 2: " + ge.getPlayer(2).getDeck());
+    System.out.println("Begin deck Player 2: " + ge.getPlayer(2).getCardsInDeck());
     System.out.println("Begin hand Player 2: " + ge.getPlayer(2).getCardsInHand());
     System.out.println("^BEGIN STATE^");
     
     Pl.placeCard(col.getCard(31), ge.getPlayer(1));
        
-    System.out.println("Effected (Witch) deck Player 1 (-2 cards): " + ge.getPlayer(1).getDeck());
+    System.out.println("Effected (Witch) deck Player 1 (-2 cards): " + ge.getPlayer(1).getCardsInDeck());
     System.out.println("Effected hand Player 1 (+2 cards): " + ge.getPlayer(1).getCardsInHand());
-    System.out.println("Effected deck Player 2 (+1 curse): " + ge.getPlayer(2).getDeck());
+    System.out.println("Effected deck Player 2 (+1 curse): " + ge.getPlayer(2).getCardsInDeck());
     System.out.println("Effected hand Player 2: " + ge.getPlayer(2).getCardsInHand());
     System.out.println("^WITCH EFFECT STATE^");
     System.out.println("Card Type: " + col.getCard(31).getCardType());
     //TODO: Kijk voor een manier om alle assertEquals weer te geven op de test results.
-    assertEquals(ge.getPlayer(1).getDeck(),testEffectedArrayDeck);
+    assertEquals(ge.getPlayer(1).getCardsInDeck(),testEffectedArrayDeck);
     //assertEquals(p1.getCards(),testArrayEffectedHand);
     //assertEquals(p2.getDeck(),testArrayEffectDeckOtherPlayer);
     }
@@ -99,12 +99,12 @@ public class PhaseTest {
     ge.getPlayer(2).addCardToHand(10);
     ge.getPlayer(1).addCardToHand(31);
     Pl.placeCard(col.getCard(31), ge.getPlayer(1));
-    System.out.println("Effected (Witch) deck Player 1 (-2 cards): " + ge.getPlayer(1).getDeck());
+    System.out.println("Effected (Witch) deck Player 1 (-2 cards): " + ge.getPlayer(1).getCardsInDeck());
     System.out.println("Effected hand Player 1 (+2 cards): " + ge.getPlayer(1).getCardsInHand());
-    System.out.println("Effected deck Player 2 (geen curse): " + ge.getPlayer(2).getDeck());
+    System.out.println("Effected deck Player 2 (geen curse): " + ge.getPlayer(2).getCardsInDeck());
     System.out.println("Effected hand Player 2(1 moat): " + ge.getPlayer(2).getCardsInHand());
     System.out.println("^WITCH EFFECT STATE^");
-    assertEquals(ge.getPlayer(2).getDeck(),testArrayDeck);
+    assertEquals(ge.getPlayer(2).getCardsInDeck(),testArrayDeck);
     }
     
     
@@ -119,7 +119,7 @@ public class PhaseTest {
         ArrayList resultArray = new ArrayList();
         resultArray.add(p1.getCardsInHand().get(3));
         
-        p1.addToPlayingField(3);
+        p1.addCardToPlayingField(3);
         System.out.println("Card in hand" + p1.getCardsInHand());
         System.out.println("Playingfield"+p1.getPlayingField());
 
@@ -138,26 +138,26 @@ public class PhaseTest {
     for(int i = 0;i < ge.getPlayerList().size()-1 ;i++){
             System.out.println(ge.getOtherPlayersList(ge.getPlayer(1)).get(i).getName());
     }
-    System.out.println("Begin deck Player 1: " + ge.getPlayer(1).getDeck());
+    System.out.println("Begin deck Player 1: " + ge.getPlayer(1).getCardsInDeck());
     
     ge.getPlayer(1).addCardToHand(31);
     ge.getPlayer(3).addCardToHand(10);
     
-    System.out.println("Begin deck Player 1: " + ge.getPlayer(1).getDeck());
+    System.out.println("Begin deck Player 1: " + ge.getPlayer(1).getCardsInDeck());
     System.out.println("Begin hand Player 1: " + ge.getPlayer(1).getCardsInHand());
-    System.out.println("Begin deck Player 2: " + ge.getPlayer(2).getDeck());
+    System.out.println("Begin deck Player 2: " + ge.getPlayer(2).getCardsInDeck());
     System.out.println("Begin hand Player 2: " + ge.getPlayer(2).getCardsInHand());
-    System.out.println("Begin deck Player 3: " + ge.getPlayer(3).getDeck());
+    System.out.println("Begin deck Player 3: " + ge.getPlayer(3).getCardsInDeck());
     System.out.println("Begin hand Player 3: " + ge.getPlayer(3).getCardsInHand());
     System.out.println("^BEGIN STATE^");
     
     Pl.placeCard(col.getCard(31), ge.getPlayer(1));
        
-    System.out.println("Effected (Witch) deck Player 1 (-2 cards): " + ge.getPlayer(1).getDeck());
+    System.out.println("Effected (Witch) deck Player 1 (-2 cards): " + ge.getPlayer(1).getCardsInDeck());
     System.out.println("Effected hand Player 1 (+2 cards): " + ge.getPlayer(1).getCardsInHand());
-    System.out.println("Effected deck Player 2 (+1 curse): " + ge.getPlayer(2).getDeck());
+    System.out.println("Effected deck Player 2 (+1 curse): " + ge.getPlayer(2).getCardsInDeck());
     System.out.println("Effected hand Player 2: " + ge.getPlayer(2).getCardsInHand());
-    System.out.println("Effected deck Player 3 (Geen Curse in deck): " + ge.getPlayer(3).getDeck());
+    System.out.println("Effected deck Player 3 (Geen Curse in deck): " + ge.getPlayer(3).getCardsInDeck());
     System.out.println("Effected hand Player 3: " + ge.getPlayer(3).getCardsInHand());
     System.out.println("^WITCH EFFECT STATE^");
     System.out.println("Card Type: " + col.getCard(31).getCardType());

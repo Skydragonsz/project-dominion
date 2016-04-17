@@ -20,7 +20,7 @@ public class Bureaucrat extends AttackCards{
     private final int cardID = 15;
     private final int cost = 4;
     private final String name = "Bureaucrat";
-    
+    private GameEngine gameEngine = new GameEngine();
 
     public Bureaucrat(){
         
@@ -46,7 +46,7 @@ public class Bureaucrat extends AttackCards{
                 System.out.println("IN TWEEDE LOOP");
                 
                 if ("VICTORY".equals(col.getCard(player.getCardsInHand().get(cardIndex)).getCardType())){
-                    gameEngine.getOtherPlayersList(player).get(index).getDeck().add(0,gameEngine.getOtherPlayersList(player).get(index).getCardsInHand().get(cardIndex));
+                    gameEngine.getOtherPlayersList(player).get(index).getCardsInDeck().add(0,gameEngine.getOtherPlayersList(player).get(index).getCardsInHand().get(cardIndex));
                     gameEngine.getOtherPlayersList(player).get(index).getCardsInHand().remove(cardIndex);
                     
                     j = gameEngine.getOtherPlayersList(player).get(index).getCardsInHand().size() +1;

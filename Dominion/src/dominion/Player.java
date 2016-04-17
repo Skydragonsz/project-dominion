@@ -27,6 +27,14 @@ public class Player extends TurnSegment {
     public Player() {
         init();
     }
+//    
+//    public Player(DominionData data) {
+//        this.deckArray = data.getDeck();
+//        this.handArray = data.getHand();
+//        this.discardArray = data.getDiscardPile();
+//        
+//        this.name = data.getName();
+//    }
 
     public Player(String name) {
         this.name = name;
@@ -40,7 +48,7 @@ public class Player extends TurnSegment {
         discardArray = new ArrayList<Integer>();
 
         shuffleDeck();
-        setNthAmountOfCards(5);
+        drawCards(5);
     }
 
 //FUNCTIONS
@@ -85,14 +93,14 @@ public class Player extends TurnSegment {
 
     //Voegt kaart toe aan playingField
     //Bekijk welke van addToPlayingField effectief gebruikt wordt.
-    public void addToPlayingField(int Index) {
+    public void addCardToPlayingField(int Index) {
         //VV Werkt VV
         playingFieldArray.add(handArray.get(Index));
         handArray.remove(Index);
     }
 
-    public void addHandFromBuyTransaction(int Index) {
-        handArray.add(currentSetArray.get(Index));
+    public void buyCard(int Index) {
+        discardArray.add(currentSetArray.get(Index));
         // -1 bij amount van gekozen kaart.
 
     }
@@ -121,7 +129,7 @@ public class Player extends TurnSegment {
         return discardArray;
     }
 
-    public ArrayList<Integer> getCurrentSetArray() {
+    public ArrayList<Integer> getCurrentKingdomSetArray() {
         return currentSetArray;
     }
 
@@ -133,7 +141,7 @@ public class Player extends TurnSegment {
         return name;
     }
 
-    public ArrayList<Integer> getDeck() {
+    public ArrayList<Integer> getCardsInDeck() {
         return deckArray;
     }
 
@@ -142,12 +150,19 @@ public class Player extends TurnSegment {
         return handArray;
     }
 
-    public Integer getCardInHand(int index) {
+    public Integer getIdInHandFromIndex(int index) {
         return Integer.parseInt(handArray.get(index).toString());
     }
     
     public ArrayList<Integer> getPlayingField() {
         return playingFieldArray;
+    }
+    
+    public void boardToDiscardPile(){
+        discardArray.addAll(handArray);
+        discardArray.addAll(playingFieldArray);
+        handArray.clear();
+        playingFieldArray.clear();
     }
 
 //SETTERS    
@@ -156,14 +171,16 @@ public class Player extends TurnSegment {
     }
     //Geeft de bovenste hoeveelheid gekozen kaarten van het deck naar de speler zijn hand.
 
-    public void setNthAmountOfCards(int amount) {
+    public void drawCards(int amount) {
         //Je kan niet meer kaarten trekken dan er in je deck zitten. Bijvoorbeeld: 3 kaarten in je deck en jij wilt 5 kaarten!
         if (amount <= (deckArray.size() + discardArray.size())) {
-            for (int i = 0; i < amount; i++) { isDeckEmpty();
+            for (int i = 0; i < amount; i++) { 
+                isDeckEmpty();
                 handArray.add(deckArray.get(0));
                 deckArray.remove(0);
             }
-        } else { isDeckEmpty();
+        } else { 
+            isDeckEmpty();
             for (int i = 0; i <= deckArray.size(); i++) {
                 isDeckEmpty();
                 handArray.add(deckArray.get(0));

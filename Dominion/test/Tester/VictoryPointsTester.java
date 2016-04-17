@@ -49,7 +49,7 @@ public class VictoryPointsTester {
         
         
         
-        System.out.println("Deck size: "+ge.getPlayer(1).getDeck().size());
+        System.out.println("Deck size: "+ge.getPlayer(1).getCardsInDeck().size());
                 
         //22 cards in deck 2 
         //1+1+1 = 3+6+6+3 + 2 van garden

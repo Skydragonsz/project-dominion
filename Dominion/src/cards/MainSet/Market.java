@@ -26,7 +26,7 @@ public class Market extends ActionCards{
         player.addCoin(1);
         player.addBuy(1);
         player.addAction(1);
-        player.setNthAmountOfCards(1);
+        player.drawCards(1);
     }
     
     @Override

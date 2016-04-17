@@ -1,16 +1,12 @@
 package gameconsole;
 
 import dominion.GameEngine;
-import dominion.Player;
-import dominion.phase.ActionPhase;
-import cards.Functions.Collection;
 import java.util.Scanner;
 
 public class GameConsole {
 
     private GameEngine gameEngine;
-    private Player currentPlayer;
-    private Collection collection;
+    private int counter = 1;
     private boolean endPlayerTurn = false; //TEMP
     Scanner scanner = new Scanner(System.in);
 
@@ -22,7 +18,6 @@ public class GameConsole {
 
     public GameConsole() {
         gameEngine = new GameEngine();
-        currentPlayer = new Player();
     }
 
     public void run() {
@@ -38,25 +33,26 @@ public class GameConsole {
     //START-UP -- GAMELOOP
     public void gameLoop() {
         boolean bln = true; //TEMP
-        
+        gameEngine.addTurn(counter);
         while (bln = true) //gameEngine.gameNotFinished()
         {   
-            currentPlayer = gameEngine.getPlayer(gameEngine.getCurrentPlayer());
             printCurrentSituation();
 
             System.out.print("[ ACTIONS ] What action would you like to perform:\t");
             String option = scanner.nextLine();
 
             handlePlayerAction(option);
-
-            if (gameEngine.getCurrentPlayer() == gameEngine.getMaxPlayers()) {
-                //gameEngine.addTurn();
-                gameEngine.ResetPlayer();
-            } else if (CurrentPlayerWantsToEndTurn()) {
-                System.out.print(gameEngine.getCurrentPlayer() + " || " + gameEngine.getMaxPlayers());
-                initNewPlayerTurn();
-                gameEngine.setNextPlayer();
-            }
+            
+            if (gameEngine.getCurrentPlayer() == gameEngine.getLastPlayers()) {
+                gameEngine.addTurn(counter);
+                counter++;
+                
+            } //if (CurrentPlayerWantsToEndTurn())
+            
+//                System.out.print(gameEngine.getCurrentPlayer() + " || " + gameEngine.getMaxPlayers());
+//                initNewPlayerTurn();
+            
+            //gameEngine.setNextPlayer();
         }
     }
     
@@ -152,7 +148,7 @@ public class GameConsole {
                 scanner.nextLine();
                 break;
             case "E":                     // C: print all cards on board (Victory, Kingdom, Treasure)
-                endPlayerTurn();
+                gameEngine.setNextPlayer();
                 break;
             default:
                 System.out.print("Incorrect or unknown letter, please try again!\n");
@@ -164,8 +160,8 @@ public class GameConsole {
     public void handlePlayCard() {
         System.out.print("[ ACTIONS -- PLAY CARD ] What card would you like to play:\t");
         int card = Integer.parseInt(scanner.nextLine());
-        currentPlayer.addToPlayingField(card-1);
-        
+        //gameEngine.getCurrentPlayer().addCardToPlayingField(card-1);
+        gameEngine.playCard(card);
     }
 
     public void handleBuyCard() {
@@ -177,7 +173,7 @@ public class GameConsole {
         //TODO -- If enough money
         //TODO -- Card goes to discardArray, not to handArray
         //TODO -- -1 buy
-        currentPlayer.addHandFromBuyTransaction(card-1);
+        gameEngine.getCurrentPlayer().buyCard(card-1);
     }
     
     public void handleBuyAction(Integer card) {
@@ -203,19 +199,19 @@ public class GameConsole {
         //TODO: cleaning, lots of it
         //IFB = insert from backend
         //ACTIONS = A B C; CURRENT TURN = None; HAND = 1 2 3; PLAYING FIELD = none;    
-        Layout.drawTitel("PLAYER " + gameEngine.getCurrentPlayer() + ": " + currentPlayer.getName() + " -- TURN " +  "TEMP");
-        Layout.drawSubTitel(currentPlayer.getName() + " INFORMATION");
+        Layout.drawTitel("PLAYER " + gameEngine.getPlayerName(gameEngine.getCurrentPlayer()) + " -- TURN " +  gameEngine.getTurnNumber(counter));
+        Layout.drawSubTitel(gameEngine.getPlayerName(gameEngine.getCurrentPlayer()) + "'S INFORMATION");
         
         Layout.drawMenuAlphabeticList("Actions", "Play Card", "Buy Card", "print current board", "Search card info", "End Turn");
-        Layout.drawMenuNoList("Current turn", "Coin(s): " + "TEMP", "Action(s): " + "TEMP" , "Buy(s): " +  "TEMP");
+        Layout.drawMenuNoList("Current turn", "Coin(s): " + gameEngine.getTurnSegmentCoin(counter), "Action(s): " + gameEngine.getTurnSegmentActions(counter) , "Buy(s): " +  "TEMP");
 
-        Layout.drawMenuNumericList("Your Cards", currentPlayer.getCardsInHand());
-        Layout.drawMenuNoList("Playing Field", currentPlayer.getPlayingField());
+        Layout.drawMenuNumericList("Your Cards", gameEngine.getCurrentPlayer().getCardsInHand());
+        Layout.drawMenuNoList("Playing Field", gameEngine.getCurrentPlayer().getPlayingField());
     }
 
     public void printAllCards() {
         Layout.drawSubTitel("Card available on board");
-        Layout.drawMenuNumericList("Board", currentPlayer.getCurrentSetArray());
+        Layout.drawMenuNumericList("Board", gameEngine.getCurrentPlayer().getCurrentKingdomSetArray());
     }
 
     public void printMatchSettings() {

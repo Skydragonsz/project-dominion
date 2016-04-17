@@ -39,9 +39,9 @@ public class Adventurer extends ActionCards{
         int cards = 0;
         int indexCounter = 0;
         while(cards <2){
-            if ("TREASURE".equals(col.getCard(player.getDeck().get(indexCounter)).getCardType())){
-                player.getCardsInHand().add(player.getDeck().get(indexCounter));
-                player.getDeck().remove(indexCounter);
+            if ("TREASURE".equals(col.getCard(player.getCardsInDeck().get(indexCounter)).getCardType())){
+                player.getCardsInHand().add(player.getCardsInDeck().get(indexCounter));
+                player.getCardsInDeck().remove(indexCounter);
                 cards++;
                 indexCounter--;
                 

@@ -24,11 +24,11 @@ public class CouncilRoom extends ActionCards{
     @Override
     public void playCard(Player player){
         player.addBuy(1);
-        player.setNthAmountOfCards(4);
+        player.drawCards(4);
         
                 
         for(int i = 0; i < gameEngine.getPlayerList().size()-1;i++){
-            gameEngine.getOtherPlayersList(player).get(i).setNthAmountOfCards(1);
+            gameEngine.getOtherPlayersList(player).get(i).drawCards(1);
         }
     }
     

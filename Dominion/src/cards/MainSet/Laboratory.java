@@ -23,7 +23,7 @@ public class Laboratory extends ActionCards{
     
     @Override
     public void playCard(Player player){
-        player.setNthAmountOfCards(2);
+        player.drawCards(2);
         player.addAction(1);
     }
     

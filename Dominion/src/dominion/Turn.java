@@ -35,7 +35,7 @@ public class Turn {
     }
     
     public void nextTurnSegment(){
-        if (turnSegmentNumber < 3){ //TEMP 3
+        if (turnSegmentNumber <= 3){ //TEMP 3
         turnSegmentNumber++;
         }
     }

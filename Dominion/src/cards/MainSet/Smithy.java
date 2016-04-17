@@ -23,7 +23,7 @@ public class Smithy extends ActionCards{
     
     @Override
     public void playCard(Player player){
-        player.setNthAmountOfCards(3);
+        player.drawCards(3);
     }
     
     @Override
