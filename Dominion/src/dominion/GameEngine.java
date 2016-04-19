@@ -1,85 +1,124 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dominion;
 
 import java.util.*;
+
 /**
  *
  * @author Arthur
  */
-
 //TODO -- transfer Player methods to GameEngine
-public class GameEngine extends Turn{
-    private final static ArrayList<Player> playerArray = new ArrayList<>();
-    private final static ArrayList<Player> otherPlayersArray = new ArrayList<>();
-    private int currentPlayer = 1;
-    
-    public GameEngine(){
-        
+public class GameEngine {
+
+    //Player
+    private final static ArrayList<Player> playerList = new ArrayList<>();
+    private final static ArrayList<Player> otherPlayerList = new ArrayList<>();
+    private Player currentPlayer;
+    private int PlayerCounter = 0;
+
+    //Turn
+    private ArrayList<Turn> turnList = new ArrayList<>();
+
+    //KINGDOM SET
+    private final static ArrayList<Integer> kingdomSetCards = new ArrayList<>();
+
+    //TEMP -- TEST
+    private Card estate = new Card("Estate", "Victory card", "description", 3, 0, 0, 1, 2, 0, false);
+    private Card copper = new Card("Copper", "Treasure", "description", 6, 3, 0, 0, 0, 0, false);
+    private Pile starterDeck = new Pile(copper, copper, copper, copper, copper, copper, copper, estate, estate, estate);
+
+    public GameEngine() {
+
     }
-    
+
     public static void main(String[] args) {
-        
-        
+
     }
-    
-    public void setAmountPlayers(int amount){
-        for(int i = 0; i < amount;i++)
-        {
-            playerArray.add(new Player("player " + (i+1)));
+
+    /* INIT */
+    public void initAmountPlayers(int amount) {
+        for (int i = 0; i < amount; i++) {
+            playerList.add(new Player());
         }
     }
-    
-    public void setName(int playernr, String name){
+
+    public void initPlayer(int playernr, String name) {
+        getPlayer(playernr).setDeck(generateDeck());
         getPlayer(playernr).setName(name);
     }
-    
-    public Player getPlayer(int playernr){
-        return playerArray.get(playernr-1);
+
+    /* METHODS */
+    public Pile generateDeck() {
+
+        return new Pile(copper, copper, copper, copper, copper, copper, copper, estate, estate, estate);
     }
-    
-    //The 3 next functions use integer; not the names.
-    public int getCurrentPlayer(){
-        return currentPlayer;
+
+
+    /* GETTERS */
+//Player    
+    public Player getPlayer(int playernr) {
+        return playerList.get(playernr - 1);
     }
-    
-    public void setNextPlayer(){
-        currentPlayer++;
+
+    public String getPlayerName(Player player) {
+        return player.getName();
     }
-        
-    public void ResetPlayer(){
-        currentPlayer = 1;
+
+    public Player getCurrentPlayer() {
+        return playerList.get(PlayerCounter);
     }
-    
-    public int getLastPlayer(){
-        return playerArray.size();
+
+    public ArrayList<Player> getPlayerList() {
+        return playerList;
     }
-    
-    public ArrayList<Player> getPlayerList(){
-        return playerArray;
+
+    public int getMaxPlayers() {
+        return playerList.size();
     }
-    
-        
-    
-    public ArrayList<Player> getOtherPlayersList(Player player){
-            for(int i = 0; i < playerArray.size();i++){
-                if(player != playerArray.get(i)){
-                    otherPlayersArray.add(playerArray.get(i));
-                }
+
+    public Player getLastPlayers() {
+        return playerList.get(playerList.size() - 1);
+    }
+
+    public ArrayList<Player> getOtherPlayersList(Player player) {
+        //TEMP FIX
+        otherPlayerList.clear();
+        for (int i = 0; i < playerList.size(); i++) {
+            if (player != playerList.get(i)) {
+                otherPlayerList.add(playerList.get(i));
             }
-        
-        return otherPlayersArray;
+        }
+        return otherPlayerList;
     }
-    
-    public void reset(){
-        otherPlayersArray.clear();
-        playerArray.clear();
+
+//Other
+    public void PlayCardEffect(int index) {
+
     }
-    
-    
-    
-    
+
+//Turn        
+    public Turn getTurn(int NthTurn) {
+        return turnList.get(NthTurn);
+    }
+
+    public int getTurnNumber(int NthTurn) {
+        return turnList.get(NthTurn - 1).getCurrentTurnNumber();
+    }
+
+    public TurnSegment getTurnSegment(int NthTurn) {
+        return turnList.get(NthTurn).getCurrentTurnSegment();
+    }
+
+    public int getTurnSegmentCoin(int NthTurn) {
+        return turnList.get(NthTurn).getCurrentTurnSegment().getCoin();
+    }
+
+    public int getTurnSegmentActions(int NthTurn) {
+        return turnList.get(NthTurn).getCurrentTurnSegment().getAction();
+    }
+
+//other    
+    public void reset() {
+        otherPlayerList.clear();
+        playerList.clear();
+    }
 }
