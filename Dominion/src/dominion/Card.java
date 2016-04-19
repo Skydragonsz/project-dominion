@@ -1,7 +1,7 @@
 package dominion;
 
 import java.util.ArrayList;
-
+import dominion.CardSpecialAction;
 /**
  *
  * @author Quint
@@ -46,7 +46,7 @@ public class Card {
         player.addBuy(additionalBuy);
 
         if (hasSpecialAction) {
-            //PlaySpecialAction(name, player, otherPlayer);        
+        	CardSpecialAction.playSpecialAction(name, player, otherPlayer);        
         }
     }
 
