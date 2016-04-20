@@ -5,42 +5,26 @@
  */
 package testers;
 
-//import Tester.*;
-//import cards.MainSet.Copper;
-//import cards.MainSet.Province;
-//import cards.MainSet.Duchy;
-//import cards.Functions.Collection;
 import dominion.Card;
+import dominion.GameEngine;
+import dominion.Pile;
+import dominion.Player;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-//import cards.MainSet.Witch;
-import dominion.Player;
-import dominion.GameEngine;
-//import dominion.phase.ActionPhase;
+
 import java.util.ArrayList;
 
 /**
  *
  * @author Arthur
  */
-public class CardsTester {
 
-//    private Player p = new Player();
-//    private Player p2 = new Player();
-//    private Witch w = new Witch();
-//    private Witch w2;
-//    private Copper c = new Copper();
-//    private Province pro = new Province();
-//    private Duchy du = new Duchy();
-//    private Province province = new Province();
-    //private KingdomCards set = new KingdomCards();
-//    private Collection col = new Collection();
-    private GameEngine ge = new GameEngine();
-//    private ActionPhase ap = new ActionPhase();
+public class CardsTester {
 
     //TEMP VALUES - NOT REAL
     private Card witch = new Card("Witch", "ATTACK", "description", 3, 0, 0, 1, 2, 0, false);
@@ -50,12 +34,24 @@ public class CardsTester {
     private Card duchy = new Card("Duchy", "Action", "description", 3, 5, 0, 1, 2, 0, false);
     private Card province2 = province;
     
+    private Card village = new Card("Village", "Action", "description", 3, 0, 0, 1, 2, 0, false);
+    private Card gold = new Card("Gold", "Treasure", "description", 6, 3, 0, 0, 0, 0, false);
+    
+    private Pile deck = new Pile(gold,gold,gold,gold,gold,gold,gold,village,village,village);
+    private Pile hand = new Pile();
+    
+    private Player firstPlayer;
+    private ArrayList<Player> secondPlayer;
+    
+    private GameEngine gameEngine = new GameEngine();
     
     public CardsTester() {
-//    ge.initAmountPlayers(2);
-//    ge.initPlayer(1, "Quint");
-//    ge.initPlayer(2, "Pint");
-    
+    	gameEngine.initAmountPlayers(2);
+    	gameEngine.initPlayer(1, "testPlayerOne");
+    	gameEngine.initPlayer(2, "testPlayerTwo");
+    	
+    	this.firstPlayer = gameEngine.getPlayer(1);
+    	this.secondPlayer = gameEngine.getOtherPlayersList(firstPlayer);
     }
 
     @BeforeClass
@@ -102,7 +98,7 @@ public class CardsTester {
         assertEquals(VictoryPoints, 15);
 
     }
-//
+
 //    @Test
 //    public void testRandomSet() {
 //        set.generateRandomSet();
@@ -110,33 +106,33 @@ public class CardsTester {
 //        //assertTrue(set.getDeck() != testArrayDeck);
 //        fail(); 
 //    }
-//
+
     @Test
     public void testGetNameForCopperCard() {
         String cardName = copper.getName();
         System.out.println(cardName);
         assertEquals(cardName,"Copper");
     }
-//
-//    @Test
-//    public void testAdventurer() {
-//        System.out.println(p.getCardsInDeck());
-//        //Adventurer card will add two copper (ID = 1) into the hand of the player.
-//        //What the result should be.
-//        ArrayList resultHandArray =  new ArrayList(p.getCardsInHand());       
-//        resultHandArray.add(1);
-//        resultHandArray.add(1);
-//
-//        //Real function
-//        col.getCard(32).playCard(p);
-//
-//        System.out.println(p.getCardsInDeck());
-//        System.out.println(p.getCardsInHand());
-//        System.out.println(resultHandArray);
-//        
-//        assertEquals(p.getCardsInHand(),resultHandArray);
-//        
-//    }
+
+    @Test
+    public void testAdventurer() {
+    	
+        System.out.println(firstPlayer.getDeck());
+        //Adventurer card will add two copper (ID = 1) into the hand of the player.
+        //What the result should be.
+        ArrayList resultHandArray =  new ArrayList(firstPlayer.getHand().getPile());       
+        resultHandArray.add("Copper");
+        resultHandArray.add("Copper");
+
+        //Real function
+        gameEngine.playCard("Adventurer", firstPlayer, secondPlayer);
+
+        System.out.println(firstPlayer.getDeck());
+        System.out.println(firstPlayer.getDeck());
+        System.out.println(resultHandArray);
+        
+        assertEquals(firstPlayer.getHand(),resultHandArray);
+    }
 //
 //    @Test
 //    //Test doesn't succeed(?). doesn't hava an assert_____();

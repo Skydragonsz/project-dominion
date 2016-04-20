@@ -51,6 +51,10 @@ public class GameEngine {
 
         return new Pile(copper, copper, copper, copper, copper, copper, copper, estate, estate, estate);
     }
+    
+    public void playCard(String cardName, Player player, ArrayList<Player> otherPlayerList){
+    	CardSpecialAction.playSpecialAction(cardName, player, otherPlayerList);
+    }
 
 
     /* GETTERS */

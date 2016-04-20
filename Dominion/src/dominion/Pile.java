@@ -13,7 +13,7 @@ public class Pile {
     private String name;
 
     private int amount;
-
+    
     public Pile() {
 
     }
@@ -40,12 +40,6 @@ public class Pile {
         return name;
     }
 
-//    public Pile getCards(){
-//        return this.pile;
-//    
-//    
-//    }
-//    
     public ArrayList<String> getCardsName() {
         ArrayList tempArrayList = new ArrayList<>();
 //        if (!pile.isEmpty()) {
