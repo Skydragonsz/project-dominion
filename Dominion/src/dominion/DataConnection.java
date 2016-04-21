@@ -13,11 +13,11 @@ import java.sql.*;
 public class DataConnection {
 // JDBC driver name and database URL
    static final String driver = "com.mysql.jdbc.Driver";  
-   static final String databaseConnection = "jdbc:mysql://localhost:3306/mysql?zeroDateTimeBehavior=convertToNull";
+   static final String databaseConnection = "jdbc:mysql://178.117.108.9:3306/dominiondb";
 
    //  Database credentials
-   static final String username = "root";
-   static final String password = "";
+   static final String username = "dominion";
+   static final String password = "dominion";
    private static int  idValue;
    
    public void connect() {
@@ -35,16 +35,17 @@ public class DataConnection {
       System.out.println("Creating statement...");
       stmt = conn.createStatement();
       String sql;
-      sql = "SELECT * FROM test;";
+      sql = "SELECT * FROM card;";
       ResultSet rs = stmt.executeQuery(sql);
 
       //STEP 5: Extract data from result set
       while(rs.next()){
          //Retrieve by column name
-         int id  =+ rs.getInt("value");
+         int id  =+ rs.getInt("id");
+         String name = rs.getString("name");
 
          //Display values
-         System.out.print("ID: " + id);
+         System.out.println("ID: " + id + ", Name: " + name);
          idValue = id;
       }
       //STEP 6: Clean-up environment
