@@ -28,6 +28,17 @@ public class Player extends TurnSegment {
         deck.shuffle();
         hand.addAmountOfCardsFrom(5, deck);
     }
+    
+    /* METHODS */
+    public Boolean checkForReactionCard() {
+        HasReaction = false;
+        for (int i = 0; i < hand.getAmount(); i++) {
+            if ("Reaction".equals(deck.getFromIndex(i).getType())) {
+                HasReaction = true;
+            }
+        }
+        return HasReaction;
+    }
 
     /* GETTERS */
     public int getVictoryPoints() {

@@ -1,6 +1,7 @@
 package dominion;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class CardSpecialAction {
 
@@ -81,7 +82,7 @@ public class CardSpecialAction {
 	}
 
 	public static void playMoat() {
-
+		stPlayer.getHand().addAmountOfCardsFrom(2, stPlayer.getDeck());
 	}
 
 	public static void playChancellor() {
@@ -89,7 +90,7 @@ public class CardSpecialAction {
 	}
 
 	public static void playWorkshop() {
-
+		 stPlayer.addInstancedCoin(4);
 	}
 
 	public static void playBureaucrat() {
@@ -105,7 +106,16 @@ public class CardSpecialAction {
 	}
 
 	public static void playMoneylender() {
+		boolean decision = true;
+		// TODO Check integratie Front-end (Positie moet door de Front-end
+		// meegegeven worden)
+		int cardPosition = 6;
+		if (decision == true) {
+			if (stPlayer.getHand().getFromIndex(cardPosition).getName() == "Copper") {
+				stPlayer.getHand().remove(stPlayer.getHand().getFromIndex(cardPosition));
+			}
 
+		}
 	}
 
 	public static void playRemodel() {
@@ -125,7 +135,11 @@ public class CardSpecialAction {
 	}
 
 	public static void playCouncilRoom() {
+		stPlayer.getHand().addAmountOfCardsFrom(4, stPlayer.getDeck());
 
+		for (int i = 0; i < stOtherPlayerList.size() - 1; i++) {
+			stOtherPlayerList.get(i).getHand().addAmountOfCardsFrom(4, stOtherPlayerList.get(i).getDeck());
+		}
 	}
 
 	public static void playLibrary() {
@@ -137,11 +151,30 @@ public class CardSpecialAction {
 	}
 
 	public static void playWitch() {
+		Card tmpWitch = new Card("Witch", "Attack", "description", 5, 0, 0, 2, 0, 0, true);
+		stPlayer.getHand().addAmountOfCardsFrom(2, stPlayer.getDeck());
 
+		for (int i = 0; i < stOtherPlayerList.size() - 1; i++) {
+			if (!stOtherPlayerList.get(i).checkForReactionCard()) {
+				stOtherPlayerList.get(i).getDeck().add(tmpWitch);
+				; // Add Curse card DECK
+			}
+		}
 	}
 
 	public static void playAdventurer() {
+		int cards = 0;
+		int indexCounter = 0;
+		while (cards < 2) {
+			if ("Treasure".equals(stPlayer.getDeck().getFromIndex(indexCounter).getType())) {
+				stPlayer.getHand().add(stPlayer.getDeck().getFromIndex(indexCounter));
+				stPlayer.getDeck().remove(stPlayer.getDeck().getFromIndex(indexCounter));
+				cards++;
+				indexCounter--;
 
+			}
+			indexCounter++;
+		}
 	}
 
 }

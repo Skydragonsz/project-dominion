@@ -67,6 +67,13 @@ public class Pile {
     public void add(Card card) {
         this.pile.add(card);
     }
+    
+    public void add(int amount, Card card) {
+        for(int i = 0; i < amount; i++){
+    	this.pile.add(card);
+        }
+    }
+
 
     public void addFrom(Card card, Pile otherPile) {
         this.pile.add(card);
