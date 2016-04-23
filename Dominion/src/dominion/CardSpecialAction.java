@@ -166,12 +166,11 @@ public class CardSpecialAction {
 		int cards = 0;
 		int indexCounter = 0;
 		while (cards < 2) {
-			if ("Treasure".equals(stPlayer.getDeck().getFromIndex(indexCounter).getType())) {
+			if ("3".equals(stPlayer.getDeck().getFromIndex(indexCounter).getType())) {
 				stPlayer.getHand().add(stPlayer.getDeck().getFromIndex(indexCounter));
 				stPlayer.getDeck().remove(stPlayer.getDeck().getFromIndex(indexCounter));
 				cards++;
 				indexCounter--;
-
 			}
 			indexCounter++;
 		}

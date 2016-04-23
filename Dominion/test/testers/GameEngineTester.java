@@ -20,10 +20,16 @@ import java.util.ArrayList;
 public class GameEngineTester {
     private GameEngine ge = new GameEngine();
     
-    
-    
-    
+    // Construct will run for every test.
     public GameEngineTester() {
+    	ge.initConnection();
+        ge.reset();
+        
+        ge.initAmountPlayers(4);
+        ge.initPlayer(1, "Quinten");
+        ge.initPlayer(2, "Coene");
+        ge.initPlayer(3, "Tim");
+        ge.initPlayer(4, "Arthur");
     }
     
     @BeforeClass
@@ -45,28 +51,15 @@ public class GameEngineTester {
     @Test
     public void testSetAmountPlayers(){
         System.out.println("testsetAmountPlayers");
-        ge.reset();
         
-        ge.initAmountPlayers(2);
-        ge.initPlayer(1, "Bob");
-        ge.initPlayer(2, "Rudy");
-        System.out.println(ge.getPlayer(1).getName());
-        System.out.println(ge.getPlayerList());
-        assertEquals(ge.getPlayerList().size(),2);
+        System.out.println("All players: " + ge.getPlayerList());
+        assertEquals(ge.getPlayerList().size(),4);
+        
     }
     
     @Test
     public void testGetOtherPlayers(){
-        //For now this function should give an error, see comments below.
         System.out.println("testGetOtherPlayers");
-        ge.reset();
-        
-        ge.initAmountPlayers(4);
-        ge.initPlayer(1, "Quinten");
-        ge.initPlayer(2, "Coene");
-        ge.initPlayer(3, "Tim");
-        ge.initPlayer(4, "Arthur");
-        
         //Gives all other players then said player.
         //What the result should be.
         ArrayList resultOtherPlayerArray =  new ArrayList();       
@@ -89,26 +82,17 @@ public class GameEngineTester {
         extra: assertArrayEquals isn't used since the values are ArrayLists and not Arrays.
         */
         
-        /* Q 13/04/2016 TEMP FIX, clear the array */
-        
-        
-        System.out.println(ge.getOtherPlayersList(ge.getPlayer(4)));
-        System.out.println(resultOtherPlayerArray);
-        System.out.println(ge.getPlayerList());
+        /* Q 13/04/2016 TEMP FIX, clear the array */  
+        System.out.println("All other players: " + ge.getOtherPlayersList(ge.getPlayer(4)));
+        System.out.println("All players: " + ge.getPlayerList());
+        System.out.println("Result: " + resultOtherPlayerArray);
         assertEquals(ge.getOtherPlayersList(ge.getPlayer(4)),resultOtherPlayerArray);
+    
     }
     
     @Test
     public void testGetOtherPlayersByName(){
-        ge.reset();
         System.out.println("testGetOtherPlayersByName");
-        
-        ge.initAmountPlayers(4);
-        ge.initPlayer(1, "Quinten");
-        ge.initPlayer(2, "Coene");
-        ge.initPlayer(3, "Tim");
-        ge.initPlayer(4, "Arthur");
-        
         String tempString = new String();
         String resultString = "QuintenCoeneTim";
         for(int i = 0;i < ge.getPlayerList().size() -1 ;i++){

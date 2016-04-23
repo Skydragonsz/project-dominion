@@ -9,23 +9,22 @@ import java.util.*;
 //TODO -- transfer Player methods to GameEngine
 public class GameEngine {
 
-    //Player
+    // Player
     private final static ArrayList<Player> playerList = new ArrayList<>();
     private final static ArrayList<Player> otherPlayerList = new ArrayList<>();
     private Player currentPlayer;
     private int PlayerCounter = 0;
 
-    //Turn
+    // Turn
     private ArrayList<Turn> turnList = new ArrayList<>();
 
-    //KINGDOM SET
+    // KINGDOM SET
     private final static ArrayList<Integer> kingdomSetCards = new ArrayList<>();
 
-    //TEMP -- TEST
-    private Card estate = new Card("Estate", "Victory card", "description", 3, 0, 0, 1, 2, 0, false);
-    private Card copper = new Card("Copper", "Treasure", "description", 6, 3, 0, 0, 0, 0, false);
-    private Pile starterDeck = new Pile(copper, copper, copper, copper, copper, copper, copper, estate, estate, estate);
-
+    // Cards
+    private ArrayList<Card> allCards;
+    private DataConnection databaseConnection = new DataConnection();
+    
     public GameEngine() {
 
     }
@@ -33,7 +32,7 @@ public class GameEngine {
     public static void main(String[] args) {
 
     }
-
+    
     /* INIT */
     public void initAmountPlayers(int amount) {
         for (int i = 0; i < amount; i++) {
@@ -45,11 +44,27 @@ public class GameEngine {
         getPlayer(playernr).setDeck(generateDeck());
         getPlayer(playernr).setName(name);
     }
+    
+    public void initConnection(){
+        allCards = databaseConnection.getAllCards();   	
+    }
 
     /* METHODS */
     public Pile generateDeck() {
-
-        return new Pile(copper, copper, copper, copper, copper, copper, copper, estate, estate, estate);
+    	Card copper = CallCard("Copper");
+    	Card estate = CallCard("Estate");
+        return new Pile(copper,copper,copper,copper,copper,copper,copper,estate,estate,estate);
+    }
+    
+    public Card CallCard(String name){
+    	Card foundCard = null;
+        for (Card card : allCards){
+        	if (name.equals(card.getName())){
+        		foundCard = card;
+        		break;
+        	}
+        }
+        return foundCard;
     }
     
     public void playCard(String cardName, Player player, ArrayList<Player> otherPlayerList){

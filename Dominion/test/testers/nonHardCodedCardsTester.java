@@ -14,6 +14,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 import dominion.Card;
+import dominion.GameEngine;
 import dominion.Pile;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,20 +24,33 @@ import java.util.Arrays;
  * @author Quint
  */
 public class nonHardCodedCardsTester {
-
-    private Card village = new Card("Village", "Action", "description", 3, 0, 0, 1, 2, 0, false);
-    private Card gold = new Card("Gold", "Treasure", "description", 6, 3, 0, 0, 0, 0, false);
-    private Pile goldPile = new Pile(gold,30);    
+	
+    private GameEngine gameEngine = new GameEngine();
+    
+    private Card village;
+    private Card gold;
+    private Pile goldPile;    
     private Pile pileOfTwo;
     
-    private Pile deck = new Pile(gold,gold,gold,gold,gold,gold,gold,village,village,village);
+    private Pile deck;
     private Pile hand = new Pile();
     
-    private Card province = new Card("Province", "Victory", "description", 6, 3, 0, 0, 0, 0, false);
-    private Pile provincePile = new Pile(province,1);
-    private Board board = new Board(goldPile, provincePile);
+    private Card province;
+    private Pile provincePile;
+    private Board board;
     
     public nonHardCodedCardsTester() {
+    	gameEngine.initConnection();
+    	
+        village = gameEngine.CallCard("Village");
+        gold = gameEngine.CallCard("Gold");
+        province = gameEngine.CallCard("Province");
+        
+        deck = new Pile(gold,gold,gold,gold,gold,gold,gold,village,village,village);
+        provincePile = new Pile(province,1);
+        goldPile = new Pile(gold,30);
+        board = new Board(goldPile, provincePile);
+        
     }
 
     @BeforeClass

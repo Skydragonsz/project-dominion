@@ -1,80 +1,89 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dominion;
+
 import java.sql.*;
+import java.util.ArrayList;
 
 /**
  *
  * @author Quinten
  */
 public class DataConnection {
-// JDBC driver name and database URL
-   static final String driver = "com.mysql.jdbc.Driver";  
-   static final String databaseConnection = "jdbc:mysql://178.117.108.9:3306/dominiondb";
+	// Info connection
+	static final String driver = "com.mysql.jdbc.Driver";
+	static final String databaseConnection = "jdbc:mysql://178.117.108.9:3306/dominiondb";
 
-   //  Database credentials
-   static final String username = "dominion";
-   static final String password = "dominion";
-   private static int  idValue;
-   
-   public void connect() {
-   Connection conn = null;
-   Statement stmt = null;
-   try{
-      //STEP 2: Register JDBC driver
-      Class.forName("com.mysql.jdbc.Driver");
+	static final String username = "dominion";
+	static final String password = "dominion";
+	
+	private ArrayList<Card> allCards = new ArrayList<Card>();
 
-      //STEP 3: Open a connection
-      System.out.println("Connecting to database...");
-      conn = DriverManager.getConnection(databaseConnection,username,password);
+	public ArrayList<Card> getAllCards() {
+		Connection conn = null;
+		Statement stmt = null;
+		try {
+			// JDBC Driver
+			Class.forName("com.mysql.jdbc.Driver");
 
-      //STEP 4: Execute a query
-      System.out.println("Creating statement...");
-      stmt = conn.createStatement();
-      String sql;
-      sql = "SELECT * FROM card;";
-      ResultSet rs = stmt.executeQuery(sql);
+			// Connection to database
+			conn = DriverManager.getConnection(databaseConnection, username, password);
 
-      //STEP 5: Extract data from result set
-      while(rs.next()){
-         //Retrieve by column name
-         int id  =+ rs.getInt("id");
-         String name = rs.getString("name");
+			// Query
+			stmt = conn.createStatement();
+			String sql;
+			// TODO: Query statement still needs joins.
+			// ex: [Now] CardType = 1 || [What we need] CardType = Treasure
+			sql = "SELECT * FROM card;";
+			ResultSet rs = stmt.executeQuery(sql);
 
-         //Display values
-         System.out.println("ID: " + id + ", Name: " + name);
-         idValue = id;
-      }
-      //STEP 6: Clean-up environment
-      rs.close();
-      stmt.close();
-      conn.close();
-   }catch(SQLException se){
-      //Handle errors for JDBC
-      se.printStackTrace();
-   }catch(Exception e){
-      //Handle errors for Class.forName
-      e.printStackTrace();
-   }finally{
-      //finally block used to close resources
-      try{
-         if(stmt!=null)
-            stmt.close();
-      }catch(SQLException se2){
-      }// nothing we can do
-      try{
-         if(conn!=null)
-            conn.close();
-      }catch(SQLException se){
-         se.printStackTrace();
-      }//end finally try
-   }//end try
-   System.out.println("Goodbye!");
-}//end main
-   public int returnSomething(){
-   return idValue;
-   }
-}//end FirstExample
+			// Processing receive data
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String name = rs.getString("name");
+				String type = rs.getString("cardTypeID");
+				String description = rs.getString("info");
+
+				int cost = rs.getInt("cost");
+				int value = rs.getInt("value");
+
+				int additionalMoney = rs.getInt("addMoney");
+				int additionalCard = rs.getInt("addCard");
+				int additionalAction = rs.getInt("addAction");
+				int additionalBuy = rs.getInt("addBuy");
+
+				boolean hasSpecialAction = rs.getBoolean("hasSpecialAction");
+
+				allCards.add(new Card(name, type, description, cost, value, additionalMoney, additionalCard,
+						additionalAction, additionalBuy, hasSpecialAction));
+
+				// Print Test
+				// System.out.println("ID: " + id + ", Name: " + name + " : " +
+				// description + " : " + type + " : " + cost + " : " + value + "
+				// : " + additionalMoney + " : " + hasSpecialAction);
+			}
+			// End
+			rs.close();
+			stmt.close();
+			conn.close();
+		} catch (SQLException se) {
+			// Handle errors for JDBC
+			se.printStackTrace();
+		} catch (Exception e) {
+			// Handle errors for Class.forName
+			e.printStackTrace();
+		} finally {
+			// finally block used to close resources
+			try {
+				if (stmt != null)
+					stmt.close();
+			} catch (SQLException se2) {
+			} // nothing we can do
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			} // end finally try
+		} // end try
+		return allCards;
+	}// end main
+}

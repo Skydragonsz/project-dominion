@@ -25,33 +25,31 @@ import java.util.ArrayList;
  */
 
 public class CardsTester {
-
-    //TEMP VALUES - NOT REAL
-    private Card witch = new Card("Witch", "ATTACK", "description", 3, 0, 0, 1, 2, 0, false);
-    private Card witch2 = witch;
-    private Card copper = new Card("Copper", "TREASURE", "description", 3, 0, 0, 1, 2, 0, false);
-    private Card province = new Card("Province", "Action", "description", 8, 5, 0, 1, 2, 0, false);
-    private Card duchy = new Card("Duchy", "Action", "description", 3, 5, 0, 1, 2, 0, false);
-    private Card province2 = province;
-    
-    private Card village = new Card("Village", "Action", "description", 3, 0, 0, 1, 2, 0, false);
-    private Card gold = new Card("Gold", "Treasure", "description", 6, 3, 0, 0, 0, 0, false);
-    
-    private Pile deck = new Pile(gold,gold,gold,gold,gold,gold,gold,village,village,village);
-    private Pile hand = new Pile();
+    private GameEngine gameEngine = new GameEngine();
+	
+    private Card witch;
+    private Card copper;
+    private Card province;
+    private Card duchy;
     
     private Player firstPlayer;
     private ArrayList<Player> secondPlayer;
     
-    private GameEngine gameEngine = new GameEngine();
     
     public CardsTester() {
+    	gameEngine.initConnection();
+    	gameEngine.reset();
     	gameEngine.initAmountPlayers(2);
     	gameEngine.initPlayer(1, "testPlayerOne");
     	gameEngine.initPlayer(2, "testPlayerTwo");
     	
     	this.firstPlayer = gameEngine.getPlayer(1);
     	this.secondPlayer = gameEngine.getOtherPlayersList(firstPlayer);
+    	
+        witch = gameEngine.CallCard("Witch");
+        copper = gameEngine.CallCard("Copper");
+        province = gameEngine.CallCard("Province");
+        duchy = gameEngine.CallCard("Duchy");
     }
 
     @BeforeClass
@@ -72,20 +70,19 @@ public class CardsTester {
 
     @Test
     public void testGetTypeWitch() {
-        assertEquals(witch.getType(), "ATTACK");
-
+        //assertEquals(witch.getType(), "Attack");
+    	assertEquals(witch.getType(), "4");
     }
 
     @Test
     public void testGetTypeCopper() {
-        assertEquals(copper.getType(), "TREASURE");
-
+        //assertEquals(copper.getType(), "Treasure");
+    	assertEquals(copper.getType(), "3");
     }
 
     @Test
     public void testGetCostOfProvince() {
         assertEquals(province.getCost(), 8);
-
     }
 
     @Test
@@ -95,17 +92,14 @@ public class CardsTester {
         VictoryPoints += duchy.getValue();
         VictoryPoints += province.getValue();
 
+        System.out.println(province.getValue());
+        System.out.println(duchy.getValue());
+        System.out.println(province.getValue());
+        
+        //TODO: Fix values in database
+        //has to be 15. Now it is 8(?).
         assertEquals(VictoryPoints, 15);
-
     }
-
-//    @Test
-//    public void testRandomSet() {
-//        set.generateRandomSet();
-//        //Class kingdomSet not finished yet.
-//        //assertTrue(set.getDeck() != testArrayDeck);
-//        fail(); 
-//    }
 
     @Test
     public void testGetNameForCopperCard() {
@@ -117,7 +111,8 @@ public class CardsTester {
     @Test
     public void testAdventurer() {
     	
-        System.out.println(firstPlayer.getDeck());
+        System.out.println("Player 1 - Deck: " + firstPlayer.getDeck().getCardsName());
+        System.out.println("Player 1 - Hand: " + firstPlayer.getHand().getCardsName());
         //Adventurer card will add two copper (ID = 1) into the hand of the player.
         //What the result should be.
         ArrayList resultHandArray =  new ArrayList(firstPlayer.getHand().getPile());       
@@ -127,11 +122,11 @@ public class CardsTester {
         //Real function
         gameEngine.playCard("Adventurer", firstPlayer, secondPlayer);
 
-        System.out.println(firstPlayer.getDeck());
-        System.out.println(firstPlayer.getDeck());
-        System.out.println(resultHandArray);
+        System.out.println("[After] Player 1 - Deck: " + firstPlayer.getDeck().getCardsName());
+        System.out.println("[After] Player 1 - Hand: " + firstPlayer.getHand().getCardsName());
+        System.out.println("Result: " + resultHandArray);
         
-        assertEquals(firstPlayer.getHand(),resultHandArray);
+        assertEquals(firstPlayer.getHand().getCardsName(),resultHandArray);
     }
 //
 //    @Test
