@@ -128,9 +128,30 @@ public class CardsTester {
         
         assertEquals(firstPlayer.getHand().getCardsName(),resultHandArray);
     }
+    
+    @Test
+    public void testChancellor() {
+    	firstPlayer.getDeck().add(gameEngine.CallCard("Chancellor"));
+    	firstPlayer.getHand().addFrom(gameEngine.CallCard("Chancellor"), firstPlayer.getDeck());
+    	
+    	ArrayList resultDiscardArray = new ArrayList(firstPlayer.getDiscardPile().getCardsName());
+    	resultDiscardArray.add(firstPlayer.getDeck().getCardsName());
+    	
+    	System.out.println("Player 1 - Deck: " + firstPlayer.getDeck().getCardsName());
+    	System.out.println("Player 1 - Hand: " + firstPlayer.getHand().getCardsName());
+    	
+    	gameEngine.playCard("Chancellor", firstPlayer, secondPlayer);
+    	
+    	System.out.println("[After] Player 1 - Deck: " + firstPlayer.getDeck().getCardsName());
+        System.out.println("[After] Player 1 - Hand: " + firstPlayer.getHand().getCardsName());
+        System.out.println("[After] Player 1 - Discard: " + firstPlayer.getDiscardPile().getCardsName());
+        
+        assertEquals(firstPlayer.getDiscardPile().getCardsName(),resultDiscardArray);
+    	
+    }
 //
 //    @Test
-//    //Test doesn't succeed(?). doesn't hava an assert_____();
+//    //Test doesn't succeed(?). doesn't have an assert_____();
 //    //Does the function work?
 //    public void testBureaucrat() {
 //        ge.reset();

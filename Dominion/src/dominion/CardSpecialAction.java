@@ -97,7 +97,12 @@ public class CardSpecialAction {
 	}
 
 	public static void playChancellor() {
-//done
+		//+2 Coins, You may immediately put your deck into your discard pile.
+		boolean choice = true;
+		if (choice == true){
+			stPlayer.getDiscardPile().addAmountOfCardsFrom(stPlayer.getDeck().getAmount(), stPlayer.getDeck());
+		}
+		
 	}
 
 	public static void playWorkshop() {
@@ -106,7 +111,19 @@ public class CardSpecialAction {
 	}
 
 	public static void playBureaucrat() {
-//done
+		//Gain a silver card, put it on top of your deck
+		Card tmpSilver = new Card("Silver", "Treasure", "description", 3, 2, 0, 0, 0, 0, false);
+		stPlayer.getDeck().add(tmpSilver);
+		//Each other player reveals a Victory card from his hand and puts it on his deck (or reveals a hand with no Victory cards).
+		for (int i = 0; i < stOtherPlayerList.size() - 1; i++) {
+			for (int j = 0; j < stOtherPlayerList.get(i).getHand().getAmount(); j++){
+				if (stOtherPlayerList.get(i).getHand().getFromIndex(j).getType() == "Victory") {
+					stOtherPlayerList.get(i).getDeck().addFrom(stOtherPlayerList.get(i).getHand().getFromIndex(j), stOtherPlayerList.get(i).getHand());
+				}
+			}
+				
+		}
+		
 	}
 
 	public static void playFeast() {

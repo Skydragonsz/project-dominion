@@ -95,8 +95,8 @@ public class Pile {
 
     public void addAmountOfCardsFrom(int amount, Pile otherPile) {
         for (int i = 0; i < amount; i++) {
-            this.pile.add(otherPile.getFromIndex(i));
-            otherPile.remove(otherPile.getFromIndex(i));
+            this.pile.add(otherPile.getFromIndex(0));
+            otherPile.remove(otherPile.getFromIndex(0));
         }
 
     }
