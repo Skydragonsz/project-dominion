@@ -74,11 +74,22 @@ public class CardSpecialAction {
 	}
 
 	public static void playCellar() {
+		// ArrayList selectedCards = selectableCards();
+		int i = selectedCards.size();
+		for (Card card : selectedCards) {
+			stPlayer.getDiscardPile().addFrom(card, stPlayer.getHand());
+		}
 
+		stPlayer.getHand().addAmountOfCardsFrom(i, stPlayer.getDeck());
 	}
 
 	public static void playChapel() {
-
+		// ArrayList selectedCards = selectableCards(4);
+		int i = selectedCards.size();
+		for (Card card : selectedCards) {
+			stPlayer.getHand().remove(card);
+			;
+		}
 	}
 
 	public static void playMoat() {
@@ -86,23 +97,33 @@ public class CardSpecialAction {
 	}
 
 	public static void playChancellor() {
-
+//done
 	}
 
 	public static void playWorkshop() {
-		 stPlayer.addInstancedCoin(4);
+		stPlayer.addInstancedCoin(4);
+		// showInstancedBuyMenu();
 	}
 
 	public static void playBureaucrat() {
-
+//done
 	}
 
 	public static void playFeast() {
-
+		stPlayer.getHand().remove(stPlayer.getHand().findCard("Feast"));
+		stPlayer.addInstancedCoin(5);
+		// showInstancedBuyMenu();
 	}
 
 	public static void playMilitia() {
-
+		for (int i = 0; i < stOtherPlayerList.size() - 1; i++) {
+			////stOtherPlayerList.get(i).getHand().addAmountOfCardsFrom(4, stOtherPlayerList.get(i).getDeck());
+			// ArrayList selectedCards = selectableCards(4);
+			int size = selectedCards.size();
+			for (Card card : selectedCards) {
+				stOtherPlayerList.get(i).getDiscardPile().addFrom(card, stOtherPlayerList.get(i).getHand());
+			}
+		}		
 	}
 
 	public static void playMoneylender() {
@@ -119,7 +140,10 @@ public class CardSpecialAction {
 	}
 
 	public static void playRemodel() {
-
+		// ArrayList selectedCards = selectableCards(1);
+		int size = selectedCards.size();
+		strPlayer.
+		stPlayer.getHand().remove(selectedCard.get(0);
 	}
 
 	public static void playSpy() {
@@ -157,7 +181,7 @@ public class CardSpecialAction {
 		for (int i = 0; i < stOtherPlayerList.size() - 1; i++) {
 			if (!stOtherPlayerList.get(i).checkForReactionCard()) {
 				stOtherPlayerList.get(i).getDeck().add(tmpWitch);
-				; // Add Curse card DECK
+				// Add Curse card DECK
 			}
 		}
 	}
