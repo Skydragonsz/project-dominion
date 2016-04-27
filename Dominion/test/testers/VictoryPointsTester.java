@@ -5,12 +5,9 @@
  */
 package testers;
 
+import dominion.Card;
 import dominion.GameEngine;
 import dominion.VictoryPoints;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -21,7 +18,11 @@ import static org.junit.Assert.*;
 public class VictoryPointsTester {
     private VictoryPoints vp = new VictoryPoints();
     private GameEngine ge = new GameEngine();
-    
+    private Card province = new Card("Province","VICTORY","none", 0,6,0,0,0,0,false);
+    private Card copper = new Card("Copper","TREASURE","none", 0,0,0,0,0,0,false);
+    private Card ducky = new Card("Duchy","VICTORY","none", 0,3,0,0,0,0,false);
+    private Card garden = new Card("Garden","VICTORY","none", 0,0,0,0,0,0,false);
+    private Card curse = new Card("Curse","VICTORY","none", 0,-1,0,0,0,0,false);
     public VictoryPointsTester() {
     }
     
@@ -29,34 +30,33 @@ public class VictoryPointsTester {
     @Test
     public void testVictoryPoints(){
         ge.initAmountPlayers(3);
-        ge.getPlayer(1).addCardToDeck(1);
-        ge.getPlayer(1).addCardToDeck(6);
-        ge.getPlayer(1).addCardToDeck(5);
-        ge.getPlayer(1).addCardToDeck(1);
-        ge.getPlayer(1).addCardToDeck(1);
-        ge.getPlayer(1).addCardToDeck(1);
-        ge.getPlayer(1).addCardToDeck(1);
-        ge.getPlayer(1).addCardToDeck(1);
-        ge.getPlayer(1).addCardToDeck(1);
-        ge.getPlayer(1).addCardToDeck(1);
-        ge.getPlayer(1).addCardToDeck(1);
-        ge.getPlayer(1).addCardToDeck(1);
-        ge.getPlayer(1).addCardToDeck(1);
-        ge.getPlayer(1).addCardToDeck(1);
-        ge.getPlayer(1).addCardToDeck(17);
-        ge.getPlayer(1).addCardToDeck(17);
-        ge.getPlayer(1).addCardToDeck(7);
+        ge.getPlayer(1).getDeck().add(copper);
+        ge.getPlayer(1).getDeck().add(province);//6
+        ge.getPlayer(1).getDeck().add(copper);
+        ge.getPlayer(1).getDeck().add(copper);
+        ge.getPlayer(1).getDeck().add(copper);
+        ge.getPlayer(1).getDeck().add(ducky);//3
+        ge.getPlayer(1).getDeck().add(copper);
+        ge.getPlayer(1).getDeck().add(copper);
+        ge.getPlayer(1).getDeck().add(ducky);//3
+        ge.getPlayer(1).getDeck().add(copper);
+        ge.getPlayer(1).getDeck().add(copper);
+        ge.getPlayer(1).getDeck().add(copper);
+        ge.getPlayer(1).getDeck().add(copper);
+        ge.getPlayer(1).getDeck().add(copper);
+        ge.getPlayer(1).getDeck().add(garden);//1 omdat gehele deling 17/10 = 1
+        ge.getPlayer(1).getDeck().add(garden);//1 omdat gehele deling 17/10 = 1
+        ge.getPlayer(1).getDeck().add(curse);//-1
         
         
         
-        System.out.println("Deck size: "+ge.getPlayer(1).getCardsInDeck().size());
+        System.out.println("Deck size: "+ge.getPlayer(1).getDeck().getPile().size());
                 
-        //22 cards in deck 2 
-        //1+1+1 = 3+6+6+3 + 2 van garden
+        //6+3+3+1+1-1 = 13
         //
         vp.victoryPointsCalc(ge);
         System.out.println(ge.getPlayer(1).getVictoryPoints());
-        assertEquals(ge.getPlayer(1).getVictoryPoints(),15);
+        assertEquals(ge.getPlayer(1).getVictoryPoints(),13);
         
     }
 }

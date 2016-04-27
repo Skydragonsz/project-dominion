@@ -40,15 +40,16 @@ public class Player extends TurnSegment {
         return HasReaction;
     }
     
-    public Card findVictoryCard() {
-    	Card foundCard = new Card();
-    	for (int i = 0; i < hand.getAmount(); i++ ) {
-    		if ("Victory".equals(hand.getFromIndex(i).getType())) {
-    			foundCard = hand.getFromIndex(i);
-    		}
-    	}
-    	return foundCard;
-    }
+//    public Card findVictoryCard() {
+//    	Card foundCard = new Card();
+//    	for (int i = 0; i < hand.getAmount(); i++ ) {
+//    		if ("Victory".equals(hand.getFromIndex(i).getType())) {
+//    			foundCard = hand.getFromIndex(i);
+//    		}
+//    	}
+//    	return foundCard;
+//    }
+
 
     /* GETTERS */
     public int getVictoryPoints() {

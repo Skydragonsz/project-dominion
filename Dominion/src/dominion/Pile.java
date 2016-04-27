@@ -32,7 +32,7 @@ public class Pile {
         this.name = KingdomCard.getName();
     }
 
-    public ArrayList getPile() {
+    public ArrayList<Card> getPile() {
         return pile;
     }
 

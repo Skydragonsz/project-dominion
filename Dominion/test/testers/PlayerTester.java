@@ -51,24 +51,24 @@ public class PlayerTester {
     
     @Test
     public void testPrintedCards(){
-        assertEquals(p.getCardsInDeck(),testArrayDeck);
+        assertEquals(p.getDeck(),testArrayDeck);
     }
     
     @Test
     public void testShuffle(){
     //Het deck van de player p word geschud.
-        System.out.println(p.getCardsInDeck());
-        p.shuffleDeck();
-        System.out.println(p.getCardsInDeck());
+        System.out.println(p.getDeck());
+        p.getDeck().shuffle();
+        System.out.println(p.getDeck());
     //Kijk als deze deck niet gelijk is aan de begin deck.
-        assertTrue(p.getCardsInDeck() != testArrayDeck);
+        assertTrue(p.getDeck() != testArrayDeck);
     } 
         
     @Test
     public void testDiscardDeckToPile(){
     //+Visuele feedback.    
-        System.out.println("Deck"+p.getCardsInDeck());
-        System.out.println("Hand"+p.getCardsInHand());
+        System.out.println("Deck"+p.getDeck());
+        System.out.println("Hand"+p.getHand());
         System.out.println("Discard pile "+p.getDiscardPile());
         System.out.println("^BEGIN STATE^");
         
@@ -78,22 +78,22 @@ public class PlayerTester {
         ////System.out.println("^SHUFFLE^");  
         
         //Pakt drie kaarten van het deck.    
-        p.drawCards(3);
+        p.getHand().addAmountOfCardsFrom(3, p.getDeck());
         
         //Discard deze kaarten.
-        p.discardDeckToPile();
+        p.getDiscardPile().addAmountOfCardsFrom(p.getDeck().getPile().size(), p.getDeck());
         System.out.println("Discard pile "+p.getDiscardPile());
-        System.out.println("Deck "+p.getCardsInDeck());
-        System.out.println("Cards in hand"+p.getCardsInHand());
+        System.out.println("Deck "+p.getDeck());
+        System.out.println("Cards in hand"+p.getHand());
         System.out.println("^Discard pile vol^");
         
         //
-        p.drawCards(5);
+        p.getHand().addAmountOfCardsFrom(5, p.getDeck());
         System.out.println("Discard pile "+p.getDiscardPile());
         
-        System.out.println("Deck "+p.getCardsInDeck());
-        System.out.println("Cards in hand"+p.getCardsInHand());
-        assertEquals(p.getCardsInHand(), testArrayHand);
+        System.out.println("Deck "+p.getDeck());
+        System.out.println("Cards in hand"+p.getHand());
+        assertEquals(p.getHand(), testArrayHand);
 
     
     }
