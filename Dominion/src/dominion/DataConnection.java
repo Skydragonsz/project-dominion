@@ -30,16 +30,19 @@ public class DataConnection {
 			// Query
 			stmt = conn.createStatement();
 			String sql;
-			// TODO: Query statement still needs joins.
-			// ex: [Now] CardType = 1 || [What we need] CardType = Treasure
-			sql = "SELECT * FROM card;";
+
+			sql = "SELECT card.ID, card.name, card.cost, cardtype.cardType, card.info, card.addMoney, card.addBuy, card.addAction, card.addCard, card.hasSpecialAction, card.value";
+			sql += " FROM card";
+			sql += " INNER JOIN cardtype";
+			sql += " ON card.cardTypeID = cardtype.cardTypeID";
+			sql += " ORDER BY card.ID;";
 			ResultSet rs = stmt.executeQuery(sql);
 
 			// Processing receive data
 			while (rs.next()) {
-				int id = rs.getInt("id");
+
 				String name = rs.getString("name");
-				String type = rs.getString("cardTypeID");
+				String type = rs.getString("cardType");
 				String description = rs.getString("info");
 
 				int cost = rs.getInt("cost");

@@ -48,13 +48,15 @@ public class dbConnectionTester {
     @Test
     public void testConnection(){
         DataConnection databaseConnection = new DataConnection();
-        databaseConnection.getAllCards();
+        //databaseConnection.getAllCards();
         
         for (Card card : databaseConnection.getAllCards()){
-        System.out.println(card.getName() + " || "+ card.getCost());
+        System.out.println(card.getName() + " || "+ card.getCost() + " || "+ card.getType());
         
         }
     
     }
+    
+    
     
 }
