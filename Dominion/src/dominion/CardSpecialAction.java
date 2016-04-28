@@ -3,15 +3,18 @@ package dominion;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class CardSpecialAction {
+public class CardSpecialAction  {
 
 	private static Player stPlayer;
 	private static ArrayList<Player> stOtherPlayerList;
+	private static GameEngine stgameEngine;
 
-	public static void playSpecialAction(String cardName, Player player, ArrayList<Player> otherPlayerList) {
+	public static void playSpecialAction(String cardName, Player player, ArrayList<Player> otherPlayerList, GameEngine gameEngine) {
 
 		stPlayer = player;
 		stOtherPlayerList = otherPlayerList;
+		stgameEngine = gameEngine;
+		stgameEngine.initConnection();
 
 		switch (cardName) {
 		case "Cellar":
@@ -112,12 +115,11 @@ public class CardSpecialAction {
 
 	public static void playBureaucrat() {
 		//Gain a silver card, put it on top of your deck
-		Card tmpSilver = new Card("Silver", "Treasure", "description", 3, 2, 0, 0, 0, 0, false);
-		stPlayer.getDeck().add(tmpSilver);
+		stPlayer.getDeck().add(stgameEngine.CallCard("Silver"));
 		//Each other player reveals a Victory card from his hand and puts it on his deck (or reveals a hand with no Victory cards).
 		for (int i = 0; i < stOtherPlayerList.size(); i++) {
 			for (int j = 0; j < stOtherPlayerList.get(i).getHand().getAmount(); j++){
-				if (stOtherPlayerList.get(i).getHand().getFromIndex(j).getType() == "Victory") {
+				if ("Victory".equals(stOtherPlayerList.get(i).getHand().getFromIndex(j).getType())) {
 					stOtherPlayerList.get(i).getDeck().addFrom(stOtherPlayerList.get(i).getHand().getFromIndex(j), stOtherPlayerList.get(i).getHand());
 				}
 			}
@@ -148,7 +150,7 @@ public class CardSpecialAction {
 		// TODO Check integratie Front-end (Positie moet door de Front-end
 		// meegegeven worden)
 		int cardPosition = 6;
-		if (decision == true) {
+		if (decision) {
 			if (stPlayer.getHand().getFromIndex(cardPosition).getName() == "Copper") {
 				stPlayer.getHand().remove(stPlayer.getHand().getFromIndex(cardPosition));
 			}
@@ -164,15 +166,25 @@ public class CardSpecialAction {
 	}
 
 	public static void playSpy() {
-
+// Each player (including you) reveals the top card of his deck and either discards it or puts it back, your choice
+		boolean choice = true;
+		if (choice){
+			stPlayer.getDiscardPile().addAmountOfCardsFrom(1, stPlayer.getDeck());
+		}
+		for (int i = 0; i < stOtherPlayerList.size(); i++) {
+			if (choice) {
+			stOtherPlayerList.get(i).getDiscardPile().addAmountOfCardsFrom(1, stOtherPlayerList.get(0).getDeck());
+			}
+		}
 	}
 
 	public static void playThief() {
-
+		// Each other player reveals the top 2 cards of his deck. If they revealed any Treasure cards, they trash 
+		// one of them that you choose. You may gain any or all (?) of these trashed cards. They discard the other revealed cards.
 	}
 
 	public static void playThroneRoom() {
-
+		// Choose an Action card in your hand. Play it twice.
 	}
 
 	public static void playCouncilRoom() {
@@ -184,20 +196,33 @@ public class CardSpecialAction {
 	}
 
 	public static void playLibrary() {
-
+		// Draw until you have 7 cards in hand. You may set aside any Action cards drawn this way, 
+		// as you draw them; discard the set aside cards after you finish drawing.
+		boolean choice = true;
+		ArrayList aside = new ArrayList();
+		for (int i = 0; i < 7; i++ ) {
+			Card drawnCard = stPlayer.getDeck().getFromIndex(0);
+			//stPlayer.getHand().addAmountOfCardsFrom(1, stPlayer.getDeck());
+			stPlayer.getHand().addFrom(drawnCard, stPlayer.getDeck());
+			if ("Action".equals(drawnCard.getType()) || "Attack".equals(drawnCard.getType())) {
+				if (choice) {
+					aside.add(drawnCard);
+				}
+			}
+		}
+		stPlayer.getDiscardPile().getPile().addAll(aside);
 	}
 
 	public static void playMine() {
-
+		// Trash a Treasure card from your hand. Gain a Treasure card costing up to 3 Coins more; put it into your hand.
 	}
 
 	public static void playWitch() {
-		Card tmpWitch = new Card("Witch", "Attack", "description", 5, 0, 0, 2, 0, 0, true);
 		stPlayer.getHand().addAmountOfCardsFrom(2, stPlayer.getDeck());
 
 		for (int i = 0; i < stOtherPlayerList.size() - 1; i++) {
 			if (!stOtherPlayerList.get(i).checkForReactionCard()) {
-				stOtherPlayerList.get(i).getDeck().add(tmpWitch);
+				stOtherPlayerList.get(i).getDeck().add(stgameEngine.CallCard("Witch"));
 				// Add Curse card DECK
 			}
 		}

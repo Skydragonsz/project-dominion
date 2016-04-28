@@ -67,8 +67,8 @@ public class GameEngine {
         return foundCard;
     }
     
-    public void playCard(String cardName, Player player, ArrayList<Player> otherPlayerList){
-    	CardSpecialAction.playSpecialAction(cardName, player, otherPlayerList);
+    public void playCard(String cardName, Player player, ArrayList<Player> otherPlayerList, GameEngine gameEngine){
+    	CardSpecialAction.playSpecialAction(cardName, player, otherPlayerList, gameEngine);
     }
 
 

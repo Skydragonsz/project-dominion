@@ -120,7 +120,7 @@ public class CardsTester {
         resultHandArray.add("Copper");
 
         //Real function
-        gameEngine.playCard("Adventurer", firstPlayer, secondPlayer);
+        gameEngine.playCard("Adventurer", firstPlayer, secondPlayer, gameEngine);
 
         System.out.println("[After] Player 1 - Deck: " + firstPlayer.getDeck().getCardsName());
         System.out.println("[After] Player 1 - Hand: " + firstPlayer.getHand().getCardsName());
@@ -140,7 +140,7 @@ public class CardsTester {
     	System.out.println("Player 1 - Deck: " + firstPlayer.getDeck().getCardsName());
     	System.out.println("Player 1 - Hand: " + firstPlayer.getHand().getCardsName());
     	
-    	gameEngine.playCard("Chancellor", firstPlayer, secondPlayer);
+    	gameEngine.playCard("Chancellor", firstPlayer, secondPlayer, gameEngine);
     	
     	System.out.println("[After] Player 1 - Deck: " + firstPlayer.getDeck().getCardsName());
         System.out.println("[After] Player 1 - Hand: " + firstPlayer.getHand().getCardsName());
@@ -149,44 +149,6 @@ public class CardsTester {
         assertEquals(firstPlayer.getDiscardPile().getCardsName(),resultDiscardArray);
     	
     }
-//
-//    @Test
-//    //Test doesn't succeed(?). doesn't have an assert_____();
-//    //Does the function work?
-//    public void testBureaucrat() {
-//        ge.reset();
-//        ge.initAmountPlayers(3);
-//        ge.initPlayer(1, "Bob");
-//        ge.initPlayer(2, "Ross");
-//        ge.initPlayer(3, "Arthur");
-//
-//        ge.getPlayer(1).addCardToHand(1);
-//        ge.getPlayer(1).addCardToHand(6);
-//        ge.getPlayer(1).addCardToHand(3);
-//
-//        ge.getPlayer(2).addCardToHand(1);
-//        ge.getPlayer(2).addCardToHand(3);
-//        ge.getPlayer(2).addCardToHand(3);
-//
-//        ge.getPlayer(3).addCardToHand(15);
-//        ge.getPlayer(3).addCardToHand(5);
-//        ge.getPlayer(3).addCardToHand(1);
-//        ge.getPlayer(3).addCardToHand(13);
-//
-//        for (int i = 1; i <= ge.getPlayerList().size(); i++) {
-//            System.out.println(ge.getPlayer(i).getName() + " " + ge.getPlayer(i).getCardsInHand());
-//        }
-//        
-//        
-//        System.out.println(ge.getPlayer(3));
-//        System.out.println(col.getCard(15) );       
-//        ap.placeCard(col.getCard(15), ge.getPlayer(3));
-//
-//        for (int i = 1; i <= ge.getPlayerList().size(); i++) {
-//            System.out.println("AFTER: " + ge.getPlayer(i).getName() + " " + ge.getPlayer(i).getCardsInHand());
-//        }
-//        //fail(); 
-//    }
     
     @Test
     public void testBureaucrat() {
@@ -204,7 +166,7 @@ public class CardsTester {
     	
     	secondPlayer.get(0).getHand().add(gameEngine.CallCard("Duchy"));
     	
-    	gameEngine.playCard("Bureaucrat", firstPlayer, secondPlayer);
+    	gameEngine.playCard("Bureaucrat", firstPlayer, secondPlayer, gameEngine);
     	
     	System.out.println("Player 1 - Deck after Card: " + firstPlayer.getDeck().getCardsName());
     	
@@ -212,5 +174,48 @@ public class CardsTester {
     	System.out.println("Player 2 - Hand after Card: " + secondPlayer.get(0).getHand().getCardsName());
     	
     	assertEquals(secondPlayer.get(0).getDeck().getCardsName(),resultDeckArray);
+    }
+    
+    @Test
+    public void testSpy() {
+    	ArrayList resultDiscardArray = firstPlayer.getDiscardPile().getCardsName();
+    	resultDiscardArray.add("Witch");
+    	
+    	firstPlayer.getDeck().getPile().add(0, gameEngine.CallCard("Witch"));
+    	secondPlayer.get(0).getDeck().getPile().add(0, gameEngine.CallCard("Adventurer"));
+    	
+    	System.out.println("Resultaat Array " + resultDiscardArray);
+    	
+    	System.out.println("Player 1 - Deck: " + firstPlayer.getDeck().getCardsName());
+    	System.out.println("Player 1 - Discard: " + firstPlayer.getDiscardPile().getCardsName());
+    	
+    	System.out.println("Player 2 - Deck: " + secondPlayer.get(0).getDeck().getCardsName());
+    	System.out.println("Player 2 - Discard: " + secondPlayer.get(0).getDiscardPile().getCardsName());
+    	
+    	gameEngine.playCard("Spy", firstPlayer, secondPlayer, gameEngine);
+    	
+    	System.out.println("Player 2 - Deck after Card: " + secondPlayer.get(0).getDeck().getCardsName());
+    	System.out.println("Player 2 - Discard after Card: " + secondPlayer.get(0).getDiscardPile().getCardsName());
+    	
+    	assertEquals(firstPlayer.getDiscardPile().getCardsName(), resultDiscardArray);
+    	
+    }
+    
+    @Test
+    public void testLibrary() {
+    	firstPlayer.getDeck().getPile().add(0, gameEngine.CallCard("Chapel"));
+    	firstPlayer.getDeck().getPile().add(1, gameEngine.CallCard("Bureaucrat"));
+    	
+    	System.out.println("Player 1 - Deck: " + firstPlayer.getDeck().getCardsName());
+    	System.out.println("Player 1 - Hand: " + firstPlayer.getHand().getCardsName());
+    	System.out.println("Player 1 - Discard: " + firstPlayer.getDiscardPile().getCardsName());
+    	
+    	gameEngine.playCard("Library", firstPlayer, secondPlayer, gameEngine);
+    	
+    	System.out.println("Player 1 - Deck after Card: " + firstPlayer.getDeck().getCardsName());
+    	System.out.println("Player 1 - Hand after Card: " + firstPlayer.getHand().getCardsName());
+    	System.out.println("Player 1 - Discard after Card: " + firstPlayer.getDiscardPile().getCardsName());
+    		
+    	
     }
 }

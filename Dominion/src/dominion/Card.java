@@ -46,6 +46,7 @@ public class Card {
         player.addBuy(additionalBuy);
 
         if (hasSpecialAction) {
+        	//TODO Fix gameEngine
         	CardSpecialAction.playSpecialAction(name, player, otherPlayer);        
         }
     }
