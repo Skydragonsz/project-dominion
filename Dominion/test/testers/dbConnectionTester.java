@@ -57,6 +57,19 @@ public class dbConnectionTester {
     
     }
     
+    @Test
+    public void testExecuteSQL(){
+    	DataConnection dbCon = new DataConnection();
+    	String sql;
+    	
+//    	sql = "INSERT INTO account(account.name,pass)";
+//    	sql += " VALUES ('test','test')";
+    	
+    	sql = "SELECT * FROM card";
+    	
+    	dbCon.executeSQL(sql);
+    }
+    
     
     
 }

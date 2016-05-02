@@ -4,7 +4,7 @@ package dominion;
  *
  * @author Arthur
  */
-public class VictoryPoints extends GameEngine {
+public class VictoryPoints {
 
     private int gardenPoints;
 
