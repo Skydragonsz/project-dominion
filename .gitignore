@@ -1,7 +1,6 @@
 /build/
 /Dominion/nbproject/private/
 /Dominion/build/
-Dominion/test/Tester/PlayerTester.java
 /ServerSocket/nbproject/private/
 /ServerSocket/build/
 /DominionServer/nbproject/private/
@@ -10,4 +9,3 @@ Dominion/test/Tester/PlayerTester.java
 *.txt
 *.log
 *.log
-Dominion/.classpath

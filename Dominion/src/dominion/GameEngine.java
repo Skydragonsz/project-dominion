@@ -46,7 +46,7 @@ public class GameEngine {
     }
     
     public void initConnection(){
-        allCards = databaseConnection.getAllCards();   	
+        allCards = databaseConnection.getAllCards(getMaxPlayers());   	
     }
 
     /* METHODS */
