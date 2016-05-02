@@ -48,9 +48,9 @@ public class dbConnectionTester {
     @Test
     public void testConnection(){
         DataConnection databaseConnection = new DataConnection();
-        databaseConnection.getAllCards();
+        databaseConnection.getAllCards(5);
         
-        for (Card card : databaseConnection.getAllCards()){
+        for (Card card : databaseConnection.getAllCards(5)){
         System.out.println(card.getName() + " || "+ card.getCost());
         
         }
