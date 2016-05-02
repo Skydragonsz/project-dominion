@@ -48,13 +48,35 @@ public class dbConnectionTester {
     @Test
     public void testConnection(){
         DataConnection databaseConnection = new DataConnection();
+<<<<<<< HEAD
         databaseConnection.getAllCards(5);
         
         for (Card card : databaseConnection.getAllCards(5)){
         System.out.println(card.getName() + " || "+ card.getCost());
+=======
+        //databaseConnection.getAllCards();
+        
+        for (Card card : databaseConnection.getAllCards()){
+        System.out.println(card.getName() + " || "+ card.getCost() + " || "+ card.getType());
+>>>>>>> origin/master
         
         }
     
     }
+    
+    @Test
+    public void testExecuteSQL(){
+    	DataConnection dbCon = new DataConnection();
+    	String sql;
+    	
+//    	sql = "INSERT INTO account(account.name,pass)";
+//    	sql += " VALUES ('test','test')";
+    	
+    	sql = "SELECT * FROM card";
+    	
+    	dbCon.executeSQL(sql);
+    }
+    
+    
     
 }

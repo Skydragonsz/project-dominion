@@ -22,7 +22,7 @@ public class DataConnection {
 		Statement stmt = null;
 		try {
 			// JDBC Driver
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName(driver);
 
 			// Connection to database
 			conn = DriverManager.getConnection(databaseConnection, username, password);
@@ -30,16 +30,19 @@ public class DataConnection {
 			// Query
 			stmt = conn.createStatement();
 			String sql;
-			// TODO: Query statement still needs joins.
-			// ex: [Now] CardType = 1 || [What we need] CardType = Treasure
-			sql = "SELECT * FROM card;";
+
+			sql = "SELECT card.ID, card.name, card.cost, cardtype.cardType, card.info, card.addMoney, card.addBuy, card.addAction, card.addCard, card.hasSpecialAction, card.value";
+			sql += " FROM card";
+			sql += " INNER JOIN cardtype";
+			sql += " ON card.cardTypeID = cardtype.cardTypeID";
+			sql += " ORDER BY card.ID;";
 			ResultSet rs = stmt.executeQuery(sql);
 
 			// Processing receive data
 			while (rs.next()) {
-				int id = rs.getInt("id");
+
 				String name = rs.getString("name");
-				String type = rs.getString("cardTypeID");
+				String type = rs.getString("cardType");
 				String description = rs.getString("info");
 
 				int cost = rs.getInt("cost");
@@ -95,4 +98,47 @@ public class DataConnection {
 		} // end try
 		return allCards;
 	}// end main
+	
+	public void executeSQL(String sql){
+		Connection conn = null;
+		Statement stmt = null;
+		try {
+			// JDBC Driver
+			Class.forName(driver);
+
+			// Connection to database
+			conn = DriverManager.getConnection(databaseConnection, username, password);
+
+			// Query
+			stmt = conn.prepareStatement(sql);
+			stmt.execute(sql);
+
+			//Close
+			stmt.close();
+			conn.close();
+		} catch (SQLException se) {
+			// Handle errors for JDBC
+			se.printStackTrace();
+		} catch (Exception e) {
+			// Handle errors for Class.forName
+			e.printStackTrace();
+		} finally {
+			// finally block used to close resources
+			try {
+				if (stmt != null)
+					stmt.close();
+			} catch (SQLException se2) {
+			} // nothing we can do
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			} // end finally try
+		} // end try
+
+		
+	}
 }
+
+

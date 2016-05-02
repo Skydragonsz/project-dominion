@@ -134,8 +134,8 @@ public class CardsTester {
     	firstPlayer.getDeck().add(gameEngine.CallCard("Chancellor"));
     	firstPlayer.getHand().addFrom(gameEngine.CallCard("Chancellor"), firstPlayer.getDeck());
     	
-    	ArrayList resultDiscardArray = new ArrayList(firstPlayer.getDiscardPile().getCardsName());
-    	resultDiscardArray.add(firstPlayer.getDeck().getCardsName());
+    	ArrayList resultDiscardArray = firstPlayer.getDiscardPile().getCardsName();
+    	resultDiscardArray.addAll(firstPlayer.getDeck().getCardsName());
     	
     	System.out.println("Player 1 - Deck: " + firstPlayer.getDeck().getCardsName());
     	System.out.println("Player 1 - Hand: " + firstPlayer.getHand().getCardsName());
@@ -187,4 +187,30 @@ public class CardsTester {
 //        }
 //        //fail(); 
 //    }
+    
+    @Test
+    public void testBureaucrat() {
+    	firstPlayer.getDeck().add(gameEngine.CallCard("Bureaucrat"));
+    	firstPlayer.getHand().addFrom(gameEngine.CallCard("Bureaucrat"), firstPlayer.getDeck());
+    	
+    	ArrayList resultDeckArray = new ArrayList(secondPlayer.get(0).getDeck().getCardsName());
+    	resultDeckArray.add("Duchy");
+    	
+    	System.out.println(resultDeckArray);
+    	
+    	System.out.println("Player 2 - Deck: " + secondPlayer.get(0).getDeck().getCardsName());
+    	System.out.println("Player 2 - Hand: " + secondPlayer.get(0).getHand().getCardsName());
+    	
+    	
+    	secondPlayer.get(0).getHand().add(gameEngine.CallCard("Duchy"));
+    	
+    	gameEngine.playCard("Bureaucrat", firstPlayer, secondPlayer);
+    	
+    	System.out.println("Player 1 - Deck after Card: " + firstPlayer.getDeck().getCardsName());
+    	
+    	System.out.println("Player 2 - Deck after Card: " + secondPlayer.get(0).getDeck().getCardsName());
+    	System.out.println("Player 2 - Hand after Card: " + secondPlayer.get(0).getHand().getCardsName());
+    	
+    	assertEquals(secondPlayer.get(0).getDeck().getCardsName(),resultDeckArray);
+    }
 }
