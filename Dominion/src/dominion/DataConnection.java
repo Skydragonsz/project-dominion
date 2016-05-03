@@ -17,7 +17,6 @@ public class DataConnection {
 	
 	private ArrayList<Card> allCards = new ArrayList<Card>();
 
-	// Waarom hebben we een "amountPlayers" nodig bij het afhalen van ALLE kaarten van de database? 
 	public ArrayList<Card> getAllCards(int amountPlayers) {
 		Connection conn = null;
 		Statement stmt = null;
@@ -56,8 +55,6 @@ public class DataConnection {
 
 				boolean hasSpecialAction = rs.getBoolean("hasSpecialAction");
 
-				
-				// Dit hoort normaal gezien hier niet te staan
 				int boardAmount = 10;
 				
 				
