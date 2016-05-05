@@ -203,6 +203,14 @@ public class CardsTester {
     
     @Test
     public void testLibrary() {
+    	ArrayList resultHandArray = firstPlayer.getHand().getCardsName();
+    	resultHandArray.add("Copper");
+    	resultHandArray.add("Copper");
+    	resultHandArray.add("Copper");
+    	resultHandArray.add("Copper");
+    	resultHandArray.add("Copper");
+    	
+    	
     	firstPlayer.getDeck().getPile().add(0, gameEngine.CallCard("Chapel"));
     	firstPlayer.getDeck().getPile().add(1, gameEngine.CallCard("Bureaucrat"));
     	
@@ -215,7 +223,30 @@ public class CardsTester {
     	System.out.println("Player 1 - Deck after Card: " + firstPlayer.getDeck().getCardsName());
     	System.out.println("Player 1 - Hand after Card: " + firstPlayer.getHand().getCardsName());
     	System.out.println("Player 1 - Discard after Card: " + firstPlayer.getDiscardPile().getCardsName());
+    	
+    	assertEquals(firstPlayer.getHand().getCardsName(), resultHandArray);
     		
     	
+    }
+    
+    @Test
+    public void testThroneRoom() {
+    	//TODO Fix this test
+    	firstPlayer.getHand().add(gameEngine.CallCard("Throne Room"));
+    	
+    	System.out.println("Player 1 - Deck: " + firstPlayer.getDeck().getCardsName());
+    	System.out.println("Player 1 - Hand: " + firstPlayer.getHand().getCardsName());
+    	System.out.println("Player 1 - Discard: " + firstPlayer.getDiscardPile().getCardsName());
+    	
+    	gameEngine.playCard("Throne Room", firstPlayer, secondPlayer, gameEngine);
+    	
+    	System.out.println("Player 1 - Deck after Card: " + firstPlayer.getDeck().getCardsName());
+    	System.out.println("Player 1 - Hand after Card: " + firstPlayer.getHand().getCardsName());
+    	System.out.println("Player 1 - Discard after Card: " + firstPlayer.getDiscardPile().getCardsName());
+    }
+    
+    @Test
+    public void testMine() {
+    	//TODO make test
     }
 }

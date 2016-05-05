@@ -181,10 +181,23 @@ public class CardSpecialAction  {
 	public static void playThief() {
 		// Each other player reveals the top 2 cards of his deck. If they revealed any Treasure cards, they trash 
 		// one of them that you choose. You may gain any or all (?) of these trashed cards. They discard the other revealed cards.
+		for (int i = 0; i < stOtherPlayerList.size(); i++){
+			//TODO Finish
 	}
 
 	public static void playThroneRoom() {
 		// Choose an Action card in your hand. Play it twice.
+		//TODO Test this code
+		boolean choice = true;
+		for (int i = 0; i < stPlayer.getHand().getAmount(); i++){
+			if ("Action".equals(stPlayer.getHand().getFromIndex(i))){
+				if (choice) {
+					for (i = 0; i < 1; i++) {
+					stPlayer.getHand().getFromIndex(i).PlayCard(stPlayer, stOtherPlayerList);
+					}
+				}
+			}
+		}
 	}
 
 	public static void playCouncilRoom() {
@@ -207,6 +220,7 @@ public class CardSpecialAction  {
 			if ("Action".equals(drawnCard.getType()) || "Attack".equals(drawnCard.getType())) {
 				if (choice) {
 					aside.add(drawnCard);
+					//TODO remove card from Hand if added to aside array.
 				}
 			}
 		}
@@ -215,6 +229,18 @@ public class CardSpecialAction  {
 
 	public static void playMine() {
 		// Trash a Treasure card from your hand. Gain a Treasure card costing up to 3 Coins more; put it into your hand.
+		//TODO Test this code
+		boolean choice = true;
+		for (int i = 0; i < stPlayer.getHand().getAmount(); i++){
+			if ("Treasure".equals(stPlayer.getHand().getFromIndex(i))){
+				if (choice) {
+					int originalCost = stPlayer.getHand().getFromIndex(i).getCost();
+					stPlayer.addInstancedCoin(originalCost + 3);
+					stPlayer.getHand().remove(stPlayer.getHand().getFromIndex(i));
+					}
+				}
+			}
+		}
 	}
 
 	public static void playWitch() {
