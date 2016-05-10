@@ -5,10 +5,23 @@
  */
 package gameconsole;
 
+import java.util.Scanner;
+
 /**
  *
  * @author Quint
  */
+
+
 public class Actions {
+	
+	
+    static Scanner scanner = new Scanner(System.in);
     
+    public static String askFor(String text){
+        System.out.print( text + ":\t");
+		return scanner.nextLine();
+    	
+    	
+    }
 }

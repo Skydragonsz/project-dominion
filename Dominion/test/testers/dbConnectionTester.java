@@ -48,19 +48,19 @@ public class dbConnectionTester {
     @Test
     public void testConnection(){
         DataConnection databaseConnection = new DataConnection();
-<<<<<<< HEAD
-        databaseConnection.getAllCards(5);
         
-        for (Card card : databaseConnection.getAllCards(5)){
-        System.out.println(card.getName() + " || "+ card.getCost());
-=======
+
         //databaseConnection.getAllCards();
+        String lastline = "";
+        String result = "Adventurer || 6 || Action";
         
         for (Card card : databaseConnection.getAllCards()){
         System.out.println(card.getName() + " || "+ card.getCost() + " || "+ card.getType());
->>>>>>> origin/master
-        
+
+        lastline = card.getName() + " || "+ card.getCost() + " || "+ card.getType();
         }
+        
+        assertEquals(lastline, result);
     
     }
     

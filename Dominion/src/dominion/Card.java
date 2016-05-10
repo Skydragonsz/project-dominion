@@ -39,15 +39,15 @@ public class Card {
     }
 
     /* METHODS */
-    public void PlayCard(Player player, ArrayList<Player> otherPlayer) {
-        player.addCoin(additionalMoney);
-        //player.addCard(additionalCard);
-        player.addAction(additionalAction);
-        player.addBuy(additionalBuy);
+    public void PlayCard(Player player, ArrayList<Player> otherPlayerList, TurnSegment currentSegment, GameEngine gameEngine) {
+
+    	currentSegment.addCoin(additionalMoney);
+        //player.getDeck().add(amount, card);
+    	currentSegment.addAction(additionalAction);
+    	currentSegment.addBuy(additionalBuy);
 
         if (hasSpecialAction) {
-        	//TODO Fix gameEngine
-        	CardSpecialAction.playSpecialAction(name, player, otherPlayer);        
+        	CardSpecialAction.playSpecialAction(name, player, otherPlayerList, gameEngine);        
         }
     }
 

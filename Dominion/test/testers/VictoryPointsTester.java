@@ -28,7 +28,7 @@ public class VictoryPointsTester {
     private Card curse;
     
     private void initTestVictoryPoints(){
-    	ge.initConnection();
+    	ge.initCards();
     	province = ge.CallCard("Province");
     	copper = ge.CallCard("Copper");
         duchy = ge.CallCard("Duchy");

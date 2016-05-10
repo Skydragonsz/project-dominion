@@ -13,6 +13,8 @@ import java.util.Random;
  *
  * @author Quinten
  */
+
+//CHANGE -- since we have a database; only random method is needed.
 public class KingdomSetCards {
 
     private ArrayList firstGame = new ArrayList(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 29, 18, 30, 10, 20, 21, 12, 13, 14));

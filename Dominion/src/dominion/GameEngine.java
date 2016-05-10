@@ -2,24 +2,19 @@ package dominion;
 
 import java.util.*;
 
-/**
- *
- * @author Arthur
- */
-//TODO -- transfer Player methods to GameEngine
 public class GameEngine {
 
     // Player
     private final static ArrayList<Player> playerList = new ArrayList<>();
     private final static ArrayList<Player> otherPlayerList = new ArrayList<>();
-    private Player currentPlayer;
-    private int PlayerCounter = 0;
+    private int PlayerCounter = 1;
 
     // Turn
     private ArrayList<Turn> turnList = new ArrayList<>();
 
-    // KINGDOM SET
-    private final static ArrayList<Integer> kingdomSetCards = new ArrayList<>();
+    
+    // Board
+    private Board board;
 
     // Cards
     private ArrayList<Card> allCards;
@@ -41,12 +36,15 @@ public class GameEngine {
     }
 
     public void initPlayer(int playernr, String name) {
-        getPlayer(playernr).setDeck(generateDeck());
-        getPlayer(playernr).setName(name);
+        getPlayer(playernr).setDeck(generateDeck()); //Generates deck (Each player needs a DIFFERENT deck object)
+        getPlayer(playernr).getDeck().shuffle(); // Shuffle deck
+        getPlayer(playernr).getHand().addAmountOfCardsFrom(5, getPlayer(playernr).getDeck()); // Puts 5 cards from deck into hand
+        getPlayer(playernr).setName(name); // Sets name
     }
     
-    public void initConnection(){
-        allCards = databaseConnection.getAllCards(getMaxPlayers());   	
+    public void initCards(){ //NAME CHANGE
+        allCards = databaseConnection.getAllCards();   	
+    	generateBoard();
     }
 
     /* METHODS */
@@ -55,6 +53,31 @@ public class GameEngine {
     	Card estate = CallCard("Estate");
         return new Pile(copper,copper,copper,copper,copper,copper,copper,estate,estate,estate);
     }
+    
+    public void generateBoard(){
+    	// TEMP -- First game
+    	Card copper = CallCard("Copper");
+    	Card silver = CallCard("Silver");
+    	Card gold = CallCard("Gold");
+    	Card estate = CallCard("Estate");
+    	Card duchy = CallCard("Duchy");
+    	Card province = CallCard("Province");
+    	Card curse = CallCard("Curse");
+    	Card cellar = CallCard("Cellar");
+    	Card market = CallCard("Market");
+    	Card militia = CallCard("Militia");
+    	Card mine = CallCard("Mine");
+    	Card moat = CallCard("Moat");
+    	Card remodel = CallCard("Remodel");
+    	Card smithy = CallCard("Smithy");
+    	Card village = CallCard("Village");
+    	Card woodcutter = CallCard("Woodcutter");
+    	Card workshop = CallCard("Workshop");
+    	
+    	Board board = new Board(copper,silver, gold, estate, duchy, province, curse, cellar, market, militia, mine, moat, remodel, smithy, village, woodcutter, workshop);
+    	this.board = board;
+    }
+    
     
     public Card CallCard(String name){
     	Card foundCard = null;
@@ -65,12 +88,27 @@ public class GameEngine {
         	}
         }
         return foundCard;
-    }
+    }  
     
-    public void playCard(String cardName, Player player, ArrayList<Player> otherPlayerList, GameEngine gameEngine){
+    public Board getBoard() {
+		return board;
+	}
+
+	public ArrayList<Card> getAllCards() {
+		return allCards;
+	}
+
+    //Will not change since many testers use this parameter configuration
+	public void playCard(String cardName, Player player, ArrayList<Player> otherPlayerList, GameEngine gameEngine){
     	CardSpecialAction.playSpecialAction(cardName, player, otherPlayerList, gameEngine);
     }
 
+	public void playCard(Card card, GameEngine gameEngine){
+		System.out.println(getCurrentTurnSegment());
+		System.out.println(getCurrentTurnSegment().getCoin());
+    	card.PlayCard(getCurrentPlayer(), getOtherPlayersList(getCurrentPlayer()), getCurrentTurnSegment(), gameEngine);
+		//CardSpecialAction.playSpecialAction(card.getName(), player, otherPlayerList, gameEngine); // <- this is in PlayCard now
+    }
 
     /* GETTERS */
 //Player    
@@ -78,12 +116,8 @@ public class GameEngine {
         return playerList.get(playernr - 1);
     }
 
-    public String getPlayerName(Player player) {
-        return player.getName();
-    }
-
     public Player getCurrentPlayer() {
-        return playerList.get(PlayerCounter);
+        return playerList.get(PlayerCounter - 1);
     }
 
     public ArrayList<Player> getPlayerList() {
@@ -123,16 +157,34 @@ public class GameEngine {
         return turnList.get(NthTurn - 1).getCurrentTurnNumber();
     }
 
-    public TurnSegment getTurnSegment(int NthTurn) {
-        return turnList.get(NthTurn).getCurrentTurnSegment();
+    public TurnSegment getCurrentTurnSegment() {
+        return getCurrentTurn().getCurrentTurnSegment(PlayerCounter - 1);
     }
 
-    public int getTurnSegmentCoin(int NthTurn) {
-        return turnList.get(NthTurn).getCurrentTurnSegment().getCoin();
-    }
+//    public int getTurnSegmentCoin(int NthTurn) {
+//        return turnList.get(NthTurn).getCurrentTurnSegment().getCoin();
+//    }
+//
+//    public int getTurnSegmentActions(int NthTurn) {
+//        return turnList.get(NthTurn).getCurrentTurnSegment(PlayerCounter - 1).getAction();
+//    }
+    
+    
+    public int getPlayerCounter() {
+		return PlayerCounter;
+	}
 
-    public int getTurnSegmentActions(int NthTurn) {
-        return turnList.get(NthTurn).getCurrentTurnSegment().getAction();
+	public Turn getCurrentTurn(){
+    	return turnList.get(turnList.size() - 1);
+    }
+    
+    public void nextTurn(int turnNumber){
+    	turnList.add(new Turn(turnNumber));
+    }
+    
+    public void nextPlayer(){
+    	PlayerCounter = PlayerCounter % 3 + 1;
+    	//TEMP 3
     }
 
 //other    

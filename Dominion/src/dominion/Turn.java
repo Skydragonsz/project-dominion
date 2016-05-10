@@ -34,8 +34,8 @@ public class Turn {
         return turnNumber;
     }
 
-    public TurnSegment getCurrentTurnSegment() {
-        return turnArray.get(turnSegmentNumber);
+    public TurnSegment getCurrentTurnSegment(int turnSegment) {
+        return turnArray.get(turnSegment);
     }
 
 }

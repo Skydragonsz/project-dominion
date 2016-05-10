@@ -11,12 +11,28 @@ public class Board {
     private ArrayList<Pile> piles = new ArrayList<>();
     private Pile province;
 
+    //CHANGE TO CARDS
     public Board(Pile... piles) {
         for (Pile pile : piles) {
             this.piles.add(pile);
 
             if ("Province".equals(pile.getName())) {
                 this.province = pile;
+            }
+        }
+    }
+    
+    // CORRECT
+    public Board(Card... cards) {
+        for (Card card : cards) {
+        	if (!"Gardens".equals(card.getName())){
+        		this.piles.add(new Pile(card, 10));
+        	} else {
+        		this.piles.add(new Pile(card, 8 + ((3 > 2) ? 4 : 0))); //TEMP 3
+        	}
+        	
+            if ("Province".equals(card.getName())) {
+                this.province = this.piles.get(piles.size() - 1);
             }
         }
     }
@@ -45,4 +61,10 @@ public class Board {
     public ArrayList<Pile> getPiles() {
         return piles;
     }
+    
+    public Pile getFromIndex(int index) {
+        return this.piles.get(index);
+    }
+
+    
 }

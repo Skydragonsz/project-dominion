@@ -22,7 +22,9 @@ import java.util.List;
  * @author Quinten
  */
 
+
 //PhaseTest needs rework, most tests don't/won't work.
+//EDIT: is phase needed?
 public class PhaseTest {
     Player p1 = new Player();
     Player p2 = new Player();

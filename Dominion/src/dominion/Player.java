@@ -25,6 +25,7 @@ public class Player extends TurnSegment {
 
     /* INIT */
     public void init() {
+    	//SEE gameEngine initPlayer, this didn't do anything for some reason.
         deck.shuffle();
         hand.addAmountOfCardsFrom(5, deck);
     }

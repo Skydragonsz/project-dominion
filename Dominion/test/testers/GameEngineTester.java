@@ -22,7 +22,7 @@ public class GameEngineTester {
     
     // Construct will run for every test.
     public GameEngineTester() {
-    	ge.initConnection();
+    	ge.initCards();
         ge.reset();
         
         ge.initAmountPlayers(4);

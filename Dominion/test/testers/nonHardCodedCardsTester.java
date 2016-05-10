@@ -40,7 +40,7 @@ public class nonHardCodedCardsTester {
     private Board board;
     
     public nonHardCodedCardsTester() {
-    	gameEngine.initConnection();
+    	gameEngine.initCards();
     	
         village = gameEngine.CallCard("Village");
         gold = gameEngine.CallCard("Gold");

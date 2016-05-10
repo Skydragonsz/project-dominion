@@ -37,7 +37,7 @@ public class CardsTester {
     
     
     public CardsTester() {
-    	gameEngine.initConnection();
+    	gameEngine.initCards();
     	gameEngine.reset();
     	gameEngine.initAmountPlayers(2);
     	gameEngine.initPlayer(1, "testPlayerOne");
@@ -71,13 +71,13 @@ public class CardsTester {
     @Test
     public void testGetTypeWitch() {
         //assertEquals(witch.getType(), "Attack");
-    	assertEquals(witch.getType(), "4");
+    	assertEquals(witch.getType(), "Attack");
     }
 
     @Test
     public void testGetTypeCopper() {
         //assertEquals(copper.getType(), "Treasure");
-    	assertEquals(copper.getType(), "3");
+    	assertEquals(copper.getType(), "Treasure");
     }
 
     @Test
@@ -152,9 +152,13 @@ public class CardsTester {
     
     @Test
     public void testBureaucrat() {
+    	//!!Takes all victory cards.
+    	
+    	//Bureaucrat from deck to hand.
     	firstPlayer.getDeck().add(gameEngine.CallCard("Bureaucrat"));
     	firstPlayer.getHand().addFrom(gameEngine.CallCard("Bureaucrat"), firstPlayer.getDeck());
     	
+    	//What result should be.
     	ArrayList resultDeckArray = new ArrayList(secondPlayer.get(0).getDeck().getCardsName());
     	resultDeckArray.add("Duchy");
     	

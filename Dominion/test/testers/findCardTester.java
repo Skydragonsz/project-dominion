@@ -20,7 +20,7 @@ public class findCardTester {
     private ArrayList secondPlayer;
     
     public findCardTester() {
-    	gameEngine.initConnection();
+    	gameEngine.initCards();
     	gameEngine.reset();
     	gameEngine.initAmountPlayers(2);
     	gameEngine.initPlayer(1, "testPlayerOne");
@@ -50,6 +50,8 @@ public class findCardTester {
 	public void initGameEngineToGenerateDeck() {
 		System.out.println(firstPlayer.getDeck().getPile());
 		System.out.println(firstPlayer.getDeck().getCardsName());
+		
+		
 	}
 
 }

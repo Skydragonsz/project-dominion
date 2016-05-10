@@ -22,7 +22,7 @@ import dominion.*;
 public class TurnTester {
 
     public Turn n = new Turn(1);
-    public TurnSegment ts = n.getCurrentTurnSegment();
+    public TurnSegment ts = n.getCurrentTurnSegment(1);
     public TurnTester() {
     }
     
@@ -63,9 +63,9 @@ public class TurnTester {
     }
     
     @Test
-    public void restRemoveBuysBelowZero(){
+    public void testRemoveBuysBelowZero(){
         ts.removeBuy(500);
         System.out.println(ts.getBuy());
-     assertTrue(ts.getBuy() > 0);
+        assertTrue(ts.getBuy() > 0);
     }
 }

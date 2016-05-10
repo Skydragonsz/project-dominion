@@ -17,7 +17,7 @@ public class DataConnection {
 	
 	private ArrayList<Card> allCards = new ArrayList<Card>();
 
-	public ArrayList<Card> getAllCards(int amountPlayers) {
+	public ArrayList<Card> getAllCards() {
 		Connection conn = null;
 		Statement stmt = null;
 		try {
@@ -55,13 +55,6 @@ public class DataConnection {
 
 				boolean hasSpecialAction = rs.getBoolean("hasSpecialAction");
 
-				int boardAmount = 10;
-				
-				
-				
-				if ("Garden".equals(name)){
-					boardAmount = 8 + ((amountPlayers > 2) ? 4 : 0) ; 
-				}
 				
 				
 				allCards.add(new Card(name, type, description, cost, value, additionalMoney, additionalCard,

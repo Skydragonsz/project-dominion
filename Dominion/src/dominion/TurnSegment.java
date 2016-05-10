@@ -28,52 +28,37 @@ public class TurnSegment {
     /* METHODS */
 //Add
     public void addCoin(int amount) {
-        if (currency >= 0) {
             currency += amount;
-        }
     }
 
     public void addInstancedCoin(int amount) {
-        if (instancedCurrency >= 0) {
             instancedCurrency += amount;
-        }
     }
 
     public void addAction(int amount) {
-        if (action >= 0) {
             action += amount;
-        }
     }
 
     public void addBuy(int amount) {
-        if (buy >= 0) {
             buy += amount;
-        }
     }
 
 //Remove   
     public void removeCoin(int amount) {
-        if (currency - amount >= 0) {
             currency -= amount;
-        }
     }
 
     public void removeInstancedCoin(int amount) {
-        if (instancedCurrency - amount >= 0) {
             instancedCurrency -= amount;
-        }
     }
 
     public void removeAction(int amount) {
-        if (action - amount >= 0) {
             action -= amount;
-        }
     }
 
     public void removeBuy(int amount) {
-        if (currency - amount >= 0) {
             buy -= amount;
-        }
+
     }
 
     /* GETTERS */

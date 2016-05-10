@@ -14,7 +14,7 @@ public class CardSpecialAction  {
 		stPlayer = player;
 		stOtherPlayerList = otherPlayerList;
 		stgameEngine = gameEngine;
-		stgameEngine.initConnection();
+		stgameEngine.initCards();
 
 		switch (cardName) {
 		case "Cellar":
@@ -184,6 +184,7 @@ public class CardSpecialAction  {
 		for (int i = 0; i < stOtherPlayerList.size(); i++){
 			//TODO Finish
 	}
+	}
 
 	public static void playThroneRoom() {
 		// Choose an Action card in your hand. Play it twice.
@@ -241,7 +242,7 @@ public class CardSpecialAction  {
 				}
 			}
 		}
-	}
+	
 
 	public static void playWitch() {
 		stPlayer.getHand().addAmountOfCardsFrom(2, stPlayer.getDeck());
