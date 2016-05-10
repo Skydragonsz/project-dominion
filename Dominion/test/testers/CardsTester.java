@@ -210,10 +210,8 @@ public class CardsTester {
     	ArrayList resultHandArray = firstPlayer.getHand().getCardsName();
     	resultHandArray.add("Copper");
     	resultHandArray.add("Copper");
-    	resultHandArray.add("Copper");
-    	resultHandArray.add("Copper");
-    	resultHandArray.add("Copper");
-    	
+
+    	System.out.println(resultHandArray);
     	
     	firstPlayer.getDeck().getPile().add(0, gameEngine.CallCard("Chapel"));
     	firstPlayer.getDeck().getPile().add(1, gameEngine.CallCard("Bureaucrat"));
@@ -229,7 +227,7 @@ public class CardsTester {
     	System.out.println("Player 1 - Discard after Card: " + firstPlayer.getDiscardPile().getCardsName());
     	
     	assertEquals(firstPlayer.getHand().getCardsName(), resultHandArray);
-    		
+    		// Werkt, maar volgorde klopt niet altijd --> error
     	
     }
     
@@ -251,6 +249,16 @@ public class CardsTester {
     
     @Test
     public void testMine() {
-    	//TODO make test
+    	firstPlayer.getHand().add(gameEngine.CallCard("Silver"));
+    	
+    	System.out.println("Player 1 - Deck: " + firstPlayer.getDeck().getCardsName());
+    	System.out.println("Player 1 - Hand: " + firstPlayer.getHand().getCardsName());
+    	System.out.println("Player 1 - Discard: " + firstPlayer.getDiscardPile().getCardsName());
+    	
+    	gameEngine.playCard(gameEngine.CallCard("Mine"), gameEngine);
+    	
+    	System.out.println("Player 1 - Deck after Card: " + firstPlayer.getDeck().getCardsName());
+    	System.out.println("Player 1 - Hand after Card: " + firstPlayer.getHand().getCardsName());
+    	System.out.println("Player 1 - Discard after Card: " + firstPlayer.getDiscardPile().getCardsName());
     }
 }
