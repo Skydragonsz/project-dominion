@@ -191,7 +191,7 @@ public class CardSpecialAction  {
 		//TODO Test this code
 		boolean choice = true;
 		for (int i = 0; i < stPlayer.getHand().getAmount(); i++){
-			if ("Action".equals(stPlayer.getHand().getFromIndex(i))){
+			if ("Action".equals(stPlayer.getHand().getFromIndex(i).getType())){
 				if (choice) {
 					for (i = 0; i < 1; i++) {
 					stPlayer.getHand().getFromIndex(i).PlayCard(stPlayer, stOtherPlayerList);
@@ -214,14 +214,16 @@ public class CardSpecialAction  {
 		// as you draw them; discard the set aside cards after you finish drawing.
 		boolean choice = true;
 		ArrayList aside = new ArrayList();
-		for (int i = 0; i < 7; i++ ) {
+		for (int i = stPlayer.getHand().getAmount(); i < 7; i++ ) {
 			Card drawnCard = stPlayer.getDeck().getFromIndex(0);
 			//stPlayer.getHand().addAmountOfCardsFrom(1, stPlayer.getDeck());
 			stPlayer.getHand().addFrom(drawnCard, stPlayer.getDeck());
 			if ("Action".equals(drawnCard.getType()) || "Attack".equals(drawnCard.getType())) {
+				i--;
 				if (choice) {
 					aside.add(drawnCard);
 					//TODO remove card from Hand if added to aside array.
+					stPlayer.getHand().remove(drawnCard);
 				}
 			}
 		}
