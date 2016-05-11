@@ -105,4 +105,11 @@ public class Pile {
         return this.pile.isEmpty();
     }
 
+	public void addAllFrom(Pile... piles) {
+		for (Pile pile : piles){
+			this.getPile().addAll(pile.getPile());
+		}
+		
+	}
+
 }

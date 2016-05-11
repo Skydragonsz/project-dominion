@@ -11,7 +11,6 @@ public class GameEngine {
 
     // Turn
     private ArrayList<Turn> turnList = new ArrayList<>();
-
     
     // Board
     private Board board;
@@ -73,7 +72,7 @@ public class GameEngine {
     	Card village = CallCard("Village");
     	Card woodcutter = CallCard("Woodcutter");
     	Card workshop = CallCard("Workshop");
-    	
+
     	Board board = new Board(copper,silver, gold, estate, duchy, province, curse, cellar, market, militia, mine, moat, remodel, smithy, village, woodcutter, workshop);
     	this.board = board;
     }
@@ -104,10 +103,7 @@ public class GameEngine {
     }
 
 	public void playCard(Card card, GameEngine gameEngine){
-		System.out.println(getCurrentTurnSegment());
-		System.out.println(getCurrentTurnSegment().getCoin());
     	card.PlayCard(getCurrentPlayer(), getOtherPlayersList(getCurrentPlayer()), getCurrentTurnSegment(), gameEngine);
-		//CardSpecialAction.playSpecialAction(card.getName(), player, otherPlayerList, gameEngine); // <- this is in PlayCard now
     }
 
     /* GETTERS */
@@ -160,14 +156,6 @@ public class GameEngine {
     public TurnSegment getCurrentTurnSegment() {
         return getCurrentTurn().getCurrentTurnSegment(PlayerCounter - 1);
     }
-
-//    public int getTurnSegmentCoin(int NthTurn) {
-//        return turnList.get(NthTurn).getCurrentTurnSegment().getCoin();
-//    }
-//
-//    public int getTurnSegmentActions(int NthTurn) {
-//        return turnList.get(NthTurn).getCurrentTurnSegment(PlayerCounter - 1).getAction();
-//    }
     
     
     public int getPlayerCounter() {
@@ -192,4 +180,15 @@ public class GameEngine {
         otherPlayerList.clear();
         playerList.clear();
     }
+
+	public void CleanedUp() {
+		getCurrentPlayer().getDiscardPile().addAllFrom(getCurrentPlayer().getHand(), getCurrentPlayer().getPlayingField());
+		if (getCurrentPlayer().getDeck().getAmount() == 0){
+			getCurrentPlayer().getDeck().addAllFrom(getCurrentPlayer().getDiscardPile());
+	}
+		getCurrentPlayer().getHand().getPile().clear();
+		getCurrentPlayer().getPlayingField().getPile().clear();
+		getCurrentPlayer().getHand().addAmountOfCardsFrom(5, getCurrentPlayer().getDeck());
+		
+}
 }

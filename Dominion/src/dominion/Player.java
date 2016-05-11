@@ -1,13 +1,14 @@
 package dominion;
 
-//Extends needed?
-public class Player extends TurnSegment {
+public class Player {
 
     private String name;
     private int victoryPoints;
 
     private Pile deck = new Pile();
     private Pile hand = new Pile();
+    private Pile selectedHand = new Pile();
+    private Pile pickedHand = new Pile();
     private Pile discardPile = new Pile();
     private Pile playingField = new Pile();
 
@@ -68,6 +69,10 @@ public class Player extends TurnSegment {
     public Pile getHand() {
         return hand;
     }
+    
+    public Pile getSelectedHand() {
+        return selectedHand;
+    }
 
     public Pile getDiscardPile() {
         return discardPile;
@@ -89,4 +94,8 @@ public class Player extends TurnSegment {
     public void setDeck(Pile deck) {
         this.deck = deck;
     }
+
+	public Pile getPickedHand() {
+		return pickedHand;
+	}
 }

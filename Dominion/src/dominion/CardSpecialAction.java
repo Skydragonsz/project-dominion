@@ -77,26 +77,23 @@ public class CardSpecialAction  {
 	}
 
 	public static void playCellar() {
-		// ArrayList selectedCards = selectableCards();
-		int i = selectedCards.size();
-		for (Card card : selectedCards) {
+		int i = stgameEngine.getCurrentPlayer().getSelectedHand().getAmount();
+		for (Card card : stgameEngine.getCurrentPlayer().getSelectedHand().getPile()) {
 			stPlayer.getDiscardPile().addFrom(card, stPlayer.getHand());
 		}
 
 		stPlayer.getHand().addAmountOfCardsFrom(i, stPlayer.getDeck());
+		System.out.println(stPlayer.getHand());
 	}
 
 	public static void playChapel() {
-		// ArrayList selectedCards = selectableCards(4);
-		int i = selectedCards.size();
-		for (Card card : selectedCards) {
+		for (Card card : stgameEngine.getCurrentPlayer().getSelectedHand().getPile()) {
 			stPlayer.getHand().remove(card);
-			;
 		}
 	}
 
 	public static void playMoat() {
-		stPlayer.getHand().addAmountOfCardsFrom(2, stPlayer.getDeck());
+		//stPlayer.getHand().addAmountOfCardsFrom(2, stPlayer.getDeck());
 	}
 
 	public static void playChancellor() {
@@ -109,7 +106,7 @@ public class CardSpecialAction  {
 	}
 
 	public static void playWorkshop() {
-		stPlayer.addInstancedCoin(4);
+		stgameEngine.getCurrentTurnSegment().addInstancedCoin(4);
 		// showInstancedBuyMenu();
 	}
 
@@ -129,8 +126,8 @@ public class CardSpecialAction  {
 	}
 
 	public static void playFeast() {
-		stPlayer.getHand().remove(stPlayer.getHand().findCard("Feast"));
-		stPlayer.addInstancedCoin(5);
+		stPlayer.getHand().remove(stgameEngine.CallCard("Feast"));
+		stgameEngine.getCurrentTurnSegment().addInstancedCoin(5);
 		// showInstancedBuyMenu();
 	}
 
@@ -138,31 +135,28 @@ public class CardSpecialAction  {
 		for (int i = 0; i < stOtherPlayerList.size() - 1; i++) {
 			////stOtherPlayerList.get(i).getHand().addAmountOfCardsFrom(4, stOtherPlayerList.get(i).getDeck());
 			// ArrayList selectedCards = selectableCards(4);
-			int size = selectedCards.size();
-			for (Card card : selectedCards) {
-				stOtherPlayerList.get(i).getDiscardPile().addFrom(card, stOtherPlayerList.get(i).getHand());
-			}
+//			int size = selectedCards.size();
+//			for (Card card : selectedCards) {
+//				stOtherPlayerList.get(i).getDiscardPile().addFrom(card, stOtherPlayerList.get(i).getHand());
+//			}
 		}		
 	}
 
 	public static void playMoneylender() {
-		boolean decision = true;
-		// TODO Check integratie Front-end (Positie moet door de Front-end
-		// meegegeven worden)
-		int cardPosition = 6;
-		if (decision) {
-			if (stPlayer.getHand().getFromIndex(cardPosition).getName() == "Copper") {
-				stPlayer.getHand().remove(stPlayer.getHand().getFromIndex(cardPosition));
+		Card card = null;
+		if (stgameEngine.getCurrentPlayer().getSelectedHand().getAmount() != 0){ //IF NOT EMPTY
+			card = stgameEngine.getCurrentPlayer().getSelectedHand().getPile().get(0);
+		}
+			if (card.getName() == "Copper") {
+				stPlayer.getHand().remove(card);
+				stgameEngine.getCurrentTurnSegment().addCoin(3);
 			}
 
 		}
-	}
 
 	public static void playRemodel() {
-		// ArrayList selectedCards = selectableCards(1);
-		int size = selectedCards.size();
-		strPlayer.
-		stPlayer.getHand().remove(selectedCard.get(0);
+		Card card = stgameEngine.getCurrentPlayer().getSelectedHand().getPile().get(0);
+		stPlayer.getHand().remove(card);
 	}
 
 	public static void playSpy() {
@@ -235,10 +229,10 @@ public class CardSpecialAction  {
 		//TODO Test this code
 		boolean choice = true;
 		for (int i = 0; i < stPlayer.getHand().getAmount(); i++){
-			if ("Treasure".equals(stPlayer.getHand().getFromIndex(i))){
+			if ("Treasure".equals(stPlayer.getHand().getFromIndex(i).getType())){
 				if (choice) {
 					int originalCost = stPlayer.getHand().getFromIndex(i).getCost();
-					stPlayer.addInstancedCoin(originalCost + 3);
+					stgameEngine.getCurrentTurnSegment().addInstancedCoin(originalCost + 3);
 					stPlayer.getHand().remove(stPlayer.getHand().getFromIndex(i));
 					}
 				}
@@ -247,11 +241,9 @@ public class CardSpecialAction  {
 	
 
 	public static void playWitch() {
-		stPlayer.getHand().addAmountOfCardsFrom(2, stPlayer.getDeck());
-
 		for (int i = 0; i < stOtherPlayerList.size() - 1; i++) {
 			if (!stOtherPlayerList.get(i).checkForReactionCard()) {
-				stOtherPlayerList.get(i).getDeck().add(stgameEngine.CallCard("Witch"));
+				stOtherPlayerList.get(i).getDeck().add(stgameEngine.CallCard("Curse"));
 				// Add Curse card DECK
 			}
 		}
@@ -261,7 +253,7 @@ public class CardSpecialAction  {
 		int cards = 0;
 		int indexCounter = 0;
 		while (cards < 2) {
-			if ("3".equals(stPlayer.getDeck().getFromIndex(indexCounter).getType())) {
+			if ("Treasure".equals(stPlayer.getDeck().getFromIndex(indexCounter).getType())) {
 				stPlayer.getHand().add(stPlayer.getDeck().getFromIndex(indexCounter));
 				stPlayer.getDeck().remove(stPlayer.getDeck().getFromIndex(indexCounter));
 				cards++;

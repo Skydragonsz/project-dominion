@@ -1,5 +1,6 @@
 package gameconsole;
 
+import dominion.Card;
 import dominion.GameEngine;
 import dominion.Pile;
 import dominion.Player;
@@ -10,10 +11,10 @@ import java.util.Scanner;
 public class GameConsole {
 
     private GameEngine gameEngine;
-    Scanner scanner = new Scanner(System.in); // NEEDED (?)
+    Scanner scanner = new Scanner(System.in);
     
     private int TurnCounter = 1;
-    private boolean endPlayerTurn = false; //TEMP
+    private boolean endPlayerTurn = false;
     
     // For cleaner code
     private Player currentPlayer;
@@ -21,6 +22,8 @@ public class GameConsole {
     private Pile currentHand;
     private Pile currentPlayingField;
     private Pile currentDiscardPile;
+    private Pile currentSelectedHand;
+    private Pile currentPickedHand;
     private TurnSegment currentTurnSegment;
 
 //START-UP
@@ -57,11 +60,12 @@ public class GameConsole {
             if (gameEngine.getCurrentPlayer() == gameEngine.getLastPlayers()) {
             	TurnCounter++;
             	gameEngine.nextTurn(TurnCounter);
-            } if (CurrentPlayerWantsToEndTurn())
+            	gameEngine.nextPlayer();
+            } else if(CurrentPlayerWantsToEndTurn()){
                 initNewPlayerTurn();
-            
             	gameEngine.nextPlayer();
         }
+            }
     }
     
     //GAMELOOP -- PLAYER INFO
@@ -81,6 +85,8 @@ public class GameConsole {
         currentPlayer = gameEngine.getCurrentPlayer();
         currentDeck = currentPlayer.getDeck();
         currentHand = currentPlayer.getHand();
+        currentSelectedHand = currentPlayer.getSelectedHand();
+        currentPickedHand = currentPlayer.getPickedHand();
         currentPlayingField = currentPlayer.getPlayingField();
         currentDiscardPile = currentPlayer.getDiscardPile();
     }
@@ -114,6 +120,80 @@ public class GameConsole {
         }
     }
     
+    public void handleSpecialActionLayout(Card card) {
+        
+    	String pressedKey = "";
+    	currentPickedHand.addAllFrom(currentHand);
+    	currentPickedHand.remove(card);
+    	currentSelectedHand.getPile().clear();
+    	
+    	switch (card.getName()) {
+		case "Cellar":
+	    	while (!"E".equals(pressedKey)){
+	        Layout.drawSubTitel("Select cards");
+	        Layout.drawMenuNumericList("Your Cards", currentPickedHand.getPile());
+	        Layout.drawMenuNoList("Playing selected cards", currentSelectedHand.getPile());
+	        
+	        handleSelectedCard();
+	        pressedKey = Actions.askFor("Press any key to continue | press E to exit");
+	    	}
+			break;
+		case "Chapel":
+			while (!"E".equals(pressedKey)){
+		        Layout.drawSubTitel("Discard cards");
+		        Layout.drawMenuNumericList("Your Cards", currentPickedHand.getPile());
+		        Layout.drawMenuNoList("Playing selected cards", currentSelectedHand.getPile());
+		        
+		        handleSelectedCard();
+		        pressedKey = Actions.askFor("Press any key to continue | press E to exit");
+		    	}
+			break;
+		case "Workshop":
+			break;
+		case "Bureaucrat":
+			break;
+		case "Feast":
+			break;
+		case "Militia":
+			break;
+		case "Moneylender":
+		        Layout.drawSubTitel("Pick a card");
+		        Layout.drawMenuNumericList("Your Cards", currentPickedHand.getPile());
+		        Layout.drawMenuNoList("Playing selected cards", currentSelectedHand.getPile());
+		        
+		        handleSelectedCard();
+		        pressedKey = Actions.askFor("Press any key to continue...");
+			break;
+		case "Remodel":
+	        Layout.drawSubTitel("Pick a card");
+	        Layout.drawMenuNumericList("Your Cards", currentPickedHand.getPile());
+	        Layout.drawMenuNoList("Playing selected cards", currentSelectedHand.getPile());
+	        
+	        handleSelectedCard();
+	        pressedKey = Actions.askFor("Press any key to continue...");
+			break;
+		case "Spy":
+			break;
+		case "Thief":
+			break;
+		case "Throne Room":
+			break;
+		case "Council Room":
+			break;
+		case "Library":
+			break;
+		case "Mine":
+			break;
+		case "Witch":
+			break;
+		case "Adventurer":
+			break;
+		default:			
+            System.out.print("Incorrect or unknown letter, please try again!\n");
+            break;
+        }
+    }
+    
     public void handleMatchSettings(String action) {
         switch (action.toUpperCase()) {
             case "A":						 // 1: 
@@ -136,11 +216,11 @@ public class GameConsole {
         switch (action.toUpperCase()) {
             case "A":                       // A: Play a card
                 //TODO: Geld kan altijd gespeeld worden!
-                if (1 > 0) handlePlayCard(); //TEMP 1
+                if (gameEngine.getCurrentTurnSegment().getAction() > 0) handlePlayCard();
                 break;
 
             case "B":                      // B: Buy a card
-                if (1 > 0) handleBuyCard();  //TEMP 1
+                if (gameEngine.getCurrentTurnSegment().getBuy() > 0) handleBuyCard();
                 break;
             case "C":                     // C: print all cards on board (Victory, Kingdom, Treasure)
                 printAllCards();
@@ -148,8 +228,14 @@ public class GameConsole {
                 scanner.nextLine();
                 break;
             case "E":                     // C: print all cards on board (Victory, Kingdom, Treasure)
+            	gameEngine.CleanedUp();
             	endPlayerTurn();
                 break;
+            case "SC":                     // C: print all cards on board (Victory, Kingdom, Treasure)
+            	printAllCards();
+                int option = Integer.parseInt(Actions.askFor("[ SPAWN ] What card would you like to spawn"));
+                currentPlayer.getHand().addAmountOfCardsFrom(1, gameEngine.getBoard().getFromIndex(option - 1));
+                break;    
             default:
                 System.out.print("Incorrect or unknown letter, please try again!\n");
                 break;
@@ -159,8 +245,17 @@ public class GameConsole {
     //HANDLE -- ACTION
     public void handlePlayCard() {
         int option = Integer.parseInt(Actions.askFor("[ ACTIONS -- PLAY CARD ] What card would you like to play"));
-        gameEngine.playCard(currentHand.getFromIndex(option - 1), gameEngine);
-        currentPlayingField.addFrom(currentHand.getFromIndex(option - 1), currentHand); // This will need to be moved.
+        Card card = currentHand.getFromIndex(option - 1);
+        if (currentHand.getFromIndex(option - 1).isHasSpecialAction()){
+        	handleSpecialActionLayout(currentHand.getFromIndex(option - 1));
+        }
+        gameEngine.playCard(card, gameEngine);
+        currentPlayingField.addFrom(card, currentHand); // This will need to be moved.
+    }
+    
+    public void handleSelectedCard(){
+    	int option = Integer.parseInt(Actions.askFor("What card would you like to select"));
+    	currentSelectedHand.addFrom(currentPickedHand.getFromIndex(option - 1),currentPickedHand);
     }
 
     public void handleBuyCard() {
@@ -171,7 +266,6 @@ public class GameConsole {
         if (gameEngine.getCurrentTurnSegment().getCoin() >= gameEngine.getBoard().getFromIndex(option - 1).getFromIndex(0).getCost()){
         	currentPlayer.getDiscardPile().addAmountOfCardsFrom(1, gameEngine.getBoard().getFromIndex(option - 1));
         	gameEngine.getCurrentTurnSegment().removeBuy(1);
-        	//System.out.print(gameEngine.getCurrentTurnSegment() + gameEngine.getCurrentTurnSegment().getCoin());
         } else {
         	System.out.print("You do not have enough coins");
         
@@ -198,25 +292,18 @@ public class GameConsole {
         Layout.drawSubTitel(currentPlayer.getName() + "'S INFORMATION"); //PIETER-JAN'S INFORMATION
         
         Layout.drawMenuAlphabeticList("Actions", "Play Card", "Buy Card", "print current board", "Search card info", "End Turn"); /* <- Parameter STRINGS is printed in a list */
-        
-		System.out.println(gameEngine.getCurrentTurnSegment());
-		System.out.println(gameEngine.getCurrentTurnSegment().getCoin());
-        
+
         Layout.drawMenuNoList("Current turn", 												// Current turn
         					  "Coin(s): " + gameEngine.getCurrentTurnSegment().getCoin(),			// Coin(s): 2
         					  "Action(s): " + gameEngine.getCurrentTurnSegment().getAction() ,  	// Action(s): 1
         					  "Buy(s): " +  gameEngine.getCurrentTurnSegment().getBuy());			// Buy(s): 1
 
-        System.out.println("H " + currentHand.getCardsName());
-        System.out.println("D " + currentDeck.getCardsName());
-        System.out.println("DP " + currentDiscardPile.getCardsName());
         Layout.drawMenuNumericList("Your Cards", currentHand.getPile()); /* <- Gets cards [name] from the HAND which is then printed in a list */
         Layout.drawMenuNoList("Playing Field", currentPlayingField.getPile());/* <- Gets cards from the FIELD which is then printed in a list */
     }
 
     public void printAllCards() {
         Layout.drawSubTitel("Card available on board");
-        //Layout.drawMenuNumericList("Board", gameEngine.getAllCards()); /* <- Gets the chosen KINGDOM SET which is then printed in a list */
         Layout.drawBoard("Board", gameEngine.getBoard().getPiles());
     }
 

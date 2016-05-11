@@ -25,10 +25,11 @@ public class Board {
     // CORRECT
     public Board(Card... cards) {
         for (Card card : cards) {
-        	if (!"Gardens".equals(card.getName())){
-        		this.piles.add(new Pile(card, 10));
-        	} else {
+        	if ("Garden".equals(card.getName())){
         		this.piles.add(new Pile(card, 8 + ((3 > 2) ? 4 : 0))); //TEMP 3
+
+        	} else {
+        		this.piles.add(new Pile(card, 10));
         	}
         	
             if ("Province".equals(card.getName())) {
