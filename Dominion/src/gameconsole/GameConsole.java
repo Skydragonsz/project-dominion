@@ -60,6 +60,7 @@ public class GameConsole {
             if (gameEngine.getCurrentPlayer() == gameEngine.getLastPlayers()) {
             	TurnCounter++;
             	gameEngine.nextTurn(TurnCounter);
+                initNewPlayerTurn();
             	gameEngine.nextPlayer();
             } else if(CurrentPlayerWantsToEndTurn()){
                 initNewPlayerTurn();
@@ -266,6 +267,7 @@ public class GameConsole {
         if (gameEngine.getCurrentTurnSegment().getCoin() >= gameEngine.getBoard().getFromIndex(option - 1).getFromIndex(0).getCost()){
         	currentPlayer.getDiscardPile().addAmountOfCardsFrom(1, gameEngine.getBoard().getFromIndex(option - 1));
         	gameEngine.getCurrentTurnSegment().removeBuy(1);
+        	gameEngine.getCurrentTurnSegment().removeCoin(gameEngine.getCurrentTurnSegment().getCoin());
         } else {
         	System.out.print("You do not have enough coins");
         

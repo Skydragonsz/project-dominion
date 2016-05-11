@@ -41,7 +41,7 @@ public class GameEngine {
         getPlayer(playernr).setName(name); // Sets name
     }
     
-    public void initCards(){ //NAME CHANGE
+    public void initCards(){
         allCards = databaseConnection.getAllCards();   	
     	generateBoard();
     }
@@ -120,7 +120,7 @@ public class GameEngine {
         return playerList;
     }
 
-    public int getMaxPlayers() {
+    public static int getMaxPlayers() {
         return playerList.size();
     }
 
@@ -171,8 +171,7 @@ public class GameEngine {
     }
     
     public void nextPlayer(){
-    	PlayerCounter = PlayerCounter % 3 + 1;
-    	//TEMP 3
+    	PlayerCounter = PlayerCounter % getMaxPlayers() + 1;
     }
 
 //other    

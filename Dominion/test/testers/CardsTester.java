@@ -115,7 +115,7 @@ public class CardsTester {
         System.out.println("Player 1 - Hand: " + firstPlayer.getHand().getCardsName());
         //Adventurer card will add two copper (ID = 1) into the hand of the player.
         //What the result should be.
-        ArrayList resultHandArray =  new ArrayList(firstPlayer.getHand().getPile());       
+        ArrayList resultHandArray =  new ArrayList(firstPlayer.getHand().getCardsName());       
         resultHandArray.add("Copper");
         resultHandArray.add("Copper");
 
@@ -234,13 +234,14 @@ public class CardsTester {
     @Test
     public void testThroneRoom() {
     	//TODO Fix this test
+    	//Test won't work since turns won't get made.
     	firstPlayer.getHand().add(gameEngine.CallCard("Throne Room"));
     	
     	System.out.println("Player 1 - Deck: " + firstPlayer.getDeck().getCardsName());
-    	System.out.println("Player 1 - Hand: " + firstPlayer.getHand().getCardsName());
-    	System.out.println("Player 1 - Discard: " + firstPlayer.getDiscardPile().getCardsName());
+    	System.out.println("Player 1 - Hand: " + firstPlayer.getHand());
+    	System.out.println("Player 1 - Discard: " + firstPlayer.getDiscardPile());
     	
-    	gameEngine.playCard("Throne Room", firstPlayer, secondPlayer, gameEngine);
+    	gameEngine.playCard(gameEngine.CallCard("Throne Room"), gameEngine);
     	
     	System.out.println("Player 1 - Deck after Card: " + firstPlayer.getDeck().getCardsName());
     	System.out.println("Player 1 - Hand after Card: " + firstPlayer.getHand().getCardsName());

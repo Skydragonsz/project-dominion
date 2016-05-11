@@ -9,7 +9,7 @@ public class VictoryPoints {
     private int gardenPoints;
 
     public void victoryPointsCalc(GameEngine ge) {
-    	ge.initConnection();
+    	ge.initCards();
         for (int i = 1; i <= ge.getPlayerList().size(); i++) {
 
             Player p = ge.getPlayer(i);

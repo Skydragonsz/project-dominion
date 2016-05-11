@@ -6,7 +6,7 @@ import java.util.ArrayList;
  *
  * @author Quinten
  */
-//TODO: remove TEMP!
+
 public class Turn {
 
     private ArrayList<TurnSegment> turnArray = new ArrayList<TurnSegment>();
@@ -17,14 +17,14 @@ public class Turn {
         this.turnNumber = NthTurn;
         this.turnSegmentNumber = 0;
 
-        for (int i = 0; i < 3; i++) { //TEMP 3       
+        for (int i = 0; i < GameEngine.getMaxPlayers(); i++) {  
             turnArray.add(new TurnSegment());
         }
     }
 
     /* METHODS */
     public void nextTurnSegment() {
-        if (turnSegmentNumber <= 3) { //TEMP 3
+        if (turnSegmentNumber <= GameEngine.getMaxPlayers()) {
             turnSegmentNumber++;
         }
     }

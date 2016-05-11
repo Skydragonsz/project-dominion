@@ -26,7 +26,7 @@ public class Board {
     public Board(Card... cards) {
         for (Card card : cards) {
         	if ("Garden".equals(card.getName())){
-        		this.piles.add(new Pile(card, 8 + ((3 > 2) ? 4 : 0))); //TEMP 3
+        		this.piles.add(new Pile(card, 8 + ((GameEngine.getMaxPlayers() > 2) ? 4 : 0)));
 
         	} else {
         		this.piles.add(new Pile(card, 10));
