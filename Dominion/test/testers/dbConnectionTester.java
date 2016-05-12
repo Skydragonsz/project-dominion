@@ -7,6 +7,8 @@ package testers;
 
 import dominion.Card;
 import dominion.DataConnection;
+import dominion.Login;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -54,7 +56,7 @@ public class dbConnectionTester {
         String lastline = "";
         String result = "Adventurer || 6 || Action";
         
-        for (Card card : databaseConnection.getAllCards()){
+        for (Card card : databaseConnection.getAllCards(6)){
         System.out.println(card.getName() + " || "+ card.getCost() + " || "+ card.getType());
 
         lastline = card.getName() + " || "+ card.getCost() + " || "+ card.getType();
@@ -75,6 +77,15 @@ public class dbConnectionTester {
     	sql = "SELECT * FROM card";
     	
     	dbCon.executeSQL(sql);
+    }
+    
+    
+    @Test
+    public void testLogon(){
+
+    	Login l = new Login();
+
+    	System.out.println(l.logon("root", "toor"));
     }
     
     
