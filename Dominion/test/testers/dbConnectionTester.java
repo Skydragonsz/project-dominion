@@ -56,7 +56,11 @@ public class dbConnectionTester {
         String lastline = "";
         String result = "Adventurer || 6 || Action";
         
+<<<<<<< HEAD
         for (Card card : databaseConnection.getAllCards(6)){
+=======
+        for (Card card : databaseConnection.getAllCards(2)){
+>>>>>>> origin/master
         System.out.println(card.getName() + " || "+ card.getCost() + " || "+ card.getType());
 
         lastline = card.getName() + " || "+ card.getCost() + " || "+ card.getType();
