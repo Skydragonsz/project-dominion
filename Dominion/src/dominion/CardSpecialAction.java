@@ -175,20 +175,48 @@ public class CardSpecialAction  {
 	public static void playThief() {
 		// Each other player reveals the top 2 cards of his deck. If they revealed any Treasure cards, they trash 
 		// one of them that you choose. You may gain any or all (?) of these trashed cards. They discard the other revealed cards.
+		int choice = 1;
+		boolean keep = true; //Implement: You may gain any or all of these trashed cards (clean up code first)
 		for (int i = 0; i < stOtherPlayerList.size(); i++){
-			//TODO Finish
-	}
+			//for (int j = 0; j < 2; j++) {
+			//Both cards are treasure cards:
+				if ("Treasure".equals(stOtherPlayerList.get(i).getDeck().getFromIndex(0).getType()) && "Treasure".equals(stOtherPlayerList.get(i).getDeck().getFromIndex(1).getType())){
+					Card firstTreasureCard = stOtherPlayerList.get(i).getDeck().getFromIndex(0);
+					Card secondTreasureCard = stOtherPlayerList.get(i).getDeck().getFromIndex(1);
+					if (choice == 1) {
+						stOtherPlayerList.get(i).getDeck().remove(stOtherPlayerList.get(i).getDeck().getFromIndex(0));
+					} else if (choice == 2) {
+						stOtherPlayerList.get(i).getDeck().remove(stOtherPlayerList.get(i).getDeck().getFromIndex(1));
+					}
+					//Only one card is a treasure card:
+				} else if ("Treasure".equals(stOtherPlayerList.get(i).getDeck().getFromIndex(0).getType()) || "Treasure".equals(stOtherPlayerList.get(i).getHand().getFromIndex(1).getType())){
+					if ("Treasure".equals(stOtherPlayerList.get(i).getDeck().getFromIndex(0).getType())){
+						Card drawnTreasureCard = stOtherPlayerList.get(i).getDeck().getFromIndex(0);
+						stOtherPlayerList.get(i).getDiscardPile().addFrom(stOtherPlayerList.get(i).getDeck().getFromIndex(1), stOtherPlayerList.get(i).getDiscardPile());
+					} else {
+						Card drawnTreasureCard = stOtherPlayerList.get(i).getDeck().getFromIndex(1);
+						stOtherPlayerList.get(i).getDiscardPile().addFrom(stOtherPlayerList.get(i).getDeck().getFromIndex(0), stOtherPlayerList.get(i).getDiscardPile());
+					}
+					//No cards are treasure cards:
+				} else {
+					for (int k = 0; k < 2; k++)
+					stOtherPlayerList.get(i).getDiscardPile().addFrom(stOtherPlayerList.get(i).getDeck().getFromIndex(k), stOtherPlayerList.get(i).getDiscardPile());
+				}
+			//}
+				
+		}
 	}
 
 	public static void playThroneRoom() {
 		// Choose an Action card in your hand. Play it twice.
-		//TODO Test this code
+		//TODO Test this code (test won't work: NullPointerException --> TurnSegment problem?)
 		boolean choice = true;
 		for (int i = 0; i < stPlayer.getHand().getAmount(); i++){
 			if ("Action".equals(stPlayer.getHand().getFromIndex(i).getType())){
 				if (choice) {
-					for (i = 0; i < 1; i++) {
-					stPlayer.getHand().getFromIndex(i).PlayCard(stPlayer, stOtherPlayerList);
+					for (int j = 0; j < 1; j++) {
+					//stPlayer.getHand().getFromIndex(i).PlayCard(stPlayer, stOtherPlayerList);
+					stgameEngine.playCard(stPlayer.getHand().getFromIndex(i), stgameEngine);
 					}
 				}
 			}
@@ -210,13 +238,11 @@ public class CardSpecialAction  {
 		ArrayList aside = new ArrayList();
 		for (int i = stPlayer.getHand().getAmount(); i < 7; i++ ) {
 			Card drawnCard = stPlayer.getDeck().getFromIndex(0);
-			//stPlayer.getHand().addAmountOfCardsFrom(1, stPlayer.getDeck());
 			stPlayer.getHand().addFrom(drawnCard, stPlayer.getDeck());
 			if ("Action".equals(drawnCard.getType()) || "Attack".equals(drawnCard.getType())) {
 				i--;
 				if (choice) {
 					aside.add(drawnCard);
-					//TODO remove card from Hand if added to aside array.
 					stPlayer.getHand().remove(drawnCard);
 				}
 			}
@@ -226,7 +252,7 @@ public class CardSpecialAction  {
 
 	public static void playMine() {
 		// Trash a Treasure card from your hand. Gain a Treasure card costing up to 3 Coins more; put it into your hand.
-		//TODO Test this code
+		//TODO Test this code (test won't work: OutOfBoundsException)
 		boolean choice = true;
 		for (int i = 0; i < stPlayer.getHand().getAmount(); i++){
 			if ("Treasure".equals(stPlayer.getHand().getFromIndex(i).getType())){

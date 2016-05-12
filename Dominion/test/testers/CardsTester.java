@@ -201,6 +201,7 @@ public class CardsTester {
     	System.out.println("Player 2 - Deck after Card: " + secondPlayer.get(0).getDeck().getCardsName());
     	System.out.println("Player 2 - Discard after Card: " + secondPlayer.get(0).getDiscardPile().getCardsName());
     	
+    	
     	assertEquals(firstPlayer.getDiscardPile().getCardsName(), resultDiscardArray);
     	
     }
@@ -230,24 +231,26 @@ public class CardsTester {
     		// Werkt, maar volgorde klopt niet altijd --> error
     	
     }
-    
+    //Problem with this test
     @Test
     public void testThroneRoom() {
     	//TODO Fix this test
     	//Test won't work since turns won't get made.
-    	firstPlayer.getHand().add(gameEngine.CallCard("Throne Room"));
+    	firstPlayer.getHand().add(0, gameEngine.CallCard("Throne Room"));
+    	firstPlayer.getHand().add(1, gameEngine.CallCard("Workshop"));
     	
     	System.out.println("Player 1 - Deck: " + firstPlayer.getDeck().getCardsName());
-    	System.out.println("Player 1 - Hand: " + firstPlayer.getHand());
-    	System.out.println("Player 1 - Discard: " + firstPlayer.getDiscardPile());
+    	System.out.println("Player 1 - Hand: " + firstPlayer.getHand().getCardsName());
+    	//System.out.println("Player 1 - Discard: " + firstPlayer.getDiscardPile().getCardsName());
     	
-    	gameEngine.playCard(gameEngine.CallCard("Throne Room"), gameEngine);
+    	//gameEngine.playCard(gameEngine.CallCard("Throne Room"), gameEngine);
+    	gameEngine.playCard("Throne Room", firstPlayer, secondPlayer, gameEngine);
     	
     	System.out.println("Player 1 - Deck after Card: " + firstPlayer.getDeck().getCardsName());
     	System.out.println("Player 1 - Hand after Card: " + firstPlayer.getHand().getCardsName());
     	System.out.println("Player 1 - Discard after Card: " + firstPlayer.getDiscardPile().getCardsName());
     }
-    
+    //Problem with this test
     @Test
     public void testMine() {
     	firstPlayer.getHand().add(gameEngine.CallCard("Silver"));
