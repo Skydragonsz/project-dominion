@@ -39,7 +39,7 @@ public class Card {
     }
 
     /* METHODS */
-    public void PlayCard(Player player, ArrayList<Player> otherPlayerList, TurnSegment currentSegment, GameEngine gameEngine) {
+    public void PlayCard(Player player, ArrayList<Player> otherPlayerList, TurnSegment currentSegment) {
 
     	currentSegment.addCoin(additionalMoney);
         player.getHand().addAmountOfCardsFrom(additionalCard, player.getDeck());
@@ -47,7 +47,7 @@ public class Card {
     	currentSegment.addBuy(additionalBuy);
 
         if (hasSpecialAction) {
-        	CardSpecialAction.playSpecialAction(name, player, otherPlayerList, gameEngine);        
+        	CardSpecialAction.playSpecialAction(name, player, otherPlayerList, currentSegment);        
         }
     }
 

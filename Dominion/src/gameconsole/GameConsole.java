@@ -45,17 +45,13 @@ public class GameConsole {
     
     //START-UP -- GAMELOOP
     public void gameLoop() {
-        boolean bln = true; //TEMP
-        gameEngine.nextTurn(TurnCounter); //first turn
-        while (bln = true) //gameEngine.gameNotFinished()
+        boolean isNotEnding = true; //TEMP
+        while (isNotEnding == true) //gameEngine.gameNotFinished()
         {   
         	setCurrentPlayer();
-        	printCurrentSituation();
+        	printCurrentTurn();
 
-            System.out.print("[ ACTIONS ] What action would you like to perform:\t");
-            String option = scanner.nextLine();
-
-            handlePlayerAction(option);
+            handlePlayerAction(Actions.askFor("[ ACTIONS ] What action would you like to perform:\t"));
             
             if (gameEngine.getCurrentPlayer() == gameEngine.getLastPlayers()) {
             	TurnCounter++;
@@ -90,6 +86,7 @@ public class GameConsole {
         currentPickedHand = currentPlayer.getPickedHand();
         currentPlayingField = currentPlayer.getPlayingField();
         currentDiscardPile = currentPlayer.getDiscardPile();
+        gameEngine.setCurrentDiscardPile();
     }
     
 //HANDLE
@@ -124,7 +121,8 @@ public class GameConsole {
     public void handleSpecialActionLayout(Card card) {
         
     	String pressedKey = "";
-    	currentPickedHand.addAllFrom(currentHand);
+    	currentPickedHand.getPile().clear();
+    	currentPickedHand.copyAllFrom(currentHand);
     	currentPickedHand.remove(card);
     	currentSelectedHand.getPile().clear();
     	
@@ -133,7 +131,7 @@ public class GameConsole {
 	    	while (!"E".equals(pressedKey)){
 	        Layout.drawSubTitel("Select cards");
 	        Layout.drawMenuNumericList("Your Cards", currentPickedHand.getPile());
-	        Layout.drawMenuNoList("Playing selected cards", currentSelectedHand.getPile());
+	        Layout.drawMenuNoList("selected cards", currentSelectedHand.getPile());
 	        
 	        handleSelectedCard();
 	        pressedKey = Actions.askFor("Press any key to continue | press E to exit");
@@ -143,7 +141,7 @@ public class GameConsole {
 			while (!"E".equals(pressedKey)){
 		        Layout.drawSubTitel("Discard cards");
 		        Layout.drawMenuNumericList("Your Cards", currentPickedHand.getPile());
-		        Layout.drawMenuNoList("Playing selected cards", currentSelectedHand.getPile());
+		        Layout.drawMenuNoList("selected cards", currentSelectedHand.getPile());
 		        
 		        handleSelectedCard();
 		        pressedKey = Actions.askFor("Press any key to continue | press E to exit");
@@ -160,18 +158,18 @@ public class GameConsole {
 		case "Moneylender":
 		        Layout.drawSubTitel("Pick a card");
 		        Layout.drawMenuNumericList("Your Cards", currentPickedHand.getPile());
-		        Layout.drawMenuNoList("Playing selected cards", currentSelectedHand.getPile());
+		        Layout.drawMenuNoList("selected cards", currentSelectedHand.getPile());
 		        
 		        handleSelectedCard();
-		        pressedKey = Actions.askFor("Press any key to continue...");
+		        Actions.pressEnter();
 			break;
 		case "Remodel":
 	        Layout.drawSubTitel("Pick a card");
 	        Layout.drawMenuNumericList("Your Cards", currentPickedHand.getPile());
-	        Layout.drawMenuNoList("Playing selected cards", currentSelectedHand.getPile());
+	        Layout.drawMenuNoList("selected cards", currentSelectedHand.getPile());
 	        
 	        handleSelectedCard();
-	        pressedKey = Actions.askFor("Press any key to continue...");
+	        Actions.pressEnter();
 			break;
 		case "Spy":
 			break;
@@ -236,7 +234,20 @@ public class GameConsole {
             	printAllCards();
                 int option = Integer.parseInt(Actions.askFor("[ SPAWN ] What card would you like to spawn"));
                 currentPlayer.getHand().addAmountOfCardsFrom(1, gameEngine.getBoard().getFromIndex(option - 1));
-                break;    
+                break;
+            case "SCA":                     // C: print all cards on board (Victory, Kingdom, Treasure)
+            	printAllCards();
+                Layout.drawSubTitel("Card available on board");
+                Layout.drawMenuNumericList("Board", gameEngine.getAllCards());
+                int optionAll = Integer.parseInt(Actions.askFor("[ SPAWN ] What card would you like to spawn"));
+                currentPlayer.getHand().add(gameEngine.getAllCards().get(optionAll - 1));
+                break;
+            case "VIEW":                     // C: print all cards on board (Victory, Kingdom, Treasure)
+            	System.out.println("Deck: " + currentPlayer.getDeck());
+            	System.out.println("Hand: " + currentPlayer.getHand());
+            	System.out.println("Disc Pile: " + currentPlayer.getDiscardPile());
+            	System.out.println("Play Field: " + currentPlayer.getPlayingField());
+                break;   
             default:
                 System.out.print("Incorrect or unknown letter, please try again!\n");
                 break;
@@ -250,7 +261,7 @@ public class GameConsole {
         if (currentHand.getFromIndex(option - 1).isHasSpecialAction()){
         	handleSpecialActionLayout(currentHand.getFromIndex(option - 1));
         }
-        gameEngine.playCard(card, gameEngine);
+        gameEngine.playCard(card);
         currentPlayingField.addFrom(card, currentHand); // This will need to be moved.
     }
     
@@ -284,10 +295,11 @@ public class GameConsole {
     }
 
 //PRINTERS
-    public void printCurrentSituation() {
+    public void printCurrentTurn() {
     	
         //ACTIONS = A B C; CURRENT TURN = None; HAND = 1 2 3; PLAYING FIELD = none;    
-        Layout.drawTitel("PLAYER " + currentPlayer.getName() 							// PLAYER PIETER-JAN
+        
+    	Layout.drawTitel("PLAYER " + currentPlayer.getName() 							// PLAYER PIETER-JAN
         			 + " -- TURN " + gameEngine.getCurrentTurn().getCurrentTurnNumber() // TURN 6
         			 + " -- SEGMENT " + gameEngine.getPlayerCounter());			 		// SEGMENT 3  (PlayerCounter = SegmentNumber)
         
@@ -323,7 +335,6 @@ public class GameConsole {
         String set = scanner.nextLine();
 
         printAllCards();
-        System.out.print("Press ENTER to continue...");
-        scanner.nextLine();
+        Actions.pressEnter();
     }
 }

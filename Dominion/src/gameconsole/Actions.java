@@ -21,7 +21,11 @@ public class Actions {
     public static String askFor(String text){
         System.out.print( text + ":\t");
 		return scanner.nextLine();
-    	
+    }
+    
+    public static void pressEnter(){
+        System.out.print("Press ENTER to continue...");
+        scanner.nextLine();
     	
     }
 }

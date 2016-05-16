@@ -16,17 +16,10 @@ public class Player {
 
     /* CONSTRUCTOR */
     public Player() {
-        //init(); <-gives error
-    }
-
-    public Player(String name) {
-        this.name = name;
-        init();
     }
 
     /* INIT */
     public void init() {
-    	//SEE gameEngine initPlayer, this didn't do anything for some reason.
         deck.shuffle();
         hand.addAmountOfCardsFrom(5, deck);
     }

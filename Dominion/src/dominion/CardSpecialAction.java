@@ -1,20 +1,19 @@
 package dominion;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 public class CardSpecialAction  {
 
 	private static Player stPlayer;
 	private static ArrayList<Player> stOtherPlayerList;
 	private static GameEngine stgameEngine;
+	private static TurnSegment stCurrentTurnSegment;
 
-	public static void playSpecialAction(String cardName, Player player, ArrayList<Player> otherPlayerList, GameEngine gameEngine) {
+	public static void playSpecialAction(String cardName, Player player, ArrayList<Player> otherPlayerList, TurnSegment currentTurnSegment) {
 
 		stPlayer = player;
 		stOtherPlayerList = otherPlayerList;
-		stgameEngine = gameEngine;
-		stgameEngine.initCards();
+		stCurrentTurnSegment = currentTurnSegment;
 
 		switch (cardName) {
 		case "Cellar":
@@ -77,8 +76,8 @@ public class CardSpecialAction  {
 	}
 
 	public static void playCellar() {
-		int i = stgameEngine.getCurrentPlayer().getSelectedHand().getAmount();
-		for (Card card : stgameEngine.getCurrentPlayer().getSelectedHand().getPile()) {
+		int i = stPlayer.getSelectedHand().getAmount();
+		for (Card card : stPlayer.getSelectedHand().getPile()) {
 			stPlayer.getDiscardPile().addFrom(card, stPlayer.getHand());
 		}
 
@@ -87,7 +86,7 @@ public class CardSpecialAction  {
 	}
 
 	public static void playChapel() {
-		for (Card card : stgameEngine.getCurrentPlayer().getSelectedHand().getPile()) {
+		for (Card card : stPlayer.getSelectedHand().getPile()) {
 			stPlayer.getHand().remove(card);
 		}
 	}
@@ -106,13 +105,13 @@ public class CardSpecialAction  {
 	}
 
 	public static void playWorkshop() {
-		stgameEngine.getCurrentTurnSegment().addInstancedCoin(4);
+		stCurrentTurnSegment.addInstancedCoin(4);
 		// showInstancedBuyMenu();
 	}
 
 	public static void playBureaucrat() {
 		//Gain a silver card, put it on top of your deck
-		stPlayer.getDeck().add(stgameEngine.CallCard("Silver"));
+		stPlayer.getDeck().add(GameEngine.CallCard("Silver"));
 		//Each other player reveals a Victory card from his hand and puts it on his deck (or reveals a hand with no Victory cards).
 		for (int i = 0; i < stOtherPlayerList.size(); i++) {
 			for (int j = 0; j < stOtherPlayerList.get(i).getHand().getAmount(); j++){
@@ -126,8 +125,8 @@ public class CardSpecialAction  {
 	}
 
 	public static void playFeast() {
-		stPlayer.getHand().remove(stgameEngine.CallCard("Feast"));
-		stgameEngine.getCurrentTurnSegment().addInstancedCoin(5);
+		stPlayer.getHand().remove(GameEngine.CallCard("Feast"));
+		stCurrentTurnSegment.addInstancedCoin(5);
 		// showInstancedBuyMenu();
 	}
 
@@ -144,18 +143,18 @@ public class CardSpecialAction  {
 
 	public static void playMoneylender() {
 		Card card = null;
-		if (stgameEngine.getCurrentPlayer().getSelectedHand().getAmount() != 0){ //IF NOT EMPTY
-			card = stgameEngine.getCurrentPlayer().getSelectedHand().getPile().get(0);
+		if (stPlayer.getSelectedHand().getAmount() != 0){ //IF NOT EMPTY
+			card = stPlayer.getSelectedHand().getPile().get(0);
 		}
 			if (card.getName() == "Copper") {
 				stPlayer.getHand().remove(card);
-				stgameEngine.getCurrentTurnSegment().addCoin(3);
+				stCurrentTurnSegment.addCoin(3);
 			}
 
 		}
 
 	public static void playRemodel() {
-		Card card = stgameEngine.getCurrentPlayer().getSelectedHand().getPile().get(0);
+		Card card = stPlayer.getSelectedHand().getPile().get(0);
 		stPlayer.getHand().remove(card);
 	}
 
@@ -216,7 +215,7 @@ public class CardSpecialAction  {
 				if (choice) {
 					for (int j = 0; j < 1; j++) {
 					//stPlayer.getHand().getFromIndex(i).PlayCard(stPlayer, stOtherPlayerList);
-					stgameEngine.playCard(stPlayer.getHand().getFromIndex(i), stgameEngine);
+					stPlayer.getHand().getFromIndex(i).PlayCard(stPlayer, stOtherPlayerList, stCurrentTurnSegment);
 					}
 				}
 			}
@@ -258,7 +257,7 @@ public class CardSpecialAction  {
 			if ("Treasure".equals(stPlayer.getHand().getFromIndex(i).getType())){
 				if (choice) {
 					int originalCost = stPlayer.getHand().getFromIndex(i).getCost();
-					stgameEngine.getCurrentTurnSegment().addInstancedCoin(originalCost + 3);
+					stCurrentTurnSegment.addInstancedCoin(originalCost + 3);
 					stPlayer.getHand().remove(stPlayer.getHand().getFromIndex(i));
 					}
 				}
@@ -269,7 +268,7 @@ public class CardSpecialAction  {
 	public static void playWitch() {
 		for (int i = 0; i < stOtherPlayerList.size() - 1; i++) {
 			if (!stOtherPlayerList.get(i).checkForReactionCard()) {
-				stOtherPlayerList.get(i).getDeck().add(stgameEngine.CallCard("Curse"));
+				stOtherPlayerList.get(i).getDeck().add(GameEngine.CallCard("Curse"));
 				// Add Curse card DECK
 			}
 		}

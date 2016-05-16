@@ -42,17 +42,10 @@ public class Pile {
 
     public ArrayList<String> getCardsName() {
         ArrayList tempArrayList = new ArrayList<>();
-//        if (!pile.isEmpty()) {
         for (int i = 0; i < pile.size(); i++) {
             tempArrayList.add(this.pile.get(i).getName());
         }
         return tempArrayList;
-
-//        else {
-//        
-//            return tempArrayList;
-//    }
-//        return tempArrayList;
     }
 
     public int getAmount() {
@@ -76,16 +69,19 @@ public class Pile {
 
 
     public void addFrom(Card card, Pile otherPile) {
+        couldPileBeEmpty(1,otherPile);
         this.pile.add(card);
         otherPile.remove(card);
     }
 
     public void moveFrom(int index, Pile otherPile) {
+        couldPileBeEmpty(1, otherPile);
         this.pile.add(otherPile.getFromIndex(index));
         otherPile.remove(otherPile.getFromIndex(index));
     }
 
     public void remove(Card card) {
+        couldIBeEmpty(1);
         this.pile.remove(card);
     }
 
@@ -94,6 +90,7 @@ public class Pile {
     }
 
     public void addAmountOfCardsFrom(int amount, Pile otherPile) {
+        couldPileBeEmpty(amount, otherPile);
         for (int i = 0; i < amount; i++) {
             this.pile.add(otherPile.getFromIndex(0));
             otherPile.remove(otherPile.getFromIndex(0));
@@ -108,8 +105,41 @@ public class Pile {
 	public void addAllFrom(Pile... piles) {
 		for (Pile pile : piles){
 			this.getPile().addAll(pile.getPile());
+			pile.getPile().clear();
 		}
 		
 	}
+	public void copyAllFrom(Pile... piles) {
+		for (Pile pile : piles){
+			this.getPile().addAll(pile.getPile());
+		}
+		
+	}
+	
+	
+	private void couldIBeEmpty(int amount){
+		if (pile.size() - amount <= 0){
+			this.addAllFrom(GameEngine.getCurrentdiscardPile());
+		}
+		
+	}
+	
+	private void couldPileBeEmpty(int amount, Pile otherPile){
+		if (otherPile.getAmount() - amount <= 0){
+			otherPile.addAllFrom(GameEngine.getCurrentdiscardPile());
+		}
+		
+	}
+	
+	
+	@Override
+	public String toString(){
+		String stringOfCards = new String();
+        for (int i = 0; i < pile.size(); i++) {
+            stringOfCards += (this.pile.get(i).getName()) + ", ";
+        }
+        return stringOfCards;
+    }
+
 
 }

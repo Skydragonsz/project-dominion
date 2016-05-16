@@ -16,11 +16,11 @@ public class GameEngine {
     private Board board;
 
     // Cards
-    private ArrayList<Card> allCards;
+    private static ArrayList<Card> allCards;
+    private static Pile currentDiscardPile;
     private DataConnection databaseConnection = new DataConnection();
     
     public GameEngine() {
-
     }
 
     public static void main(String[] args) {
@@ -32,17 +32,22 @@ public class GameEngine {
         for (int i = 0; i < amount; i++) {
             playerList.add(new Player());
         }
+        nextTurn(1);
     }
 
     public void initPlayer(int playernr, String name) {
-        getPlayer(playernr).setDeck(generateDeck()); //Generates deck (Each player needs a DIFFERENT deck object)
-        getPlayer(playernr).getDeck().shuffle(); // Shuffle deck
-        getPlayer(playernr).getHand().addAmountOfCardsFrom(5, getPlayer(playernr).getDeck()); // Puts 5 cards from deck into hand
         getPlayer(playernr).setName(name); // Sets name
+        getPlayer(playernr).setDeck(generateDeck()); //Generates deck (Each player needs a DIFFERENT deck object)
+        getPlayer(playernr).init(); //init player
+
+    }
+    
+    public void init(){
+        initCards();
     }
     
     public void initCards(){
-        allCards = databaseConnection.getAllCards();   	
+        allCards = databaseConnection.getAllCards(); //placeholder 1   	
     	generateBoard();
     }
 
@@ -78,7 +83,7 @@ public class GameEngine {
     }
     
     
-    public Card CallCard(String name){
+    public static Card CallCard(String name){
     	Card foundCard = null;
         for (Card card : allCards){
         	if (name.equals(card.getName())){
@@ -97,13 +102,8 @@ public class GameEngine {
 		return allCards;
 	}
 
-    //Will not change since many testers use this parameter configuration
-	public void playCard(String cardName, Player player, ArrayList<Player> otherPlayerList, GameEngine gameEngine){
-    	CardSpecialAction.playSpecialAction(cardName, player, otherPlayerList, gameEngine);
-    }
-
-	public void playCard(Card card, GameEngine gameEngine){
-    	card.PlayCard(getCurrentPlayer(), getOtherPlayersList(getCurrentPlayer()), getCurrentTurnSegment(), gameEngine);
+	public void playCard(Card card){
+    	card.PlayCard(getCurrentPlayer(), getOtherPlayersList(getCurrentPlayer()), getCurrentTurnSegment());
     }
 
     /* GETTERS */
@@ -137,11 +137,6 @@ public class GameEngine {
             }
         }
         return otherPlayerList;
-    }
-
-//Other
-    public void PlayCardEffect(int index) {
-
     }
 
 //Turn        
@@ -182,12 +177,20 @@ public class GameEngine {
 
 	public void CleanedUp() {
 		getCurrentPlayer().getDiscardPile().addAllFrom(getCurrentPlayer().getHand(), getCurrentPlayer().getPlayingField());
-		if (getCurrentPlayer().getDeck().getAmount() == 0){
-			getCurrentPlayer().getDeck().addAllFrom(getCurrentPlayer().getDiscardPile());
-	}
-		getCurrentPlayer().getHand().getPile().clear();
-		getCurrentPlayer().getPlayingField().getPile().clear();
+//		if (getCurrentPlayer().getDeck().getAmount() == 0){
+//			getCurrentPlayer().getDeck().addAllFrom(getCurrentPlayer().getDiscardPile());
+//	}
+
 		getCurrentPlayer().getHand().addAmountOfCardsFrom(5, getCurrentPlayer().getDeck());
 		
 }
+	// I don't know.. is this correct?
+	public void setCurrentDiscardPile(){
+		currentDiscardPile = getCurrentPlayer().getDiscardPile();
+	}
+	
+	public static Pile getCurrentdiscardPile(){
+		return currentDiscardPile;
+	}
+	
 }
