@@ -53,7 +53,7 @@ public class CardSpecialAction  {
 		case "Thief":
 			playThief();
 			break;
-		case "Throne Room":
+		case "Throne room":
 			playThroneRoom();
 			break;
 		case "Council Room":
@@ -86,8 +86,10 @@ public class CardSpecialAction  {
 	}
 
 	public static void playChapel() {
-		for (Card card : stPlayer.getSelectedHand().getPile()) {
-			stPlayer.getHand().remove(card);
+		if (stPlayer.getSelectedHand().getAmount() <= 4) {
+			for (Card card : stPlayer.getSelectedHand().getPile()) {
+				stPlayer.getHand().remove(card);
+			}
 		}
 	}
 
@@ -106,7 +108,6 @@ public class CardSpecialAction  {
 
 	public static void playWorkshop() {
 		stCurrentTurnSegment.addInstancedCoin(4);
-		// showInstancedBuyMenu();
 	}
 
 	public static void playBureaucrat() {
@@ -117,6 +118,7 @@ public class CardSpecialAction  {
 			for (int j = 0; j < stOtherPlayerList.get(i).getHand().getAmount(); j++){
 				if ("Victory".equals(stOtherPlayerList.get(i).getHand().getFromIndex(j).getType())) {
 					stOtherPlayerList.get(i).getDeck().addFrom(stOtherPlayerList.get(i).getHand().getFromIndex(j), stOtherPlayerList.get(i).getHand());
+					j = stOtherPlayerList.get(i).getHand().getAmount();
 				}
 			}
 				
@@ -125,23 +127,25 @@ public class CardSpecialAction  {
 	}
 
 	public static void playFeast() {
-		stPlayer.getHand().remove(GameEngine.CallCard("Feast"));
+		stPlayer.getPlayingField().remove(GameEngine.CallCard("Feast"));
 		stCurrentTurnSegment.addInstancedCoin(5);
-		// showInstancedBuyMenu();
 	}
 
 	public static void playMilitia() {
+		// +2 Coins, Each other player discards down to 3 cards in his hand.
 		for (int i = 0; i < stOtherPlayerList.size() - 1; i++) {
-			////stOtherPlayerList.get(i).getHand().addAmountOfCardsFrom(4, stOtherPlayerList.get(i).getDeck());
-			// ArrayList selectedCards = selectableCards(4);
-//			int size = selectedCards.size();
-//			for (Card card : selectedCards) {
-//				stOtherPlayerList.get(i).getDiscardPile().addFrom(card, stOtherPlayerList.get(i).getHand());
-//			}
+			for (Player otherPlayer : stOtherPlayerList) {
+				if (otherPlayer.getHand().getAmount() > 3) {
+					for (Card card : otherPlayer.getSelectedHand().getPile()) {
+						otherPlayer.getDiscardPile().addFrom(card, otherPlayer.getHand());
+					}
+				}
+			}
 		}		
 	}
 
 	public static void playMoneylender() {
+		// Trash a Copper from your hand. If you do, +3 Coins.
 		Card card = null;
 		if (stPlayer.getSelectedHand().getAmount() != 0){ //IF NOT EMPTY
 			card = stPlayer.getSelectedHand().getPile().get(0);
@@ -154,12 +158,15 @@ public class CardSpecialAction  {
 		}
 
 	public static void playRemodel() {
+		// Trash a card from your hand. Gain a card costing up to 2 Coins more than the trashed card.
 		Card card = stPlayer.getSelectedHand().getPile().get(0);
+		stCurrentTurnSegment.addCoin(card.getCost() + 2);
 		stPlayer.getHand().remove(card);
 	}
 
 	public static void playSpy() {
-// Each player (including you) reveals the top card of his deck and either discards it or puts it back, your choice
+		// +1 Card, +1 Action
+		// Each player (including you) reveals the top card of his deck and either discards it or puts it back, your choice
 		boolean choice = true;
 		if (choice){
 			stPlayer.getDiscardPile().addAmountOfCardsFrom(1, stPlayer.getDeck());
@@ -208,19 +215,13 @@ public class CardSpecialAction  {
 
 	public static void playThroneRoom() {
 		// Choose an Action card in your hand. Play it twice.
-		//TODO Test this code (test won't work: NullPointerException --> TurnSegment problem?)
-		boolean choice = true;
-		for (int i = 0; i < stPlayer.getHand().getAmount(); i++){
-			if ("Action".equals(stPlayer.getHand().getFromIndex(i).getType())){
-				if (choice) {
-					for (int j = 0; j < 1; j++) {
-					//stPlayer.getHand().getFromIndex(i).PlayCard(stPlayer, stOtherPlayerList);
-					stPlayer.getHand().getFromIndex(i).PlayCard(stPlayer, stOtherPlayerList, stCurrentTurnSegment);
+		Card card = stPlayer.getSelectedHand().getPile().get(0);
+			if ("Action".equals(card.getType())){
+					for (int j = 0; j <= 1; j++) {
+					card.PlayCard(stPlayer, stOtherPlayerList, stCurrentTurnSegment);
 					}
 				}
 			}
-		}
-	}
 
 	public static void playCouncilRoom() {
 		stPlayer.getHand().addAmountOfCardsFrom(4, stPlayer.getDeck());
@@ -251,18 +252,12 @@ public class CardSpecialAction  {
 
 	public static void playMine() {
 		// Trash a Treasure card from your hand. Gain a Treasure card costing up to 3 Coins more; put it into your hand.
-		//TODO Test this code (test won't work: OutOfBoundsException)
-		boolean choice = true;
-		for (int i = 0; i < stPlayer.getHand().getAmount(); i++){
-			if ("Treasure".equals(stPlayer.getHand().getFromIndex(i).getType())){
-				if (choice) {
-					int originalCost = stPlayer.getHand().getFromIndex(i).getCost();
-					stCurrentTurnSegment.addInstancedCoin(originalCost + 3);
-					stPlayer.getHand().remove(stPlayer.getHand().getFromIndex(i));
-					}
+		Card card = stPlayer.getSelectedHand().getPile().get(0);
+			if ("Treasure".equals(card.getType())){
+				stCurrentTurnSegment.addInstancedCoin(card.getCost() + 3);
+				stPlayer.getHand().remove(card);
 				}
 			}
-		}
 	
 
 	public static void playWitch() {

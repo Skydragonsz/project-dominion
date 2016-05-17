@@ -160,15 +160,13 @@ public class CardsTester {
     	
     	//What result should be.
     	ArrayList resultDeckArray = new ArrayList(secondPlayer.get(0).getDeck().getCardsName());
-    	resultDeckArray.add("Duchy");
+    	resultDeckArray.add("Estate");
     	
     	System.out.println(resultDeckArray);
     	
     	System.out.println("Player 2 - Deck: " + secondPlayer.get(0).getDeck().getCardsName());
     	System.out.println("Player 2 - Hand: " + secondPlayer.get(0).getHand().getCardsName());
     	
-    	
-    	secondPlayer.get(0).getHand().add(GameEngine.CallCard("Duchy"));
     	
     	gameEngine.playCard(GameEngine.CallCard("Bureaucrat"));
     	
@@ -179,6 +177,8 @@ public class CardsTester {
     	
     	assertEquals(secondPlayer.get(0).getDeck().getCardsName(),resultDeckArray);
     }
+    
+    
     
     @Test
     public void testSpy() {
@@ -236,34 +236,53 @@ public class CardsTester {
     public void testThroneRoom() {
     	//TODO Fix this test
     	//Test won't work since turns won't get made.
-    	firstPlayer.getHand().add(GameEngine.CallCard("Throne room"));
-    	firstPlayer.getHand().add(1, GameEngine.CallCard("Workshop"));
     	
+    	ArrayList resultHandArray = firstPlayer.getHand().getCardsName();
+    	resultHandArray.add("Estate");
+    	resultHandArray.add("Copper");
+    	
+    	
+    	System.out.println(resultHandArray);
+    	
+    	firstPlayer.getSelectedHand().add(GameEngine.CallCard("Village"));
+    	
+    	firstPlayer.getDeck().getPile().add(0, GameEngine.CallCard("Estate"));
+    	firstPlayer.getDeck().getPile().add(1, GameEngine.CallCard("Copper"));
+    	    	
+    	System.out.println(gameEngine.CallCard("Throne room").getType());
     	System.out.println("Player 1 - Deck: " + firstPlayer.getDeck().getCardsName());
     	System.out.println("Player 1 - Hand: " + firstPlayer.getHand().getCardsName());
-    	//System.out.println("Player 1 - Discard: " + firstPlayer.getDiscardPile().getCardsName());
+    	System.out.println(gameEngine.getCurrentTurnSegment().getAction());
     	
-    	//gameEngine.playCard(GameEngine.CallCard("Throne Room"), gameEngine);
     	gameEngine.playCard(GameEngine.CallCard("Throne room"));
     	
     	System.out.println("Player 1 - Deck after Card: " + firstPlayer.getDeck().getCardsName());
     	System.out.println("Player 1 - Hand after Card: " + firstPlayer.getHand().getCardsName());
     	System.out.println("Player 1 - Discard after Card: " + firstPlayer.getDiscardPile().getCardsName());
+    	System.out.println("Village 2x uitvoeren: 1(Standaard) + 2(Village) + 2(Village) actions = " + gameEngine.getCurrentTurnSegment().getAction());
+    	
+    	assertEquals(firstPlayer.getHand().getCardsName(), resultHandArray);
+    	
+    	
     }
     //Problem with this test
     @Test
     public void testMine() {
-    	firstPlayer.getHand().add(GameEngine.CallCard("Silver"));
+    	firstPlayer.getSelectedHand().add(GameEngine.CallCard("Silver"));
     	
     	System.out.println("Player 1 - Deck: " + firstPlayer.getDeck().getCardsName());
     	System.out.println("Player 1 - Hand: " + firstPlayer.getHand().getCardsName());
     	System.out.println("Player 1 - Discard: " + firstPlayer.getDiscardPile().getCardsName());
+    	System.out.println(gameEngine.getCurrentTurnSegment().getInstancedCoin());
     	
     	gameEngine.playCard(GameEngine.CallCard("Mine"));
     	
     	System.out.println("Player 1 - Deck after Card: " + firstPlayer.getDeck().getCardsName());
     	System.out.println("Player 1 - Hand after Card: " + firstPlayer.getHand().getCardsName());
     	System.out.println("Player 1 - Discard after Card: " + firstPlayer.getDiscardPile().getCardsName());
+    	System.out.println(gameEngine.getCurrentTurnSegment().getInstancedCoin());
+    	
+    	System.out.println("Deze kaart werkt, geen waarden om te vergelijken");
     }
     
     @Test
