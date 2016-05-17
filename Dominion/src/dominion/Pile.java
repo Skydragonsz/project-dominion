@@ -90,7 +90,7 @@ public class Pile {
     }
 
     public void addAmountOfCardsFrom(int amount, Pile otherPile) {
-        couldPileBeEmpty(amount, otherPile);
+        
         for (int i = 0; i < amount; i++) {
             this.pile.add(otherPile.getFromIndex(0));
             otherPile.remove(otherPile.getFromIndex(0));
@@ -98,7 +98,7 @@ public class Pile {
 
     }
 
-    public boolean isDeckEmpty() {
+    public boolean isPileEmpty() {
         return this.pile.isEmpty();
     }
 
@@ -125,11 +125,13 @@ public class Pile {
 	}
 	
 	private void couldPileBeEmpty(int amount, Pile otherPile){
-		if (otherPile.getAmount() - amount <= 0){
+		if (otherPile.isPileEmpty()){
 			otherPile.addAllFrom(GameEngine.getCurrentdiscardPile());
 		}
 		
 	}
+	
+
 	
 	
 	@Override

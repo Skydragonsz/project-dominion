@@ -102,5 +102,17 @@ public class GameEngineTester {
         assertEquals(tempString,resultString);
     }
     
+    @Test
+    public void testDrawCards(){
+    	System.out.println("Deck: "+ge.getCurrentPlayer().getDeck());
+    	System.out.println("Discard pile: "+ge.getCurrentPlayer().getDiscardPile());
+    	System.out.println("Hand: "+ge.getCurrentPlayer().getHand());
+    	System.out.println("==================AFTER==================");
+    	ge.drawAmountOfCards(4);
+    	System.out.println("Deck: "+ge.getCurrentPlayer().getDeck());
+    	System.out.println("Discard pile: "+ge.getCurrentPlayer().getDiscardPile());
+    	System.out.println("Hand: "+ge.getCurrentPlayer().getHand());
+    }
+    
     
 }

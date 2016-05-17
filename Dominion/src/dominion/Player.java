@@ -30,20 +30,12 @@ public class Player {
         for (int i = 0; i < hand.getAmount(); i++) {
             if ("Reaction".equals(deck.getFromIndex(i).getType())) {
                 HasReaction = true;
+                i = hand.getAmount() + 1;
             }
         }
         return HasReaction;
     }
     
-//    public Card findVictoryCard() {
-//    	Card foundCard = new Card();
-//    	for (int i = 0; i < hand.getAmount(); i++ ) {
-//    		if ("Victory".equals(hand.getFromIndex(i).getType())) {
-//    			foundCard = hand.getFromIndex(i);
-//    		}
-//    	}
-//    	return foundCard;
-//    }
 
 
     /* GETTERS */

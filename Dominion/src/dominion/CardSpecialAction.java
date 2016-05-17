@@ -22,10 +22,6 @@ public class CardSpecialAction  {
 		case "Chapel":
 			playChapel();
 			break;
-		case "Moat":
-			// ?
-			playMoat();
-			break;
 		case "Chancellor":
 			playChancellor();
 			break;
@@ -53,10 +49,10 @@ public class CardSpecialAction  {
 		case "Thief":
 			playThief();
 			break;
-		case "Throne Room":
+		case "Throne room":
 			playThroneRoom();
 			break;
-		case "Council Room":
+		case "Council room":
 			playCouncilRoom();
 			break;
 		case "Library":
@@ -91,15 +87,13 @@ public class CardSpecialAction  {
 		}
 	}
 
-	public static void playMoat() {
-		//stPlayer.getHand().addAmountOfCardsFrom(2, stPlayer.getDeck());
-	}
 
 	public static void playChancellor() {
 		//+2 Coins, You may immediately put your deck into your discard pile.
 		boolean choice = true;
 		if (choice == true){
-			stPlayer.getDiscardPile().addAmountOfCardsFrom(stPlayer.getDeck().getAmount(), stPlayer.getDeck());
+			
+			stPlayer.getDiscardPile().addAllFrom(stPlayer.getDeck());
 		}
 		
 	}
@@ -223,10 +217,12 @@ public class CardSpecialAction  {
 	}
 
 	public static void playCouncilRoom() {
-		stPlayer.getHand().addAmountOfCardsFrom(4, stPlayer.getDeck());
+		
 
-		for (int i = 0; i < stOtherPlayerList.size() - 1; i++) {
-			stOtherPlayerList.get(i).getHand().addAmountOfCardsFrom(4, stOtherPlayerList.get(i).getDeck());
+		for (int i = 0; i < stOtherPlayerList.size(); i++) {
+			
+			stOtherPlayerList.get(i).getHand().addAmountOfCardsFrom(1, stOtherPlayerList.get(i).getDeck());
+			
 		}
 	}
 
@@ -234,8 +230,8 @@ public class CardSpecialAction  {
 		// Draw until you have 7 cards in hand. You may set aside any Action cards drawn this way, 
 		// as you draw them; discard the set aside cards after you finish drawing.
 		boolean choice = true;
-		ArrayList aside = new ArrayList();
-		for (int i = stPlayer.getHand().getAmount(); i < 7; i++ ) {
+		ArrayList<Card> aside = new ArrayList<Card>();
+		for (int i = stPlayer.getHand().getAmount() - 1; i < 7; i++ ) {
 			Card drawnCard = stPlayer.getDeck().getFromIndex(0);
 			stPlayer.getHand().addFrom(drawnCard, stPlayer.getDeck());
 			if ("Action".equals(drawnCard.getType()) || "Attack".equals(drawnCard.getType())) {
@@ -251,7 +247,7 @@ public class CardSpecialAction  {
 
 	public static void playMine() {
 		// Trash a Treasure card from your hand. Gain a Treasure card costing up to 3 Coins more; put it into your hand.
-		//TODO Test this code (test won't work: OutOfBoundsException)
+		// TODO Test this code (test won't work: OutOfBoundsException)
 		boolean choice = true;
 		for (int i = 0; i < stPlayer.getHand().getAmount(); i++){
 			if ("Treasure".equals(stPlayer.getHand().getFromIndex(i).getType())){
@@ -266,9 +262,9 @@ public class CardSpecialAction  {
 	
 
 	public static void playWitch() {
-		for (int i = 0; i < stOtherPlayerList.size() - 1; i++) {
+		for (int i = 0; i < stOtherPlayerList.size(); i++) {
 			if (!stOtherPlayerList.get(i).checkForReactionCard()) {
-				stOtherPlayerList.get(i).getDeck().add(GameEngine.CallCard("Curse"));
+				stOtherPlayerList.get(i).getDiscardPile().add(GameEngine.CallCard("Curse"));
 				// Add Curse card DECK
 			}
 		}
