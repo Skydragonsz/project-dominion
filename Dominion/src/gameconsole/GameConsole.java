@@ -261,8 +261,9 @@ public class GameConsole {
         if (currentHand.getFromIndex(option - 1).isHasSpecialAction()){
         	handleSpecialActionLayout(currentHand.getFromIndex(option - 1));
         }
-        gameEngine.playCard(card);
         currentPlayingField.addFrom(card, currentHand); // This will need to be moved.
+        gameEngine.playCard(card);
+        
     }
     
     public void handleSelectedCard(){
