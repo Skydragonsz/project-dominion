@@ -106,25 +106,7 @@ public class GameEngine {
     	card.PlayCard(getCurrentPlayer(), getOtherPlayersList(getCurrentPlayer()), getCurrentTurnSegment());
     }
 	
-	public void drawAmountOfCards(int amount){
 
-		
-		if(((getCurrentPlayer().getDeck().getAmount() + getCurrentPlayer().getDiscardPile().getAmount()) < amount) && (getCurrentPlayer().getDeck().getAmount() < amount)  ){
-			
-			amount = getCurrentPlayer().getDeck().getAmount() + getCurrentPlayer().getDiscardPile().getAmount();
-			
-			
-				if (getCurrentPlayer().getDeck().isPileEmpty()){
-					getCurrentPlayer().getDeck().addAllFrom(getCurrentPlayer().getDiscardPile());
-				}
-				
-				
-			
-	
-		}
-			getCurrentPlayer().getHand().addAmountOfCardsFrom(amount, getCurrentPlayer().getDeck());
-		
-	}
 
     /* GETTERS */
 //Player    

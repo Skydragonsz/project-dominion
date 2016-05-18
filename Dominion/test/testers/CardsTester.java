@@ -285,9 +285,5 @@ public class CardsTester {
     	System.out.println("Deze kaart werkt, geen waarden om te vergelijken");
     }
     
-    @Test
-    public void testCorrectStart() {
-    	
-    	
-    }
+
 }

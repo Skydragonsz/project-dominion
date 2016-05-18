@@ -77,7 +77,7 @@ public class CardSpecialAction  {
 			stPlayer.getDiscardPile().addFrom(card, stPlayer.getHand());
 		}
 
-		stPlayer.getHand().addAmountOfCardsFrom(i, stPlayer.getDeck());
+		stPlayer.getDeck().drawCards(i,stPlayer.getHand(),stPlayer.getDiscardPile());
 		System.out.println(stPlayer.getHand());
 	}
 
@@ -222,7 +222,9 @@ public class CardSpecialAction  {
 
 		for (int i = 0; i < stOtherPlayerList.size(); i++) {
 			
-			stOtherPlayerList.get(i).getHand().addAmountOfCardsFrom(1, stOtherPlayerList.get(i).getDeck());
+			stOtherPlayerList.get(i).getDeck().drawCards(1, stOtherPlayerList.get(i).getHand(), stOtherPlayerList.get(i).getDiscardPile());;
+			
+			
 			
 		}
 	}
@@ -260,7 +262,7 @@ public class CardSpecialAction  {
 
 	public static void playWitch() {
 		for (int i = 0; i < stOtherPlayerList.size(); i++) {
-			if (!stOtherPlayerList.get(i).checkForReactionCard()) {
+			if (!stOtherPlayerList.get(i).getHand().checkForReactionCard()) {
 				stOtherPlayerList.get(i).getDiscardPile().add(GameEngine.CallCard("Curse"));
 				// Add Curse card DECK
 			}

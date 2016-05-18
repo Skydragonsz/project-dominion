@@ -104,11 +104,15 @@ public class GameEngineTester {
     
     @Test
     public void testDrawCards(){
+    	ge.getCurrentPlayer().getDiscardPile().add(ge.CallCard("Copper"));
+    	
     	System.out.println("Deck: "+ge.getCurrentPlayer().getDeck());
     	System.out.println("Discard pile: "+ge.getCurrentPlayer().getDiscardPile());
     	System.out.println("Hand: "+ge.getCurrentPlayer().getHand());
     	System.out.println("==================AFTER==================");
-    	ge.drawAmountOfCards(4);
+    	
+    	ge.getCurrentPlayer().getDeck().drawCards(10, ge.getCurrentPlayer().getHand(), ge.getCurrentPlayer().getDiscardPile());
+    	
     	System.out.println("Deck: "+ge.getCurrentPlayer().getDeck());
     	System.out.println("Discard pile: "+ge.getCurrentPlayer().getDiscardPile());
     	System.out.println("Hand: "+ge.getCurrentPlayer().getHand());

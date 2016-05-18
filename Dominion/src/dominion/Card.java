@@ -42,7 +42,7 @@ public class Card {
     public void PlayCard(Player player, ArrayList<Player> otherPlayerList, TurnSegment currentSegment) {
 
     	currentSegment.addCoin(additionalMoney);
-        player.getHand().addAmountOfCardsFrom(additionalCard, player.getDeck());
+        player.getDeck().drawCards(additionalCard, player.getHand(),player.getDiscardPile());
     	currentSegment.addAction(additionalAction);
     	currentSegment.addBuy(additionalBuy);
 
