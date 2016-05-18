@@ -32,7 +32,12 @@ public class DominionServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //		response.setContentType("application/json");
 //		
-//
+
+		GameEngine gameEngine = new GameEngine();
+		
+		gameEngine.initCards();
+		
+		
 //		GameEngine gameEngine = (GameEngine) request.getServletContext().getAttribute("gameEngine");
 //		if(gameEngine == null)
 //		{
@@ -49,8 +54,8 @@ public class DominionServlet extends HttpServlet {
 //				
 //		
 //		Writer writer = response.getWriter();
-//		
-//		//writer.append("Kindly served by Tomcat at: ");
+////		
+//		writer.append("Kindly served by Tomcat at: " + gameEngine.getCurrentPlayer());
 //		//writer.append(request.getContextPath());
 //		
 //		//writer.append("\n");
@@ -61,18 +66,24 @@ public class DominionServlet extends HttpServlet {
 		
 		operation = request.getParameter("operation");
 		
-//		
-//		
-//		switch(operation)
-//		{
-//		case "initialize":
-//		int amount = Integer.parseInt(request.getParameter("playerAmount"));
-//		initAmount(amount);
-//			for (int i = 0; i < amount; i++)
-//			{
-//				initPlayers(i, request.getParameter("name" + i));
-//				
-//			}
+		
+		
+		switch(operation)
+		{
+		case "initialize":
+		
+			int amount = Integer.parseInt(request.getParameter("playerAmount"));
+			gameEngine.initAmountPlayers(amount);
+			for (int i = 0; i < amount; i++)
+			{
+				gameEngine.initPlayer(i, request.getParameter("name" + i));
+				
+			}
+			
+//			Writer writer = response.getWriter();
+////			
+//			writer.append("Kindly served by Tomcat at: " + gameEngine.getCurrentPlayer());
+		}
 ////			writer.append("{ \"status\":\"OK\", \"name1\":\"");
 ////			writer.append(playerName1);
 ////			writer.append("\", \"name2\":\"");
@@ -105,11 +116,11 @@ public class DominionServlet extends HttpServlet {
 //	}
 //	
 		
-		 response.setContentType("text/html");
-		 response.setCharacterEncoding("utf-8");
-		 PrintWriter out = response.getWriter();
-		 out.println("<html><body>Hello World. Dit is een test!</body></html>");
-		 System.out.println("ik heb gewerkt...");
+//		 response.setContentType("text/html");
+//		 response.setCharacterEncoding("utf-8");
+//		 PrintWriter out = response.getWriter();
+//		 out.println("<html><body>Hello World. Dit is een test!</body></html>");
+//		 System.out.println("ik heb gewerkt...");
 	}
 
 	/**

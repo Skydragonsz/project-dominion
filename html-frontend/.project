@@ -3,6 +3,7 @@
 	<name>html-frontend</name>
 	<comment></comment>
 	<projects>
+		<project>java-backend</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

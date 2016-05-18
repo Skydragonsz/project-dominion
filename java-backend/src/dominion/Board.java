@@ -22,11 +22,17 @@ public class Board {
         }
     }
     
+    
+    
+    
+    
+    
+    
     // CORRECT
     public Board(Card... cards) {
         for (Card card : cards) {
         	if ("Garden".equals(card.getName())){
-        		this.piles.add(new Pile(card, 8 + ((GameEngine.getMaxPlayers() > 2) ? 4 : 0)));
+        		this.piles.add(new Pile(card, 8 + ((3 > 2) ? 4 : 0))); //GameEngine.getMaxPlayers()
 
         	} else {
         		this.piles.add(new Pile(card, 10));
