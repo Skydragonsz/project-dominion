@@ -267,7 +267,7 @@ public class CardSpecialAction  {
 		// as you draw them; discard the set aside cards after you finish drawing.
 		boolean choice = true;
 		ArrayList<Card> aside = new ArrayList<Card>();
-		for (int i = stPlayer.getHand().getAmount() - 1; i < 7; i++ ) {
+		for (int i = stPlayer.getHand().getAmount(); i < 7; i++ ) {
 			Card drawnCard = stPlayer.getDeck().getFromIndex(0);
 			stPlayer.getHand().addFrom(drawnCard, stPlayer.getDeck());
 			if ("Action".equals(drawnCard.getType()) || "Attack".equals(drawnCard.getType())) {

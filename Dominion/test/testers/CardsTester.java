@@ -185,7 +185,8 @@ public class CardsTester {
     	ArrayList resultDiscardArray = firstPlayer.getDiscardPile().getCardsName();
     	resultDiscardArray.add("Witch");
     	
-    	firstPlayer.getDeck().getPile().add(0, GameEngine.CallCard("Witch"));
+    	firstPlayer.getDeck().getPile().add(0, GameEngine.CallCard("Copper"));
+    	firstPlayer.getDeck().getPile().add(1, GameEngine.CallCard("Witch"));
     	secondPlayer.get(0).getDeck().getPile().add(0, GameEngine.CallCard("Adventurer"));
     	
     	System.out.println("Resultaat Array " + resultDiscardArray);
@@ -197,6 +198,9 @@ public class CardsTester {
     	System.out.println("Player 2 - Discard: " + secondPlayer.get(0).getDiscardPile());
     	
     	gameEngine.playCard(GameEngine.CallCard("Spy"));
+    	
+    	System.out.println("Player 1 - Deck after Card: " + firstPlayer.getDeck());
+    	System.out.println("Player 1 - Discard after Card: " + firstPlayer.getDiscardPile());
     	
     	System.out.println("Player 2 - Deck after Card: " + secondPlayer.get(0).getDeck());
     	System.out.println("Player 2 - Discard after Card: " + secondPlayer.get(0).getDiscardPile());
