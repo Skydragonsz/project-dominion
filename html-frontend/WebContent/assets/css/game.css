@@ -1,0 +1,106 @@
+
+
+
+#playingfield {
+    float: left;
+    margin-left: 424px;
+    margin-top: 10px;
+
+}
+
+.circle{
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    border-radius: 100%;
+    background-color: red;
+}
+
+#bottom {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+#hand {
+    background-color: #1c94c4;
+    width: 1200px;
+    margin: 0 auto;
+    margin-left: 500px;
+}
+
+
+.active{
+    transform: scale(1.3,1.3)!important;
+    z-index: 9999;
+    /* margin-bottom: 50px; */
+    top: -50px!important;
+
+}
+
+.kingdom, #playingfield .card{
+    height: 200px!important;
+    width: 125px!important;
+    margin: 3px;
+
+
+}
+
+.treasure{
+    background-color: gold!important;
+    background-image: none!important;
+}
+
+.victory{
+    background-color: green!important;
+    background-image: none!important;
+
+}
+
+#kingdomset{
+    width:700px;
+    float:left;
+
+}
+
+#treasure{
+    float:left;
+    clear: left
+}
+
+#victory{
+    float: left;
+}
+
+#wrapper{
+    float:left;
+}
+
+#info{
+    font-family: 'Patrick Hand', cursive;
+    float: left;
+    height: 350px;
+    width: 350px;
+    background-image: url(../media/paper.png);
+    background-repeat: no-repeat;
+    padding-left: 75px;
+    padding-top: 65px;
+}
+
+
+#SelectCards{
+    width: 70%;
+    padding: 50px;
+    padding-top: 10px;
+    margin: 0 auto;
+    position: absolute;
+    z-index: 999;
+}
+
+h3{
+    padding-top: 30px;
+}
+
+#info p{
+    line-height: 160%;
+}

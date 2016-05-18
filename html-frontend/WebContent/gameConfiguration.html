@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="assets/css/general.css">
+    <title>Menu</title>
+</head>
+<body>
+<div id="menu" class="menu">
+    <h1>Match settings</h1>
+    <h2>How many players</h2>
+    <input type="text" id="players" placeholder="Amount of players"/>
+    <h2>Select a set</h2>
+    <input type="radio" name="set" id="fg" value="1" checked><label for="fg">First game</label>
+    <input type="radio" name="set" id="bm" value="2"><label for="bm">Big Money</label>
+    <input type="radio" name="set" id="in" value="3"><label for="in">Interaction</label>
+    <input type="radio" name="set" id="sd" value="4"><label for="sd">Size Distortion</label>
+    <input type="radio" name="set" id="vs" value="5"><label for="vs">Village Square</label>
+    <input type="radio" name="set" id="rs" value="random"><label for="rs">Random set</label>
+    <input type="radio" name="set" id="cs" value="custom">
+    <label  for="cs">
+    <select id="custom">
+        <option value="placeholder" disabled selected>Custom set</option>
+        <option value="">test</option>
+        <option value="create">Create a custom set...</option>
+
+    </select>
+    </label>
+        <br>
+    <br>
+    <a class="button" href="#">Ok</a>
+    </form>
+
+</div>
+</body>
+</html>

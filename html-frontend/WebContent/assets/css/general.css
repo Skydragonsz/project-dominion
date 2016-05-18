@@ -1,0 +1,119 @@
+.button{
+    text-decoration: none;
+    color: gold;
+    float: left;
+    background: url('../media/button.png') no-repeat -3px -6px;
+    width: 195px;
+    height: 45px;
+    line-height: 250%;
+    text-align: center;
+}
+
+.button:hover{
+    background: url('../media/button.png') no-repeat -211px -6px;
+    width: 195px;
+    height: 45px;
+
+}
+
+.button:active{
+    background: url('../media/button.png') no-repeat -414px -6px;
+    width: 195px;
+    height: 45px;
+}
+
+#menu{
+    width: 200px;
+    height: 100%;
+    padding: 50px;
+    padding-top: 10px;
+    margin: 0 auto;
+    background-color: gray;
+}
+
+#custom{
+    width: 150px;
+}
+
+label{
+    display: block;
+}
+
+.menu{
+    border-style: solid;
+    border-width: 38px 43px 43px 38px;
+    border-image: url(../media/UI_ElementWood_Crop_mini.png) 38 43 43 38 fill repeat;
+    box-shadow: 0 0 10px rgb(0, 0, 0), inset 0 0 25px rgb(0, 0, 0);
+}
+
+.invisible{
+    display:none;
+}
+
+
+.card{
+    /*margin: 10px;*/
+    border: 2px solid black;
+    height: 260px;
+    width: 162px;
+    background-color:red;
+    border-radius: 5px;
+    background-image: url(../media/Base%20Deck/village.jpg);
+    background-size: 100%;
+    float:left;
+    box-shadow: 0 0 10px rgb(0, 0, 0), inset 0 0 25px rgb(0, 0, 0);
+
+}
+
+
+.card:hover{
+    border: 2px solid gold;
+}
+
+.paper{
+
+
+}
+
+img{
+
+    float:left;
+    filter: drop-shadow(0 0 10px rgb(0, 0, 0));
+}
+
+.back{
+    background-image: url(../media/Base%20Deck/back.jpg)!important;
+}
+
+html{
+
+    background-image: url("../media/background-smaller.png");
+    background-size:     cover;                      /* <------ */
+    background-repeat:   no-repeat;
+    /*background-image: url("http://digitalresult.com/wp-content/uploads/2015/04/landscape-desktop-wallpapers-44.jpeg");
+*/
+}
+
+body{
+    margin: 40px;
+}
+
+h1{
+    font-size: 2em;
+}
+
+h2{
+    font-size: 1.5em;
+}
+
+h3{
+    font-size: 1.25em;
+}
+
+b{
+    font-weight: bold;
+}
+/*
+#kingdomset, #wrapper, #center, #bottom{
+    -webkit-filter: blur(5px)!important;
+}*/
