@@ -286,6 +286,37 @@ public class CardsTester {
     }
     
     @Test
+    public void testThief() {
+    	
+    	
+    	System.out.println("Player 1 - Deck: " + firstPlayer.getDeck().getCardsName());
+    	System.out.println("Player 1 - Hand: " + firstPlayer.getHand().getCardsName());
+    	System.out.println("Player 1 - Discard: " + firstPlayer.getDiscardPile().getCardsName());
+    	System.out.println("Player 1 - SelectedHand: " + firstPlayer.getSelectedHand().getCardsName());
+    	System.out.println("-----------------------------------------------------");
+    	
+    	System.out.println("Player 2 - Deck: " + secondPlayer.get(0).getDeck());
+    	System.out.println("Player 2 - Discard: " + secondPlayer.get(0).getDiscardPile());
+    	System.out.println("Player 2 - Discard: " + secondPlayer.get(0).getDiscardPile().getCardsName());
+    	System.out.println("Player 2 - SelectedHand: " + secondPlayer.get(0).getSelectedHand().getCardsName());
+    	System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++");
+    	
+    	
+    	gameEngine.playCard(GameEngine.CallCard("Thief"));
+    	
+    	System.out.println("Player 1 - Deck after Card: " + firstPlayer.getDeck().getCardsName());
+    	System.out.println("Player 1 - Hand after Card: " + firstPlayer.getHand().getCardsName());
+    	System.out.println("Player 1 - Discard after Card: " + firstPlayer.getDiscardPile().getCardsName());
+    	System.out.println("Player 1 - SelectedHand after Card: " + firstPlayer.getSelectedHand().getCardsName());
+    	System.out.println("-----------------------------------------------------");
+    	
+    	System.out.println("Player 2 - Deck after Card: " + secondPlayer.get(0).getDeck());
+    	System.out.println("Player 2 - Discard after Card: " + secondPlayer.get(0).getDiscardPile());
+    	System.out.println("Player 2 - Discard after Card: " + secondPlayer.get(0).getDiscardPile().getCardsName());
+    	System.out.println("Player 2 - SelectedHand after Card: " + secondPlayer.get(0).getSelectedHand().getCardsName());
+    }
+    
+    @Test
     public void testCorrectStart() {
     	
     	

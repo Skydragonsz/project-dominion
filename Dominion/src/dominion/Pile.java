@@ -56,6 +56,7 @@ public class Pile {
     public Card getFromIndex(int index) {
         return this.pile.get(index);
     }
+    
 
     public void add(Card card) {
         this.pile.add(card);
