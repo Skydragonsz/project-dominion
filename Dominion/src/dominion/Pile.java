@@ -11,7 +11,7 @@ public class Pile {
 
     private ArrayList<Card> pile = new ArrayList<>();
     private String name;
-
+    private boolean HasReaction;
     private int amount;
     
     public Pile() {
@@ -82,7 +82,7 @@ public class Pile {
     }
 
     public void remove(Card card) {
-        couldIBeEmpty(1);
+        
         this.pile.remove(card);
     }
 
@@ -97,6 +97,30 @@ public class Pile {
             otherPile.remove(otherPile.getFromIndex(0));
         }
 
+    }
+    
+    public void drawCards(int amount, Pile hand, Pile discardPile){		
+		if(this.getAmount() < amount){
+			if((this.getAmount() + discardPile.getAmount()) < amount){
+				amount = this.getAmount() + discardPile.getAmount();
+			}
+				if (this.isPileEmpty() || this.getAmount() < amount){
+					this.addAllFrom(discardPile);
+					this.shuffle();
+				}
+			}
+		hand.addAmountOfCardsFrom(amount, this);		
+    }
+    
+    public Boolean checkForReactionCard() {
+        HasReaction = false;
+        for (int i = 0; i < this.getAmount(); i++) {
+            if ("Reaction".equals(this.getFromIndex(i).getType())) {
+                HasReaction = true;
+                i = this.getAmount() + 1;
+            }
+        }
+        return HasReaction;
     }
 
     public boolean isPileEmpty() {
@@ -118,12 +142,7 @@ public class Pile {
 	}
 	
 	
-	private void couldIBeEmpty(int amount){
-		if (pile.size() - amount <= 0){
-			this.addAllFrom(GameEngine.getCurrentdiscardPile());
-		}
-		
-	}
+
 	
 	private void couldPileBeEmpty(int amount, Pile otherPile){
 		if (otherPile.isPileEmpty()){

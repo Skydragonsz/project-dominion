@@ -23,19 +23,7 @@ public class Player {
         deck.shuffle();
         hand.addAmountOfCardsFrom(5, deck);
     }
-    
-    /* METHODS */
-    public Boolean checkForReactionCard() {
-        HasReaction = false;
-        for (int i = 0; i < hand.getAmount(); i++) {
-            if ("Reaction".equals(deck.getFromIndex(i).getType())) {
-                HasReaction = true;
-                i = hand.getAmount() + 1;
-            }
-        }
-        return HasReaction;
-    }
-    
+        
 
 
     /* GETTERS */
