@@ -10,3 +10,5 @@
 *.log
 *.log
 html-frontend/build/classes/server/DominionServlet.class
+html-frontend/build/classes/server/DominionServlet.class
+*.class
