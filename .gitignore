@@ -9,3 +9,4 @@
 *.txt
 *.log
 *.log
+html-frontend/build/classes/server/DominionServlet.class

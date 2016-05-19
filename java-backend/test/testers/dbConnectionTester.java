@@ -7,8 +7,6 @@ package testers;
 
 import dominion.Card;
 import dominion.DataConnection;
-import dominion.Login;
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -83,15 +81,7 @@ public class dbConnectionTester {
     	dbCon.executeSQL(sql);
     }
     
-    
-    @Test
-    public void testLogon(){
-
-    	Login l = new Login();
-
-    	System.out.println(l.logon("root", "toor"));
-    }
-    
+      
     
     
 }
