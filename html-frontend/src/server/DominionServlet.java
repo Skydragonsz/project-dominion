@@ -53,7 +53,7 @@ public class DominionServlet extends HttpServlet {
 //		// zodat je gameEngine.getPlayer(  PARAM PLAYER ) .getCard(  PARAM CARD ID )
 //				
 //		
-//		Writer writer = response.getWriter();
+		Writer writer = response.getWriter();
 ////		
 //		writer.append("Kindly served by Tomcat at: " + gameEngine.getCurrentPlayer());
 //		//writer.append(request.getContextPath());
@@ -74,16 +74,17 @@ public class DominionServlet extends HttpServlet {
 		
 			int amount = Integer.parseInt(request.getParameter("playerAmount"));
 			gameEngine.initAmountPlayers(amount);
-			for (int i = 0; i < amount; i++)
+			for (int i = 1; i < amount; i++)
 			{
 				gameEngine.initPlayer(i, request.getParameter("name" + i));
 				
 			}
+			break;
 			
 //			Writer writer = response.getWriter();
 ////			
 //			writer.append("Kindly served by Tomcat at: " + gameEngine.getCurrentPlayer());
-		}
+		
 ////			writer.append("{ \"status\":\"OK\", \"name1\":\"");
 ////			writer.append(playerName1);
 ////			writer.append("\", \"name2\":\"");
@@ -108,10 +109,10 @@ public class DominionServlet extends HttpServlet {
 //			
 //			break;
 //			
-//		default:
-//			writer.append("{ \"status\":\"NOK\", \"errormessage\":\"Invalid operation\" }" );
-//			break;
-//		}
+		default:
+			writer.append("{ \"status\":\"NOK\", \"errormessage\":\"Invalid operation\" }" );
+			break;
+		}
 //		
 //	}
 //	

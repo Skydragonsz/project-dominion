@@ -217,7 +217,7 @@ public class GameConsole {
         switch (action.toUpperCase()) {
             case "A":                       // A: Play a card
                 //TODO: Geld kan altijd gespeeld worden!
-                if (gameEngine.getCurrentTurnSegment().getAction() > 0) handlePlayCard();
+                handlePlayCard();
                 break;
 
             case "B":                      // B: Buy a card
@@ -263,7 +263,6 @@ public class GameConsole {
         if (currentHand.getFromIndex(option - 1).isHasSpecialAction()){
         	handleSpecialActionLayout(currentHand.getFromIndex(option - 1));
         }
-        currentPlayingField.addFrom(card, currentHand); // This will need to be moved.
         gameEngine.playCard(card);
         
     }
@@ -276,16 +275,9 @@ public class GameConsole {
     public void handleBuyCard() {
         printAllCards();
         
-        int option = Integer.parseInt(Actions.askFor("[ ACTIONS -- BUY CARD ] What card would you like to buy"));
+        int option = Integer.parseInt(Actions.askFor("[ ACTIONS -- BUY CARD ] What card would you like to buy")) -1;
+        gameEngine.buyCard(option);
         
-        if (gameEngine.getCurrentTurnSegment().getCoin() >= gameEngine.getBoard().getFromIndex(option - 1).getFromIndex(0).getCost()){
-        	currentPlayer.getDiscardPile().addAmountOfCardsFrom(1, gameEngine.getBoard().getFromIndex(option - 1));
-        	gameEngine.getCurrentTurnSegment().removeBuy(1);
-        	gameEngine.getCurrentTurnSegment().removeCoin(gameEngine.getCurrentTurnSegment().getCoin());
-        } else {
-        	System.out.print("You do not have enough coins");
-        
-        }
     }
 
 //SETTERS    
