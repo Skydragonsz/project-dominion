@@ -10,6 +10,23 @@ $(document).ready(function () {
     generateVictory();
     calculateDegreesCardsInHand();
     */
+	
+	$("img").click(function() {
+		
+		var request = $.ajax({ cache: false,
+			dataType: "text",
+		    url: "/html-frontend/DominionServlet",
+		    data: { operation: 'initialize',
+		    	name1: $("h1").val(),
+		    	name2: $("h2").val() }
+		});
+		request.done(function (data) {
+			var obj = JSON.stringify(data);
+			
+		    console.log("pls");
+		});
+		});
+
 
     $.get("DominionServlet", function (responseText) {   // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response text...
         console.log(responseText);
