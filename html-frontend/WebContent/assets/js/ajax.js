@@ -37,3 +37,37 @@ $.get("DominionServlet?operation=getHand", function(responseJson) {    // Execut
 
 }
 
+function callBoard() {
+	$.get("DominionServlet?operation=getBoard", function(responseJson) {    // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response JSON... // Create HTML <ul> element and append it to HTML DOM element with ID "somediv".
+	    $.each(responseJson, function(index, item) { // Iterate over the JSON array.
+	    	var card = item.toString().split(";");
+	    	var type;
+//	    	switch (index) {
+//	    	case (index <= 2 && index >= 0):
+//	    		type = "treasure";
+//	    	console.log("treasure" + card[0])
+//	    	break;
+//	    	case (index >= 3 && index <= 6):
+//	    		type = "victory";
+//	    	console.log("victory" + card[0])
+//	    	break;
+//	    	case (index >= 7 && index <= 16):
+//	    		type = "kingdomset"
+//	    		console.log("kingdomset" + card[0])
+//	    	break;
+//	    	}
+	    	
+	    	if (index <= 2 && index >= 0) {
+	    		type = "treasure";
+	    	} else if (index >= 3 && index <= 6) {
+	    		type ="victory"
+	    	} else {
+	    		type = "kingdomset"
+	    	}
+	    	//var amount = item.toString().split(';')[1];
+	    	$("#" + type).append('<div class="kingdom card" style="position: relative; background-image: url(../html-frontend/assets/media/Base%20Deck/'+ card[0].toLowerCase() +'.jpg)""><div class="circle">10</div></div>');
+	    })
+	});
+}
+
+
