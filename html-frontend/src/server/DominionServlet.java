@@ -36,7 +36,11 @@ public class DominionServlet extends HttpServlet {
   	     response.setCharacterEncoding("UTF-8");
   	     
   	     Writer writer = response.getWriter();
-  	     writer.append("Testen"); //, \"name1\":\"Jonas\"
+  	     writer.append("Testen");
+  	     
+	}
+  	     
+  	     //, \"name1\":\"Jonas\"
 
 //		GameEngine gameEngine = new GameEngine();
 //		
@@ -97,22 +101,13 @@ public class DominionServlet extends HttpServlet {
 //		// welke speler iets doet en welke kaart hij manipuleert.
 //		// zodat je gameEngine.getPlayer(  PARAM PLAYER ) .getCard(  PARAM CARD ID )
 //				
-//		
-//		Writer writer = response.getWriter();
-////		
 //		writer.append("Kindly served by Tomcat at: " + gameEngine.getCurrentPlayer());
 //		//writer.append(request.getContextPath());
 //		
 //		//writer.append("\n");
 //		
 //		//writer.append("Hello world");
-//		
 
-		
-		
-		
-		
-		////			writer.append("{ \"status\":\"OK\", \"name1\":\"");
 ////			writer.append(playerName1);
 ////			writer.append("\", \"name2\":\"");
 ////			writer.append(playerName2);
@@ -135,11 +130,7 @@ public class DominionServlet extends HttpServlet {
 //			//   { 'naam':'Jonas' }
 //			
 //			break;
-//			
-//		default:
-//			writer.append("{ \"status\":\"NOK\", \"errormessage\":\"Invalid operation\" }" );
-//			break;
-//		}
+//
 //		
 //	}
 //	
@@ -149,7 +140,6 @@ public class DominionServlet extends HttpServlet {
 //		 PrintWriter out = response.getWriter();
 //		 out.println("<html><body>Hello World. Dit is een test!</body></html>");
 //		 System.out.println("ik heb gewerkt...");
-	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

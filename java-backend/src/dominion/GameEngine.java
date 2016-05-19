@@ -103,8 +103,37 @@ public class GameEngine {
 	}
 
 	public void playCard(Card card){
-    	card.PlayCard(getCurrentPlayer(), getOtherPlayersList(getCurrentPlayer()), getCurrentTurnSegment());
+		if(card.getType().equals("Treasure") || getCurrentTurnSegment().getAction() > 0){
+			if(!card.getType().equals("Victory")){
+		    	card.PlayCard(getCurrentPlayer(), getOtherPlayersList(getCurrentPlayer()), getCurrentTurnSegment());
+		    	getCurrentPlayer().getPlayingField().addFrom(card, getCurrentPlayer().getHand());
+
+		    	if(!card.getType().equals("Treasure")){
+		    		getCurrentTurnSegment().removeAction(1);
+
+		    	}
+	    	
+			}
+		}
+		
     }
+	
+	
+	public void buyCard(int option){
+
+		
+		Card card = getBoard().getFromIndex(option).getFromIndex(0);
+		
+		
+        if (getCurrentTurnSegment().getCoin() >= card.getCost()){
+        	getCurrentPlayer().getDiscardPile().addAmountOfCardsFrom(1, getBoard().getFromIndex(option));
+        	getCurrentTurnSegment().removeBuy(1);
+        	getCurrentTurnSegment().removeCoin(getCurrentTurnSegment().getCoin());
+        	
+        }
+        
+		
+	}
 	
 
 
@@ -179,11 +208,8 @@ public class GameEngine {
 
 	public void CleanedUp() {
 		getCurrentPlayer().getDiscardPile().addAllFrom(getCurrentPlayer().getHand(), getCurrentPlayer().getPlayingField());
-//		if (getCurrentPlayer().getDeck().getAmount() == 0){
-//			getCurrentPlayer().getDeck().addAllFrom(getCurrentPlayer().getDiscardPile());
-//	}
+		getCurrentPlayer().getDeck().drawCards(5, getCurrentPlayer().getHand(), getCurrentPlayer().getDiscardPile());
 
-		getCurrentPlayer().getHand().addAmountOfCardsFrom(5, getCurrentPlayer().getDeck());
 		
 }
 	// I don't know.. is this correct?
