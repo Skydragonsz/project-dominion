@@ -21,6 +21,7 @@ public class DominionServlet extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
+	
     public DominionServlet() {
         super();
         // TODO Auto-generated constructor stub
@@ -29,13 +30,57 @@ public class DominionServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		response.setContentType("application/json");
-//		
+		 response.setContentType("text/plain");
+  	     response.setCharacterEncoding("UTF-8");
+  	     
+  	     Writer writer = response.getWriter();
+  	     writer.append("Testen"); //, \"name1\":\"Jonas\"
 
-		GameEngine gameEngine = new GameEngine();
+//		GameEngine gameEngine = new GameEngine();
+//		
+//		gameEngine.initCards();
+//	
+//		
+//		String operation;
+//		
+//		operation = request.getParameter("operation");
+//		
 		
-		gameEngine.initCards();
+//		switch(operation)
+//		{
+//		case "initialize":
+//			int amount = Integer.parseInt(request.getParameter("playerAmount"));
+//			gameEngine.initAmountPlayers(amount);
+//			for (int i = 1; i <= amount; i++)
+//			{
+//				gameEngine.initPlayer(i, request.getParameter("name" + i));
+//			}
+//						
+//			writer.append("Kindly served by Tomcat at: " + gameEngine.getCurrentPlayer().getName());
+//			break;
+//		case "showBoard":
+//			writer.append("{ \"card\":\"Village\" } "); //, \"name1\":\"Jonas\"
+//			
+//			break;
+//		case "playCard":
+//			String card = request.getParameter("card");
+//			gameEngine.playCard(GameEngine.CallCard(card));
+//			writer.append("Kindly served by Tomcat at: " + gameEngine.getCurrentPlayer().getName() + gameEngine.getPlayer(1).getName() + gameEngine.getPlayer(2).getName() + gameEngine.getPlayer(3).getName());
+//			break;
+//		
+//			
+//		case "information":
+//			writer.append("Hand " + gameEngine.getCurrentPlayer().getHand() + "\n" +
+//						  "Deck " + gameEngine.getCurrentPlayer().getDeck() + "\n" +
+//						  "PlayingField " + gameEngine.getCurrentPlayer().getPlayingField() + "\n" +
+//						  "Discard" + gameEngine.getCurrentPlayer().getHand() + "\n");
+//		default:
+//			writer.append("error: jsdffsdkljsdfjlfd");
+//			break;
+//		}
+		
 		
 		
 //		GameEngine gameEngine = (GameEngine) request.getServletContext().getAttribute("gameEngine");
@@ -62,29 +107,12 @@ public class DominionServlet extends HttpServlet {
 //		
 //		//writer.append("Hello world");
 //		
-		String operation;
-		
-		operation = request.getParameter("operation");
+
 		
 		
 		
-		switch(operation)
-		{
-		case "initialize":
 		
-			int amount = Integer.parseInt(request.getParameter("playerAmount"));
-			gameEngine.initAmountPlayers(amount);
-			for (int i = 0; i < amount; i++)
-			{
-				gameEngine.initPlayer(i, request.getParameter("name" + i));
-				
-			}
-			
-//			Writer writer = response.getWriter();
-////			
-//			writer.append("Kindly served by Tomcat at: " + gameEngine.getCurrentPlayer());
-		}
-////			writer.append("{ \"status\":\"OK\", \"name1\":\"");
+		////			writer.append("{ \"status\":\"OK\", \"name1\":\"");
 ////			writer.append(playerName1);
 ////			writer.append("\", \"name2\":\"");
 ////			writer.append(playerName2);

@@ -2,15 +2,21 @@
  * Created by Quinten on 26/04/2016.
  */
 
-$(document).ready (fun1ction(){
+$(document).ready(function () {
+    /*
     generateHand();
     generateSet();
     generateTreasure();
     generateVictory();
     calculateDegreesCardsInHand();
+    */
+
+    $.get("DominionServlet", function (responseText) {   // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response text...
+        console.log(responseText);
+    });
 
 
-    $(".hand").on("click", function(){
+    $(".hand").on("click", function () {
         $(this).detach().appendTo("#playingfield");
         $(this).removeClass("hand");
         $(this).removeAttr('style');
@@ -19,78 +25,82 @@ $(document).ready (fun1ction(){
     });
 
 
-    $("#players").change(function() {
-        $("#players").val($("#players").val()*2).change();
+    $("#players").change(function () {
+        $("#players").val($("#players").val() * 2).change();
         console.log("tst");
     });
 
 
-    $(".hand").on("mouseenter", function(){
+    $(".hand").on("mouseenter", function () {
         $(this).addClass("active");
         console.log("test");
     });
 
-    $(".hand").on("mouseleave", function(){
+    $(".hand").on("mouseleave", function () {
         $(this).removeClass("active");
         console.log("test");
     });
 });
 
-function calculateDegreesCardsInHand(){
+
+/*
+function calculateDegreesCardsInHand() {
     var index = Math.floor($(".hand").length / 2);
     var switchedIndex = -index;
     console.log(index);
-    $(".hand").each(function() {
+    $(".hand").each(function () {
         $(this).css("transform", "rotate(" + (switchedIndex * 10) + "deg)");
         $(this).css("top", (Math.abs(switchedIndex) * ((Math.abs(switchedIndex) * 7))));
 
         $(this).css("left", index * 75);
         index--;
         switchedIndex++;
-        });
+    });
 
-}
 
-function generateHand(){
+function generateHand() {
     var amount = prompt("amount of cards");
-    for (var i = 0; i < amount; i++){
+    for (var i = 0; i < amount; i++) {
         $("#hand").append('<div class="hand card" style="position: relative"></div>');
     }
 }
 
-function generateSet(){
+function generateSet() {
     var amount = 10;
-    for (var i = 0; i < amount; i++){
+    for (var i = 0; i < amount; i++) {
         $("#kingdomset").append('<div class="kingdom card" style="position: relative"><div class="circle">10</div></div>');
     }
 }
 
-function generateTreasure(){
+function generateTreasure() {
     var amount = 3;
-    for (var i = 0; i < amount; i++){
+    for (var i = 0; i < amount; i++) {
         $("#treasure").append('<div class="kingdom treasure card" style="position: relative"></div>');
     }
 }
-function generateVictory(){
+
+function generateVictory() {
     var amount = 4;
-    for (var i = 0; i < amount; i++){
+    for (var i = 0; i < amount; i++) {
         $("#victory").append('<div class="kingdom victory card" style="position: relative"></div>');
     }
 }
-function cardGlow(){
+
+function cardGlow() {
     $(".active").addClass("glowBig");
     timer = setInterval(blink, 200);
 }
-    function blinkGlow() {
-        $(".card").toggleClass("glowBig").toggleClass("glowSmall");
+
+function blinkGlow() {
+    $(".card").toggleClass("glowBig").toggleClass("glowSmall");
 }
 
-function sendSpecialAction(){
+function sendSpecialAction() {
 
 }
 
 
-function specialAction(cardName){
+function specialAction(cardName) {
     switch (cardName) {
         case "Cellar":
             //fill DIV with cards from hand.
@@ -178,59 +188,43 @@ function specialAction(cardName){
             break;
 
         default:
-            console.log("Sorry, we are out of " + expr + ".");
+            console.log("Sorry, we are out of " + expr + ".")
     }
 
-
-
-
-
-
-function showCards(){
-    $.get("handCardServlet", function(responseJson) {
-        $.each(responseJson, function(name) {
-            $("#SelectCards").append('<div class="card" id="" style="position: relative; background-image: url(../media/' + name + '.jpg)"></div>');
-        });
-    });
 }
-
-    function showOneCardFromPlayer(){
-        $.get("handCardServlet", function(responseJson) {
-            $.each(responseJson, function(player, name) {
-                $("#SelectCards").append('<div><h3>player</h3><div class="card" id="" style="position: relative; background-image: url(../media/' + name + '.jpg)"></div></div>');
-            });
-        });
-    }
-
-
-
-function showBoard(){
-        $("#kingdom").appendTo("#SelectCards");
-        $("#wrapper").appendTo("#SelectCards");
 }
 
 
 
+/*
+
+ function showCards(){
+ $.get("handCardServlet", function(responseJson) {
+ $.each(responseJson, function(name) {
+ $("#SelectCards").append('<div class="card" id="" style="position: relative; background-image: url(../media/' + name + '.jpg)"></div>');
+ });
+ });
+ }
+
+ function showOneCardFromPlayer(){
+ /        $.get("handCardServlet", function(responseJson) {
+ $.each(responseJson, function(player, name) {
+ $("#SelectCards").append('<div><h3>player</h3><div class="card" id="" style="position: relative; background-image: url(../media/' + name + '.jpg)"></div></div>');
+ });
+ });
+ }
+
+
+
+ function showBoard(){
+ $("#kingdom").appendTo("#SelectCards");
+ $("#wrapper").appendTo("#SelectCards");
+ }
+
+ */
 
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
