@@ -69,7 +69,6 @@ public class DominionServlet extends HttpServlet {
 			break;
 			
 		case "getHand":
-
 			List<String> list = new ArrayList<>();
 	  	    list = gameEngine.getCurrentPlayer().getHand().getCardsName();
 	  	    String json = new Gson().toJson(list);
@@ -77,17 +76,28 @@ public class DominionServlet extends HttpServlet {
 	  	    response.setContentType("application/json");
 	  	    response.setCharacterEncoding("UTF-8");
 	  	    response.getWriter().write(json);
-	  	     
+			break;
+		
+		case "getBoard":
+			List<String> board = new ArrayList<>();
+	  	    
+	  	    		
+	  	    		for(Pile pile: gameEngine.getBoard().getPiles()){
+	  	    			board.add(pile.getFromIndex(0).getName() + ";" + pile.getAmount());	
+	  	    		}	
+	  	    		String jsonBoard = new Gson().toJson(board);
 
+	  	    response.setContentType("application/json");
+	  	    response.setCharacterEncoding("UTF-8");
+	  	    response.getWriter().write(jsonBoard);
 			break;
 		case "showBoard":
 			writer.append("{ \"card\":\"Village\" } "); //, \"name1\":\"Jonas\"
-			
+
 			break;
 		case "playCard":
 			String card = request.getParameter("card");
 			gameEngine.playCard(GameEngine.CallCard(card));
-			writer.append("Kindly served by Tomcat at: " + gameEngine.getCurrentPlayer().getName() + gameEngine.getPlayer(1).getName() + gameEngine.getPlayer(2).getName() + gameEngine.getPlayer(3).getName());
 			break;
 		
 			
