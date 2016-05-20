@@ -68,20 +68,17 @@ function callPlayerInfo() {
 			$("#coins").append('<b>coins: </b>' + responseJson.coins);
 			$("#actions").append('<b>actions: </b>' + responseJson.actions);
 			$("#buys").append('<b>buys: </b>' + responseJson.buys);
-//			if (index = 0) {
-//				$("h1").append('<b>Player: </b>' + info + "'");
-//			} else if (index = 1) {
-//				$("h2").append('<b>Turn: </b>' + info + "'");
-//			} else if (index = 2) {
-//				$("p").append('<b>coins: </b>' + info + "'");
-//			} else if (index = 3) {
-//				$("p").append('<b>actions: </b>' + info + "'");
-//			} else {
-//				$("p").append('<b>buys: </b>' + info + "'");
-//			}
 			
 			
 		})
+}
+
+function callAllCards() {
+	$.get("DominionServlet?operation=getAllCards", function(responseJson) {
+		$.each(responseJson, function(index, item) {
+			 $("#all").append('<div class="card" style="position: relative; background-image: url(../html-frontend/assets/media/Base%20Deck/'+ item.toLowerCase() +'.jpg)""></div>');
+		})
+	});
 }
 
 

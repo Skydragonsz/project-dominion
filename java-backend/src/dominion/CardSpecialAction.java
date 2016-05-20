@@ -109,6 +109,7 @@ public class CardSpecialAction  {
 		stPlayer.getDeck().add(GameEngine.CallCard("Silver"));
 		//Each other player reveals a Victory card from his hand and puts it on his deck (or reveals a hand with no Victory cards).
 		for (int i = 0; i < stOtherPlayerList.size(); i++) {
+			if (!stOtherPlayerList.get(i).getHand().checkForReactionCard()) {
 			for (int j = 0; j < stOtherPlayerList.get(i).getHand().getAmount(); j++){
 				if ("Victory".equals(stOtherPlayerList.get(i).getHand().getFromIndex(j).getType())) {
 					stOtherPlayerList.get(i).getDeck().addFrom(stOtherPlayerList.get(i).getHand().getFromIndex(j), stOtherPlayerList.get(i).getHand());
@@ -116,6 +117,7 @@ public class CardSpecialAction  {
 				}
 			}
 				
+			}
 		}
 		
 	}
@@ -127,7 +129,8 @@ public class CardSpecialAction  {
 
 	public static void playMilitia() {
 		// +2 Coins, Each other player discards down to 3 cards in his hand.
-		for (int i = 0; i < stOtherPlayerList.size() - 1; i++) {
+		for (int i = 0; i < stOtherPlayerList.size(); i++) {
+			if (!stOtherPlayerList.get(i).getHand().checkForReactionCard()) {
 			for (Player otherPlayer : stOtherPlayerList) {
 				if (otherPlayer.getHand().getAmount() > 3) {
 					for (Card card : otherPlayer.getSelectedHand().getPile()) {
@@ -135,7 +138,8 @@ public class CardSpecialAction  {
 					}
 				}
 			}
-		}		
+			}	
+		}
 	}
 
 	public static void playMoneylender() {
@@ -166,9 +170,11 @@ public class CardSpecialAction  {
 			stPlayer.getDiscardPile().addAmountOfCardsFrom(1, stPlayer.getDeck());
 		}
 		for (int i = 0; i < stOtherPlayerList.size(); i++) {
+			if (!stOtherPlayerList.get(i).getHand().checkForReactionCard()) {
 			if (choice) {
 			stOtherPlayerList.get(i).getDiscardPile().addAmountOfCardsFrom(1, stOtherPlayerList.get(0).getDeck());
 			}
+		}
 		}
 	}
 
@@ -181,6 +187,7 @@ public class CardSpecialAction  {
 		ArrayList<Card> topTwoCards = new ArrayList();
 		boolean choice = true;
 		for (int i = 0; i < stOtherPlayerList.size(); i++) {
+			if (!stOtherPlayerList.get(i).getHand().checkForReactionCard()) {
 			for (int j = 0; j < 2; j++) {
 				Card topCard = stOtherPlayerList.get(i).getDeck().getFromIndex(j);
 				topTwoCards.add(topCard);
@@ -209,12 +216,13 @@ public class CardSpecialAction  {
 			}
 			
 		}
+		}
 	}
 
 	public static void playThroneRoom() {
 		// Choose an Action card in your hand. Play it twice.
 		Card card = stPlayer.getSelectedHand().getPile().get(0);
-			if ("Action".equals(card.getType())){
+			if ("Action".equals(card.getType()) || "Reaction".equals(card.getType()) || "Attack".equals(card.getType())){
 					for (int j = 0; j <= 1; j++) {
 					card.PlayCard(stPlayer, stOtherPlayerList, stCurrentTurnSegment);
 					}
@@ -241,7 +249,7 @@ public class CardSpecialAction  {
 		for (int i = stPlayer.getHand().getAmount(); i < 7; i++ ) {
 			Card drawnCard = stPlayer.getDeck().getFromIndex(0);
 			stPlayer.getHand().addFrom(drawnCard, stPlayer.getDeck());
-			if ("Action".equals(drawnCard.getType()) || "Attack".equals(drawnCard.getType())) {
+			if ("Action".equals(drawnCard.getType()) || "Attack".equals(drawnCard.getType()) || "Reaction".equals(drawnCard.getType())) {
 				i--;
 				if (choice) {
 					aside.add(drawnCard);

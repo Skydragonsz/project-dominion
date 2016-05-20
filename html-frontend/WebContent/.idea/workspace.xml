@@ -88,7 +88,7 @@
         <entry file="file://$PROJECT_DIR$/assets/js/ajax.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.52548546">
-              <caret line="65" column="73" selection-start-line="65" selection-start-column="73" selection-end-line="65" selection-end-column="73" />
+              <caret line="62" column="73" selection-start-line="62" selection-start-column="73" selection-end-line="62" selection-end-column="73" />
               <folding>
                 <element signature="e#0#42#0" expanded="false" />
               </folding>
@@ -295,7 +295,7 @@
     <option name="totallyTimeSpent" value="18678000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="22" y="41" width="1885" height="984" extended-state="0" />
+    <frame x="22" y="41" width="1885" height="984" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1904762" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -744,7 +744,7 @@
     <entry file="file://$PROJECT_DIR$/assets/js/ajax.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.52548546">
-          <caret line="65" column="73" selection-start-line="65" selection-start-column="73" selection-end-line="65" selection-end-column="73" />
+          <caret line="62" column="73" selection-start-line="62" selection-start-column="73" selection-end-line="62" selection-end-column="73" />
           <folding>
             <element signature="e#0#42#0" expanded="false" />
           </folding>
