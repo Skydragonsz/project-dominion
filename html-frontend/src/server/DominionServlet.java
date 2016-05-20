@@ -37,100 +37,86 @@ public class DominionServlet extends HttpServlet {
 	 */
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		 response.setContentType("text/plain");
-//  	     response.setCharacterEncoding("UTF-8");
-//  	     
-  	     Writer writer = response.getWriter();
-//  	     writer.append("Pesten");
-//  	     
-  	     
-  	    	
-  	     
-  	     //, \"name1\":\"Jonas\"
-	  	    response.setContentType("application/json");
-	  	    response.setCharacterEncoding("UTF-8");
+		Writer writer = response.getWriter();
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
 
+		GameEngine gameEngine = (GameEngine) request.getServletContext().getAttribute("gameEngine");
+		if (gameEngine == null) {
+			gameEngine = new GameEngine();
+			request.getServletContext().setAttribute("gameEngine", gameEngine);
+		}
 
-			GameEngine gameEngine = (GameEngine) request.getServletContext().getAttribute("gameEngine");
-			if(gameEngine == null)
-			{
-				gameEngine = new GameEngine();
-				request.getServletContext().setAttribute("gameEngine", gameEngine);
-				
-			}
-
-	  	    
 		gameEngine.initCards();
-	
-		
 		String operation;
-		
 		operation = request.getParameter("operation");
-//		
-		
-		switch(operation)
-		{
+
+		switch (operation) {
 		case "initialize":
 			int amount = Integer.parseInt(request.getParameter("playerAmount"));
 			gameEngine.initAmountPlayers(amount);
-			//response.getWriter().write();
-	  	    
-			for (int i = 1; i <= amount; i++)
-			{
-				gameEngine.initPlayer(i, request.getParameter("name" + i));
-			}	
 
+			for (int i = 1; i <= amount; i++) {
+				gameEngine.initPlayer(i, request.getParameter("name" + i));
+			}
 			break;
-			
 		case "getHand":
 			List<String> list = new ArrayList<>();
-	  	    list = gameEngine.getCurrentPlayer().getHand().getCardsName();
-	  	    String json = new Gson().toJson(list);
+			list = gameEngine.getCurrentPlayer().getHand().getCardsName();
+			String json = new Gson().toJson(list);
 
-	  	    response.getWriter().write(json);
-	  	    break;
-		
+			response.getWriter().write(json);
+			break;
 		case "getBoard":
 			List<String> board = new ArrayList<>();
-	  	    
-	  	    		
-	  	    		for(Pile pile: gameEngine.getBoard().getPiles()){
-	  	    			board.add(pile.getFromIndex(0).getName() + ";" + pile.getAmount());	
-	  	    		}	
-	  	    		String jsonBoard = new Gson().toJson(board);
 
-	  	    response.getWriter().write(jsonBoard);
+			for (Pile pile : gameEngine.getBoard().getPiles()) {
+				board.add(pile.getFromIndex(0).getName() + ";" + pile.getAmount());
+			}
+			String jsonBoard = new Gson().toJson(board);
+
+			response.getWriter().write(jsonBoard);
 			break;
 		case "showBoard":
-			writer.append("{ \"card\":\"Village\" } "); //, \"name1\":\"Jonas\"
-
+			writer.append("{ \"card\":\"Village\" } ");
+			break;
 		case "getPlayerInfo":
-			String playerInfo = "{\"player\":\"" + gameEngine.getCurrentPlayer().getName()
-							+ "\", \"turn\":\"" + gameEngine.getTurnNumber()
-					 	 + "\" , \"coins\":\"" + gameEngine.getCurrentTurnSegment().getCoin() 
-					 + "\" , \"actions\":\"" + gameEngine.getCurrentTurnSegment().getAction() 
-					 + "\" , \"buys\":\"" + gameEngine.getCurrentTurnSegment().getBuy() + "\"}";
-			
+			String playerInfo = "{\"player\":\"" + gameEngine.getCurrentPlayer().getName() + "\", \"turn\":\""
+					+ gameEngine.getTurnNumber() + "\" , \"coins\":\"" + gameEngine.getCurrentTurnSegment().getCoin()
+					+ "\" , \"actions\":\"" + gameEngine.getCurrentTurnSegment().getAction() + "\" , \"buys\":\""
+					+ gameEngine.getCurrentTurnSegment().getBuy() + "\"}";
 
 			response.getWriter().write(playerInfo);
+			break;
+		case "getAllCards":
+			List<String> allCards = new ArrayList<>();
+
+			for (Card card : gameEngine.getAllCards()){
+				String cardName = card.getName();
+				String cardType = card.getType();
+				if(!("Victory".equals(cardType) || "Treasure".equals(cardType))){
+					allCards.add(cardName);
+				}
+			}
+			String jsonCards = new Gson().toJson(allCards);
+
+			
+			response.getWriter().write(jsonCards);
 			break;
 		case "playCard":
 			String card = request.getParameter("card");
 			gameEngine.playCard(GameEngine.CallCard(card));
 			break;
-		
-			
 		case "information":
-			writer.append("Hand " + gameEngine.getCurrentPlayer().getHand() + "\n" +
-						  "Deck " + gameEngine.getCurrentPlayer().getDeck() + "\n" +
-						  "PlayingField " + gameEngine.getCurrentPlayer().getPlayingField() + "\n" +
-						  "Discard" + gameEngine.getCurrentPlayer().getHand() + "\n");
+			writer.append("Hand " + gameEngine.getCurrentPlayer().getHand() + "\n" + "Deck "
+					+ gameEngine.getCurrentPlayer().getDeck() + "\n" + "PlayingField "
+					+ gameEngine.getCurrentPlayer().getPlayingField() + "\n" + "Discard"
+					+ gameEngine.getCurrentPlayer().getHand() + "\n");
+			break;
 		default:
 			writer.append("error: jsdffsdkljsdfjlfd");
 			break;
-		}
-		
-		
+		}		
 		
 //		GameEngine gameEngine = (GameEngine) request.getServletContext().getAttribute("gameEngine");
 //		if(gameEngine == null)

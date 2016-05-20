@@ -24,6 +24,7 @@ public class DataConnection {
 		Statement stmt = null;
 		try {
 			// JDBC Driver
+			allCards.clear();
 			Class.forName(driver);
 
 			// Connection to database
