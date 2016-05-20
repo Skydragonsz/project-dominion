@@ -2,28 +2,34 @@
  * Created by Gianni on 5/19/2016.
  */
 $(document).ready(function () {
-    $("#test").click(function () {
 
-         $.ajax({ cache: false,
-            dataType: "text",
-            url: "/html-frontend/DominionServlet",
-             type: "get",
-            data: {
-                operation: 'initialize',
-                playerAmount: '2',
-                name1: 'Quint',
-                name2: 'Coene'
-            }
-
-         }).done(function (data) {
-            var obj = JSON.parse(data);
-
-           console.log("Operation: " + obj.operation + " playerAmount: " + obj.playerAmount + " name1 " + obj.name1 + " name2 " + obj.name2);
-        });
-    });
-
+	initializeGame();
+	callBoard();
+	callHand();
+	callPlayerInfo();
+ 
 
 });
+
+function initializeGame() {
+    
+       $.ajax({ cache: false,
+           dataType: "text",
+           url: "/html-frontend/DominionServlet",
+            type: "get",
+           data: {
+               operation: 'initialize',
+               playerAmount: '2',
+               name1: 'Quint',
+               name2: 'Coene'
+           }
+
+        }).done(function (data) {
+           var obj = JSON.parse(data);
+
+          console.log("Operation: " + obj.operation + " playerAmount: " + obj.playerAmount + " name1 " + obj.name1 + " name2 " + obj.name2);
+       });
+}
 
 
 function callHand() {
@@ -76,7 +82,7 @@ function callPlayerInfo() {
 function callAllCards() {
 	$.get("DominionServlet?operation=getAllCards", function(responseJson) {
 		$.each(responseJson, function(index, item) {
-			 $("#all").append('<div class="card" style="position: relative; background-image: url(../html-frontend/assets/media/Base%20Deck/'+ item.toLowerCase() +'.jpg)""></div>');
+			 $("#all").append('<div class="card" style="position: relative; background-image: url(../html-frontend/assets/media/Base%20Deck/'+ item.toLowerCase().replace(/\s+/g, '') +'.jpg)""></div>');
 		})
 	});
 }
