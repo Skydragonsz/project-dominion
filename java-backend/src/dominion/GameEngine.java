@@ -175,8 +175,8 @@ public class GameEngine {
         return turnList.get(NthTurn);
     }
 
-    public int getTurnNumber(int NthTurn) {
-        return turnList.get(NthTurn - 1).getCurrentTurnNumber();
+    public int getTurnNumber() {
+        return turnList.size();
     }
 
     public TurnSegment getCurrentTurnSegment() {
@@ -189,7 +189,7 @@ public class GameEngine {
 	}
 
 	public Turn getCurrentTurn(){
-    	return turnList.get(turnList.size() - 1);
+    	return turnList.get(turnList.size()-1);
     }
     
     public void nextTurn(int turnNumber){

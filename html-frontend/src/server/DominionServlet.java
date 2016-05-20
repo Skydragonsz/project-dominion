@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import dominion.*;
+import dominion.Turn;
 
 /**
  * Servlet implementation class DominionServlet
@@ -40,15 +41,25 @@ public class DominionServlet extends HttpServlet {
 //  	     response.setCharacterEncoding("UTF-8");
 //  	     
   	     Writer writer = response.getWriter();
-//  	     writer.append("Testen");
+//  	     writer.append("Pesten");
 //  	     
   	     
   	    	
   	     
   	     //, \"name1\":\"Jonas\"
+	  	    response.setContentType("application/json");
+	  	    response.setCharacterEncoding("UTF-8");
 
-		
-  	    GameEngine gameEngine = new GameEngine();
+
+			GameEngine gameEngine = (GameEngine) request.getServletContext().getAttribute("gameEngine");
+			if(gameEngine == null)
+			{
+				gameEngine = new GameEngine();
+				request.getServletContext().setAttribute("gameEngine", gameEngine);
+				
+			}
+
+	  	    
 		gameEngine.initCards();
 	
 		
@@ -62,10 +73,13 @@ public class DominionServlet extends HttpServlet {
 		case "initialize":
 			int amount = Integer.parseInt(request.getParameter("playerAmount"));
 			gameEngine.initAmountPlayers(amount);
+			//response.getWriter().write();
+	  	    
 			for (int i = 1; i <= amount; i++)
 			{
 				gameEngine.initPlayer(i, request.getParameter("name" + i));
 			}	
+
 			break;
 			
 		case "getHand":
@@ -73,10 +87,8 @@ public class DominionServlet extends HttpServlet {
 	  	    list = gameEngine.getCurrentPlayer().getHand().getCardsName();
 	  	    String json = new Gson().toJson(list);
 
-	  	    response.setContentType("application/json");
-	  	    response.setCharacterEncoding("UTF-8");
 	  	    response.getWriter().write(json);
-			break;
+	  	    break;
 		
 		case "getBoard":
 			List<String> board = new ArrayList<>();
@@ -87,13 +99,18 @@ public class DominionServlet extends HttpServlet {
 	  	    		}	
 	  	    		String jsonBoard = new Gson().toJson(board);
 
-	  	    response.setContentType("application/json");
-	  	    response.setCharacterEncoding("UTF-8");
 	  	    response.getWriter().write(jsonBoard);
 			break;
 		case "showBoard":
 			writer.append("{ \"card\":\"Village\" } "); //, \"name1\":\"Jonas\"
 
+		case "getPlayerInfo":
+			String playerInfo = "{\"turn\":\"" + gameEngine.getTurnNumber() + "\" , \"coins:\"" + gameEngine.getCurrentTurnSegment().getCoin() 
+					 + "\" , \"actions:\"" + gameEngine.getCurrentTurnSegment().getAction() 
+					 + "\" , \"buys:\"" + gameEngine.getCurrentTurnSegment().getBuy() + "\"}";
+			
+
+			response.getWriter().write(playerInfo);
 			break;
 		case "playCard":
 			String card = request.getParameter("card");
