@@ -4,39 +4,28 @@
 
 $(document).ready(function () {
 	console.log("werkt dit?");
-    /*
     calculateDegreesCardsInHand();
-    */
-	
-    $(".hand").on("click", function () {
-        $(this).detach().appendTo("#playingfield");
-        $(this).removeClass("hand");
-        $(this).removeAttr('style');
-        calculateDegreesCardsInHand();
-        console.log("clicked");
-    });
-
-
-    $("#players").change(function () {
-        $("#players").val($("#players").val() * 2).change();
-        console.log("tst");
-    });
-
-
-    $(".hand").on("mouseenter", function () {
-        $(this).addClass("active");
-        console.log("test");
-    });
-
-    $(".hand").on("mouseleave", function () {
-        $(this).removeClass("active");
-        console.log("test");
-    });
 });
 
 
+$(document).on('click', '.hand', function(){
+    $(this).detach().appendTo("#playingfield");
+    $(this).removeClass("hand");
+    //$(this).removeAttr('style');
+    calculateDegreesCardsInHand();
+    console.log("clicked");
+});
 
-/*
+$(document).on('mouseenter', '.hand', function(){
+    $(this).addClass("active");
+    console.log("test");
+});
+$(document).on('mouseleave', '.hand', function(){
+    $(this).removeClass("active");
+    console.log("test");
+});
+
+
 function calculateDegreesCardsInHand() {
     var index = Math.floor($(".hand").length / 2);
     var switchedIndex = -index;
@@ -48,7 +37,10 @@ function calculateDegreesCardsInHand() {
         $(this).css("left", index * 75);
         index--;
         switchedIndex++;
-    });
+})
+}
+    
+    /*
 
 
 function generateHand() {

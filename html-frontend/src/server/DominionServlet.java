@@ -107,6 +107,11 @@ public class DominionServlet extends HttpServlet {
 			String card = request.getParameter("card");
 			gameEngine.playCard(GameEngine.CallCard(card));
 			break;
+			
+		case "buyCard":
+			String buyCard = request.getParameter("card");
+			gameEngine.buyCard(GameEngine.CallCard(buyCard));
+			break;
 		case "information":
 			writer.append("Hand " + gameEngine.getCurrentPlayer().getHand() + "\n" + "Deck "
 					+ gameEngine.getCurrentPlayer().getDeck() + "\n" + "PlayingField "
