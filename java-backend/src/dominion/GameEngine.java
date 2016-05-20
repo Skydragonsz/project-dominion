@@ -102,10 +102,11 @@ public class GameEngine {
 		return allCards;
 	}
 
-	public void playCard(Card card){
-		if(card.getType().equals("Treasure") || getCurrentTurnSegment().getAction() > 0){
-			if(!card.getType().equals("Victory")){
+	public void playCard(String cardName){
+		Card card = CallCard(cardName);
+		if(!card.getType().equals("Victory") || getCurrentTurnSegment().getAction() > 0){
 		    	card.PlayCard(getCurrentPlayer(), getOtherPlayersList(getCurrentPlayer()), getCurrentTurnSegment());
+		    	//			stPlayer.getDiscardPile().addFrom(card, stPlayer.getHand());
 		    	getCurrentPlayer().getPlayingField().addFrom(card, getCurrentPlayer().getHand());
 
 		    	if(!card.getType().equals("Treasure")){
@@ -114,9 +115,12 @@ public class GameEngine {
 		    	}
 	    	
 			}
+		
+//		System.out.println(card);
+//		getCurrentPlayer().getPlayingField().addFrom(card, getCurrentPlayer().getHand());
+		
 		}
 		
-    }
 	
 	
 	public void buyCard(int option){
@@ -128,7 +132,7 @@ public class GameEngine {
         if (getCurrentTurnSegment().getCoin() >= card.getCost()){
         	getCurrentPlayer().getDiscardPile().addAmountOfCardsFrom(1, getBoard().getFromIndex(option));
         	getCurrentTurnSegment().removeBuy(1);
-        	getCurrentTurnSegment().removeCoin(getCurrentTurnSegment().getCoin());
+        	getCurrentTurnSegment().removeCoin(card.getCost());
         	
         }
         
@@ -143,7 +147,7 @@ public void buyCard(Card card){
 	        if (getCurrentTurnSegment().getCoin() >= card.getCost()){
 	        	getCurrentPlayer().getDiscardPile().addAmountOfCardsFrom(1, pile);
 	        	getCurrentTurnSegment().removeBuy(1);
-	        	getCurrentTurnSegment().removeCoin(getCurrentTurnSegment().getCoin());
+	        	getCurrentTurnSegment().removeCoin(card.getCost());
 	        	
 	        }
 		}

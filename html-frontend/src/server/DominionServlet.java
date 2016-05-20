@@ -105,18 +105,22 @@ public class DominionServlet extends HttpServlet {
 			break;
 		case "playCard":
 			String card = request.getParameter("card");
-			gameEngine.playCard(GameEngine.CallCard(card));
+			gameEngine.playCard(card);
 			break;
 			
 		case "buyCard":
 			String buyCard = request.getParameter("card");
-			gameEngine.buyCard(GameEngine.CallCard(buyCard));
+			gameEngine.buyCard(gameEngine.CallCard(buyCard));
+			System.out.println(gameEngine.CallCard(buyCard));
+			System.out.println(gameEngine.CallCard(buyCard));
 			break;
 		case "information":
 			writer.append("Hand " + gameEngine.getCurrentPlayer().getHand() + "\n" + "Deck "
 					+ gameEngine.getCurrentPlayer().getDeck() + "\n" + "PlayingField "
 					+ gameEngine.getCurrentPlayer().getPlayingField() + "\n" + "Discard"
-					+ gameEngine.getCurrentPlayer().getHand() + "\n");
+					+ gameEngine.getCurrentPlayer().getDiscardPile() + "\n"
+					+ gameEngine.CallCard("Copper")
+					+ " " + GameEngine.CallCard("Copper"));
 			break;
 		default:
 			writer.append("error: jsdffsdkljsdfjlfd");

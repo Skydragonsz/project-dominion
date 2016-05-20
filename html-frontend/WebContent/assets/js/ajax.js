@@ -56,7 +56,7 @@ function callBoard() {
 	    		type = "kingdomset"
 	    	}
 	    	//var amount = item.toString().split(';')[1];
-	    	$("#" + type).append('<div id="'+ item + '" class="kingdom card" style="position: relative; background-image: url(../html-frontend/assets/media/Base%20Deck/'+ card[0].toLowerCase() +'.jpg)""><div class="circle">10</div></div>');
+	    	$("#" + type).append('<div id="'+ card[0] + '" class="kingdom card" style="position: relative; background-image: url(../html-frontend/assets/media/Base%20Deck/'+ card[0].toLowerCase() +'.jpg)""><div class="circle">10</div></div>');
 	    })
 	});
 }

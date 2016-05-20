@@ -70,13 +70,11 @@ public class Pile {
 
 
     public void addFrom(Card card, Pile otherPile) {
-        couldPileBeEmpty(1,otherPile);
         this.pile.add(card);
         otherPile.remove(card);
     }
 
     public void moveFrom(int index, Pile otherPile) {
-        couldPileBeEmpty(1, otherPile);
         this.pile.add(otherPile.getFromIndex(index));
         otherPile.remove(otherPile.getFromIndex(index));
     }
@@ -141,17 +139,6 @@ public class Pile {
 		
 	}
 	
-	
-
-	
-	private void couldPileBeEmpty(int amount, Pile otherPile){
-		if (otherPile.isPileEmpty()){
-			otherPile.addAllFrom(GameEngine.getCurrentdiscardPile());
-		}
-		
-	}
-	
-
 	
 	
 	@Override
