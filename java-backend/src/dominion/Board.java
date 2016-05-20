@@ -69,11 +69,8 @@ public class Board {
     }
     
     // TODO fix this.
-    public void loadBoard(Card card, int amount){
-    	this.piles.clear();
-
-    		this.piles.add(new Pile(card, 10));
-    	
+    public void addPileToBoardWithAmount(Card card, int amount){
+    		this.piles.add(new Pile(card, amount));    	
     }
     
     

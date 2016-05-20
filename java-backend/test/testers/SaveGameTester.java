@@ -45,9 +45,20 @@ public class SaveGameTester {
 	}
 	
 	@Test
+	public void testLoad(){
+		sg.load(ge,19);
+		
+	}
+	
+	@Test
 	public void randomTester(){
+		System.out.println(ge.getBoard().getFromIndex(4).getCardsName());
+		
+		System.out.println(ge.getBoard().getPiles());
+		
 
-		System.out.println(sg.getGameID());
+		
+		System.out.println(ge.getBoard().getPiles());
 	}
 
 }

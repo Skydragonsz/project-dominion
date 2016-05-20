@@ -31,7 +31,9 @@ public class SaveGame {
 		String[] list = string.split(",");
 		Pile pile = new Pile();
 		for(int i = 0; i < list.length ; i++){
-			new GameEngine();
+			if(i == list.length - 1){
+				list[i] = list[i].substring(0, list[i].length()-1);
+			}
 			pile.add(GameEngine.CallCard(list[i]));
 		}
 		return pile;
@@ -52,12 +54,13 @@ public class SaveGame {
 		
 		
 		for(int i = 1; i < ge.getMaxPlayers() +1;i++){
-			//sql += "(" + i +","+gameID+",'deck','hand','discard','playing')";
+			//sql += "(" + i +","+gameID+",'deck','hand','discard','playing','name')";
 			sql += "(" + i +","+gameID+",'";
 			sql += stringify(ge.getPlayer(i).getDeck()) + "','";
 			sql += stringify(ge.getPlayer(i).getHand()) + "','";
 			sql += stringify(ge.getPlayer(i).getDiscardPile()) + "','";
-			sql += stringify(ge.getPlayer(i).getPlayingField()) + "')";
+			sql += stringify(ge.getPlayer(i).getPlayingField()) + "','";
+			sql += ge.getPlayer(i).getName() + "')";
 			
 			
 			if(!(i == ge.getMaxPlayers())){sql += ",";}		
@@ -106,6 +109,40 @@ public class SaveGame {
 		}
 		dc.executeSQL(sql);
 	}
+	
+	public void load(GameEngine ge,int gameID){
+		
+		loadBoard(ge,gameID);
+		loadPlayers(ge,gameID);
+		
+	}
+	
+	private void loadPlayers(GameEngine ge, int gameID){
+		
+	}
+	
+	
+    private void loadBoard(GameEngine ge, int gameID){
+    	String sql = new String();
+    	
+    	ge.getBoard().getPiles().clear();
+    	
+    	for(int i = 0; i < 17;i++){
+    		sql = "SELECT name, amount FROM board WHERE (boardID = "+gameID+" AND `index` = "+i +")";
+    		//sql = "SELECT name FROM board WHERE (boardID = "+gameID+" AND `index` = "+i +")";
+    		String[] cardAndAmount = dc.executeSelectSQL(sql).split(",");
+    		cardAndAmount[1] = cardAndAmount[1].substring(0, cardAndAmount[1].length()-1);
+    		
+    		
+    		Card card = ge.CallCard(cardAndAmount[0]);
+
+
+    		int amount = Integer.parseInt(cardAndAmount[1]);
+    		
+    		ge.getBoard().addPileToBoardWithAmount(card, amount);
+    		
+    	}
+    }
 	
 	 
 	

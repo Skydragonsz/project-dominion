@@ -270,7 +270,7 @@ public class DataConnection {
 
 				for (int i = 1; i <= rsmd.getColumnCount();i++){
 
-						if(i >= rsmd.getColumnCount() -1){
+						if(i >= rsmd.getColumnCount()){
 							value += rs.getString(i) + ";";
 						}else{
 							value += rs.getString(i) + ",";

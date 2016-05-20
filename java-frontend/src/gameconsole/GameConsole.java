@@ -259,7 +259,7 @@ public class GameConsole {
     //HANDLE -- ACTION
     public void handlePlayCard() {
         int option = Integer.parseInt(Actions.askFor("[ ACTIONS -- PLAY CARD ] What card would you like to play"));
-        Card card = currentHand.getFromIndex(option - 1);
+        String card = currentHand.getFromIndex(option - 1).getName();
         if (currentHand.getFromIndex(option - 1).isHasSpecialAction()){
         	handleSpecialActionLayout(currentHand.getFromIndex(option - 1));
         }

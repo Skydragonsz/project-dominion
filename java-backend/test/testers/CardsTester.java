@@ -120,7 +120,7 @@ public class CardsTester {
         resultHandArray.add("Copper");
 
         //Real function
-        gameEngine.playCard(GameEngine.CallCard("Adventurer"));
+        gameEngine.playCard("Adventurer");
 
         System.out.println("[After] Player 1 - Deck: " + firstPlayer.getDeck().getCardsName());
         System.out.println("[After] Player 1 - Hand: " + firstPlayer.getHand().getCardsName());
@@ -140,7 +140,7 @@ public class CardsTester {
     	System.out.println("Player 1 - Deck: " + firstPlayer.getDeck().getCardsName());
     	System.out.println("Player 1 - Hand: " + firstPlayer.getHand().getCardsName());
     	
-    	gameEngine.playCard(GameEngine.CallCard("Chancellor"));
+    	gameEngine.playCard("Chancellor");
     	
     	System.out.println("[After] Player 1 - Deck: " + firstPlayer.getDeck().getCardsName());
         System.out.println("[After] Player 1 - Hand: " + firstPlayer.getHand().getCardsName());
@@ -168,7 +168,7 @@ public class CardsTester {
     	System.out.println("Player 2 - Hand: " + secondPlayer.get(0).getHand().getCardsName());
     	
     	
-    	gameEngine.playCard(GameEngine.CallCard("Bureaucrat"));
+    	gameEngine.playCard("Bureaucrat");
     	
     	System.out.println("Player 1 - Deck after Card: " + firstPlayer.getDeck().getCardsName());
     	
@@ -197,7 +197,7 @@ public class CardsTester {
     	System.out.println("Player 2 - Deck: " + secondPlayer.get(0).getDeck());
     	System.out.println("Player 2 - Discard: " + secondPlayer.get(0).getDiscardPile());
     	
-    	gameEngine.playCard(GameEngine.CallCard("Spy"));
+    	gameEngine.playCard("Spy");
     	
     	System.out.println("Player 1 - Deck after Card: " + firstPlayer.getDeck());
     	System.out.println("Player 1 - Discard after Card: " + firstPlayer.getDiscardPile());
@@ -225,7 +225,7 @@ public class CardsTester {
     	System.out.println("Player 1 - Hand: " + firstPlayer.getHand().getCardsName());
     	System.out.println("Player 1 - Discard: " + firstPlayer.getDiscardPile().getCardsName());
     	
-    	gameEngine.playCard(GameEngine.CallCard("Library"));
+    	gameEngine.playCard("Library");
     	
     	System.out.println("Player 1 - Deck after Card: " + firstPlayer.getDeck().getCardsName());
     	System.out.println("Player 1 - Hand after Card: " + firstPlayer.getHand().getCardsName());
@@ -257,7 +257,7 @@ public class CardsTester {
     	System.out.println("Player 1 - Hand: " + firstPlayer.getHand().getCardsName());
     	System.out.println(gameEngine.getCurrentTurnSegment().getAction());
     	
-    	gameEngine.playCard(GameEngine.CallCard("Throne room"));
+    	gameEngine.playCard("Throne room");
     	
     	System.out.println("Player 1 - Deck after Card: " + firstPlayer.getDeck().getCardsName());
     	System.out.println("Player 1 - Hand after Card: " + firstPlayer.getHand().getCardsName());
@@ -278,7 +278,7 @@ public class CardsTester {
     	System.out.println("Player 1 - Discard: " + firstPlayer.getDiscardPile().getCardsName());
     	System.out.println(gameEngine.getCurrentTurnSegment().getInstancedCoin());
     	
-    	gameEngine.playCard(GameEngine.CallCard("Mine"));
+    	gameEngine.playCard("Mine");
     	
     	System.out.println("Player 1 - Deck after Card: " + firstPlayer.getDeck().getCardsName());
     	System.out.println("Player 1 - Hand after Card: " + firstPlayer.getHand().getCardsName());
@@ -309,7 +309,7 @@ public class CardsTester {
     	System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++");
     	
     	
-    	gameEngine.playCard(GameEngine.CallCard("Thief"));
+    	gameEngine.playCard("Thief");
     	
     	System.out.println("Player 1 - Deck after Card: " + firstPlayer.getDeck().getCardsName());
     	System.out.println("Player 1 - Hand after Card: " + firstPlayer.getHand().getCardsName());
