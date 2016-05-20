@@ -290,6 +290,10 @@ public class CardsTester {
     
     @Test
     public void testThief() {
+    	ArrayList resultDiscardArray = firstPlayer.getDiscardPile().getCardsName();
+    	resultDiscardArray.add("Copper");
+    	
+    	secondPlayer.get(0).getDeck().getPile().add(0, gameEngine.CallCard("Copper"));
     	
     	
     	System.out.println("Player 1 - Deck: " + firstPlayer.getDeck().getCardsName());
@@ -299,7 +303,7 @@ public class CardsTester {
     	System.out.println("-----------------------------------------------------");
     	
     	System.out.println("Player 2 - Deck: " + secondPlayer.get(0).getDeck());
-    	System.out.println("Player 2 - Discard: " + secondPlayer.get(0).getDiscardPile());
+    	System.out.println("Player 2 - Hand: " + secondPlayer.get(0).getHand());
     	System.out.println("Player 2 - Discard: " + secondPlayer.get(0).getDiscardPile().getCardsName());
     	System.out.println("Player 2 - SelectedHand: " + secondPlayer.get(0).getSelectedHand().getCardsName());
     	System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++");
@@ -314,9 +318,11 @@ public class CardsTester {
     	System.out.println("-----------------------------------------------------");
     	
     	System.out.println("Player 2 - Deck after Card: " + secondPlayer.get(0).getDeck());
-    	System.out.println("Player 2 - Discard after Card: " + secondPlayer.get(0).getDiscardPile());
+    	System.out.println("Player 2 - Hand after Card: " + secondPlayer.get(0).getHand().getCardsName());
     	System.out.println("Player 2 - Discard after Card: " + secondPlayer.get(0).getDiscardPile().getCardsName());
     	System.out.println("Player 2 - SelectedHand after Card: " + secondPlayer.get(0).getSelectedHand().getCardsName());
+    	
+    	assertEquals(firstPlayer.getDiscardPile().getCardsName(), resultDiscardArray);
     }
     
     @Test

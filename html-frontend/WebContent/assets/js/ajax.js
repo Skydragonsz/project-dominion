@@ -42,20 +42,6 @@ function callBoard() {
 	    $.each(responseJson, function(index, item) { // Iterate over the JSON array.
 	    	var card = item.toString().split(";");
 	    	var type;
-//	    	switch (index) {
-//	    	case (index <= 2 && index >= 0):
-//	    		type = "treasure";
-//	    	console.log("treasure" + card[0])
-//	    	break;
-//	    	case (index >= 3 && index <= 6):
-//	    		type = "victory";
-//	    	console.log("victory" + card[0])
-//	    	break;
-//	    	case (index >= 7 && index <= 16):
-//	    		type = "kingdomset"
-//	    		console.log("kingdomset" + card[0])
-//	    	break;
-//	    	}
 	    	
 	    	if (index <= 2 && index >= 0) {
 	    		type = "treasure";
@@ -69,5 +55,28 @@ function callBoard() {
 	    })
 	});
 }
+
+
+function callPlayerInfo() {
+
+	$.get("DominionServlet?operation=getBoard", function(responseJson) {    // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response JSON... // Create HTML <ul> element and append it to HTML DOM element with ID "somediv".
+	    $.each(responseJson, function(index, item) { // Iterate over the JSON array.
+	    	var info = item.toString();
+	    	
+	    	if (index = 0) {
+	    		$("h1").append('<b>Player: </b>' + info + "'");
+	    	} else if (index = 1) {
+	    		$("h2").append('<b>Turn: </b>' + info + "'");
+	    	} else if (index = 2) {
+				$("p").append('<b>coins: </b>' + info + "'");
+	    	} else if (index = 3) {
+				$("p").append('<b>actions: </b>' + info + "'");
+			} else {
+				$("p").append('<b>buys: </b>' + info + "'");
+			}
+	    })
+	});
+
+	}
 
 

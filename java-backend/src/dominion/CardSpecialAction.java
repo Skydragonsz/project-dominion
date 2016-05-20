@@ -177,45 +177,7 @@ public class CardSpecialAction  {
 		// revealed any Treasure cards, they trash
 		// one of them that you choose. You may gain any or all (?) of these
 		// trashed cards. They discard the other revealed cards.
-		//int choice = 1;
-		//boolean keep = true; // Implement: You may gain any or all of these
-								// trashed cards (clean up code first)
-//		for (int i = 0; i < stOtherPlayerList.size(); i++) {
-//			// for (int j = 0; j < 2; j++) {
-//			// Both cards are treasure cards:
-//			if ("Treasure".equals(stOtherPlayerList.get(i).getDeck().getFromIndex(0).getType())
-//					&& "Treasure".equals(stOtherPlayerList.get(i).getDeck().getFromIndex(1).getType())) {
-//				Card firstTreasureCard = stOtherPlayerList.get(i).getDeck().getFromIndex(0);
-//				Card secondTreasureCard = stOtherPlayerList.get(i).getDeck().getFromIndex(1);
-//				if (choice == 1) {
-//					stOtherPlayerList.get(i).getDeck().remove(stOtherPlayerList.get(i).getDeck().getFromIndex(0));
-//				} else if (choice == 2) {
-//					stOtherPlayerList.get(i).getDeck().remove(stOtherPlayerList.get(i).getDeck().getFromIndex(1));
-//				}
-//				// Only one card is a treasure card:
-//			} else if ("Treasure".equals(stOtherPlayerList.get(i).getDeck().getFromIndex(0).getType())
-//					|| "Treasure".equals(stOtherPlayerList.get(i).getHand().getFromIndex(1).getType())) {
-//				if ("Treasure".equals(stOtherPlayerList.get(i).getDeck().getFromIndex(0).getType())) {
-//					Card drawnTreasureCard = stOtherPlayerList.get(i).getDeck().getFromIndex(0);
-//					stOtherPlayerList.get(i).getDiscardPile().addFrom(
-//							stOtherPlayerList.get(i).getDeck().getFromIndex(1),
-//							stOtherPlayerList.get(i).getDiscardPile());
-//				} else {
-//					Card drawnTreasureCard = stOtherPlayerList.get(i).getDeck().getFromIndex(1);
-//					stOtherPlayerList.get(i).getDiscardPile().addFrom(
-//							stOtherPlayerList.get(i).getDeck().getFromIndex(0),
-//							stOtherPlayerList.get(i).getDiscardPile());
-//				}
-//				// No cards are treasure cards:
-//			} else {
-//				for (int k = 0; k < 2; k++)
-//					stOtherPlayerList.get(i).getDiscardPile().addFrom(
-//							stOtherPlayerList.get(i).getDeck().getFromIndex(k),
-//							stOtherPlayerList.get(i).getDiscardPile());
-//			}
-//			// }
-//
-//		}
+		
 		ArrayList<Card> topTwoCards = new ArrayList();
 		boolean choice = true;
 		for (int i = 0; i < stOtherPlayerList.size(); i++) {
@@ -229,14 +191,23 @@ public class CardSpecialAction  {
 				} else {
 					stOtherPlayerList.get(i).getDiscardPile().add(card);
 				}
-				if (stPlayer.getSelectedHand().getAmount() > 1) {
-					if (choice) {
-						stPlayer.getSelectedHand().remove(stPlayer.getSelectedHand().getFromIndex(1));
-					} else {
-						stPlayer.getSelectedHand().remove(stPlayer.getSelectedHand().getFromIndex(0));
-					}
+			}
+			if (stPlayer.getSelectedHand().getAmount() > 1) {
+				if (choice) {
+					stPlayer.getDiscardPile().addFrom(stPlayer.getSelectedHand().getFromIndex(0), stPlayer.getSelectedHand());
+					stPlayer.getSelectedHand().remove(stPlayer.getSelectedHand().getFromIndex(0));
+				} else {
+					stPlayer.getDiscardPile().addFrom(stPlayer.getSelectedHand().getFromIndex(1), stPlayer.getSelectedHand());
+					stPlayer.getSelectedHand().remove(stPlayer.getSelectedHand().getFromIndex(0));
+				}
+			} else {
+				if (choice) {
+					stPlayer.getDiscardPile().addFrom(stPlayer.getSelectedHand().getFromIndex(0), stPlayer.getSelectedHand());
+				} else {
+					stPlayer.getSelectedHand().remove(stPlayer.getSelectedHand().getFromIndex(0));
 				}
 			}
+			
 		}
 	}
 
