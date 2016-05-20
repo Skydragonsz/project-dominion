@@ -105,9 +105,11 @@ public class DominionServlet extends HttpServlet {
 			writer.append("{ \"card\":\"Village\" } "); //, \"name1\":\"Jonas\"
 
 		case "getPlayerInfo":
-			String playerInfo = "{\"turn\":\"" + gameEngine.getTurnNumber() + "\" , \"coins:\"" + gameEngine.getCurrentTurnSegment().getCoin() 
-					 + "\" , \"actions:\"" + gameEngine.getCurrentTurnSegment().getAction() 
-					 + "\" , \"buys:\"" + gameEngine.getCurrentTurnSegment().getBuy() + "\"}";
+			String playerInfo = "{\"player\":\"" + gameEngine.getCurrentPlayer().getName()
+							+ "\", \"turn\":\"" + gameEngine.getTurnNumber()
+					 	 + "\" , \"coins\":\"" + gameEngine.getCurrentTurnSegment().getCoin() 
+					 + "\" , \"actions\":\"" + gameEngine.getCurrentTurnSegment().getAction() 
+					 + "\" , \"buys\":\"" + gameEngine.getCurrentTurnSegment().getBuy() + "\"}";
 			
 
 			response.getWriter().write(playerInfo);

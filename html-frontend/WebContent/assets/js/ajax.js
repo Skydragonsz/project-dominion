@@ -59,24 +59,29 @@ function callBoard() {
 
 function callPlayerInfo() {
 
-	$.get("DominionServlet?operation=getBoard", function(responseJson) {    // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response JSON... // Create HTML <ul> element and append it to HTML DOM element with ID "somediv".
-	    $.each(responseJson, function(index, item) { // Iterate over the JSON array.
-	    	var info = item.toString();
-	    	
-	    	if (index = 0) {
-	    		$("h1").append('<b>Player: </b>' + info + "'");
-	    	} else if (index = 1) {
-	    		$("h2").append('<b>Turn: </b>' + info + "'");
-	    	} else if (index = 2) {
-				$("p").append('<b>coins: </b>' + info + "'");
-	    	} else if (index = 3) {
-				$("p").append('<b>actions: </b>' + info + "'");
-			} else {
-				$("p").append('<b>buys: </b>' + info + "'");
-			}
-	    })
-	});
-
-	}
+	$.get("DominionServlet?operation=getPlayerInfo", function(responseJson) { // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response JSON... // Create HTML <ul> element and append it to HTML DOM element with ID "somediv".
+//		$.each(responseJson, function(index, item) { // Iterate over the JSON array.
+//			var info = item.toString();
+			console.log(responseJson.turn);
+			$("#player").append('<b>Player: </b>' + responseJson.player);
+			$("#turn").append('<b>Turn: </b>' + responseJson.turn);
+			$("#coins").append('<b>coins: </b>' + responseJson.coins);
+			$("#actions").append('<b>actions: </b>' + responseJson.actions);
+			$("#buys").append('<b>buys: </b>' + responseJson.buys);
+//			if (index = 0) {
+//				$("h1").append('<b>Player: </b>' + info + "'");
+//			} else if (index = 1) {
+//				$("h2").append('<b>Turn: </b>' + info + "'");
+//			} else if (index = 2) {
+//				$("p").append('<b>coins: </b>' + info + "'");
+//			} else if (index = 3) {
+//				$("p").append('<b>actions: </b>' + info + "'");
+//			} else {
+//				$("p").append('<b>buys: </b>' + info + "'");
+//			}
+			
+			
+		})
+}
 
 
