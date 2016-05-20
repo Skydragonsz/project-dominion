@@ -7,6 +7,8 @@ import java.util.ArrayList;
  * @author Quint
  */
 public class Board {
+	
+
 
     private ArrayList<Pile> piles = new ArrayList<>();
     private Pile province;
@@ -26,7 +28,12 @@ public class Board {
     
     
     
-    
+	// 2 Players:
+	// 30 Gold
+	// 40 Silver
+	// 46 Copper (60 - 7 * amountOfPlayers)
+	// 8 All Victory cards
+	// 10 Curse
     
     // CORRECT
     public Board(Card... cards) {
@@ -35,7 +42,24 @@ public class Board {
         		this.piles.add(new Pile(card, 8 + ((3 > 2) ? 4 : 0))); //GameEngine.getMaxPlayers()
 
         	} else {
-        		this.piles.add(new Pile(card, 10));
+        		if ("Victory".equals(card.getType()) && !("Curse".equals(card.getName()))){
+        			this.piles.add(new Pile(card, 8));
+        		}else{
+        			switch(card.getName()){
+        			case "Copper":
+        				this.piles.add(new Pile(card, 60 - (7*2))); //GameEngine.getMaxPlayers()  //2 moet vervangen worden
+        				break;
+        			case "Silver":
+        				this.piles.add(new Pile(card, 40)); 
+        				break;
+        			case "Gold":
+        				this.piles.add(new Pile(card, 30)); 
+        				break;
+        			default:
+        				this.piles.add(new Pile(card, 10));
+        				break;
+        			}
+        		}
         	}
         	
             if ("Province".equals(card.getName())) {
@@ -43,6 +67,16 @@ public class Board {
             }
         }
     }
+    
+    // TODO fix this.
+    public void loadBoard(Card card, int amount){
+    	this.piles.clear();
+
+    		this.piles.add(new Pile(card, 10));
+    	
+    }
+    
+    
 
 /* METHODS */    
     public boolean isGameEnding() {

@@ -10,11 +10,11 @@ import java.util.ArrayList;
  */
 public class DataConnection {
 	// Info connection
-	static final String driver = "com.mysql.jdbc.Driver";
-	static final String databaseConnection = "jdbc:mysql://178.117.108.9:3306/dominiondb";
+	private static final String driver = "com.mysql.jdbc.Driver";
+	private static final String databaseConnection = "jdbc:mysql://178.117.108.9:3306/dominiondb";
 
-	static final String username = "dominion";
-	static final String password = "dominion";
+	private static final String username = "dominion";
+	private static final String password = "dominion";
 	
 	private ArrayList<Card> allCards = new ArrayList<Card>();
 
@@ -247,6 +247,63 @@ public class DataConnection {
 
 		
 	}
+	
+	public String executeSelectSQL(String sql){
+		String value = new String();
+		Connection conn = null;
+		Statement stmt = null;
+		try {
+			// JDBC Driver
+			Class.forName(driver);
+
+			// Connection to database
+			conn = DriverManager.getConnection(databaseConnection, username, password);
+
+			// Query
+			stmt = conn.createStatement();
+
+			ResultSet rs = stmt.executeQuery(sql);
+			ResultSetMetaData rsmd = rs.getMetaData();
+
+			// Processing receive data
+			while (rs.next()) {
+
+				for (int i = 1; i <= rsmd.getColumnCount();i++){
+
+						if(i >= rsmd.getColumnCount() -1){
+							value += rs.getString(i) + ";";
+						}else{
+							value += rs.getString(i) + ",";
+						}
+				}	
+			}
+			// End
+			rs.close();
+			stmt.close();
+			conn.close();
+		} catch (SQLException se) {
+			// Handle errors for JDBC
+			se.printStackTrace();
+		} catch (Exception e) {
+			// Handle errors for Class.forName
+			e.printStackTrace();
+		} finally {
+			// finally block used to close resources
+			try {
+				if (stmt != null)
+					stmt.close();
+			} catch (SQLException se2) {
+			} // nothing we can do
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			} // end finally try
+		} // end try
+		return value;
+	}
+
 
 	
 }

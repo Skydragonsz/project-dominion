@@ -76,9 +76,10 @@ public class dbConnectionTester {
 //    	sql = "INSERT INTO account(account.name,pass)";
 //    	sql += " VALUES ('test','test')";
     	
-    	sql = "SELECT * FROM card";
+    	//sql = "SELECT * FROM card";
+    	sql = "SELECT gameID FROM game ORDER BY gameID DESC LIMIT 1";
     	
-    	dbCon.executeSQL(sql);
+    	System.out.println(dbCon.executeSelectSQL(sql));
     }
     
       
