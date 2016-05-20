@@ -135,6 +135,30 @@ public class GameEngine {
 		
 	}
 	
+public void buyCard(Card card){
+		
+	for (Pile pile : getBoard().getPiles()) {
+		if (card.getName().equals(pile.getFromIndex(0).getName())) {
+
+	        if (getCurrentTurnSegment().getCoin() >= card.getCost()){
+	        	getCurrentPlayer().getDiscardPile().addAmountOfCardsFrom(1, pile);
+	        	getCurrentTurnSegment().removeBuy(1);
+	        	getCurrentTurnSegment().removeCoin(getCurrentTurnSegment().getCoin());
+	        	
+	        }
+		}
+	}
+	
+//        if (getCurrentTurnSegment().getCoin() >= card.getCost()){
+//        	getCurrentPlayer().getDiscardPile().addAmountOfCardsFrom(1, getBoard().getFromIndex(option));
+//        	getCurrentTurnSegment().removeBuy(1);
+//        	getCurrentTurnSegment().removeCoin(getCurrentTurnSegment().getCoin());
+//        	
+//        }
+        
+		
+	}
+	
 
 
     /* GETTERS */
