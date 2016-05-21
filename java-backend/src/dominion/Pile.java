@@ -42,8 +42,10 @@ public class Pile {
 
     public ArrayList<String> getCardsName() {
         ArrayList tempArrayList = new ArrayList<>();
-        for (int i = 0; i < pile.size(); i++) {
-            tempArrayList.add(this.pile.get(i).getName());
+        if(!(this.pile.size() ==0)){
+	        for (int i = 0; i < pile.size(); i++) {
+	            tempArrayList.add(this.pile.get(i).getName().toString());
+	        }
         }
         return tempArrayList;
     }
@@ -66,6 +68,12 @@ public class Pile {
         for(int i = 0; i < amount; i++){
     	this.pile.add(card);
         }
+    }
+    
+    public void add(Pile pile){
+    	for(int i = 0; i < pile.getAmount(); i++){
+    		this.pile.add(pile.getFromIndex(i));
+    	}
     }
 
 

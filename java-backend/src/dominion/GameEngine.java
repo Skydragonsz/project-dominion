@@ -18,7 +18,7 @@ public class GameEngine {
     // Cards
     private static ArrayList<Card> allCards;
     private static Pile currentDiscardPile;
-    private DataConnection databaseConnection = new DataConnection();
+    private static DataConnection databaseConnection = new DataConnection();
     
     public GameEngine() {
     }
@@ -32,7 +32,7 @@ public class GameEngine {
         for (int i = 0; i < amount; i++) {
             playerList.add(new Player());
         }
-        nextTurn(1);
+        
     }
 
     public void initPlayer(int playernr, String name) {
@@ -42,8 +42,19 @@ public class GameEngine {
 
     }
     
+    public void initPlayer(int playernr, String name, Pile deck, Pile hand, Pile discardPile,Pile playingField) {
+        getPlayer(playernr).setName(name);
+        getPlayer(playernr).getDeck().add(deck);  
+        getPlayer(playernr).getHand().add(hand);
+        getPlayer(playernr).getDiscardPile().add(discardPile);
+        getPlayer(playernr).getPlayingField().add(playingField);
+        
+
+    }
+    
     public void init(){
         initCards();
+        nextTurn(1);
     }
     
     public void initCards(){
@@ -84,6 +95,10 @@ public class GameEngine {
     
     
     public static Card CallCard(String name){
+    	if(allCards == null){
+    		allCards = databaseConnection.getAllCards();
+    		
+    	}
     	Card foundCard = null;
         for (Card card : allCards){
         	if (name.equals(card.getName())){
@@ -214,6 +229,10 @@ public void buyCard(Card card){
     
     public int getPlayerCounter() {
 		return PlayerCounter;
+	}
+    
+    public void setPlayerCounter(int currentPlayer) {
+		this.PlayerCounter = currentPlayer;
 	}
 
 	public Turn getCurrentTurn(){

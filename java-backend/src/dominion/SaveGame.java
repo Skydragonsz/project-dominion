@@ -6,14 +6,14 @@ import java.util.ArrayList;
 
 public class SaveGame {
 	private DataConnection dc = new DataConnection();
-
+	private String sql = new String();
 	
 	public SaveGame(){
 		
 	}
 	
 	
-	public String stringify(Pile pile){
+	private String stringify(Pile pile){
 		String newPile = new String();
 		
 		for(int i = 0; i < pile.getAmount(); i++){
@@ -27,14 +27,14 @@ public class SaveGame {
 		return newPile;
 	}
 	
-	public Pile splitify(String string){
+	private Pile splitify(String string){
 		String[] list = string.split(",");
 		Pile pile = new Pile();
-		for(int i = 0; i < list.length ; i++){
-			if(i == list.length - 1){
-				list[i] = list[i].substring(0, list[i].length()-1);
+		if(!(list[0].length() == 0)){
+			for(int i = 0; i < list.length ; i++){
+
+				pile.add(GameEngine.CallCard(list[i]));
 			}
-			pile.add(GameEngine.CallCard(list[i]));
 		}
 		return pile;
 	}
@@ -49,11 +49,11 @@ public class SaveGame {
 	}
 	
 	private void savePlayerSQL(GameEngine ge, int gameID){
-		String sql = new String();
+		
 		sql = "INSERT INTO player VALUES";
 		
 		
-		for(int i = 1; i < ge.getMaxPlayers() +1;i++){
+		for(int i = 1; i <= ge.getMaxPlayers();i++){
 			//sql += "(" + i +","+gameID+",'deck','hand','discard','playing','name')";
 			sql += "(" + i +","+gameID+",'";
 			sql += stringify(ge.getPlayer(i).getDeck()) + "','";
@@ -72,7 +72,7 @@ public class SaveGame {
 	}
 	
 	private void saveGameSQL(GameEngine ge){
-		String sql = new String();
+		
 
 		int amountPlayers = GameEngine.getMaxPlayers();
 		int turn = ge.getCurrentTurn().getCurrentTurnNumber();
@@ -83,7 +83,7 @@ public class SaveGame {
 	}
 	
 	public int getGameID(){
-		String sql = new String();
+		
 		String strGameID = new String();
 		int gameID;
 		sql = "SELECT gameID FROM game ORDER BY gameID DESC LIMIT 1";
@@ -98,7 +98,7 @@ public class SaveGame {
 	
 	
 	private void saveBoardSQL(GameEngine ge, int gameID){
-		String sql = new String();
+		
 		sql = "INSERT INTO board VALUES ";
 		for(int i = 0; i < ge.getBoard().getPiles().size();i++){
 			
@@ -111,21 +111,59 @@ public class SaveGame {
 	}
 	
 	public void load(GameEngine ge,int gameID){
-		
+		loadGame(ge,gameID);
 		loadBoard(ge,gameID);
 		loadPlayers(ge,gameID);
 		
 	}
 	
+	private int getGameInfo(String info, int gameID){
+		sql = "SELECT * FROM game WHERE gameID = " + gameID;
+		return dc.getIntFromSelect(sql, info);
+	}
+	
+	public ArrayList<Integer> loadAllGameID(GameEngine ge){
+		ArrayList<Integer> value = new ArrayList<Integer>();
+		
+		return value;
+	}
+	
+	private void loadGame(GameEngine ge, int gameID){
+		
+		
+		ge.nextTurn(getGameInfo("turn",gameID));
+		ge.setPlayerCounter(getGameInfo("currentPlayer",gameID));	
+	}
+	
 	private void loadPlayers(GameEngine ge, int gameID){
+		ArrayList<String> everything = new ArrayList<String>();
+		Pile deck;
+		Pile hand;
+		Pile discardPile;
+		Pile playingField;
+		String name = new String();
+		for(int i = 1; i <= GameEngine.getMaxPlayers();i++){
+			sql ="SELECT * FROM player WHERE gameID = " + gameID + " AND playerID= " + i;
+			everything = dc.getStringFromSelect(sql, "deck","hand","discardPile","playingField","name");
+			
+			deck = splitify(everything.get(0));
+			hand = splitify(everything.get(1));
+			discardPile = splitify(everything.get(2));
+			playingField = splitify(everything.get(3));
+			name = everything.get(4);
+			
+			ge.initPlayer(i, name, deck, hand, discardPile, playingField);
+		}
 		
 	}
 	
 	
     private void loadBoard(GameEngine ge, int gameID){
-    	String sql = new String();
     	
+    	// TEMP fix
+    	ge.generateBoard();
     	ge.getBoard().getPiles().clear();
+    	
     	
     	for(int i = 0; i < 17;i++){
     		sql = "SELECT name, amount FROM board WHERE (boardID = "+gameID+" AND `index` = "+i +")";
@@ -134,7 +172,7 @@ public class SaveGame {
     		cardAndAmount[1] = cardAndAmount[1].substring(0, cardAndAmount[1].length()-1);
     		
     		
-    		Card card = ge.CallCard(cardAndAmount[0]);
+    		Card card = GameEngine.CallCard(cardAndAmount[0]);
 
 
     		int amount = Integer.parseInt(cardAndAmount[1]);

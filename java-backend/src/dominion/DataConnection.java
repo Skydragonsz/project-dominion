@@ -2,6 +2,7 @@ package dominion;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 /**
@@ -303,7 +304,109 @@ public class DataConnection {
 		} // end try
 		return value;
 	}
+	
+	public int getIntFromSelect(String sql, String columnName){
+		int value = 0;
+		Connection conn = null;
+		Statement stmt = null;
+		try {
+			// JDBC Driver
+			Class.forName(driver);
 
+			// Connection to database
+			conn = DriverManager.getConnection(databaseConnection, username, password);
+
+			// Query
+			stmt = conn.createStatement();
+
+			ResultSet rs = stmt.executeQuery(sql);
+			
+
+			// Processing receive data
+			while (rs.next()) {
+				value = rs.getInt(columnName);
+				
+			}
+			// End
+			rs.close();
+			stmt.close();
+			conn.close();
+		} catch (SQLException se) {
+			// Handle errors for JDBC
+			se.printStackTrace();
+		} catch (Exception e) {
+			// Handle errors for Class.forName
+			e.printStackTrace();
+		} finally {
+			// finally block used to close resources
+			try {
+				if (stmt != null)
+					stmt.close();
+			} catch (SQLException se2) {
+			} // nothing we can do
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			} // end finally try
+		} // end try
+		return value;
+	}
+
+	
+	public ArrayList<String> getStringFromSelect(String sql, String... columnName){
+		
+		ArrayList<String> value = new ArrayList<String>();
+		Connection conn = null;
+		Statement stmt = null;
+		try {
+			// JDBC Driver
+			Class.forName(driver);
+
+			// Connection to database
+			conn = DriverManager.getConnection(databaseConnection, username, password);
+
+			// Query
+			stmt = conn.createStatement();
+
+			ResultSet rs = stmt.executeQuery(sql);
+			
+
+			// Processing receive data
+			while (rs.next()) {
+				for(String name : columnName){
+					value.add(rs.getString(name));
+				}
+				
+				
+			}
+			// End
+			rs.close();
+			stmt.close();
+			conn.close();
+		} catch (SQLException se) {
+			// Handle errors for JDBC
+			se.printStackTrace();
+		} catch (Exception e) {
+			// Handle errors for Class.forName
+			e.printStackTrace();
+		} finally {
+			// finally block used to close resources
+			try {
+				if (stmt != null)
+					stmt.close();
+			} catch (SQLException se2) {
+			} // nothing we can do
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			} // end finally try
+		} // end try
+		return value;
+	}
 
 	
 }
