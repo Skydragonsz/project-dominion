@@ -64,7 +64,10 @@ public class GameEngine {
 
     /* METHODS */
     public Pile generateDeck() {
+    	System.out.print("\n" + getAllCards() + "\n");
     	Card copper = CallCard("Copper");
+    	System.out.print("Een copper kaart in generateDeck -- GameEngine CallCard: " + CallCard("Copper")  + " " + CallCard("Copper").getName() + "\n");
+    	System.out.print("Een copper kaart in generateDeck -- GameEngine: " + copper  + " " + copper.getName() + "\n");
     	Card estate = CallCard("Estate");
         return new Pile(copper,copper,copper,copper,copper,copper,copper,estate,estate,estate);
     }
@@ -119,6 +122,7 @@ public class GameEngine {
 
 	public void playCard(String cardName){
 		Card card = CallCard(cardName);
+    	System.out.print("Een kaart in playCard -- GameEngine: " + card  + " " + card.getName() + "\n");
 		if(!card.getType().equals("Victory") || getCurrentTurnSegment().getAction() > 0){
 		    	card.PlayCard(getCurrentPlayer(), getOtherPlayersList(getCurrentPlayer()), getCurrentTurnSegment());
 		    	//			stPlayer.getDiscardPile().addFrom(card, stPlayer.getHand());

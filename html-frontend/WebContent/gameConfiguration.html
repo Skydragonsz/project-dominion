@@ -10,6 +10,9 @@
     <h1>Match settings</h1>
     <h2>How many players</h2>
     <input type="text" id="players" placeholder="Amount of players"/>
+        <input type="text" id="name1" placeholder="player name"/>
+            <input type="text" id="name2" placeholder="player name"/>
+                <input type="text" id="name3" placeholder="player name"/>
     <h2>Select a set</h2>
     <input type="radio" name="set" id="fg" value="1" checked><label for="fg">First game</label>
     <input type="radio" name="set" id="bm" value="2"><label for="bm">Big Money</label>
@@ -28,9 +31,11 @@
     </label>
         <br>
     <br>
-    <a class="button" href="#">Ok</a>
-    </form>
+    <a class="button" id="init" href="#">Ok</a>
 
 </div>
+    <script type="text/javascript" src="assets/js/jquery.js"></script>
+    <script type="text/javascript" src="assets/js/jquery-ui.js"></script>
+    <script type="text/javascript" src="assets/js/ajax.js"></script>
 </body>
 </html>

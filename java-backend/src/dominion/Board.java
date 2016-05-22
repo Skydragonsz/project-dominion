@@ -12,22 +12,7 @@ public class Board {
 
     private ArrayList<Pile> piles = new ArrayList<>();
     private Pile province;
-
-    //CHANGE TO CARDS
-    public Board(Pile... piles) {
-        for (Pile pile : piles) {
-            this.piles.add(pile);
-
-            if ("Province".equals(pile.getName())) {
-                this.province = pile;
-            }
-        }
-    }
-    
-    
-    
-    
-    
+   
 	// 2 Players:
 	// 30 Gold
 	// 40 Silver

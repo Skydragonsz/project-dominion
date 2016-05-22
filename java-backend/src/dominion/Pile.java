@@ -20,6 +20,7 @@ public class Pile {
 
     public Pile(Card... pile) {
         for (Card card : pile) {
+        	System.out.print("Een kaart in Pile -- Pile: " + card + " " + card.getName()  + "\n");
             this.pile.add(card);
         }
     }
@@ -87,10 +88,21 @@ public class Pile {
         otherPile.remove(otherPile.getFromIndex(index));
     }
 
-    public void remove(Card card) {
-        
-        this.pile.remove(card);
-    }
+	public void remove(Card card) {
+		//pretty messy
+		// pointers, objects, those things.
+//    	System.out.print("Een kaart in remove -- Pile: " + card + " " + card.getName() + "\n");
+//		boolean firstFind = true;
+//		Card foundCard = null;
+//
+//		for (Card pileCard : pile) {
+//			if (pileCard.getName().equals(card.getName()) && firstFind) {
+//				firstFind = false;
+//				foundCard = pileCard;
+//			}
+//		}
+		this.pile.remove(card);
+	}
 
     public void shuffle() {
         Collections.shuffle(this.pile);

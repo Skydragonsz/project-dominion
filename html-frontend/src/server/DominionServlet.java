@@ -5,6 +5,7 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,7 +32,13 @@ public class DominionServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
+	/**
+	 * @see Servlet#init(ServletConfig)
+	 */
+	public void init(ServletConfig config) throws ServletException {
+		// TODO Auto-generated method stub
 
+	}
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -46,28 +53,41 @@ public class DominionServlet extends HttpServlet {
 			gameEngine = new GameEngine();
 			request.getServletContext().setAttribute("gameEngine", gameEngine);
 		}
-
-		gameEngine.initCards();
+		
+			
 		String operation;
 		operation = request.getParameter("operation");
 
 		switch (operation) {
 		case "initialize":
+			gameEngine.initCards();
+			System.out.println("Init case");
 			int amount = Integer.parseInt(request.getParameter("playerAmount"));
 			gameEngine.initAmountPlayers(amount);
 
 			for (int i = 1; i <= amount; i++) {
 				gameEngine.initPlayer(i, request.getParameter("name" + i));
 			}
+			//gameEngine.init();
 			break;
 		case "getHand":
+			System.out.println("Hand case");
 			List<String> list = new ArrayList<>();
 			list = gameEngine.getCurrentPlayer().getHand().getCardsName();
 			String json = new Gson().toJson(list);
 
 			response.getWriter().write(json);
 			break;
+		case "getPlayingField":
+			System.out.println("Hand case");
+			List<String> playingFieldList = new ArrayList<>();
+			playingFieldList = gameEngine.getCurrentPlayer().getPlayingField().getCardsName();
+			String playingFieldJson = new Gson().toJson(playingFieldList);
+
+			response.getWriter().write(playingFieldJson);
+			break;		
 		case "getBoard":
+			System.out.println("Board case");
 			List<String> board = new ArrayList<>();
 
 			for (Pile pile : gameEngine.getBoard().getPiles()) {
@@ -81,6 +101,7 @@ public class DominionServlet extends HttpServlet {
 			writer.append("{ \"card\":\"Village\" } ");
 			break;
 		case "getPlayerInfo":
+			System.out.println("player info case");
 			String playerInfo = "{\"player\":\"" + gameEngine.getCurrentPlayer().getName() + "\", \"turn\":\""
 					+ gameEngine.getTurnNumber() + "\" , \"coins\":\"" + gameEngine.getCurrentTurnSegment().getCoin()
 					+ "\" , \"actions\":\"" + gameEngine.getCurrentTurnSegment().getAction() + "\" , \"buys\":\""
@@ -89,6 +110,7 @@ public class DominionServlet extends HttpServlet {
 			response.getWriter().write(playerInfo);
 			break;
 		case "getAllCards":
+			System.out.println("AllCard case");
 			List<String> allCards = new ArrayList<>();
 
 			for (Card card : gameEngine.getAllCards()){
@@ -104,15 +126,18 @@ public class DominionServlet extends HttpServlet {
 			response.getWriter().write(jsonCards);
 			break;
 		case "playCard":
+			System.out.println("Play case");
 			String card = request.getParameter("card");
+	    	System.out.print("\n" + gameEngine.getAllCards() + "\n");
+	    	System.out.print("Een kaart in playCard -- Servlet: " + card  + "\n");
 			gameEngine.playCard(card);
+			
 			break;
 			
 		case "buyCard":
+			System.out.println("Buy case");
 			String buyCard = request.getParameter("card");
 			gameEngine.buyCard(gameEngine.CallCard(buyCard));
-			System.out.println(gameEngine.CallCard(buyCard));
-			System.out.println(gameEngine.CallCard(buyCard));
 			break;
 		case "information":
 			writer.append("Hand " + gameEngine.getCurrentPlayer().getHand() + "\n" + "Deck "
@@ -120,10 +145,16 @@ public class DominionServlet extends HttpServlet {
 					+ gameEngine.getCurrentPlayer().getPlayingField() + "\n" + "Discard"
 					+ gameEngine.getCurrentPlayer().getDiscardPile() + "\n"
 					+ gameEngine.CallCard("Copper")
-					+ " " + GameEngine.CallCard("Copper"));
+					+ " " + gameEngine.CallCard("Copper"));
 			break;
+		case "nextSegment":
+        	gameEngine.CleanedUp();
+			if (gameEngine.getCurrentPlayer() == gameEngine.getLastPlayers()){
+				gameEngine.nextTurn(8); //integer needed? maybe saves?
+			}
+				gameEngine.nextPlayer();
 		default:
-			writer.append("error: jsdffsdkljsdfjlfd");
+			writer.append("error: Something went wrong :(");
 			break;
 		}		
 		
