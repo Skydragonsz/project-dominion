@@ -220,18 +220,40 @@ function specialAction(cardName) {
             	console.log("Cellar case" + selectedCards)
             	return selectedCards
             })
+            break;
         case "Chapel":
+        	$("#SelectCards").removeClass("invisible");
             //fill DIV with cards from hand.
             //Select up to 4 cards.
             //EFFECT:Trash
 //            showCards();
+        	
+            $.get("DominionServlet?operation=getHand", function (responseJson) {
+                $.each(responseJson, function (index, item) {
+                    $("#SelectCards").append('<div id="' + item + '" class="selectable card" style="position: relative; background-image: url(../html-frontend/assets/media/Base%20Deck/' + item.toLowerCase() + '.jpg)"></div>');
+                })
+            });
+            
+            $(document).on('click', '.selectedCardButton', function () {
+            	selectedCards = getSelectedCards(4);
+            	console.log("Chapel case" + selectedCards)
+            	return selectedCards
+            })
             break;
         case "Chancellor":
             break;
         case "Workshop":
+        	$("#SelectCards").removeClass("invisible");
             //fill DIV with board piles.
             //Buy a card that cost up to 4 coins.
 //            showBoard();
+        	
+            $.get("DominionServlet?operation=getBoard", function (responseJson) {
+                $.each(responseJson, function (index, item) {
+               	 var card = item.toString().split(";");
+                    $("#SelectCards").append('<div id="' + card[0] + '" class="selectable card" style="position: relative; background-image: url(../html-frontend/assets/media/Base%20Deck/' + card[0].toLowerCase() + '.jpg)"></div>');
+                })
+            });
             break;
         case "Bureaucrat":
             //fill DIV with section that equal the amount of all other players. One section = one player.
@@ -318,9 +340,21 @@ $(document).on('click', '.selectable', function () {
 
 function getSelectedCards(){
 	var selectedCards;
-	$( ".selected" ).each(function() {
-		selectedCards = $( this ).attr("id");
+	$(".selected").each(function() {
+		selectedCards = $(this).attr("id");
 	});
+	console.log("selectedCards");
+	console.log(selectedCards);
+	return selectedCards;
+}
+
+function getSelectedCards(amount){
+	var selectedCards;
+	for (i = 0; i <= amount; i++){
+		$(".selected").each(function() {
+			selectedCards = $(this).attr("id");
+		});
+	}
 	console.log("selectedCards");
 	console.log(selectedCards);
 	return selectedCards;
