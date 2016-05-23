@@ -230,6 +230,7 @@ function calculateDegreesCardsInHand() {
 
 //---- SPECIAL ACTION ----//
 function specialAction(cardName) {
+	/*extra zinnetje voor extra commit*/
 	$("#selectedCardButton").removeClass();
 	$('#selectedCardButton').addClass(cardName);
     switch (cardName) {
