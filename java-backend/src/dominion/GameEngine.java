@@ -53,7 +53,6 @@ public class GameEngine {
     }
     
     public void init(){
-        initCards();
         nextTurn(1);
     }
     

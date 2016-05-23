@@ -67,6 +67,10 @@ public class Player {
     public void setDeck(Pile deck) {
         this.deck = deck;
     }
+    
+	public void setSelectedHand(Pile selectedHand) {
+		this.selectedHand = selectedHand;
+	}
 
 	public Pile getPickedHand() {
 		return pickedHand;

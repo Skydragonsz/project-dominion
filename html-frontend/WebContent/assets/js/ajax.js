@@ -13,7 +13,7 @@ $("#init").on("click", function () {
 });
 
 function initializeGame() {
-
+	//TEMP 3
     $.ajax({
         cache: false,
         dataType: "text",
@@ -111,33 +111,36 @@ function cleanLayoutBoard() {
     $("#victory").children().remove();
     $("#hand").children().remove();
     $("#playingfield").children().remove();
+    $("#SelectCards").children().remove();
 }
 
 
 //JAVASCRIPT TRIGGER EVENTS
 /*When clicked in hand*/
-$(document).on('click', '.hand', function () {
-    var id = $(this).attr('id').toString();
-    var effect = specialAction(id);
-    console.log(effect);
-    $.ajax({
-        cache: false,
-        dataType: "text",
-        url: "/html-frontend/DominionServlet",
-        type: "get",
-        data: {
-            operation: 'playCard',
-            card: id,
-            effect: effect
-        }
+$(document).on('click', '.hand', function() {
+	var id = $(this).attr('id').toString();
+	var selectedCards = specialAction(id);
 
-    }).done(function (data) {
-        var obj = JSON.stringify(data);
-        callPlayerInfo();
-    });
-})
+	if (selectedCards == "N/A") {
+		$.ajax({
+			cache : false,
+			dataType : "text",
+			url : "/html-frontend/DominionServlet",
+			type : "get",
+			data : {
+				operation : 'playCard',
+				card : id,
+				effect : selectedCards
+			}
 
-/*When clicked on the button nextSegment*/
+		}).done(function(data) {
+			var obj = JSON.stringify(data);
+			callPlayerInfo();
+		});
+	} 
+});
+
+/* When clicked on the button nextSegment */
 $(document).on('click', '#nextSegment', function () {
     $.ajax({
         cache: false,
@@ -150,13 +153,37 @@ $(document).on('click', '#nextSegment', function () {
 
     }).done(function (data) {
         var obj = JSON.stringify(data);
+        alert("Next player");
         cleanLayoutBoard();
         callBoard();
         callHand();
         callPlayingField();
         callPlayerInfo();
     });
-})
+});
+
+/* When clicked on the button spawn Card */
+$(document).on('click', '#spawn', function () {
+	var cardName = prompt("What card would you like to spawn <String>?")
+    $.ajax({
+        cache: false,
+        dataType: "text",
+        url: "/html-frontend/DominionServlet",
+        type: "get",
+        data: {
+            operation: 'spawnCard',
+            card : cardName
+        }
+
+    }).done(function (data) {
+        var obj = JSON.stringify(data);
+        cleanLayoutBoard();
+        callBoard();
+        callHand();
+        callPlayingField();
+        callPlayerInfo();
+    });
+});
 
 /*When clicked in kingdomset*/
 $(document).on('click', '.kingdom', function () {
@@ -183,7 +210,7 @@ $(document).on('click', '.kingdom', function () {
 
         });
     }
-})
+});
 
 /*calculate degrees for cards*/
 function calculateDegreesCardsInHand() {
@@ -203,35 +230,25 @@ function calculateDegreesCardsInHand() {
 
 //---- SPECIAL ACTION ----//
 function specialAction(cardName) {
+	$("#selectedCardButton").removeClass();
+	$('#selectedCardButton').addClass(cardName);
     switch (cardName) {
         case "Cellar":
-            $("#SelectCards").removeClass("invisible");
             //fill DIV with cards from hand.
             //Select any number of cards.
             //EFFECT:Discard.
-            $.get("DominionServlet?operation=getHand", function (responseJson) {
-                $.each(responseJson, function (index, item) {
-                    $("#SelectCards").append('<div id="' + item + '" class="selectable card" style="position: relative; background-image: url(../html-frontend/assets/media/Base%20Deck/' + item.toLowerCase() + '.jpg)"></div>');
-                })
-            });
-            
-            $(document).on('click', '.selectedCardButton', function () {
-            	selectedCards = getSelectedCards();
-            	console.log("Cellar case" + selectedCards)
-            	return selectedCards
-            })
+            showSelectableCards("Discard any number of cards.");
         case "Chapel":
             //fill DIV with cards from hand.
             //Select up to 4 cards.
             //EFFECT:Trash
 //            showCards();
-            break;
-        case "Chancellor":
+            showSelectableCards("Select up to 4 cards.");
             break;
         case "Workshop":
             //fill DIV with board piles.
             //Buy a card that cost up to 4 coins.
-//            showBoard();
+            showSelectableBoard("Buy a card that cost up to 4 coins.");
             break;
         case "Bureaucrat":
             //fill DIV with section that equal the amount of all other players. One section = one player.
@@ -243,8 +260,6 @@ function specialAction(cardName) {
             //  -------------------------------
 //            showOneCardFromPlayer();
             break;
-        case "Feast":
-            break;
         case "Militia":
             //fill DIV with section that equal the amount of all other players. One section = one player.
             //Each section will display the hand of said player.
@@ -255,19 +270,18 @@ function specialAction(cardName) {
             //fill DIV with cards from hand.
             //Select 1 copper card.
             //EFFECT:Trash
-//            showCards();
+            showSelectableCards("Select 1 copper card.");
             break;
         case "Remodel":
             //fill DIV with cards from hand.
             //Select 1 card.
             //EFFECT:Trash
-//            showCards();
+            showSelectableCards("Select 1 card.");
             break;
         case "Spy":
             //fill DIV with section that equal the amount of all players. One section = one player.
             //Each section will display the top card of said player his deck.
             //You choice to put it back or discard it.
-
 //            showOneCardFromPlayer();
             break;
         case "Thief":
@@ -281,8 +295,7 @@ function specialAction(cardName) {
             //fill DIV with cards from hand.
             //Select 1 action card.
             //EFFECT: Play it twice
-            break;
-        case "Council Room":
+            showSelectableCards("Select 1 action card.");
             break;
         case "Library":
             //later
@@ -291,39 +304,74 @@ function specialAction(cardName) {
             //fill DIV with cards from hand.
             //Select 1 treasure card.
             //EFFECT: Trash
-            break;
-        case "Witch":
+            showSelectableCards("Select 1 treasure card.");
             break;
         case "Adventurer":
             //later
             break;
 
         default:
-            console.log("N/A")
-
-
+    		return "N/A";
     }
-    cleanLayoutBoard();
-    callBoard();
-    callHand();
-    callPlayingField();
-    callPlayerInfo();
 
 }
+
+$(document).on('click', '#selectedCardButton', function () {
+	var cardName = $('#selectedCardButton').attr("class");
+	var selectedCards = getSelectedCards();
+	$.ajax({
+		cache : false,
+		dataType : "text",
+		url : "/html-frontend/DominionServlet",
+		type : "get",
+		data : {
+			operation : 'playCard',
+			card : cardName,
+			effect : selectedCards
+		}
+
+	}).done(function(data) {
+		var obj = JSON.stringify(data);
+		cleanLayoutBoard();
+		callBoard();
+		callPlayingField();
+		callPlayerInfo();
+		callHand();
+        $("#SelectCards").addClass("invisible");
+		
+	});
+});
 
 $(document).on('click', '.selectable', function () {
     $(this).removeClass("selectable");
     $(this).addClass("selected");
-})
+});
 
 function getSelectedCards(){
-	var selectedCards;
+	var selectedCards = [];
 	$( ".selected" ).each(function() {
-		selectedCards = $( this ).attr("id");
+		selectedCards.push($( this ).attr("id"));
 	});
+
 	console.log("selectedCards");
 	console.log(selectedCards);
 	return selectedCards;
 }
 
+function showSelectableCards(text){
+    $("#SelectCards").removeClass("invisible");
+    $("#specialActionText").html(text);
+    $.get("DominionServlet?operation=getHand", function (responseJson) {
+        $.each(responseJson, function (index, item) {
+            $("#SelectCards").append('<div id="' + item + '" class="selectable card" style="position: relative; background-image: url(../html-frontend/assets/media/Base%20Deck/' + item.toLowerCase() + '.jpg)"></div>');
+        })
+    });
+}
 
+function showSelectableBoard(text){
+    //Getting the correct values from servlet
+    callBoard();
+    $("#specialActionText").html(text);
+    $("#kingdomset").appendTo("#SelectCards");
+    $("#wrapper").appendTo("#SelectCards");
+}

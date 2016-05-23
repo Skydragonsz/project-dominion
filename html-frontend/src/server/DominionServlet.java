@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.ServletConfig;
@@ -68,7 +69,7 @@ public class DominionServlet extends HttpServlet {
 			for (int i = 1; i <= amount; i++) {
 				gameEngine.initPlayer(i, request.getParameter("name" + i));
 			}
-			//gameEngine.init();
+			gameEngine.init();
 			break;
 		case "getHand":
 			System.out.println("Hand case");
@@ -128,10 +129,24 @@ public class DominionServlet extends HttpServlet {
 		case "playCard":
 			System.out.println("Play case");
 			String card = request.getParameter("card");
-	    	System.out.print("\n" + gameEngine.getAllCards() + "\n");
-	    	System.out.print("Een kaart in playCard -- Servlet: " + card  + "\n");
+			String[] effect = request.getParameterValues("effect[]");
+
+			Pile selectedHand = new Pile();
+			if (effect != null) {
+				for (String cardName : effect) {
+					selectedHand.add(GameEngine.CallCard(cardName));
+				}
+			}
+			System.out.println("SERVLET PLAYCARD: " + card
+					+ " " + Arrays.toString(effect) 
+					//+ " " + effect.length() 
+					+ " " + selectedHand.getAmount() 
+					+ " " + request.getQueryString() );
+			gameEngine.getCurrentPlayer().setSelectedHand(selectedHand);
+			System.out.print("\n" + gameEngine.getAllCards() + "\n");
+			System.out.print("Een kaart in playCard -- Servlet: " + card + "\n");
 			gameEngine.playCard(card);
-			
+
 			break;
 			
 		case "buyCard":
@@ -139,6 +154,10 @@ public class DominionServlet extends HttpServlet {
 			String buyCard = request.getParameter("card");
 			gameEngine.buyCard(gameEngine.CallCard(buyCard));
 			break;
+		case "spawnCard":
+			String spawnCard = request.getParameter("card");
+			gameEngine.getCurrentPlayer().getHand().add(GameEngine.CallCard(spawnCard));
+			break;	
 		case "information":
 			writer.append("Hand " + gameEngine.getCurrentPlayer().getHand() + "\n" + "Deck "
 					+ gameEngine.getCurrentPlayer().getDeck() + "\n" + "PlayingField "

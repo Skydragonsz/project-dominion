@@ -49,7 +49,7 @@ public class nonHardCodedCardsTester {
         deck = new Pile(gold,gold,gold,gold,gold,gold,gold,village,village,village);
         provincePile = new Pile(province,1);
         goldPile = new Pile(gold,30);
-        board = new Board(goldPile, provincePile);
+        //board = new Board(goldPile, provincePile);
         
     }
 
