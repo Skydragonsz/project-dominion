@@ -158,7 +158,7 @@ public class CardSpecialAction  {
 	public static void playRemodel() {
 		// Trash a card from your hand. Gain a card costing up to 2 Coins more than the trashed card.
 		Card card = stPlayer.getSelectedHand().getPile().get(0);
-		stCurrentTurnSegment.addCoin(card.getCost() + 2);
+		stCurrentTurnSegment.addInstancedCoin(card.getCost() + 2);
 		stPlayer.getHand().remove(card);
 	}
 

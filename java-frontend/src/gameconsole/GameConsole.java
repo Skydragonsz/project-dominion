@@ -140,15 +140,13 @@ public class GameConsole {
 	    	}
 			break;
 		case "Chapel":
-			int i = 0;
-			while (!"E".equals(pressedKey) || i <= 4){
+			while (!"E".equals(pressedKey)){
 		        Layout.drawSubTitel("Discard cards");
 		        Layout.drawMenuNumericList("Your Cards", currentPickedHand.getPile());
 		        Layout.drawMenuNoList("selected cards", currentSelectedHand.getPile());
 		        
 		        handleSelectedCard();
 		        pressedKey = Actions.askFor("Press any key to continue | press E to exit");
-		        i++;
 		    	}
 			break;
 		case "Workshop":
@@ -162,8 +160,17 @@ public class GameConsole {
 			Actions.pressEnter();
 			break;
 		case "Bureaucrat":
+			Layout.drawSubTitel("Other Players' Victory Cards");
+			for (int i = 1; i < gameEngine.getPlayerList().size(); i ++) {
+				Layout.drawMenuNoList("Hand Player " + gameEngine.getPlayerList().get(i).getName()
+						+ ": ", gameEngine.getPlayerList().get(i).getHand().getPile());
+			}
 			break;
 		case "Feast":
+			Layout.drawSubTitel("Choose a card costing up to 5");
+			Layout.drawMenuPurchasableCards("Choose one card costing up to 4", gameEngine.getBoard().getPiles(), 5);
+			handleGainInstancedCard();
+			Actions.pressEnter();
 			break;
 		case "Militia":
 			break;
@@ -184,6 +191,21 @@ public class GameConsole {
 	        Actions.pressEnter();
 			break;
 		case "Spy":
+			Layout.drawSubTitel("Each Players' Top Card");
+			for (int i = 0; i < gameEngine.getPlayerList().size(); i ++) {
+				Layout.drawMenuNoList("Hand Player " + gameEngine.getPlayerList().get(i).getName()
+						+ ": ", gameEngine.getPlayerList().get(i).getDeck().getFromIndex(0).getName());
+				String option = (Actions.askFor("Discard this card? Y | N"));
+				switch(option){
+				case "Y":
+					//Execute Card
+				break;
+				case "N":
+					//Next action
+					break;
+				}
+		    	//currentSelectedHand.addFrom(currentPickedHand.getFromIndex(option - 1),currentPickedHand);
+			}
 			break;
 		case "Thief":
 			break;
