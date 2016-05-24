@@ -13,6 +13,12 @@ $("#init").on("click", function () {
     initializeGame()
 });
 
+$("#load").on("click", function () {
+    loadGame()
+});
+
+
+
 function initializeGame() {
     //TEMP 3
     $.ajax({
@@ -44,10 +50,11 @@ function loadGame() {
         type: "get",
         data: {
             operation: 'load',
-            gameID: $("#saves option:selected").val()
+            gameID: $("#saves :selected").val()
         }
 
     }).done(function (data) {
+    	console.log("test" + data);
         var obj = JSON.parse(data);
     });
 }
@@ -202,6 +209,25 @@ $(document).on('click', '#spawn', function () {
     }).done(function (data) {
         var obj = JSON.stringify(data);
         cleanLayoutBoard();
+    });
+});
+
+/* Save Game */
+$(document).on('click', '#save', function () {
+    var save = prompt("Save name")
+    $.ajax({
+        cache: false,
+        dataType: "text",
+        url: "/html-frontend/DominionServlet",
+        type: "get",
+        data: {
+            operation: 'save',
+            save: save
+        }
+
+    }).done(function (data) {
+        var obj = JSON.stringify(data);
+        
     });
 });
 
