@@ -3,6 +3,8 @@ package dominion;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 
 /**
@@ -205,6 +207,60 @@ public class DataConnection {
 		} // end try
 		return allCards;
 	}// end main
+	
+	public Map<Integer,String> loadGameID() {
+		Connection conn = null;
+		Statement stmt = null;
+		Map<Integer,String> data = new LinkedHashMap<Integer, String>();
+		try {
+			// JDBC Driver
+			Class.forName(driver);
+
+			// Connection to database
+			conn = DriverManager.getConnection(databaseConnection, username, password);
+
+			// Query
+			stmt = conn.createStatement();
+			String sql;
+			
+			sql = "SELECT * FROM game;";
+
+			
+			
+			ResultSet rs = stmt.executeQuery(sql);
+
+			// Processing receive data
+			while (rs.next()) {
+
+				data.put(rs.getInt("gameID"), rs.getString("name"));
+
+			}
+			// End
+			rs.close();
+			stmt.close();
+			conn.close();
+		} catch (SQLException se) {
+			// Handle errors for JDBC
+			se.printStackTrace();
+		} catch (Exception e) {
+			// Handle errors for Class.forName
+			e.printStackTrace();
+		} finally {
+			// finally block used to close resources
+			try {
+				if (stmt != null)
+					stmt.close();
+			} catch (SQLException se2) {
+			} // nothing we can do
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			} // end finally try
+		} // end try
+		return data;
+	}
 	
 	
 	

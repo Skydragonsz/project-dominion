@@ -121,8 +121,9 @@ public class GameEngine {
 
 	public void playCard(String cardName){
 		Card card = CallCard(cardName);
-    	System.out.print("Een kaart in playCard -- GameEngine: " + card  + " " + card.getName() + "\n");
-		if(!card.getType().equals("Victory") || getCurrentTurnSegment().getAction() > 0){
+    	
+		if(!card.getType().equals("Victory") && getCurrentTurnSegment().getAction() > 0){
+			System.out.print("Een kaart in playCard -- GameEngine: " + card  + " " + card.getName() + "\n");
 		    	card.PlayCard(getCurrentPlayer(), getOtherPlayersList(getCurrentPlayer()), getCurrentTurnSegment());
 		    	//			stPlayer.getDiscardPile().addFrom(card, stPlayer.getHand());
 		    	getCurrentPlayer().getPlayingField().addFrom(card, getCurrentPlayer().getHand());
@@ -142,16 +143,16 @@ public class GameEngine {
 	
 	
 	public void buyCard(int option){
+		if(getCurrentTurnSegment().getBuy() > 0){
+		
+			Card card = getBoard().getFromIndex(option).getFromIndex(0);
+		
 
-		
-		Card card = getBoard().getFromIndex(option).getFromIndex(0);
-		
-		
-        if (getCurrentTurnSegment().getCoin() >= card.getCost()){
-        	getCurrentPlayer().getDiscardPile().addAmountOfCardsFrom(1, getBoard().getFromIndex(option));
-        	getCurrentTurnSegment().removeBuy(1);
-        	getCurrentTurnSegment().removeCoin(card.getCost());
-        	
+	        if (getCurrentTurnSegment().getCoin() >= card.getCost()){
+	        	getCurrentPlayer().getDiscardPile().addAmountOfCardsFrom(1, getBoard().getFromIndex(option));
+	        	getCurrentTurnSegment().removeBuy(1);
+	        	getCurrentTurnSegment().removeCoin(card.getCost());
+	        }
         }
         
 		
@@ -170,16 +171,17 @@ public class GameEngine {
 	}
 	
 public void buyCard(Card card){
-		
-	for (Pile pile : getBoard().getPiles()) {
-		if (card.getName().equals(pile.getFromIndex(0).getName())) {
-
-	        if (getCurrentTurnSegment().getCoin() >= card.getCost()){
-	        	getCurrentPlayer().getDiscardPile().addAmountOfCardsFrom(1, pile);
-	        	getCurrentTurnSegment().removeBuy(1);
-	        	getCurrentTurnSegment().removeCoin(card.getCost());
-	        	
-	        }
+	if(getCurrentTurnSegment().getBuy() > 0){
+		for (Pile pile : getBoard().getPiles()) {
+			if (card.getName().equals(pile.getFromIndex(0).getName())) {
+	
+		        if (getCurrentTurnSegment().getCoin() >= card.getCost()){
+		        	getCurrentPlayer().getDiscardPile().addAmountOfCardsFrom(1, pile);
+		        	getCurrentTurnSegment().removeBuy(1);
+		        	getCurrentTurnSegment().removeCoin(card.getCost());
+		        	
+		        }
+			}
 		}
 	}
 	
