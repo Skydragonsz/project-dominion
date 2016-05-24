@@ -3,29 +3,23 @@
  */
 
 $(document).ready(function () {
-	console.log("werkt dit?");
-//    calculateDegreesCardsInHand();
 });
 
 
-$(document).on('click', '.hand', function(){
-	if (($(this).attr("id") != "Estate") && ($(this).attr("id") != "Duchy") && ($(this).attr("id") != "Province")) {
-    $(this).detach().appendTo("#playingfield");
-    $(this).removeClass("hand active");
-//    $(this).removeAttr('style');
-    calculateDegreesCardsInHand();
-//    console.log("clicked");
-    
-	}
-});
+//$(document).on('click', '.hand', function(){
+//	if (($(this).attr("id") != "Estate") && ($(this).attr("id") != "Duchy") && ($(this).attr("id") != "Province")) {
+//    $(this).detach().appendTo("#playingfield");
+//    $(this).removeClass("hand active");
+////    calculateDegreesCardsInHand();
+//    
+//	}
+//});
 
 $(document).on('mouseenter', '.hand', function(){
     $(this).addClass("active");
-//    console.log("test");
 });
 $(document).on('mouseleave', '.hand', function(){
     $(this).removeClass("active");
-//    console.log("test");
 });
 
 

@@ -2,7 +2,7 @@
 $(document).ready(function () {
     callBoard();
     callHand();
-    calculateDegreesCardsInHand();
+//    calculateDegreesCardsInHand();
     callPlayingField();
     callPlayerInfo();
 });
@@ -13,7 +13,7 @@ $("#init").on("click", function () {
 });
 
 function initializeGame() {
-	//TEMP 3
+    //TEMP 3
     $.ajax({
         cache: false,
         dataType: "text",
@@ -33,7 +33,6 @@ function initializeGame() {
         console.log("Operation: " + obj.operation + " playerAmount: " + obj.playerAmount + " name1 " + obj.name1 + " name2 " + obj.name2);
     });
 }
-
 
 // CALL FROM SERVLET
 /* Board */
@@ -106,38 +105,45 @@ function callAllCards() {
 
 //CLEAN HTML LAYOUT
 function cleanLayoutBoard() {
+    //clean
     $("#kingdomset").children().remove();
     $("#treasure").children().remove();
     $("#victory").children().remove();
     $("#hand").children().remove();
     $("#playingfield").children().remove();
     $("#SelectCards").children().remove();
+
+    //call
+    callBoard();
+    callHand();
+    callPlayingField();
+    callPlayerInfo();
 }
 
 
 //JAVASCRIPT TRIGGER EVENTS
-/*When clicked in hand*/
-$(document).on('click', '.hand', function() {
-	var id = $(this).attr('id').toString();
-	var selectedCards = specialAction(id);
+/*When clicked in hand*/ /*PLAY CARD*/
+$(document).on('click', '.hand', function () {
+    var id = $(this).attr('id').toString();
+    showSpecialActionLayout(id); /*changed hasSpecialAction*/
 
-	if (selectedCards == "N/A") {
-		$.ajax({
-			cache : false,
-			dataType : "text",
-			url : "/html-frontend/DominionServlet",
-			type : "get",
-			data : {
-				operation : 'playCard',
-				card : id,
-				effect : selectedCards
-			}
+    if (!hasSpecialAction) {
+    	console.log('graak ik hier?')
+        $.ajax({
+            cache: false,
+            dataType: "text",
+            url: "/html-frontend/DominionServlet",
+            type: "get",
+            data: {
+                operation: 'playCard',
+                card: id
+            }
 
-		}).done(function(data) {
-			var obj = JSON.stringify(data);
-			callPlayerInfo();
-		});
-	} 
+        }).done(function (data) {
+            var obj = JSON.stringify(data);
+            cleanLayoutBoard();
+        });
+    }
 });
 
 /* When clicked on the button nextSegment */
@@ -155,16 +161,12 @@ $(document).on('click', '#nextSegment', function () {
         var obj = JSON.stringify(data);
         alert("Next player");
         cleanLayoutBoard();
-        callBoard();
-        callHand();
-        callPlayingField();
-        callPlayerInfo();
     });
 });
 
 /* When clicked on the button spawn Card */
 $(document).on('click', '#spawn', function () {
-	var cardName = prompt("What card would you like to spawn <String>?")
+    var cardName = prompt("What card would you like to spawn <String>?")
     $.ajax({
         cache: false,
         dataType: "text",
@@ -172,16 +174,12 @@ $(document).on('click', '#spawn', function () {
         type: "get",
         data: {
             operation: 'spawnCard',
-            card : cardName
+            card: cardName
         }
 
     }).done(function (data) {
         var obj = JSON.stringify(data);
         cleanLayoutBoard();
-        callBoard();
-        callHand();
-        callPlayingField();
-        callPlayerInfo();
     });
 });
 
@@ -202,53 +200,46 @@ $(document).on('click', '.kingdom', function () {
 
         }).done(function (data) {
             var obj = JSON.stringify(data);
-            callPlayerInfo();
+            cleanLayoutBoard();
             //TEMP -- amount get changed in HTML, doesn't ask for servlet request.
             //When a new turn is asked they will get the correct values from the server.
-            amount = $("#" + id).find(".circle").text() - 1;
-            $("#" + id).find(".circle").html(amount);
+            //amount = $("#" + id).find(".circle").text() - 1;
+            //$("#" + id).find(".circle").html(amount);
 
         });
     }
 });
 
-/*calculate degrees for cards*/
-function calculateDegreesCardsInHand() {
-    var index = Math.floor($(document).find(".hand").length / 2);
-    var switchedIndex = -index;
-    console.log(index);
-    $(document).find(".hand").each(function () {
-        $(this).css("transform", "rotate(" + (switchedIndex * 10) + "deg)");
-        $(this).css("top", (Math.abs(switchedIndex) * ((Math.abs(switchedIndex) * 7))));
+/*calculate degrees for cards -- kinda works*/
+//function calculateDegreesCardsInHand() {
+//    var index = Math.floor($(document).find(".hand").length / 2);
+//    var switchedIndex = -index;
+//    console.log(index);
+//    $(document).find(".hand").each(function () {
+//        $(this).css("transform", "rotate(" + (switchedIndex * 10) + "deg)");
+//        $(this).css("top", (Math.abs(switchedIndex) * ((Math.abs(switchedIndex) * 7))));
+//
+//        $(this).css("left", index * 75);
+//        index--;
+//        switchedIndex++;
+//    })
+//}
 
-        $(this).css("left", index * 75);
-        index--;
-        switchedIndex++;
-    })
-}
 
 
 //---- SPECIAL ACTION ----//
-function specialAction(cardName) {
-	/*extra zinnetje voor extra commit*/
-	$("#selectedCardButton").removeClass();
-	$('#selectedCardButton').addClass(cardName);
+//1. SHOW IT TO THE USER.
+function showSpecialActionLayout(cardName) {
+    $("#selectedCardButton").removeClass();
+    $('#selectedCardButton').addClass(cardName);
     switch (cardName) {
         case "Cellar":
-            //fill DIV with cards from hand.
-            //Select any number of cards.
-            //EFFECT:Discard.
             showSelectableCards("Discard any number of cards.");
+            break;
         case "Chapel":
-            //fill DIV with cards from hand.
-            //Select up to 4 cards.
-            //EFFECT:Trash
-//            showCards();
-            showSelectableCards("Select up to 4 cards.");
+            showSelectableCards("Trash up to 4 cards.");
             break;
         case "Workshop":
-            //fill DIV with board piles.
-            //Buy a card that cost up to 4 coins.
             showSelectableBoard("Buy a card that cost up to 4 coins.");
             break;
         case "Bureaucrat":
@@ -268,16 +259,10 @@ function specialAction(cardName) {
 
             break;
         case "Moneylender":
-            //fill DIV with cards from hand.
-            //Select 1 copper card.
-            //EFFECT:Trash
-            showSelectableCards("Select 1 copper card.");
+            showSelectableCards("Trash 1 copper card.");
             break;
         case "Remodel":
-            //fill DIV with cards from hand.
-            //Select 1 card.
-            //EFFECT:Trash
-            showSelectableCards("Select 1 card.");
+            showSelectableCards("Trash 1 card.");
             break;
         case "Spy":
             //fill DIV with section that equal the amount of all players. One section = one player.
@@ -293,73 +278,25 @@ function specialAction(cardName) {
 //            showOneCardFromPlayer(); //MET 2
             break;
         case "Throne Room":
-            //fill DIV with cards from hand.
-            //Select 1 action card.
-            //EFFECT: Play it twice
             showSelectableCards("Select 1 action card.");
             break;
         case "Library":
             //later
             break;
         case "Mine":
-            //fill DIV with cards from hand.
-            //Select 1 treasure card.
-            //EFFECT: Trash
-            showSelectableCards("Select 1 treasure card.");
+            showSelectableCards("Trash 1 treasure card.");
             break;
         case "Adventurer":
             //later
             break;
-
         default:
-    		return "N/A";
+            hasSpecialAction = false;
     }
 
 }
 
-$(document).on('click', '#selectedCardButton', function () {
-	var cardName = $('#selectedCardButton').attr("class");
-	var selectedCards = getSelectedCards();
-	$.ajax({
-		cache : false,
-		dataType : "text",
-		url : "/html-frontend/DominionServlet",
-		type : "get",
-		data : {
-			operation : 'playCard',
-			card : cardName,
-			effect : selectedCards
-		}
-
-	}).done(function(data) {
-		var obj = JSON.stringify(data);
-		cleanLayoutBoard();
-		callBoard();
-		callPlayingField();
-		callPlayerInfo();
-		callHand();
-        $("#SelectCards").addClass("invisible");
-		
-	});
-});
-
-$(document).on('click', '.selectable', function () {
-    $(this).removeClass("selectable");
-    $(this).addClass("selected");
-});
-
-function getSelectedCards(){
-	var selectedCards = [];
-	$( ".selected" ).each(function() {
-		selectedCards.push($( this ).attr("id"));
-	});
-
-	console.log("selectedCards");
-	console.log(selectedCards);
-	return selectedCards;
-}
-
-function showSelectableCards(text){
+//1,5. SHOW IT -> CLICK IT -> GET IT
+function showSelectableCards(text) {
     $("#SelectCards").removeClass("invisible");
     $("#specialActionText").html(text);
     $.get("DominionServlet?operation=getHand", function (responseJson) {
@@ -369,10 +306,134 @@ function showSelectableCards(text){
     });
 }
 
-function showSelectableBoard(text){
+function showSelectableBoard(text) {
     //Getting the correct values from servlet
-    callBoard();
+    $("#SelectCards").removeClass("invisible");
     $("#specialActionText").html(text);
     $("#kingdomset").appendTo("#SelectCards");
     $("#wrapper").appendTo("#SelectCards");
+}
+
+$(document).on('click', '.selectable', function () {
+    $(this).toggleClass("selected");
+});
+
+function getSelectedCards() {
+    var selectedCards = [];
+    $(".selected").each(function () {
+        selectedCards.push($(this).attr("id"));
+    });
+    return selectedCards;
+}
+
+
+
+//2. SEND IT.
+$(document).on('click', '#selectedCardButton', function () {
+    var cardName = $('#selectedCardButton').attr("class");
+    var selectedCards = getSelectedCards();
+    /*See #2,5*/
+    if (checkIfSelectedCorrectly(cardName, selectedCards)) {
+        $.ajax({
+            cache: false,
+            dataType: "text",
+            url: "/html-frontend/DominionServlet",
+            type: "get",
+            data: {
+                operation: 'playCard',
+                card: cardName,
+                effect: selectedCards
+            }
+
+        }).done(function (data) {
+            var obj = JSON.stringify(data);
+            cleanLayoutBoard();
+            callBoard();
+            callPlayingField();
+            callPlayerInfo();
+            callHand();
+            $("#SelectCards").addClass("invisible");
+
+        });
+    } else {
+        alert("You selected the wrong card(s), try again.")
+    }
+});
+
+
+//2,5. CHECK IT.
+function checkIfSelectedCorrectly(cardName, selectedCards) {
+    var information = requestSpecialActionInformation(cardName);
+    switch (cardName) {
+        case "Chapel":
+            return selectedCards.length <= 4;
+        case "Workshop":
+            //fill DIV with board piles.
+            //Buy a card that cost up to 4 coins.
+            if (information = false){
+
+            }
+            return selectedCards;
+        case "Bureaucrat":
+            //fill DIV with section that equal the amount of all other players. One section = one player.
+            //Each section will display a victory card of said player if he has one, if a player doesn't hava a victory card
+            //in his hand, show text "no victory card"
+            //  -------------------------------
+            //  | Player2 | Player3 | Player4 |
+            //  | estate  | no vict |province |
+            //  -------------------------------
+//            showOneCardFromPlayer();
+            break;
+        case "Militia":
+            //fill DIV with section that equal the amount of all other players. One section = one player.
+            //Each section will display the hand of said player.
+            //Said player can discard down to 3 cards.
+
+            break;
+        case "Moneylender":
+            console.log(selectedCards);
+            return selectedCards.length == 1 && selectedCards == "Copper";
+        case "Remodel":
+            return selectedCards.length == 1;
+            break;
+        case "Spy":
+            //fill DIV with section that equal the amount of all players. One section = one player.
+            //Each section will display the top card of said player his deck.
+            //You choice to put it back or discard it.
+//            showOneCardFromPlayer();
+            break;
+        case "Thief":
+            //fill DIV with section that equal the amount of all other players. One section = one player.
+            //Each section will display the top 2 cards of said player his deck.
+            //Said player picks a treasure card he wants to trash (if he gets the option to).
+            //You choice to take or not take these trashed cards.
+//            showOneCardFromPlayer(); //MET 2
+            break;
+        case "Throne Room":
+            return selectedCards.length == 1 && selectedCards == "ALL ACTION CARDS";
+            break;
+        case "Library":
+            //later
+            break;
+        case "Mine":
+            return selectedCards.length == 1 && selectedCards == "ALL TREASURE CARDS";
+        case "Adventurer":
+            //later
+            break;
+
+        default:
+            return "N/A";
+    }
+
+}
+function requestSpecialActionInformation(){
+    console.log("specialactsdfdsf");
+    var variable;
+    $.get("DominionServlet?operation=getSpecialAction", function (responseJson) {
+        console.log("specialact" +  responseJson.player);
+        variable = responseJson.player0;
+        
+    });
+    console.log(variable);
+
 }
