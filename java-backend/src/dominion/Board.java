@@ -32,7 +32,7 @@ public class Board {
         		}else{
         			switch(card.getName()){
         			case "Copper":
-        				this.piles.add(new Pile(card, 60 - (7*GameEngine.getMaxPlayers()))); //GameEngine.getMaxPlayers()  //2 moet vervangen worden
+        				this.piles.add(new Pile(card, (60 - (7* GameEngine.getMaxPlayers() )))); //GameEngine.getMaxPlayers()  //2 moet vervangen worden
         				break;
         			case "Silver":
         				this.piles.add(new Pile(card, 40)); 
