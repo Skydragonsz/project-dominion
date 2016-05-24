@@ -42,7 +42,7 @@ public class SaveGameTester {
 	public void testLoad(){
 		
 
-		sg.load(ge, 19);
+		sg.load(ge, sg.getLastGameID());
 		System.out.println("BOARD");
 		
 		for(int i = 0;i < ge.getBoard().getPiles().size();i++){
@@ -65,9 +65,11 @@ public class SaveGameTester {
 			System.out.println("Playing Field: "+ge.getPlayer(i).getPlayingField().getCardsName());
 			System.out.println();
 			System.out.println();
-			System.out.println("Playercounter " + ge.getPlayerCounter());
-			System.out.println("Turn " + ge.getTurnNumber());
+
 		}
+		
+		System.out.println("Playercounter " + ge.getPlayerCounter());
+		System.out.println("Turn " + ge.getTurnNumber());
 	}
 
 }

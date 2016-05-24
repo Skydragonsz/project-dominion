@@ -42,8 +42,8 @@ public class SaveGame {
 	public void save(GameEngine ge){
 		
 		saveGameSQL(ge);
-		savePlayerSQL(ge,getGameID());
-		saveBoardSQL(ge,getGameID());
+		savePlayerSQL(ge,getLastGameID());
+		saveBoardSQL(ge,getLastGameID());
 		
 		
 	}
@@ -82,7 +82,7 @@ public class SaveGame {
 		dc.executeSQL(sql);
 	}
 	
-	public int getGameID(){
+	public int getLastGameID(){
 		
 		String strGameID = new String();
 		int gameID;
@@ -136,7 +136,7 @@ public class SaveGame {
 	}
 	
 	private void loadPlayers(GameEngine ge, int gameID){
-		ArrayList<String> everything = new ArrayList<String>();
+		ArrayList<String> playerData = new ArrayList<String>();
 		Pile deck;
 		Pile hand;
 		Pile discardPile;
@@ -144,13 +144,13 @@ public class SaveGame {
 		String name = new String();
 		for(int i = 1; i <= GameEngine.getMaxPlayers();i++){
 			sql ="SELECT * FROM player WHERE gameID = " + gameID + " AND playerID= " + i;
-			everything = dc.getStringFromSelect(sql, "deck","hand","discardPile","playingField","name");
+			playerData = dc.getStringFromSelect(sql, "deck","hand","discardPile","playingField","name");
 			
-			deck = splitify(everything.get(0));
-			hand = splitify(everything.get(1));
-			discardPile = splitify(everything.get(2));
-			playingField = splitify(everything.get(3));
-			name = everything.get(4);
+			deck = splitify(playerData.get(0));
+			hand = splitify(playerData.get(1));
+			discardPile = splitify(playerData.get(2));
+			playingField = splitify(playerData.get(3));
+			name = playerData.get(4);
 			
 			ge.initPlayer(i, name, deck, hand, discardPile, playingField);
 		}
