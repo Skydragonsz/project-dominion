@@ -10,11 +10,15 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
     <servlet>
+    <servlet-name>loadGame</servlet-name>
+    <servlet-class>server.LoadGame</servlet-class>
+  </servlet>
+  <servlet>
     <servlet-name>load</servlet-name>
     <servlet-class>server.Load</servlet-class>
   </servlet>
   <servlet>
-    <servlet-name>menu</servlet-name>
+    <servlet-name>servlet</servlet-name>
     <servlet-class>server.DominionServlet</servlet-class>
   </servlet>
   <servlet>
@@ -25,13 +29,17 @@
     <servlet-name>Welcome</servlet-name>
     <servlet-class>login.Welcome</servlet-class>
   </servlet>
-    <servlet-mapping>
+  <servlet-mapping>
     <servlet-name>load</servlet-name>
     <url-pattern>/load</url-pattern>
   </servlet-mapping>
+    <servlet-mapping>
+    <servlet-name>loadGame</servlet-name>
+    <url-pattern>/loadGame</url-pattern>
+  </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>menu</servlet-name>
-    <url-pattern>/menu</url-pattern>
+    <servlet-name>servlet</servlet-name>
+    <url-pattern>/servlet</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>login</servlet-name>

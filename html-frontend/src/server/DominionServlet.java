@@ -60,6 +60,7 @@ public class DominionServlet extends HttpServlet {
 			gameEngine = new GameEngine();
 			request.getServletContext().setAttribute("gameEngine", gameEngine);
 		}
+		
 
 		String operation;
 		operation = request.getParameter("operation");
@@ -67,7 +68,7 @@ public class DominionServlet extends HttpServlet {
 		switch (operation) {
 		// INIT
 		case "initialize":
-			gameEngine.initCards(); 
+			gameEngine.initCards(Integer.parseInt(request.getParameter("set"))); 
 			int amount = Integer.parseInt(request.getParameter("playerAmount"));
 			gameEngine.initAmountPlayers(amount);
 
@@ -75,6 +76,15 @@ public class DominionServlet extends HttpServlet {
 				gameEngine.initPlayer(i, request.getParameter("name" + i));
 			}
 			gameEngine.init();
+			break;
+		case "load":
+			
+			int gameID = Integer.parseInt(request.getParameter("gameID"));
+			
+			gameEngine.loadGame(gameID);
+			
+
+
 			break;
 		// GETTERS
 		case "getBoard":
@@ -153,7 +163,7 @@ public class DominionServlet extends HttpServlet {
 			break;
 		case "buyInstancedCard":
 			String buyInstancedCard = request.getParameter("card");
-			gameEngine.buyInstancedCard(GameEngine.CallCard(buyInstancedCard));
+			//gameEngine.buyInstancedCard(GameEngine.CallCard(buyInstancedCard));
 			break;	
 		case "nextSegment":
 			gameEngine.CleanedUp();

@@ -22,7 +22,7 @@ public class GameEngineTester {
     
     // Construct will run for every test.
     public GameEngineTester() {
-    	ge.initCards();
+    	ge.initCards(5);
         ge.reset();
         
         ge.initAmountPlayers(4);
@@ -116,6 +116,17 @@ public class GameEngineTester {
     	System.out.println("Deck: "+ge.getCurrentPlayer().getDeck());
     	System.out.println("Discard pile: "+ge.getCurrentPlayer().getDiscardPile());
     	System.out.println("Hand: "+ge.getCurrentPlayer().getHand());
+    }
+    
+    @Test
+    public void generateKingdomSet(){
+    	
+    	
+		for(int i = 0;i < ge.getBoard().getPiles().size();i++){
+			System.out.print(ge.getBoard().getFromIndex(i).getFromIndex(1).getName());
+			System.out.print(" ");
+			System.out.println(ge.getBoard().getFromIndex(i).getAmount());
+		}
     }
     
     

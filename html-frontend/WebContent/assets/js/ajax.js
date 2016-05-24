@@ -1,5 +1,6 @@
 // ON LOAD
 $(document).ready(function () {
+	loadGame();
     callBoard();
     callHand();
 //    calculateDegreesCardsInHand();
@@ -25,13 +26,29 @@ function initializeGame() {
             name1: $("#name1").val(),
             name2: $("#name2").val(),
             name3: $("#name3").val(),
-            set: $("input[type='radio']").val()
+            set: $("input[type='radio']:checked").val()
         }
 
     }).done(function (data) {
         var obj = JSON.parse(data);
 
         console.log("Operation: " + obj.operation + " playerAmount: " + obj.playerAmount + " name1 " + obj.name1 + " name2 " + obj.name2);
+    });
+}
+
+function loadGame() {
+    $.ajax({
+        cache: false,
+        dataType: "text",
+        url: "/html-frontend/DominionServlet",
+        type: "get",
+        data: {
+            operation: 'load',
+            gameID: $("#saves option:selected").val()
+        }
+
+    }).done(function (data) {
+        var obj = JSON.parse(data);
     });
 }
 
@@ -50,6 +67,7 @@ function callBoard() {
             } else {
                 type = "kingdomset"
             }
+            card[0] = card[0].replace(/\s+/g, '');
             $("#" + type).append('<div id="' + card[0] + '" class="kingdom card" style="position: relative; background-image: url(../html-frontend/assets/media/Base%20Deck/' + card[0].toLowerCase() + '.jpg)""><div class="circle">' + card[1] + '</div></div>');
         })
     });

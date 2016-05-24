@@ -41,13 +41,18 @@ public class Load extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
 		DataConnection dataConnection = (DataConnection) request.getServletContext().getAttribute("dataConnection");
 		if (dataConnection == null) {
 			dataConnection = new DataConnection();
 			request.getServletContext().setAttribute("dataConnection", dataConnection);
 		}
+		
+		
+		String json = new Gson().toJson(dataConnection.loadGameID());
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		response.getWriter().write(json);
 	}
 
 	/**
@@ -69,12 +74,9 @@ public class Load extends HttpServlet {
 		
 		
 
-		System.out.println(dataConnection.loadGameID());
+
 		
-		String json = new Gson().toJson(dataConnection.loadGameID());
-		response.setContentType("application/json");
-		response.setCharacterEncoding("UTF-8");
-		response.getWriter().write(json);
+
 		
 	}
 

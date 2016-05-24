@@ -5,20 +5,7 @@
     <link rel="stylesheet" type="text/css" href="assets/css/general.css">
     <title>Load</title>
     
-    <script type="text/javascript">
-		$(document).ready(function () {                           // When the HTML DOM is ready loading, then execute the following function...
-   		$('.btn-click').click(function () {                  // Locate HTML DOM element with ID "somebutton" and assign the following function to its "click" event...
-        $.get('Load', function (responseJson) {    // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response JSON...
-            
-            var $select = $('#saves');                           // Locate HTML DOM element with ID "someselect".
-            $select.find('option').remove();                          // Find all child elements with tag name "option" and remove them (just to prevent duplicate options when button is pressed again).
-            $.each(responseJson, function (key, value) {               // Iterate over the JSON object.
-                $('<option>').val(key).text(value).appendTo($select); // Create HTML <option> element, set its value with currently iterated key and its text content with currently iterated item and finally append it to the <select>.
-            });
-        });
-    });
-});
-		</script>
+
 </head>
 <body>
 <div id="menu" class="menu">
@@ -28,15 +15,16 @@
     <h2>Select a save game</h2>
 
     
-    <form method="post" action="load">
+    <form method="post" action="servlet">
 	    <select id="saves" name="saves">
-	        <option value="placeholder" disabled selected>Select save</option>
+
 	
 	
 	
 	    </select>
+	    <br>
 	    
-		<button type="submit" value="load" class="btn btn-primary btn-block btn-large">Let me in.</button>
+		<button type="submit" value="servlet" class="btn btn-primary btn-block btn-large">OK</button>
 	</form>
    
 
@@ -44,5 +32,6 @@
     <script type="text/javascript" src="assets/js/jquery.js"></script>
     <script type="text/javascript" src="assets/js/jquery-ui.js"></script>
     <script type="text/javascript" src="assets/js/ajax.js"></script>
+    <script type="text/javascript" src="assets/js/load.js"></script>
 </body>
 </html>

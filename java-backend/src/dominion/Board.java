@@ -24,7 +24,7 @@ public class Board {
     public Board(Card... cards) {
         for (Card card : cards) {
         	if ("Garden".equals(card.getName())){
-        		this.piles.add(new Pile(card, 8 + ((3 > 2) ? 4 : 0))); //GameEngine.getMaxPlayers()
+        		this.piles.add(new Pile(card, 8 + ((GameEngine.getMaxPlayers() > 2) ? 4 : 0))); //GameEngine.getMaxPlayers()
 
         	} else {
         		if ("Victory".equals(card.getType()) && !("Curse".equals(card.getName()))){
@@ -32,7 +32,7 @@ public class Board {
         		}else{
         			switch(card.getName()){
         			case "Copper":
-        				this.piles.add(new Pile(card, 60 - (7*2))); //GameEngine.getMaxPlayers()  //2 moet vervangen worden
+        				this.piles.add(new Pile(card, 60 - (7*GameEngine.getMaxPlayers()))); //GameEngine.getMaxPlayers()  //2 moet vervangen worden
         				break;
         			case "Silver":
         				this.piles.add(new Pile(card, 40)); 

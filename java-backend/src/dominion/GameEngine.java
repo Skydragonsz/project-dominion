@@ -20,6 +20,9 @@ public class GameEngine {
     private static Pile currentDiscardPile;
     private static DataConnection databaseConnection = new DataConnection();
     
+    //Extra
+    private SaveGame saveGame = new SaveGame();
+    
     public GameEngine() {
     }
 
@@ -56,9 +59,26 @@ public class GameEngine {
         nextTurn(1);
     }
     
+    public static void initAllCards(){
+    	allCards = databaseConnection.getAllCards();
+    }
+    
+    public static void initAllCards(int set){
+    	allCards = databaseConnection.getAllCards(set);
+    }
+    
     public void initCards(){
-        allCards = databaseConnection.getAllCards(); //placeholder 1   	
+    	initAllCards(); //placeholder 1   	
     	generateBoard();
+    }
+    
+    public void initCards(int set){
+    	if(set == 0){
+    		initCards();
+    	}else{
+ 	
+    		generateBoard(set);
+    	}
     }
 
     /* METHODS */
@@ -95,10 +115,35 @@ public class GameEngine {
     	this.board = board;
     }
     
+    public void generateBoard(int set){
+    	initAllCards(set);
+    	// TEMP -- First game
+    	Card card1 = CallCard(0);
+    	Card card2 = CallCard(1);
+    	Card card3 = CallCard(2);
+    	Card card4 = CallCard(3);
+    	Card card5 = CallCard(4);
+    	Card card6 = CallCard(5);
+    	Card card7 = CallCard(6);
+    	Card card8 = CallCard(7);
+    	Card card9 = CallCard(8);
+    	Card card10 = CallCard(9);
+    	Card card11 = CallCard(10);
+    	Card card12 = CallCard(11);
+    	Card card13 = CallCard(12);
+    	Card card14 = CallCard(13);
+    	Card card15 = CallCard(14);
+    	Card card16 = CallCard(15);
+    	Card card17 = CallCard(16);
+
+    	Board board = new Board(card1,card2, card3, card4, card5, card6, card7, card8, card9, card10, card11, card12, card13, card14, card15, card16, card17);
+    	this.board = board;
+    }
+    
     
     public static Card CallCard(String name){
     	if(allCards == null){
-    		allCards = databaseConnection.getAllCards();
+    		initAllCards();
     		
     	}
     	Card foundCard = null;
@@ -111,6 +156,15 @@ public class GameEngine {
         return foundCard;
     }  
     
+    public static Card CallCard(int index){
+    	if(allCards == null){
+    		initAllCards(1);
+    		
+    	}
+
+        return allCards.get(index);
+    } 
+    
     public Board getBoard() {
 		return board;
 	}
@@ -122,7 +176,7 @@ public class GameEngine {
 	public void playCard(String cardName){
 		Card card = CallCard(cardName);
     	
-		if(!card.getType().equals("Victory") && getCurrentTurnSegment().getAction() > 0){
+		if((!card.getType().equals("Victory") && getCurrentTurnSegment().getAction() > 0) || card.getType().equals("Treasure")){
 			System.out.print("Een kaart in playCard -- GameEngine: " + card  + " " + card.getName() + "\n");
 		    	card.PlayCard(getCurrentPlayer(), getOtherPlayersList(getCurrentPlayer()), getCurrentTurnSegment());
 		    	//			stPlayer.getDiscardPile().addFrom(card, stPlayer.getHand());
@@ -193,6 +247,14 @@ public void buyCard(Card card){
 //        }
         
 		
+	}
+
+	public void loadGame(int gameID){
+		saveGame.load(this, gameID);
+	}
+	
+	public void saveGame(int gameID){
+		saveGame.save(this);	
 	}
 	
 
