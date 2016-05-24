@@ -20,8 +20,8 @@ import dominion.*;
 
     
 public class TurnTester {
-
-    public Turn n = new Turn(1);
+	private GameEngine ge = new GameEngine();
+    public Turn n = new Turn(1,ge);
     public TurnSegment ts = n.getCurrentTurnSegment(1);
     public TurnTester() {
     }

@@ -13,18 +13,18 @@ public class Turn {
     private int turnNumber;
     private int turnSegmentNumber;
 
-    public Turn(int NthTurn) {
+    public Turn(int NthTurn,GameEngine ge) {
         this.turnNumber = NthTurn;
         this.turnSegmentNumber = 0;
 
-        for (int i = 0; i < GameEngine.getMaxPlayers(); i++) {  
+        for (int i = 0; i < ge.getMaxPlayers(); i++) {  
             turnArray.add(new TurnSegment());
         }
     }
 
     /* METHODS */
-    public void nextTurnSegment() {
-        if (turnSegmentNumber <= GameEngine.getMaxPlayers()) {
+    public void nextTurnSegment(GameEngine ge) {
+        if (turnSegmentNumber <= ge.getMaxPlayers()) {
             turnSegmentNumber++;
         }
     }

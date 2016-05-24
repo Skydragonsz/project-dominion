@@ -39,9 +39,18 @@ public class SaveGame {
 		return pile;
 	}
 	
+	public void save(GameEngine ge,String name){
+		
+		saveGameSQL(ge,name);
+		savePlayerSQL(ge,getLastGameID());
+		saveBoardSQL(ge,getLastGameID());
+		
+		
+	}
+	
 	public void save(GameEngine ge){
 		
-		saveGameSQL(ge);
+		saveGameSQL(ge,"");
 		savePlayerSQL(ge,getLastGameID());
 		saveBoardSQL(ge,getLastGameID());
 		
@@ -71,14 +80,14 @@ public class SaveGame {
 		dc.executeSQL(sql);
 	}
 	
-	private void saveGameSQL(GameEngine ge){
+	private void saveGameSQL(GameEngine ge,String name){
 		
-
-		int amountPlayers = GameEngine.getMaxPlayers();
+		if(name.isEmpty()){name="NOW()";}
+		int amountPlayers = ge.getMaxPlayers();
 		int turn = ge.getCurrentTurn().getCurrentTurnNumber();
 		int currentPlayer = ge.getPlayerCounter();
 		
-		sql = "INSERT INTO game(amountOfPlayers,turn,currentPlayer,DATE) VALUES (" + amountPlayers + "," + turn + "," + currentPlayer + ",NOW())";
+		sql = "INSERT INTO game(amountOfPlayers,turn,currentPlayer,DATE,name) VALUES (" + amountPlayers + "," + turn + "," + currentPlayer + ",NOW(), "+ name + ")";
 		dc.executeSQL(sql);
 	}
 	
@@ -142,7 +151,7 @@ public class SaveGame {
 		Pile discardPile;
 		Pile playingField;
 		String name = new String();
-		for(int i = 1; i <= GameEngine.getMaxPlayers();i++){
+		for(int i = 1; i <= ge.getMaxPlayers();i++){
 			sql ="SELECT * FROM player WHERE gameID = " + gameID + " AND playerID= " + i;
 			playerData = dc.getStringFromSelect(sql, "deck","hand","discardPile","playingField","name");
 			

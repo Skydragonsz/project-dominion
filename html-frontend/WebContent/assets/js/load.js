@@ -1,13 +1,14 @@
 $(document).ready(function () {  
 	
-});                        
+	
+                        
 
         $.get('Load', function (responseJson) {    
-        	console.log("test");
+
             var $select = $('#saves');                           
             $select.find('option').remove();
             
-            $('<option>').val("placeholder").text("Select save").appendTo($select);
+            $('<option>').val("1").text("Select save").appendTo($select);
             
 
 
@@ -20,3 +21,4 @@ $(document).ready(function () {
         })
         });
         
+});

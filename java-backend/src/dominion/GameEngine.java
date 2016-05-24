@@ -111,7 +111,7 @@ public class GameEngine {
     	Card woodcutter = CallCard("Woodcutter");
     	Card workshop = CallCard("Workshop");
 
-    	Board board = new Board(copper,silver, gold, estate, duchy, province, curse, cellar, market, militia, mine, moat, remodel, smithy, village, woodcutter, workshop);
+    	Board board = new Board(this,copper,silver, gold, estate, duchy, province, curse, cellar, market, militia, mine, moat, remodel, smithy, village, woodcutter, workshop);
     	this.board = board;
     }
     
@@ -136,7 +136,7 @@ public class GameEngine {
     	Card card16 = CallCard(15);
     	Card card17 = CallCard(16);
 
-    	Board board = new Board(card1,card2, card3, card4, card5, card6, card7, card8, card9, card10, card11, card12, card13, card14, card15, card16, card17);
+    	Board board = new Board(this,card1,card2, card3, card4, card5, card6, card7, card8, card9, card10, card11, card12, card13, card14, card15, card16, card17);
     	this.board = board;
     }
     
@@ -253,8 +253,8 @@ public void buyCard(Card card){
 		saveGame.load(this, gameID);
 	}
 	
-	public void saveGame(int gameID){
-		saveGame.save(this);	
+	public void saveGame(String name){
+		saveGame.save(this,name);	
 	}
 	
 
@@ -273,7 +273,7 @@ public void buyCard(Card card){
         return playerList;
     }
 
-    public static int getMaxPlayers() {
+    public int getMaxPlayers() {
         return playerList.size();
     }
 
@@ -319,7 +319,7 @@ public void buyCard(Card card){
     }
     
     public void nextTurn(int turnNumber){
-    	turnList.add(new Turn(turnNumber));
+    	turnList.add(new Turn(turnNumber,this));
     }
     
     public void nextPlayer(){
