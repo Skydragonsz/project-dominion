@@ -65,8 +65,8 @@ public class GameEngine {
     public Pile generateDeck() {
     	System.out.print("\n" + getAllCards() + "\n");
     	Card copper = CallCard("Copper");
-    	System.out.print("Een copper kaart in generateDeck -- GameEngine CallCard: " + CallCard("Copper")  + " " + CallCard("Copper").getName() + "\n");
-    	System.out.print("Een copper kaart in generateDeck -- GameEngine: " + copper  + " " + copper.getName() + "\n");
+    	//System.out.print("Een copper kaart in generateDeck -- GameEngine CallCard: " + CallCard("Copper")  + " " + CallCard("Copper").getName() + "\n");
+    	//System.out.print("Een copper kaart in generateDeck -- GameEngine: " + copper  + " " + copper.getName() + "\n");
     	Card estate = CallCard("Estate");
         return new Pile(copper,copper,copper,copper,copper,copper,copper,estate,estate,estate);
     }
@@ -155,6 +155,18 @@ public class GameEngine {
         }
         
 		
+	}
+	
+	public void buyInstancedCard(int option){
+		
+		Card card = getBoard().getFromIndex(option).getFromIndex(0);
+		
+		if (getCurrentTurnSegment().getInstancedCoin() >= card.getCost()){
+			getCurrentPlayer().getDiscardPile().addAmountOfCardsFrom(1, getBoard().getFromIndex(option));
+			getCurrentTurnSegment().removeInstancedCoin();
+		} else {
+			System.out.println("Error, not enough coins!");
+		}
 	}
 	
 public void buyCard(Card card){

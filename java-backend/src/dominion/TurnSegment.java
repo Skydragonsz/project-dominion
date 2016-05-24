@@ -47,10 +47,15 @@ public class TurnSegment {
     public void removeCoin(int amount) {
             currency -= amount;
     }
+    
+    public void removeInstancedCoin(){
+    	instancedCurrency = 0;
+    }
 
     public void removeInstancedCoin(int amount) {
             instancedCurrency -= amount;
     }
+    
 
     public void removeAction(int amount) {
             action -= amount;

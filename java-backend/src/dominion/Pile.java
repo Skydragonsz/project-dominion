@@ -20,7 +20,7 @@ public class Pile {
 
     public Pile(Card... pile) {
         for (Card card : pile) {
-        	System.out.print("Een kaart in Pile -- Pile: " + card + " " + card.getName()  + "\n");
+        	//System.out.print("Een kaart in Pile -- Pile: " + card + " " + card.getName()  + "\n");
             this.pile.add(card);
         }
     }

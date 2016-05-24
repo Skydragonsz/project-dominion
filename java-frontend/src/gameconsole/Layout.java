@@ -42,6 +42,21 @@ public class Layout {
 		}
 		System.out.println("|-----------------------|\n");
 	}
+	
+	public static void drawMenuPurchasableCards(String title, ArrayList<Pile> piles, int instancedCoins){
+		System.out.println(
+				"|---------------------------------------------------------------------|\n" + "|" + title.toUpperCase() + "|\n" + "|---------------------------------------------------------------------|");
+		int counter = 1;
+		for (Pile pile : piles) {
+			Card card = pile.getFromIndex(0);
+			if(card.getCost() <= instancedCoins){
+			drawMenuLine(String.valueOf(counter) + ". ", card.getName() + " [Cost:" +  card.getCost() +  "] " + "[Value:" +  card.getValue() +  "] ");
+			counter++;
+			}
+		}
+		System.out.println("|---------------------------------------------------------------------|\n");
+	}
+	
 
 	public static void drawMenuAlphabeticList(String title, String... lines) {
 

@@ -42,7 +42,7 @@ public class GameConsole {
     public void run() {
         Layout.drawLogo();
         Layout.drawMenuAlphabeticList("Main menu", "New game", "Load Game", "show (card) sets", "Help", "Exit game");
-        handleMainMenuAction(Actions.askFor("Choice an option"));
+        handleMainMenuAction(Actions.askFor("Choose an option"));
     }
     
     //START-UP -- GAMELOOP
@@ -140,16 +140,26 @@ public class GameConsole {
 	    	}
 			break;
 		case "Chapel":
-			while (!"E".equals(pressedKey)){
+			int i = 0;
+			while (!"E".equals(pressedKey) || i <= 4){
 		        Layout.drawSubTitel("Discard cards");
 		        Layout.drawMenuNumericList("Your Cards", currentPickedHand.getPile());
 		        Layout.drawMenuNoList("selected cards", currentSelectedHand.getPile());
 		        
 		        handleSelectedCard();
 		        pressedKey = Actions.askFor("Press any key to continue | press E to exit");
+		        i++;
 		    	}
 			break;
 		case "Workshop":
+			Layout.drawSubTitel("Choose a card costing up to 4");
+			Layout.drawMenuPurchasableCards("Choose one card costing up to 4", gameEngine.getBoard().getPiles(), 4);
+			//Layout.drawBoard("Choose one card costing up to 4", gameEngine.getBoard().getPiles()); --> Resultaat NullPointerException
+			System.out.println("Instanced Coins: " + currentTurnSegment.getInstancedCoin()); //--> Resultaat 0
+			//System.out.println("Instanced Coins: " + gameEngine.getCurrentTurnSegment().getInstancedCoin());
+			handleGainInstancedCard();
+			//System.out.println("Instanced Coins: " + currentTurnSegment.getInstancedCoin());
+			Actions.pressEnter();
 			break;
 		case "Bureaucrat":
 			break;
@@ -184,6 +194,12 @@ public class GameConsole {
 		case "Library":
 			break;
 		case "Mine":
+			Layout.drawSubTitel("Pick a Treasure card");
+			Layout.drawMenuNumericList("Your Cards", currentPickedHand.getPile());
+			Layout.drawMenuNoList("selected cards", currentSelectedHand.getPile());
+			
+			handleSelectedCard();
+			Actions.pressEnter();
 			break;
 		case "Witch":
 			break;
@@ -271,6 +287,11 @@ public class GameConsole {
     	int option = Integer.parseInt(Actions.askFor("What card would you like to select"));
     	currentSelectedHand.addFrom(currentPickedHand.getFromIndex(option - 1),currentPickedHand);
     }
+    
+    public void handleGainInstancedCard() {
+    	int option = Integer.parseInt(Actions.askFor("What card would you like to select"));
+    	gameEngine.buyInstancedCard(option);
+    }
 
     public void handleBuyCard() {
         printAllCards();
@@ -323,6 +344,7 @@ public class GameConsole {
         int amount = Integer.parseInt(Actions.askFor("How many players"));
         gameEngine.initAmountPlayers(amount);
         setPlayerNames(amount);
+        gameEngine.init();
         
         Layout.drawSubTitel("Kingdom Set");
         Layout.drawMenuAlphabeticList("Kingdom Sets", "Custom set", "Random", "First game", "Big Money", "Interaction", "Size Distortion", "Village Square");
