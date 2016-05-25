@@ -5,6 +5,8 @@
  */
 package dominion;
 
+import org.json.JSONObject;
+
 /**
  *
  * @author Quint
@@ -17,6 +19,7 @@ public class TurnSegment {
     private int instancedCurrency; //Bijvoorbeeld; "WORKSHOP: Gain a card costing up to 4coins"
     private int action;
     private int buy;
+    private JSONObject obj;
 
     public TurnSegment() {
         this.currency = 0;
@@ -82,4 +85,13 @@ public class TurnSegment {
     public int getBuy() {
         return buy;
     }
+
+	public void setData(JSONObject obj) {
+		this.obj = obj;
+		
+	}
+	public JSONObject getData() {
+		return obj;
+		
+	}
 }

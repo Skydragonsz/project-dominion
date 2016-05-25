@@ -111,6 +111,13 @@ public class DominionServlet extends HttpServlet {
 
 			response.getWriter().write(json);
 			break;
+//		case "getSelectableHand":
+//			List<String> selectable = new ArrayList<>();
+//			list = gameEngine.getCurrentPlayer().getPickedHand().getCardsName();
+//			String selectableJson = new Gson().toJson(selectable);
+//
+//			response.getWriter().write(selectableJson);
+//			break;	
 		case "getPlayingField":
 			List<String> playingFieldList = new ArrayList<>();
 			playingFieldList = gameEngine.getCurrentPlayer().getPlayingField().getCardsName();
@@ -156,6 +163,7 @@ public class DominionServlet extends HttpServlet {
 		// ACTIONS
 		case "playCard":
 			String card = request.getParameter("card");
+
 			String[] effect = request.getParameterValues("effect[]");
 
 			Pile selectedHand = new Pile();
@@ -170,6 +178,7 @@ public class DominionServlet extends HttpServlet {
 //			System.out.println(obj.get("player1"));
 //			System.out.println(request.getQueryString());
 			break;
+
 		case "buyCard":
 			String buyCard = request.getParameter("card");
 			gameEngine.buyCard(gameEngine.CallCard(buyCard));
