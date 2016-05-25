@@ -137,7 +137,10 @@ function cleanLayoutBoard() {
 $(document).on('click', '.hand', function () {
     var id = $(this).attr('id').toString();
     showSpecialActionLayout(id); /*changed hasSpecialAction*/
-
+	var JSONobj = {};
+	JSONobj["state"] = "None";
+	var obj = JSON.stringify(JSONobj);
+	
         $.ajax({
             cache: false,
             dataType: "text",
@@ -145,7 +148,8 @@ $(document).on('click', '.hand', function () {
             type: "get",
             data: {
                 operation: 'playCard',
-                card: id
+                card: id,
+                effect: obj
             }
 
         }).done(function (data) {
@@ -261,16 +265,15 @@ function isGameOver(){
 //1. SHOW IT TO THE USER.
 function showSpecialActionLayout(cardName) {
     $("#selectedCardButton").removeClass();
-    $('#selectedCardButton').addClass(cardName);
     switch (cardName) {
         case "Cellar":
-            showSelectableCards("Discard any number of cards.");
+            showSelectableCards("Discard any number of cards.",cardName);
             break;
         case "Chapel":
-            showSelectableCards("Trash up to 4 cards.");
+            showSelectableCards("Trash up to 4 cards."),cardName;
             break;
         case "Workshop":
-            showSelectableBoard("Buy a card that cost up to 4 coins.");
+            showSelectableBoard("Buy a card that cost up to 4 coins.",cardName);
             break;
         case "Bureaucrat":
             //fill DIV with section that equal the amount of all other players. One section = one player.
@@ -289,10 +292,10 @@ function showSpecialActionLayout(cardName) {
 
             break;
         case "Moneylender":
-            showSelectableCards("Trash 1 copper card.");
+            showSelectableCards("Trash 1 copper card.",cardName);
             break;
         case "Remodel":
-            showSelectableCards("Trash 1 card.");
+            showSelectableCards("Trash 1 card.",cardName);
             break;
         case "Spy":
             //fill DIV with section that equal the amount of all players. One section = one player.
@@ -308,13 +311,13 @@ function showSpecialActionLayout(cardName) {
 //            showOneCardFromPlayer(); //MET 2
             break;
         case "Throne Room":
-            showSelectableCards("Select 1 action card.");
+            showSelectableCards("Select 1 action card.",cardName);
             break;
         case "Library":
             //later
             break;
         case "Mine":
-            showSelectableCards("Trash 1 treasure card.");
+            showSelectableCards("Trash 1 treasure card.",cardName);
             break;
         case "Adventurer":
             //later
@@ -326,16 +329,16 @@ function showSpecialActionLayout(cardName) {
 }
 
 //1,5. SHOW IT -> CLICK IT -> GET IT
-function showSelectableCards(text) {
+function showSelectableCards(text, cardName) {
     $("#SelectCards").removeClass("invisible");
     //$("#specialActionText").html(text);
     refreshCurrentPlayer();
-    $("#SelectCards").append('<div class="'+ "player " + playerCounter +'"></div>');
+    $("#SelectCards").append('<div id="' + cardName + '" class="'+ "player" + '"></div>');
     $.get("DominionServlet?operation=getHand", function (responseJson) {
         $.each(responseJson, function (index, item) {
-            $(".player" + "." + playerCounter).append('<div id="' + item + '" class="selectable card" style="position: relative; background-image: url(../html-frontend/assets/media/Base%20Deck/' + item.toLowerCase() + '.jpg)"></div>');
+            $(".player").append('<div id="' + item + '" class="selectable card" style="position: relative; background-image: url(../html-frontend/assets/media/Base%20Deck/' + item.toLowerCase() + '.jpg)"></div>');
         });
-        $(".player" + "." + playerCounter).append('<a id="selectedCardButton" class="button special" href="#">Ok</a>');
+        $(".player").append('<a id="selectedCardButton" class="button special" href="#">Ok</a>');
     });
 }
 
@@ -381,10 +384,8 @@ function getSelectedCards() {
 
 // 2. SEND IT.
 $(document).on('click', '#selectedCardButton', function () {
-    var cardName = $('#selectedCardButton').attr("class");
+    var cardName = $('.player').attr("id");
     var selectedCards = getSelectedCards();
-    /*See #2,5*/
-//    if (checkIfSelectedCorrectly(cardName, selectedCards)) {
         $.ajax({
             cache: false,
             dataType: "json",
@@ -393,13 +394,14 @@ $(document).on('click', '#selectedCardButton', function () {
             contentType: "application/json",
             data: {
                 operation: 'playCard',
-                card: "Cellar",
+                card: cardName,
                 effect: selectedCards
             }
 
         }).done(function (data) {
             var obj = JSON.stringify(data);
             cleanLayoutBoard();
+            $("#SelectCards").children().remove();
             //callBoard();
             callPlayingField();
             callPlayerInfo();
@@ -410,85 +412,10 @@ $(document).on('click', '#selectedCardButton', function () {
 //    } else {
 //        alert("You selected the wrong card(s), try again.")
 //    }
+        $("#SelectCards").addClass("invisible");
+        $("#SelectCards").children().remove();
 });
 
-
-//2,5. CHECK IT.
-function checkIfSelectedCorrectly(cardName, selectedCards) {
-    var information = requestSpecialActionInformation(cardName);
-    switch (cardName) {
-        case "Chapel":
-            return selectedCards.length <= 4;
-        case "Workshop":
-            //fill DIV with board piles.
-            //Buy a card that cost up to 4 coins.
-            if (information = false){
-
-            }
-            return selectedCards;
-        case "Bureaucrat":
-            //fill DIV with section that equal the amount of all other players. One section = one player.
-            //Each section will display a victory card of said player if he has one, if a player doesn't hava a victory card
-            //in his hand, show text "no victory card"
-            //  -------------------------------
-            //  | Player2 | Player3 | Player4 |
-            //  | estate  | no vict |province |
-            //  -------------------------------
-//            showOneCardFromPlayer();
-            break;
-        case "Militia":
-            //fill DIV with section that equal the amount of all other players. One section = one player.
-            //Each section will display the hand of said player.
-            //Said player can discard down to 3 cards.
-
-            break;
-        case "Moneylender":
-            console.log(selectedCards);
-            return selectedCards.length == 1 && selectedCards == "Copper";
-        case "Remodel":
-            return selectedCards.length == 1;
-            break;
-        case "Spy":
-            //fill DIV with section that equal the amount of all players. One section = one player.
-            //Each section will display the top card of said player his deck.
-            //You choice to put it back or discard it.
-//            showOneCardFromPlayer();
-            break;
-        case "Thief":
-            //fill DIV with section that equal the amount of all other players. One section = one player.
-            //Each section will display the top 2 cards of said player his deck.
-            //Said player picks a treasure card he wants to trash (if he gets the option to).
-            //You choice to take or not take these trashed cards.
-//            showOneCardFromPlayer(); //MET 2
-            break;
-        case "Throne Room":
-            return selectedCards.length == 1 && selectedCards == "ALL ACTION CARDS";
-            break;
-        case "Library":
-            //later
-            break;
-        case "Mine":
-            return selectedCards.length == 1 && selectedCards == "ALL TREASURE CARDS";
-        case "Adventurer":
-            //later
-            break;
-
-        default:
-            return "N/A";
-    }
-
-}
-function requestSpecialActionInformation(){
-    console.log("specialactsdfdsf");
-    var variable;
-    $.get("DominionServlet?operation=getSpecialAction", function (responseJson) {
-        console.log("specialact" +  responseJson.player);
-        variable = responseJson.player0;
-        
-    });
-    console.log(variable);
-
-}
 
 function refreshCurrentPlayer(){
     $.get("DominionServlet?operation=getCurrentPlayer", function (responseJson) {

@@ -108,6 +108,13 @@ public class DominionServlet extends HttpServlet {
 
 			response.getWriter().write(json);
 			break;
+//		case "getSelectableHand":
+//			List<String> selectable = new ArrayList<>();
+//			list = gameEngine.getCurrentPlayer().getPickedHand().getCardsName();
+//			String selectableJson = new Gson().toJson(selectable);
+//
+//			response.getWriter().write(selectableJson);
+//			break;	
 		case "getPlayingField":
 			List<String> playingFieldList = new ArrayList<>();
 			playingFieldList = gameEngine.getCurrentPlayer().getPlayingField().getCardsName();
@@ -152,24 +159,32 @@ public class DominionServlet extends HttpServlet {
 			break;
 		// ACTIONS
 		case "playCard":
+			String card = request.getParameter("card");
+			Pile selectedHand = new Pile();
+			JSONObject obj = new JSONObject(request.getParameter("effect"));
+			gameEngine.getCurrentTurnSegment().setData(obj);
+			gameEngine.playCard(card);
+
+			System.out.println(obj);
+			//System.out.println(request.getQueryString());
+			break;
 //			String card = request.getParameter("card");
 //			String[] effect = request.getParameterValues("effect[]");
-//
 //			Pile selectedHand = new Pile();
 //			if (effect != null) {
 //				for (String cardName : effect) {
-//					selectedHand.add(GameEngine.CallCard(cardName));
+//					selectedHand.add(gameEngine.CallCard(cardName));
 //				}
 //			}
 //			gameEngine.playCard(card);
-			JSONObject obj = new JSONObject(request.getParameter("effect"));
-
-			System.out.println(obj.get("player1"));
-			System.out.println(request.getQueryString());
-			break;
+////			JSONObject obj = new JSONObject(request.getParameter("effect"));
+////
+////			System.out.println(obj.get("player1"));
+////			System.out.println(request.getQueryString());
+//			break;
 		case "buyCard":
 			String buyCard = request.getParameter("card");
-			gameEngine.buyCard(GameEngine.CallCard(buyCard));
+			gameEngine.buyCard(gameEngine.CallCard(buyCard));
 			break;
 		case "buyInstancedCard":
 			String buyInstancedCard = request.getParameter("card");
@@ -185,7 +200,7 @@ public class DominionServlet extends HttpServlet {
 		// EXTRA
 		case "spawnCard":
 			String spawnCard = request.getParameter("card");
-			gameEngine.getCurrentPlayer().getHand().add(GameEngine.CallCard(spawnCard));
+			gameEngine.getCurrentPlayer().getHand().add(gameEngine.CallCard(spawnCard));
 			break;
 		case "information":
 			writer.append("Hand " + gameEngine.getCurrentPlayer().getHand() + "\n" + "Deck "

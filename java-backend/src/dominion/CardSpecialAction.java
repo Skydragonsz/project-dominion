@@ -2,6 +2,8 @@ package dominion;
 
 import java.util.ArrayList;
 
+import org.json.JSONObject;
+
 public class CardSpecialAction  {
 
 	private static Player stPlayer;
@@ -72,7 +74,9 @@ public class CardSpecialAction  {
 	}
 
 	public static void playCellar() {
-		int i = stPlayer.getSelectedHand().getAmount();
+		
+		int i = 1;
+		JSONObject obj = stCurrentTurnSegment.getData();
 		for (Card card : stPlayer.getSelectedHand().getPile()) {
 			stPlayer.getDiscardPile().addFrom(card, stPlayer.getHand());
 		}
