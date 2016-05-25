@@ -209,9 +209,9 @@ public class DominionServlet extends HttpServlet {
 					+ gameEngine.CallCard("Copper"));
 			break;
 		case "emptyPiles":
-			gameEngine.getBoard().getFromIndex(12).remove(gameEngine.CallCard("Militia"));
-			gameEngine.getBoard().getFromIndex(13).remove(gameEngine.CallCard("Remodel"));
-			gameEngine.getBoard().getFromIndex(14).remove(gameEngine.CallCard("Smithy"));
+			gameEngine.getBoard().getFromIndex(12).remove(gameEngine.CallCard(8));
+			gameEngine.getBoard().getFromIndex(13).remove(gameEngine.CallCard(9));
+			gameEngine.getBoard().getFromIndex(14).remove(gameEngine.CallCard(10));
 			break;
 		case "emptyProvince":
 			gameEngine.getBoard().getFromIndex(6).remove(gameEngine.CallCard("Province"));

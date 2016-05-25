@@ -26,10 +26,10 @@ public class SaveGameTester {
 		
 
     	
-    	ge.initPlayer(1, "testPlayerOne");
-    	ge.initPlayer(2, "testPlayerTwo");
-    	ge.initPlayer(3, "testPlayerThree");
-    	ge.initPlayer(4, "testPlayerFour");
+    	ge.initPlayer(1, "Quinten");
+    	ge.initPlayer(2, "Arthur");
+    	ge.initPlayer(3, "Coene");
+    	ge.initPlayer(4, "Tim");
     	ge.init();
     	ge.initCards();
    
@@ -37,17 +37,12 @@ public class SaveGameTester {
 		
 	}
 	
-	@Test
-	public void randomTester(){
-		
-		
-	}
 	
 	@Test
 	public void testLoad(){
 		
 
-		sg.load(ge, 22);
+		sg.load(ge, sg.getLastGameID());
 		System.out.println("BOARD");
 		
 		for(int i = 0;i < ge.getBoard().getPiles().size();i++){
