@@ -227,7 +227,7 @@ public class GameEngine {
 public void buyCard(Card card){
 	if(getCurrentTurnSegment().getBuy() > 0){
 		for (Pile pile : getBoard().getPiles()) {
-			if (card.getName().equals(pile.getFromIndex(0).getName())) {
+			if (!pile.isPileEmpty() && card.getName().equals(pile.getFromIndex(0).getName())) {
 	
 		        if (getCurrentTurnSegment().getCoin() >= card.getCost()){
 		        	getCurrentPlayer().getDiscardPile().addAmountOfCardsFrom(1, pile);
@@ -257,6 +257,9 @@ public void buyCard(Card card){
 		saveGame.save(this,name);	
 	}
 	
+	public boolean isGameOver(){
+		return board.isGameEnding();
+	}
 
 
     /* GETTERS */

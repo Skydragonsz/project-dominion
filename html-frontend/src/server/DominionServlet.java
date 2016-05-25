@@ -77,21 +77,24 @@ public class DominionServlet extends HttpServlet {
 			}
 			gameEngine.init();
 			break;
-		case "load":
-			
+		case "load":			
 			int gameID = Integer.parseInt(request.getParameter("gameID"));
-			
 			gameEngine.loadGame(gameID);
-			
-
-
 			break;
+		case "getGameState":
+			response.getWriter().write("{\"gameOver\" : " + gameEngine.isGameOver() + "}");
 		// GETTERS
+			break;
 		case "getBoard":
 			List<String> board = new ArrayList<>();
 
 			for (Pile pile : gameEngine.getBoard().getPiles()) {
-				board.add(pile.getFromIndex(0).getName() + ";" + pile.getAmount());
+				if (pile.isPileEmpty()){
+					board.add(pile.getName() + ";0");
+					
+				} else {
+					board.add(pile.getFromIndex(0).getName() + ";" + pile.getAmount());
+				}
 			}
 			String jsonBoard = new Gson().toJson(board);
 
@@ -184,6 +187,13 @@ public class DominionServlet extends HttpServlet {
 					+ gameEngine.getCurrentPlayer().getDiscardPile() + "\n" + gameEngine.CallCard("Copper") + " "
 					+ gameEngine.CallCard("Copper"));
 			break;
+		case "emptyPiles":
+			gameEngine.getBoard().getFromIndex(12).remove(gameEngine.CallCard("Militia"));
+			gameEngine.getBoard().getFromIndex(13).remove(gameEngine.CallCard("Remodel"));
+			gameEngine.getBoard().getFromIndex(14).remove(gameEngine.CallCard("Smithy"));
+			break;
+		case "emptyProvince":
+			gameEngine.getBoard().getFromIndex(6).remove(gameEngine.CallCard("Province"));
 		default:
 			writer.append("error: Something went wrong :(");
 			break;
