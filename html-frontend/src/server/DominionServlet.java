@@ -68,20 +68,34 @@ public class DominionServlet extends HttpServlet {
 		switch (operation) {
 		// INIT
 		case "initialize":
-			gameEngine.initCards(Integer.parseInt(request.getParameter("set"))); 
+			
 			int amount = Integer.parseInt(request.getParameter("playerAmount"));
 			gameEngine.initAmountPlayers(amount);
 
+			gameEngine.initCards(Integer.parseInt(request.getParameter("set")));
+			
 			for (int i = 1; i <= amount; i++) {
 				gameEngine.initPlayer(i, request.getParameter("name" + i));
 			}
+			 
+			
 			gameEngine.init();
+			
+			
+			
 			break;
 		case "load":
 			
-			int gameID = Integer.parseInt(request.getParameter("gameID"));
 			
-			gameEngine.loadGame(gameID);
+			int gameID = Integer.parseInt(request.getParameter("saves"));
+			System.out.println(Integer.parseInt(request.getParameter("saves")));
+			if(gameID == 0){
+				operation = "initialize";
+			}else{
+				gameEngine.loadGame(gameID);
+				
+			}
+			
 			
 
 
@@ -152,18 +166,18 @@ public class DominionServlet extends HttpServlet {
 			Pile selectedHand = new Pile();
 			if (effect != null) {
 				for (String cardName : effect) {
-					selectedHand.add(GameEngine.CallCard(cardName));
+					selectedHand.add(gameEngine.CallCard(cardName));
 				}
 			}
 			gameEngine.playCard(card);
 			break;
 		case "buyCard":
 			String buyCard = request.getParameter("card");
-			gameEngine.buyCard(GameEngine.CallCard(buyCard));
+			gameEngine.buyCard(gameEngine.CallCard(buyCard));
 			break;
 		case "buyInstancedCard":
 			String buyInstancedCard = request.getParameter("card");
-			//gameEngine.buyInstancedCard(GameEngine.CallCard(buyInstancedCard));
+			//gameEngine.buyInstancedCard(gameEngine.CallCard(buyInstancedCard));
 			break;	
 		case "nextSegment":
 			gameEngine.CleanedUp();
@@ -175,7 +189,7 @@ public class DominionServlet extends HttpServlet {
 		// EXTRA
 		case "spawnCard":
 			String spawnCard = request.getParameter("card");
-			gameEngine.getCurrentPlayer().getHand().add(GameEngine.CallCard(spawnCard));
+			gameEngine.getCurrentPlayer().getHand().add(gameEngine.CallCard(spawnCard));
 			break;
 		case "information":
 			writer.append("Hand " + gameEngine.getCurrentPlayer().getHand() + "\n" + "Deck "

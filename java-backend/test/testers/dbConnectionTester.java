@@ -73,13 +73,11 @@ public class dbConnectionTester {
     	DataConnection dbCon = new DataConnection();
     	String sql;
     	
-//    	sql = "INSERT INTO account(account.name,pass)";
-//    	sql += " VALUES ('test','test')";
-    	
-    	//sql = "SELECT * FROM card";
     	sql = "SELECT gameID FROM game ORDER BY gameID DESC LIMIT 1";
     	
-    	System.out.println(dbCon.executeSelectSQL(sql));
+    	System.out.println("GameID: " + dbCon.executeSelectSQL(sql));
+    	
+    	
     }
     
       

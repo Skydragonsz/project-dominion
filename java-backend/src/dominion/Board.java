@@ -12,6 +12,10 @@ public class Board {
 
     private ArrayList<Pile> piles = new ArrayList<>();
     private Pile province;
+    
+    public Board(){
+    	
+    }
    
 	// 2 Players:
 	// 30 Gold
@@ -34,7 +38,6 @@ public class Board {
         			switch(card.getName()){
         			case "Copper":
         				this.piles.add(new Pile(card, (60 - (7 * amount )))); //GameEngine.getMaxPlayers()  //2 moet vervangen worden
-        				System.out.println("p:" + amount);
         				break;
         			case "Silver":
         				this.piles.add(new Pile(card, 40)); 

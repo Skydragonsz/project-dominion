@@ -23,11 +23,16 @@ public class SaveGameTester {
 	
 	@Test
 	public void testSave(){
-    	ge.init();
+		
+
+    	
     	ge.initPlayer(1, "testPlayerOne");
     	ge.initPlayer(2, "testPlayerTwo");
     	ge.initPlayer(3, "testPlayerThree");
     	ge.initPlayer(4, "testPlayerFour");
+    	ge.init();
+    	ge.initCards();
+   
 		sg.save(ge);
 		
 	}
@@ -42,7 +47,7 @@ public class SaveGameTester {
 	public void testLoad(){
 		
 
-		sg.load(ge, sg.getLastGameID());
+		sg.load(ge, 22);
 		System.out.println("BOARD");
 		
 		for(int i = 0;i < ge.getBoard().getPiles().size();i++){
