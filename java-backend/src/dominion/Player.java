@@ -12,7 +12,6 @@ public class Player {
     private Pile discardPile = new Pile();
     private Pile playingField = new Pile();
 
-    private boolean HasReaction;
 
     /* CONSTRUCTOR */
     public Player() {

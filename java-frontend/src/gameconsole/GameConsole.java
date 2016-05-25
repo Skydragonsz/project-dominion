@@ -130,6 +130,7 @@ public class GameConsole {
     	
     	switch (card.getName()) {
 		case "Cellar":
+			//Works
 	    	while (!"E".equals(pressedKey)){
 	        Layout.drawSubTitel("Select cards");
 	        Layout.drawMenuNumericList("Your Cards", currentPickedHand.getPile());
@@ -140,6 +141,7 @@ public class GameConsole {
 	    	}
 			break;
 		case "Chapel":
+			//Works
 			while (!"E".equals(pressedKey)){
 		        Layout.drawSubTitel("Discard cards");
 		        Layout.drawMenuNumericList("Your Cards", currentPickedHand.getPile());
@@ -150,16 +152,18 @@ public class GameConsole {
 		    	}
 			break;
 		case "Workshop":
+			//InstancedCoins not working
 			Layout.drawSubTitel("Choose a card costing up to 4");
 			Layout.drawMenuPurchasableCards("Choose one card costing up to 4", gameEngine.getBoard().getPiles(), 4);
-			//Layout.drawBoard("Choose one card costing up to 4", gameEngine.getBoard().getPiles()); --> Resultaat NullPointerException
+			//Layout.drawBoard("Choose one card costing up to 4", gameEngine.getBoard().getPiles());
 			System.out.println("Instanced Coins: " + currentTurnSegment.getInstancedCoin()); //--> Resultaat 0
-			//System.out.println("Instanced Coins: " + gameEngine.getCurrentTurnSegment().getInstancedCoin());
+			//System.out.println("Instanced Coins: " + gameEngine.getCurrentTurnSegment().getInstancedCoin()); --> Resultaat NullPointerException
 			handleGainInstancedCard();
 			//System.out.println("Instanced Coins: " + currentTurnSegment.getInstancedCoin());
 			Actions.pressEnter();
 			break;
 		case "Bureaucrat":
+			//Works
 			Layout.drawSubTitel("Other Players' Victory Cards");
 			for (int i = 1; i < gameEngine.getPlayerList().size(); i ++) {
 				Layout.drawMenuNoList("Hand Player " + gameEngine.getPlayerList().get(i).getName()
@@ -167,14 +171,28 @@ public class GameConsole {
 			}
 			break;
 		case "Feast":
+			//W.I.P.
 			Layout.drawSubTitel("Choose a card costing up to 5");
-			Layout.drawMenuPurchasableCards("Choose one card costing up to 4", gameEngine.getBoard().getPiles(), 5);
+			Layout.drawMenuPurchasableCards("Choose one card costing up to 5", gameEngine.getBoard().getPiles(), 5);
 			handleGainInstancedCard();
 			Actions.pressEnter();
 			break;
 		case "Militia":
+			//W.I.P.
+			Layout.drawSubTitel("Other Players' Hand");			
+			for (int i = 1; i < gameEngine.getPlayerList().size(); i++){
+				while (!"E".equals(pressedKey)){
+					Layout.drawMenuNumericList("Hand Player " + gameEngine.getPlayerList().get(i).getName()
+							, gameEngine.getPlayerList().get(i).getHand().getPile());
+					Layout.drawMenuNoList("selected cards Player " + gameEngine.getPlayerList().get(i).getName()
+							, gameEngine.getPlayerList().get(i).getSelectedHand().getPile());
+					handleSelectedCard();
+					pressedKey = Actions.askFor("Press any key to continue | press E to exit");
+				}
+			}
 			break;
 		case "Moneylender":
+			//InstancedCoin Issue
 		        Layout.drawSubTitel("Pick a card");
 		        Layout.drawMenuNumericList("Your Cards", currentPickedHand.getPile());
 		        Layout.drawMenuNoList("selected cards", currentSelectedHand.getPile());
@@ -183,6 +201,7 @@ public class GameConsole {
 		        Actions.pressEnter();
 			break;
 		case "Remodel":
+			//InstancedCoin Issue
 	        Layout.drawSubTitel("Pick a card");
 	        Layout.drawMenuNumericList("Your Cards", currentPickedHand.getPile());
 	        Layout.drawMenuNoList("selected cards", currentSelectedHand.getPile());
@@ -191,6 +210,7 @@ public class GameConsole {
 	        Actions.pressEnter();
 			break;
 		case "Spy":
+			//Hardcoded part works, option NO W.I.P.
 			Layout.drawSubTitel("Each Players' Top Card");
 			for (int i = 0; i < gameEngine.getPlayerList().size(); i ++) {
 				Layout.drawMenuNoList("Hand Player " + gameEngine.getPlayerList().get(i).getName()
@@ -199,8 +219,10 @@ public class GameConsole {
 				switch(option){
 				case "Y":
 					//Execute Card
+					//wordt standaard nu uitgevoerd (hardcoded choice = true)
 				break;
 				case "N":
+					
 					//Next action
 					break;
 				}
@@ -208,24 +230,52 @@ public class GameConsole {
 			}
 			break;
 		case "Thief":
+			//W.I.P.
+			//Show top two cards of each OTHER player
+			Layout.drawSubTitel("Top two cards of each other players' deck");
+			for (int i = 1; i < gameEngine.getPlayerList().size(); i ++) {
+				Layout.drawMenuNoList("Top Cards Player " + gameEngine.getPlayerList().get(i).getName()
+						+ ": ", gameEngine.getPlayerList().get(i).getDeck().getFromIndex(0).getName()
+						, gameEngine.getPlayerList().get(i).getDeck().getFromIndex(1).getName());
+			}
+			//If treasure cards are shown, choose one to trash
+			
+			//Choose which of the trashed cards you want to gain
 			break;
 		case "Throne Room":
+			//Back-end bug
+			 Layout.drawSubTitel("Choose a card to play twice");
+		        Layout.drawMenuNumericList("Your Cards", currentPickedHand.getPile());
+		        Layout.drawMenuNoList("selected card", currentSelectedHand.getPile());
+		        
+		        handleSelectedCard();
+		        pressedKey = Actions.askFor("Press any key to continue");
 			break;
 		case "Council Room":
+			//No special layout needed?
 			break;
 		case "Library":
+			//W.I.P.
 			break;
 		case "Mine":
+			//Show selected card from hand into Selected Cards area
+			while (!"E".equals(pressedKey)){
 			Layout.drawSubTitel("Pick a Treasure card");
 			Layout.drawMenuNumericList("Your Cards", currentPickedHand.getPile());
 			Layout.drawMenuNoList("selected cards", currentSelectedHand.getPile());
 			
 			handleSelectedCard();
-			Actions.pressEnter();
+			pressedKey = Actions.askFor("Press any key to continue | press E to exit");
+			}
+			//Show purchasable cards
+			
+			//handleGainInstancedCard();
 			break;
 		case "Witch":
+			//No special layout needed?
 			break;
 		case "Adventurer":
+			//W.I.P.
 			break;
 		default:			
             System.out.print("Incorrect or unknown letter, please try again!\n");

@@ -1,6 +1,5 @@
 // ON LOAD
 $(document).ready(function () {
-	loadGame();
     callBoard();
     callHand();
 //    calculateDegreesCardsInHand();
@@ -14,9 +13,7 @@ $("#init").on("click", function () {
     initializeGame()
 });
 
-$("#load").on("click", function () {
-    loadGame()
-});
+
 
 
 
@@ -43,22 +40,7 @@ function initializeGame() {
     });
 }
 
-function loadGame() {
-    $.ajax({
-        cache: false,
-        dataType: "text",
-        url: "/html-frontend/DominionServlet",
-        type: "get",
-        data: {
-            operation: 'load',
-            gameID: $("#saves :selected").val()
-        }
 
-    }).done(function (data) {
-    	console.log("test" + data);
-        var obj = JSON.parse(data);
-    });
-}
 
 // CALL FROM SERVLET
 /* Board */

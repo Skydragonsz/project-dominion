@@ -43,7 +43,7 @@ public class Pile {
     }
 
     public ArrayList<String> getCardsName() {
-        ArrayList tempArrayList = new ArrayList<>();
+        ArrayList<String> tempArrayList = new ArrayList<String>();
         if(!(this.pile.size() ==0)){
 	        for (int i = 0; i < pile.size(); i++) {
 	            tempArrayList.add(this.pile.get(i).getName().toString());

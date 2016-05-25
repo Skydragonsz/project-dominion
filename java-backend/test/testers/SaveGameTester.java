@@ -23,20 +23,20 @@ public class SaveGameTester {
 	
 	@Test
 	public void testSave(){
+		
+
+    	
+    	ge.initPlayer(1, "Quinten");
+    	ge.initPlayer(2, "Arthur");
+    	ge.initPlayer(3, "Coene");
+    	ge.initPlayer(4, "Tim");
     	ge.init();
-    	ge.initPlayer(1, "testPlayerOne");
-    	ge.initPlayer(2, "testPlayerTwo");
-    	ge.initPlayer(3, "testPlayerThree");
-    	ge.initPlayer(4, "testPlayerFour");
+    	ge.initCards();
+   
 		sg.save(ge);
 		
 	}
 	
-	@Test
-	public void randomTester(){
-		
-		
-	}
 	
 	@Test
 	public void testLoad(){

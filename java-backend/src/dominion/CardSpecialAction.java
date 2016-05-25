@@ -106,7 +106,7 @@ public class CardSpecialAction  {
 
 	public static void playBureaucrat() {
 		//Gain a silver card, put it on top of your deck
-		stPlayer.getDeck().add(GameEngine.CallCard("Silver"));
+		stgameEngine.getCurrentPlayer().getDeck().add(stgameEngine.CallCard("Silver"));
 		//Each other player reveals a Victory card from his hand and puts it on his deck (or reveals a hand with no Victory cards).
 		for (int i = 0; i < stOtherPlayerList.size(); i++) {
 			if (!stOtherPlayerList.get(i).getHand().checkForReactionCard()) {
@@ -123,7 +123,7 @@ public class CardSpecialAction  {
 	}
 
 	public static void playFeast() {
-		stPlayer.getPlayingField().remove(GameEngine.CallCard("Feast"));
+		stPlayer.getPlayingField().remove(stgameEngine.CallCard("Feast"));
 		stCurrentTurnSegment.addInstancedCoin(5);
 	}
 
@@ -184,7 +184,7 @@ public class CardSpecialAction  {
 		// one of them that you choose. You may gain any or all (?) of these
 		// trashed cards. They discard the other revealed cards.
 		
-		ArrayList<Card> topTwoCards = new ArrayList();
+		ArrayList<Card> topTwoCards = new ArrayList<Card>();
 		boolean choice = true;
 		for (int i = 0; i < stOtherPlayerList.size(); i++) {
 			if (!stOtherPlayerList.get(i).getHand().checkForReactionCard()) {
@@ -275,7 +275,7 @@ public class CardSpecialAction  {
 	public static void playWitch() {
 		for (int i = 0; i < stOtherPlayerList.size(); i++) {
 			if (!stOtherPlayerList.get(i).getHand().checkForReactionCard()) {
-				stOtherPlayerList.get(i).getDiscardPile().add(GameEngine.CallCard("Curse"));
+				stOtherPlayerList.get(i).getDiscardPile().add(stgameEngine.CallCard("Curse"));
 				// Add Curse card DECK
 			}
 		}

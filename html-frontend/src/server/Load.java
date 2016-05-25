@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -62,13 +61,19 @@ public class Load extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 		
-		DataConnection dataConnection = (DataConnection) request.getServletContext().getAttribute("dataConnection");
-		if (dataConnection == null) {
-			dataConnection = new DataConnection();
-			request.getServletContext().setAttribute("dataConnection", dataConnection);
+        RequestDispatcher rs = request.getRequestDispatcher("game.html");
+        rs.forward(request, response);
+		
+		request.getParameter("saves");
+		
+		
+		GameEngine gameEngine = (GameEngine) request.getServletContext().getAttribute("gameEngine");
+		if (gameEngine == null) {
+			gameEngine = new GameEngine();
+			request.getServletContext().setAttribute("gameEngine", gameEngine);
 		}
 		
-		
+		gameEngine.loadGame(Integer.parseInt(request.getParameter("saves")));
 		
 		
 		

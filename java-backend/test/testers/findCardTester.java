@@ -17,17 +17,18 @@ public class findCardTester {
 
     private GameEngine gameEngine = new GameEngine();
     private Player firstPlayer;
-    private ArrayList secondPlayer;
+    private ArrayList<Player> otherPlayers = new ArrayList<Player>();
     
     public findCardTester() {
-    	gameEngine.initCards();
+    	
     	gameEngine.reset();
     	gameEngine.initAmountPlayers(2);
     	gameEngine.initPlayer(1, "testPlayerOne");
     	gameEngine.initPlayer(2, "testPlayerTwo");
+    	gameEngine.initCards(2);
     	
     	this.firstPlayer = gameEngine.getPlayer(1);
-    	this.secondPlayer = gameEngine.getOtherPlayersList(firstPlayer);
+    	this.otherPlayers = gameEngine.getOtherPlayersList(firstPlayer);
     }
 	
 	@BeforeClass

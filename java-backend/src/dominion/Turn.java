@@ -28,6 +28,10 @@ public class Turn {
             turnSegmentNumber++;
         }
     }
+    
+    public void setCurrentTurnNumber(int number){
+    	turnNumber = number;
+    }
 
     /* GETTERS */
     public int getCurrentTurnNumber() {

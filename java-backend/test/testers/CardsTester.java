@@ -46,10 +46,10 @@ public class CardsTester {
     	this.firstPlayer = gameEngine.getPlayer(1);
     	this.secondPlayer = gameEngine.getOtherPlayersList(firstPlayer);
     	
-        witch = GameEngine.CallCard("Witch");
-        copper = GameEngine.CallCard("Copper");
-        province = GameEngine.CallCard("Province");
-        duchy = GameEngine.CallCard("Duchy");
+        witch = gameEngine.CallCard("Witch");
+        copper = gameEngine.CallCard("Copper");
+        province = gameEngine.CallCard("Province");
+        duchy = gameEngine.CallCard("Duchy");
     }
 
     @BeforeClass
@@ -115,7 +115,7 @@ public class CardsTester {
         System.out.println("Player 1 - Hand: " + firstPlayer.getHand().getCardsName());
         //Adventurer card will add two copper (ID = 1) into the hand of the player.
         //What the result should be.
-        ArrayList resultHandArray =  new ArrayList(firstPlayer.getHand().getCardsName());       
+        ArrayList<String> resultHandArray =  new ArrayList<String>(firstPlayer.getHand().getCardsName());       
         resultHandArray.add("Copper");
         resultHandArray.add("Copper");
 
@@ -131,10 +131,10 @@ public class CardsTester {
     
     @Test
     public void testChancellor() {
-    	firstPlayer.getDeck().add(GameEngine.CallCard("Chancellor"));
-    	firstPlayer.getHand().addFrom(GameEngine.CallCard("Chancellor"), firstPlayer.getDeck());
+    	firstPlayer.getDeck().add(gameEngine.CallCard("Chancellor"));
+    	firstPlayer.getHand().addFrom(gameEngine.CallCard("Chancellor"), firstPlayer.getDeck());
     	
-    	ArrayList resultDiscardArray = firstPlayer.getDiscardPile().getCardsName();
+    	ArrayList<String> resultDiscardArray = firstPlayer.getDiscardPile().getCardsName();
     	resultDiscardArray.addAll(firstPlayer.getDeck().getCardsName());
     	
     	System.out.println("Player 1 - Deck: " + firstPlayer.getDeck().getCardsName());
@@ -155,11 +155,11 @@ public class CardsTester {
     	//!!Takes all victory cards.
     	
     	//Bureaucrat from deck to hand.
-    	firstPlayer.getDeck().add(GameEngine.CallCard("Bureaucrat"));
-    	firstPlayer.getHand().addFrom(GameEngine.CallCard("Bureaucrat"), firstPlayer.getDeck());
+    	firstPlayer.getDeck().add(gameEngine.CallCard("Bureaucrat"));
+    	firstPlayer.getHand().addFrom(gameEngine.CallCard("Bureaucrat"), firstPlayer.getDeck());
     	
     	//What result should be.
-    	ArrayList resultDeckArray = new ArrayList(secondPlayer.get(0).getDeck().getCardsName());
+    	ArrayList<String> resultDeckArray = new ArrayList<String>(secondPlayer.get(0).getDeck().getCardsName());
     	resultDeckArray.add("Estate");
     	
     	System.out.println(resultDeckArray);
@@ -182,12 +182,12 @@ public class CardsTester {
     
     @Test
     public void testSpy() {
-    	ArrayList resultDiscardArray = firstPlayer.getDiscardPile().getCardsName();
+    	ArrayList<String> resultDiscardArray = firstPlayer.getDiscardPile().getCardsName();
     	resultDiscardArray.add("Witch");
     	
-    	firstPlayer.getDeck().getPile().add(0, GameEngine.CallCard("Copper"));
-    	firstPlayer.getDeck().getPile().add(1, GameEngine.CallCard("Witch"));
-    	secondPlayer.get(0).getDeck().getPile().add(0, GameEngine.CallCard("Adventurer"));
+    	firstPlayer.getDeck().getPile().add(0, gameEngine.CallCard("Copper"));
+    	firstPlayer.getDeck().getPile().add(1, gameEngine.CallCard("Witch"));
+    	secondPlayer.get(0).getDeck().getPile().add(0, gameEngine.CallCard("Adventurer"));
     	
     	System.out.println("Resultaat Array " + resultDiscardArray);
     	
@@ -212,14 +212,14 @@ public class CardsTester {
     
     @Test
     public void testLibrary() {
-    	ArrayList resultHandArray = firstPlayer.getHand().getCardsName();
+    	ArrayList<String> resultHandArray = firstPlayer.getHand().getCardsName();
     	resultHandArray.add("Copper");
     	resultHandArray.add("Copper");
 
     	System.out.println(resultHandArray);
     	
-    	firstPlayer.getDeck().getPile().add(0, GameEngine.CallCard("Chapel"));
-    	firstPlayer.getDeck().getPile().add(1, GameEngine.CallCard("Bureaucrat"));
+    	firstPlayer.getDeck().getPile().add(0, gameEngine.CallCard("Chapel"));
+    	firstPlayer.getDeck().getPile().add(1, gameEngine.CallCard("Bureaucrat"));
     	
     	System.out.println("Player 1 - Deck: " + firstPlayer.getDeck().getCardsName());
     	System.out.println("Player 1 - Hand: " + firstPlayer.getHand().getCardsName());
@@ -240,17 +240,17 @@ public class CardsTester {
     	//TODO Fix this test
     	//Test won't work since turns won't get made.
     	
-    	ArrayList resultHandArray = firstPlayer.getHand().getCardsName();
+    	ArrayList<String> resultHandArray = firstPlayer.getHand().getCardsName();
     	resultHandArray.add("Estate");
     	resultHandArray.add("Copper");
     	
     	
     	System.out.println(resultHandArray);
     	
-    	firstPlayer.getSelectedHand().add(GameEngine.CallCard("Village"));
+    	firstPlayer.getSelectedHand().add(gameEngine.CallCard("Village"));
     	
-    	firstPlayer.getDeck().getPile().add(0, GameEngine.CallCard("Estate"));
-    	firstPlayer.getDeck().getPile().add(1, GameEngine.CallCard("Copper"));
+    	firstPlayer.getDeck().getPile().add(0, gameEngine.CallCard("Estate"));
+    	firstPlayer.getDeck().getPile().add(1, gameEngine.CallCard("Copper"));
     	    	
     	System.out.println(gameEngine.CallCard("Throne room").getType());
     	System.out.println("Player 1 - Deck: " + firstPlayer.getDeck().getCardsName());
@@ -271,7 +271,7 @@ public class CardsTester {
     //Problem with this test
     @Test
     public void testMine() {
-    	firstPlayer.getSelectedHand().add(GameEngine.CallCard("Silver"));
+    	firstPlayer.getSelectedHand().add(gameEngine.CallCard("Silver"));
     	
     	System.out.println("Player 1 - Deck: " + firstPlayer.getDeck().getCardsName());
     	System.out.println("Player 1 - Hand: " + firstPlayer.getHand().getCardsName());
@@ -290,7 +290,7 @@ public class CardsTester {
     
     @Test
     public void testThief() {
-    	ArrayList resultDiscardArray = firstPlayer.getDiscardPile().getCardsName();
+    	ArrayList<String> resultDiscardArray = firstPlayer.getDiscardPile().getCardsName();
     	resultDiscardArray.add("Copper");
     	
     	secondPlayer.get(0).getDeck().getPile().add(0, gameEngine.CallCard("Copper"));

@@ -1,24 +1,33 @@
 $(document).ready(function () {  
-	
+	loadSaves();
+	$("#load").on("click", loadGame());
+});	
 	
                         
-
+function loadSaves(){
         $.get('Load', function (responseJson) {    
-
-            var $select = $('#saves');                           
+        	var $select = $('#saves');                           
             $select.find('option').remove();
-            
-            $('<option>').val("1").text("Select save").appendTo($select);
-            
-
-
-            
-            
-
-        
-        $.each(responseJson, function (key, value) {               // Iterate over the JSON object.
-            $('<option>').val(key).text(value).appendTo($select); // Create HTML <option> element, set its value with currently iterated key and its text content with currently iterated item and finally append it to the <select>.
-        })
+            $('<option>').val("0").text("Select save").appendTo($select);
+            $.each(responseJson, function (key, value) {               
+            	$('<option>').val(key).text(value).appendTo($select); 
+            })
         });
-        
-});
+}
+
+function loadGame() {
+    $.ajax({
+        cache: false,
+        dataType: "text",
+        url: "/html-frontend/DominionServlet",
+        type: "get",
+        data: {
+            operation: 'load',
+            gameID: $("#saves :selected").val()
+        }
+
+    }).done(function (data) {
+    	console.log("test" + data);
+        var obj = JSON.parse(data);
+    });
+}
