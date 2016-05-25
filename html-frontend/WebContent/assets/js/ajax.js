@@ -241,6 +241,7 @@ function isGameOver(){
 //            showVictoryScreen();
             console.log(data.gameOver);
             alert("GAME IS OVER");
+            window.location.href = "../html-frontend/victory.html";
         } else {
             $("#kingdomset").children().remove();
             $("#treasure").children().remove();
@@ -254,6 +255,7 @@ function isGameOver(){
             callPlayingField();
             callPlayerInfo();
         }
+    	
     });
 }
 

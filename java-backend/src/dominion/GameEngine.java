@@ -77,7 +77,6 @@ public class GameEngine {
 
     /* METHODS */
     public Pile generateDeck() {
-    	initAllCards();
     	System.out.print("\n generateDeck:" + getAllCards() + "\n");
     	Card copper = CallCard("Copper");
     	//System.out.print("Een copper kaart in generateDeck -- GameEngine CallCard: " + CallCard("Copper")  + " " + CallCard("Copper").getName() + "\n");
@@ -406,6 +405,11 @@ public void buyCard(Card card){
 	
 	public Pile getCurrentdiscardPile(){
 		return currentDiscardPile;
+	}
+	
+	public void calcVictory(){
+		VictoryPoints vp = new VictoryPoints();
+		vp.victoryPointsCalc(this);
 	}
 	
 }

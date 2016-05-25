@@ -1,6 +1,6 @@
 $(document).ready(function () {  
 	loadSaves();
-	$("#load").on("click", loadGame());
+	$("#load").on("click", loadGame);
 });	
 	
                         
@@ -10,7 +10,7 @@ function loadSaves(){
             $select.find('option').remove();
             $('<option>').val("0").text("Select save").appendTo($select);
             $.each(responseJson, function (key, value) {               
-            	$('<option>').val(key).text(value).appendTo($select); 
+            	$('<option name="saves">').val(key).text(value).appendTo($select); 
             })
         });
 }

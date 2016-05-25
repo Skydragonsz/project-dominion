@@ -9,7 +9,7 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-    <servlet>
+  <servlet>
     <servlet-name>loadGame</servlet-name>
     <servlet-class>server.LoadGame</servlet-class>
   </servlet>
@@ -33,7 +33,7 @@
     <servlet-name>load</servlet-name>
     <url-pattern>/load</url-pattern>
   </servlet-mapping>
-    <servlet-mapping>
+  <servlet-mapping>
     <servlet-name>loadGame</servlet-name>
     <url-pattern>/loadGame</url-pattern>
   </servlet-mapping>

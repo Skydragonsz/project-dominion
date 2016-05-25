@@ -5,8 +5,11 @@ import java.io.PrintWriter;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -70,10 +73,10 @@ public class DominionServlet extends HttpServlet {
 		switch (operation) {
 		// INIT
 		case "initialize":
-			gameEngine.initCards(Integer.parseInt(request.getParameter("set"))); 
+			
 			int amount = Integer.parseInt(request.getParameter("playerAmount"));
 			gameEngine.initAmountPlayers(amount);
-
+			gameEngine.initCards(Integer.parseInt(request.getParameter("set"))); 
 			for (int i = 1; i <= amount; i++) {
 				gameEngine.initPlayer(i, request.getParameter("name" + i));
 			}
@@ -152,28 +155,28 @@ public class DominionServlet extends HttpServlet {
 			break;
 		// ACTIONS
 		case "playCard":
-//			String card = request.getParameter("card");
-//			String[] effect = request.getParameterValues("effect[]");
-//
-//			Pile selectedHand = new Pile();
-//			if (effect != null) {
-//				for (String cardName : effect) {
-//					selectedHand.add(GameEngine.CallCard(cardName));
-//				}
-//			}
-//			gameEngine.playCard(card);
-			JSONObject obj = new JSONObject(request.getParameter("effect"));
+			String card = request.getParameter("card");
+			String[] effect = request.getParameterValues("effect[]");
 
-			System.out.println(obj.get("player1"));
-			System.out.println(request.getQueryString());
+			Pile selectedHand = new Pile();
+			if (effect != null) {
+				for (String cardName : effect) {
+					selectedHand.add(gameEngine.CallCard(cardName));
+				}
+			}
+			gameEngine.playCard(card);
+//			JSONObject obj = new JSONObject(request.getParameter("effect"));
+//
+//			System.out.println(obj.get("player1"));
+//			System.out.println(request.getQueryString());
 			break;
 		case "buyCard":
 			String buyCard = request.getParameter("card");
-			gameEngine.buyCard(GameEngine.CallCard(buyCard));
+			gameEngine.buyCard(gameEngine.CallCard(buyCard));
 			break;
 		case "buyInstancedCard":
 			String buyInstancedCard = request.getParameter("card");
-			//gameEngine.buyInstancedCard(GameEngine.CallCard(buyInstancedCard));
+			//gameEngine.buyInstancedCard(gameEngine.CallCard(buyInstancedCard));
 			break;	
 		case "nextSegment":
 			gameEngine.CleanedUp();
@@ -185,7 +188,7 @@ public class DominionServlet extends HttpServlet {
 		// EXTRA
 		case "spawnCard":
 			String spawnCard = request.getParameter("card");
-			gameEngine.getCurrentPlayer().getHand().add(GameEngine.CallCard(spawnCard));
+			gameEngine.getCurrentPlayer().getHand().add(gameEngine.CallCard(spawnCard));
 			break;
 		case "information":
 			writer.append("Hand " + gameEngine.getCurrentPlayer().getHand() + "\n" + "Deck "
@@ -195,13 +198,30 @@ public class DominionServlet extends HttpServlet {
 					+ gameEngine.CallCard("Copper"));
 			break;
 		case "emptyPiles":
-			gameEngine.getBoard().getFromIndex(12).remove(gameEngine.CallCard("Militia"));
-			gameEngine.getBoard().getFromIndex(13).remove(gameEngine.CallCard("Remodel"));
-			gameEngine.getBoard().getFromIndex(14).remove(gameEngine.CallCard("Smithy"));
+			gameEngine.getBoard().getFromIndex(12).remove(gameEngine.CallCard(12));
+			gameEngine.getBoard().getFromIndex(13).remove(gameEngine.CallCard(13));
+			gameEngine.getBoard().getFromIndex(14).remove(gameEngine.CallCard(14));
 			break;
 		case "emptyProvince":
 			gameEngine.getBoard().getFromIndex(6).remove(gameEngine.CallCard("Province"));
 			break;
+		case "calcVictory":
+			
+			if(gameEngine.getCurrentPlayer().getVictoryPoints()==0){
+				gameEngine.calcVictory();
+			}
+			Map<String,Integer> players = new LinkedHashMap<String, Integer>();
+			
+			for (int i = 1; i <= gameEngine.getMaxPlayers();i++){
+				players.put(gameEngine.getPlayer(i).getName(), gameEngine.getPlayer(i).getVictoryPoints());
+			}
+			
+			String playerData = new Gson().toJson(players);
+			response.setContentType("application/json");
+			response.setCharacterEncoding("UTF-8");
+			response.getWriter().write(playerData);
+			break;
+			
 		default:
 			writer.append("error: Something went wrong :(");
 			break;

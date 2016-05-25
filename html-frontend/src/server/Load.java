@@ -58,13 +58,15 @@ public class Load extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+
+
 		
-        RequestDispatcher rs = request.getRequestDispatcher("game.html");
-        rs.forward(request, response);
+
 		
-		request.getParameter("saves");
+        int save = Integer.parseInt(request.getParameter("saves"));
+        
+        System.out.println(save);
+
 		
 		
 		GameEngine gameEngine = (GameEngine) request.getServletContext().getAttribute("gameEngine");
@@ -75,7 +77,8 @@ public class Load extends HttpServlet {
 		
 		gameEngine.loadGame(Integer.parseInt(request.getParameter("saves")));
 		
-		
+        RequestDispatcher rs = request.getRequestDispatcher("game.html");
+        rs.forward(request, response);
 		
 		
 
