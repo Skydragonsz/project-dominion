@@ -124,11 +124,20 @@ function cleanLayoutBoard() {
     $("#playingfield").children().remove();
     $("#SelectCards").children().remove();
 
-    //call
-    callBoard();
-    callHand();
-    callPlayingField();
-    callPlayerInfo();
+    //GameOver check
+    isGameOver();
+//    if (isGameOver()){
+//        showVictoryScreen();
+//        console.og("GAME IS OVER");
+//        alert("GAME IS OVER");
+//    } else {
+//        //call
+//        callBoard();
+//        callHand();
+//        callPlayingField();
+//        callPlayerInfo();
+//    }
+
 }
 
 
@@ -231,31 +240,34 @@ $(document).on('click', '.kingdom', function () {
         }).done(function (data) {
             var obj = JSON.stringify(data);
             cleanLayoutBoard();
-            //TEMP -- amount get changed in HTML, doesn't ask for servlet request.
-            //When a new turn is asked they will get the correct values from the server.
-            //amount = $("#" + id).find(".circle").text() - 1;
-            //$("#" + id).find(".circle").html(amount);
-
         });
     }
 });
 
-/*calculate degrees for cards -- kinda works*/
-//function calculateDegreesCardsInHand() {
-//    var index = Math.floor($(document).find(".hand").length / 2);
-//    var switchedIndex = -index;
-//    console.log(index);
-//    $(document).find(".hand").each(function () {
-//        $(this).css("transform", "rotate(" + (switchedIndex * 10) + "deg)");
-//        $(this).css("top", (Math.abs(switchedIndex) * ((Math.abs(switchedIndex) * 7))));
-//
-//        $(this).css("left", index * 75);
-//        index--;
-//        switchedIndex++;
-//    })
-//}
-
-
+function isGameOver(){
+    $.get("DominionServlet?operation=getGameState", function (responseJson) {
+        console.log(responseJson.gameOver);
+    }).done(function (data) {
+    	console.log(data.gameOver);
+    	if (data.gameOver){
+//            showVictoryScreen();
+            console.log(data.gameOver);
+            alert("GAME IS OVER");
+        } else {
+            $("#kingdomset").children().remove();
+            $("#treasure").children().remove();
+            $("#victory").children().remove();
+            $("#hand").children().remove();
+            $("#playingfield").children().remove();
+            $("#SelectCards").children().remove();
+            //call
+            callBoard();
+            callHand();
+            callPlayingField();
+            callPlayerInfo();
+        }
+    });
+}
 
 //---- SPECIAL ACTION ----//
 //1. SHOW IT TO THE USER.
@@ -378,7 +390,7 @@ $(document).on('click', '#selectedCardButton', function () {
         }).done(function (data) {
             var obj = JSON.stringify(data);
             cleanLayoutBoard();
-            callBoard();
+            //callBoard();
             callPlayingField();
             callPlayerInfo();
             callHand();

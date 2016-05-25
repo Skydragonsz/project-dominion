@@ -22,6 +22,7 @@ public class Pile {
         for (Card card : pile) {
         	//System.out.print("Een kaart in Pile -- Pile: " + card + " " + card.getName()  + "\n");
             this.pile.add(card);
+            this.name = card.getName();
         }
     }
 
