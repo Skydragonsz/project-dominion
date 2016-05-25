@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
+
 import com.google.gson.Gson;
 import com.mysql.jdbc.StringUtils;
 
@@ -97,7 +99,6 @@ public class DominionServlet extends HttpServlet {
 				}
 			}
 			String jsonBoard = new Gson().toJson(board);
-
 			response.getWriter().write(jsonBoard);
 			break;
 		case "getHand":
@@ -123,7 +124,6 @@ public class DominionServlet extends HttpServlet {
 			response.getWriter().write(playerInfo);
 			break;
 		case "getSpecialAction":
-			System.out.println("jkldsfljkfsdjklm");
 			String specialActionInfo = "Player = [";
 			for (int i= 0; i < 1; i++){
 				String Hand = new Gson().toJson(gameEngine.getPlayer(1).getHand().getCardsName());
@@ -147,18 +147,25 @@ public class DominionServlet extends HttpServlet {
 			String jsonCards = new Gson().toJson(allCards);
 			response.getWriter().write(jsonCards);
 			break;
+		case "getCurrentPlayer":
+			response.getWriter().write("{\"currentPlayer\" : " + gameEngine.getPlayerCounter() + "}");
+			break;
 		// ACTIONS
 		case "playCard":
-			String card = request.getParameter("card");
-			String[] effect = request.getParameterValues("effect[]");
+//			String card = request.getParameter("card");
+//			String[] effect = request.getParameterValues("effect[]");
+//
+//			Pile selectedHand = new Pile();
+//			if (effect != null) {
+//				for (String cardName : effect) {
+//					selectedHand.add(GameEngine.CallCard(cardName));
+//				}
+//			}
+//			gameEngine.playCard(card);
+			JSONObject obj = new JSONObject(request.getParameter("effect"));
 
-			Pile selectedHand = new Pile();
-			if (effect != null) {
-				for (String cardName : effect) {
-					selectedHand.add(GameEngine.CallCard(cardName));
-				}
-			}
-			gameEngine.playCard(card);
+			System.out.println(obj.get("player1"));
+			System.out.println(request.getQueryString());
 			break;
 		case "buyCard":
 			String buyCard = request.getParameter("card");
@@ -194,6 +201,7 @@ public class DominionServlet extends HttpServlet {
 			break;
 		case "emptyProvince":
 			gameEngine.getBoard().getFromIndex(6).remove(gameEngine.CallCard("Province"));
+			break;
 		default:
 			writer.append("error: Something went wrong :(");
 			break;

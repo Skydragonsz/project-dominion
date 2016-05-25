@@ -6,6 +6,7 @@ $(document).ready(function () {
 //    calculateDegreesCardsInHand();
     callPlayingField();
     callPlayerInfo();
+    refreshCurrentPlayer()
 });
 
 // GAME CONFIG
@@ -140,20 +141,10 @@ function cleanLayoutBoard() {
     $("#victory").children().remove();
     $("#hand").children().remove();
     $("#playingfield").children().remove();
-    $("#SelectCards").children().remove();
+    //$("#SelectCards").children().remove();
 
     //GameOver check
     isGameOver();
-//    if (isGameOver()){
-//        showVictoryScreen();
-//        console.og("GAME IS OVER");
-//        alert("GAME IS OVER");
-//    } else {
-//        //call
-//        callBoard();
-//        callHand();
-//        callPlayingField();
-//        callPlayerInfo();
 //    }
 
 }
@@ -165,8 +156,6 @@ $(document).on('click', '.hand', function () {
     var id = $(this).attr('id').toString();
     showSpecialActionLayout(id); /*changed hasSpecialAction*/
 
-    if (!hasSpecialAction) {
-    	console.log('graak ik hier?')
         $.ajax({
             cache: false,
             dataType: "text",
@@ -181,7 +170,6 @@ $(document).on('click', '.hand', function () {
             var obj = JSON.stringify(data);
             cleanLayoutBoard();
         });
-    }
 });
 
 /* When clicked on the button nextSegment */
@@ -277,7 +265,7 @@ function isGameOver(){
             $("#victory").children().remove();
             $("#hand").children().remove();
             $("#playingfield").children().remove();
-            $("#SelectCards").children().remove();
+            //$("#SelectCards").children().remove();
             //call
             callBoard();
             callHand();
@@ -310,7 +298,7 @@ function showSpecialActionLayout(cardName) {
             //  | Player2 | Player3 | Player4 |
             //  | estate  | no vict |province |
             //  -------------------------------
-//            showOneCardFromPlayer();
+            showSpecialActionCard(CardName);
             break;
         case "Militia":
             //fill DIV with section that equal the amount of all other players. One section = one player.
@@ -358,11 +346,14 @@ function showSpecialActionLayout(cardName) {
 //1,5. SHOW IT -> CLICK IT -> GET IT
 function showSelectableCards(text) {
     $("#SelectCards").removeClass("invisible");
-    $("#specialActionText").html(text);
+    //$("#specialActionText").html(text);
+    refreshCurrentPlayer();
+    $("#SelectCards").append('<div class="'+ "player " + playerCounter +'"></div>');
     $.get("DominionServlet?operation=getHand", function (responseJson) {
         $.each(responseJson, function (index, item) {
-            $("#SelectCards").append('<div id="' + item + '" class="selectable card" style="position: relative; background-image: url(../html-frontend/assets/media/Base%20Deck/' + item.toLowerCase() + '.jpg)"></div>');
-        })
+            $(".player" + "." + playerCounter).append('<div id="' + item + '" class="selectable card" style="position: relative; background-image: url(../html-frontend/assets/media/Base%20Deck/' + item.toLowerCase() + '.jpg)"></div>');
+        });
+        $(".player" + "." + playerCounter).append('<a id="selectedCardButton" class="button special" href="#">Ok</a>');
     });
 }
 
@@ -379,29 +370,48 @@ $(document).on('click', '.selectable', function () {
 });
 
 function getSelectedCards() {
-    var selectedCards = [];
-    $(".selected").each(function () {
-        selectedCards.push($(this).attr("id"));
-    });
-    return selectedCards;
+	var JSONobj = {};
+	$(".player").each(function() {
+		var selectedCards = [];
+		player = $(this).attr("class");
+		player = player.replace(/ /g,'');
+		
+		$(this).find(".selected").each(function() {
+			selectedCards.push($(this).attr("id"));
+		});
+
+		JSONobj[player] = selectedCards;
+		
+		$(this).find(".special").each(function() {
+			key = $(this).attr("id") + player;
+			JSONobj[key] = true;
+		});
+		
+	});
+	
+	var obj = JSON.stringify(JSONobj);
+	console.log(obj);
+	console.log(JSONobj);
+	return obj;
 }
 
 
 
-//2. SEND IT.
+// 2. SEND IT.
 $(document).on('click', '#selectedCardButton', function () {
     var cardName = $('#selectedCardButton').attr("class");
     var selectedCards = getSelectedCards();
     /*See #2,5*/
-    if (checkIfSelectedCorrectly(cardName, selectedCards)) {
+//    if (checkIfSelectedCorrectly(cardName, selectedCards)) {
         $.ajax({
             cache: false,
-            dataType: "text",
+            dataType: "json",
             url: "/html-frontend/DominionServlet",
             type: "get",
+            contentType: "application/json",
             data: {
                 operation: 'playCard',
-                card: cardName,
+                card: "Cellar",
                 effect: selectedCards
             }
 
@@ -415,9 +425,9 @@ $(document).on('click', '#selectedCardButton', function () {
             $("#SelectCards").addClass("invisible");
 
         });
-    } else {
-        alert("You selected the wrong card(s), try again.")
-    }
+//    } else {
+//        alert("You selected the wrong card(s), try again.")
+//    }
 });
 
 
@@ -495,5 +505,13 @@ function requestSpecialActionInformation(){
         
     });
     console.log(variable);
+
+}
+
+function refreshCurrentPlayer(){
+    $.get("DominionServlet?operation=getCurrentPlayer", function (responseJson) {
+        playerCounter = responseJson.currentPlayer;
+        console.log(playerCounter);
+    });
 
 }
