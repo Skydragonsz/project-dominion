@@ -14,7 +14,7 @@ import java.util.Map;
 public class DataConnection {
 	// Info connection
 	private static final String driver = "com.mysql.jdbc.Driver";
-	private static final String databaseConnection = "jdbc:mysql://178.117.108.9:3306/dominiondb";
+	private static final String databaseConnection = "jdbc:mysql://localhost:3306/dominiondb";
 
 	private static final String username = "dominion";
 	private static final String password = "dominion";
